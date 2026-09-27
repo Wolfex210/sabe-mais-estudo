@@ -10,33 +10,141 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as DesafiosRouteImport } from './routes/desafios'
+import { Route as FerramentasRouteImport } from './routes/ferramentas'
+import { Route as PerfilRouteImport } from './routes/perfil'
+import { Route as PlanosRouteImport } from './routes/planos'
+import { Route as ProgressoRouteImport } from './routes/progresso'
+import { Route as QuizRouteImport } from './routes/quiz'
+import { Route as MateriasIndexRouteImport } from './routes/materias.index'
+import { Route as MateriasSlugRouteImport } from './routes/materias.$slug'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DesafiosRoute = DesafiosRouteImport.update({
+  id: '/desafios',
+  path: '/desafios',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FerramentasRoute = FerramentasRouteImport.update({
+  id: '/ferramentas',
+  path: '/ferramentas',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PerfilRoute = PerfilRouteImport.update({
+  id: '/perfil',
+  path: '/perfil',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PlanosRoute = PlanosRouteImport.update({
+  id: '/planos',
+  path: '/planos',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProgressoRoute = ProgressoRouteImport.update({
+  id: '/progresso',
+  path: '/progresso',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const QuizRoute = QuizRouteImport.update({
+  id: '/quiz',
+  path: '/quiz',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MateriasIndexRoute = MateriasIndexRouteImport.update({
+  id: '/materias/',
+  path: '/materias/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MateriasSlugRoute = MateriasSlugRouteImport.update({
+  id: '/materias/$slug',
+  path: '/materias/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/desafios': typeof DesafiosRoute
+  '/ferramentas': typeof FerramentasRoute
+  '/perfil': typeof PerfilRoute
+  '/planos': typeof PlanosRoute
+  '/progresso': typeof ProgressoRoute
+  '/quiz': typeof QuizRoute
+  '/materias/$slug': typeof MateriasSlugRoute
+  '/materias/': typeof MateriasIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/desafios': typeof DesafiosRoute
+  '/ferramentas': typeof FerramentasRoute
+  '/perfil': typeof PerfilRoute
+  '/planos': typeof PlanosRoute
+  '/progresso': typeof ProgressoRoute
+  '/quiz': typeof QuizRoute
+  '/materias/$slug': typeof MateriasSlugRoute
+  '/materias': typeof MateriasIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/desafios': typeof DesafiosRoute
+  '/ferramentas': typeof FerramentasRoute
+  '/perfil': typeof PerfilRoute
+  '/planos': typeof PlanosRoute
+  '/progresso': typeof ProgressoRoute
+  '/quiz': typeof QuizRoute
+  '/materias/$slug': typeof MateriasSlugRoute
+  '/materias/': typeof MateriasIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/desafios'
+    | '/ferramentas'
+    | '/perfil'
+    | '/planos'
+    | '/progresso'
+    | '/quiz'
+    | '/materias/$slug'
+    | '/materias/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/desafios'
+    | '/ferramentas'
+    | '/perfil'
+    | '/planos'
+    | '/progresso'
+    | '/quiz'
+    | '/materias/$slug'
+    | '/materias'
+  id:
+    | '__root__'
+    | '/'
+    | '/desafios'
+    | '/ferramentas'
+    | '/perfil'
+    | '/planos'
+    | '/progresso'
+    | '/quiz'
+    | '/materias/$slug'
+    | '/materias/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  DesafiosRoute: typeof DesafiosRoute
+  FerramentasRoute: typeof FerramentasRoute
+  PerfilRoute: typeof PerfilRoute
+  PlanosRoute: typeof PlanosRoute
+  ProgressoRoute: typeof ProgressoRoute
+  QuizRoute: typeof QuizRoute
+  MateriasSlugRoute: typeof MateriasSlugRoute
+  MateriasIndexRoute: typeof MateriasIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +156,75 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/desafios': {
+      id: '/desafios'
+      path: '/desafios'
+      fullPath: '/desafios'
+      preLoaderRoute: typeof DesafiosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ferramentas': {
+      id: '/ferramentas'
+      path: '/ferramentas'
+      fullPath: '/ferramentas'
+      preLoaderRoute: typeof FerramentasRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/perfil': {
+      id: '/perfil'
+      path: '/perfil'
+      fullPath: '/perfil'
+      preLoaderRoute: typeof PerfilRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/planos': {
+      id: '/planos'
+      path: '/planos'
+      fullPath: '/planos'
+      preLoaderRoute: typeof PlanosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/progresso': {
+      id: '/progresso'
+      path: '/progresso'
+      fullPath: '/progresso'
+      preLoaderRoute: typeof ProgressoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/quiz': {
+      id: '/quiz'
+      path: '/quiz'
+      fullPath: '/quiz'
+      preLoaderRoute: typeof QuizRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/materias/': {
+      id: '/materias/'
+      path: '/materias'
+      fullPath: '/materias/'
+      preLoaderRoute: typeof MateriasIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/materias/$slug': {
+      id: '/materias/$slug'
+      path: '/materias/$slug'
+      fullPath: '/materias/$slug'
+      preLoaderRoute: typeof MateriasSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  DesafiosRoute: DesafiosRoute,
+  FerramentasRoute: FerramentasRoute,
+  PerfilRoute: PerfilRoute,
+  PlanosRoute: PlanosRoute,
+  ProgressoRoute: ProgressoRoute,
+  QuizRoute: QuizRoute,
+  MateriasSlugRoute: MateriasSlugRoute,
+  MateriasIndexRoute: MateriasIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
