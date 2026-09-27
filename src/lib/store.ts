@@ -100,7 +100,7 @@ export const LEVELS = [
 ];
 
 export function levelOf(points: number) {
-  let current = LEVELS[0];
+  let current = LEVELS[0]!;
   let next: (typeof LEVELS)[number] | null = null;
   LEVELS.forEach((l, i) => {
     if (points >= l.min) {
