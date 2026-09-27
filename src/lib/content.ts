@@ -314,5 +314,5 @@ export const challenges: Challenge[] = [
 /** Desafio do dia: muda a cada dia do ano. */
 export function dailyChallenge(): Challenge {
   const day = Math.floor(Date.now() / 86400000);
-  return challenges[day % challenges.length];
+  return challenges[day % challenges.length]!;
 }

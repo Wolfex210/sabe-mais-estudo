@@ -228,7 +228,7 @@ const DAYS = ["Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado", "Domi
 
 function Cronograma() {
   const { schedule } = useAppState();
-  const [day, setDay] = useState(DAYS[0]);
+  const [day, setDay] = useState(DAYS[0]!);
   const [time, setTime] = useState("19:00");
   const [subject, setSubject] = useState("");
 
