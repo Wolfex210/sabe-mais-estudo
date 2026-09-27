@@ -10,33 +10,53 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as MateriasIndexRouteImport } from './routes/materias.index'
+import { Route as MateriasSlugRouteImport } from './routes/materias.$slug'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const MateriasIndexRoute = MateriasIndexRouteImport.update({
+  id: '/materias/',
+  path: '/materias/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MateriasSlugRoute = MateriasSlugRouteImport.update({
+  id: '/materias/$slug',
+  path: '/materias/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/materias/$slug': typeof MateriasSlugRoute
+  '/materias/': typeof MateriasIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/materias/$slug': typeof MateriasSlugRoute
+  '/materias': typeof MateriasIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/materias/$slug': typeof MateriasSlugRoute
+  '/materias/': typeof MateriasIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/materias/$slug' | '/materias/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/materias/$slug' | '/materias'
+  id: '__root__' | '/' | '/materias/$slug' | '/materias/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  MateriasSlugRoute: typeof MateriasSlugRoute
+  MateriasIndexRoute: typeof MateriasIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +68,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/materias/': {
+      id: '/materias/'
+      path: '/materias'
+      fullPath: '/materias/'
+      preLoaderRoute: typeof MateriasIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/materias/$slug': {
+      id: '/materias/$slug'
+      path: '/materias/$slug'
+      fullPath: '/materias/$slug'
+      preLoaderRoute: typeof MateriasSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  MateriasSlugRoute: MateriasSlugRoute,
+  MateriasIndexRoute: MateriasIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
