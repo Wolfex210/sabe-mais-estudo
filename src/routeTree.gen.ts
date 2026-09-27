@@ -10,12 +10,30 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as DesafiosRouteImport } from './routes/desafios'
+import { Route as FerramentasRouteImport } from './routes/ferramentas'
+import { Route as QuizRouteImport } from './routes/quiz'
 import { Route as MateriasIndexRouteImport } from './routes/materias.index'
 import { Route as MateriasSlugRouteImport } from './routes/materias.$slug'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DesafiosRoute = DesafiosRouteImport.update({
+  id: '/desafios',
+  path: '/desafios',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FerramentasRoute = FerramentasRouteImport.update({
+  id: '/ferramentas',
+  path: '/ferramentas',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const QuizRoute = QuizRouteImport.update({
+  id: '/quiz',
+  path: '/quiz',
   getParentRoute: () => rootRouteImport,
 } as any)
 const MateriasIndexRoute = MateriasIndexRouteImport.update({
@@ -31,30 +49,61 @@ const MateriasSlugRoute = MateriasSlugRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/desafios': typeof DesafiosRoute
+  '/ferramentas': typeof FerramentasRoute
+  '/quiz': typeof QuizRoute
   '/materias/$slug': typeof MateriasSlugRoute
   '/materias/': typeof MateriasIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/desafios': typeof DesafiosRoute
+  '/ferramentas': typeof FerramentasRoute
+  '/quiz': typeof QuizRoute
   '/materias/$slug': typeof MateriasSlugRoute
   '/materias': typeof MateriasIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/desafios': typeof DesafiosRoute
+  '/ferramentas': typeof FerramentasRoute
+  '/quiz': typeof QuizRoute
   '/materias/$slug': typeof MateriasSlugRoute
   '/materias/': typeof MateriasIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/materias/$slug' | '/materias/'
+  fullPaths:
+    | '/'
+    | '/desafios'
+    | '/ferramentas'
+    | '/quiz'
+    | '/materias/$slug'
+    | '/materias/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/materias/$slug' | '/materias'
-  id: '__root__' | '/' | '/materias/$slug' | '/materias/'
+  to:
+    | '/'
+    | '/desafios'
+    | '/ferramentas'
+    | '/quiz'
+    | '/materias/$slug'
+    | '/materias'
+  id:
+    | '__root__'
+    | '/'
+    | '/desafios'
+    | '/ferramentas'
+    | '/quiz'
+    | '/materias/$slug'
+    | '/materias/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  DesafiosRoute: typeof DesafiosRoute
+  FerramentasRoute: typeof FerramentasRoute
+  QuizRoute: typeof QuizRoute
   MateriasSlugRoute: typeof MateriasSlugRoute
   MateriasIndexRoute: typeof MateriasIndexRoute
 }
@@ -66,6 +115,27 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/desafios': {
+      id: '/desafios'
+      path: '/desafios'
+      fullPath: '/desafios'
+      preLoaderRoute: typeof DesafiosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ferramentas': {
+      id: '/ferramentas'
+      path: '/ferramentas'
+      fullPath: '/ferramentas'
+      preLoaderRoute: typeof FerramentasRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/quiz': {
+      id: '/quiz'
+      path: '/quiz'
+      fullPath: '/quiz'
+      preLoaderRoute: typeof QuizRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/materias/': {
@@ -87,6 +157,9 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  DesafiosRoute: DesafiosRoute,
+  FerramentasRoute: FerramentasRoute,
+  QuizRoute: QuizRoute,
   MateriasSlugRoute: MateriasSlugRoute,
   MateriasIndexRoute: MateriasIndexRoute,
 }
