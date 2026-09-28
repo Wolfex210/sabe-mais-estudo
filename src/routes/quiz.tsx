@@ -28,7 +28,7 @@ const levels = [
 ] as const;
 
 function QuizPage() {
-  const [slug, setSlug] = useState(subjects[0].slug);
+  const [slug, setSlug] = useState(subjects[0]!.slug);
   const [level, setLevel] = useState<Question["level"]>("facil");
   const [started, setStarted] = useState(false);
   const [index, setIndex] = useState(0);
@@ -50,7 +50,7 @@ function QuizPage() {
   function pick(i: number) {
     if (chosen !== null) return;
     setChosen(i);
-    const ok = i === questions[index].answer;
+    const ok = i === questions[index]!.answer;
     if (ok) setScore((s) => s + 1);
     actions.answer(ok);
   }
@@ -119,13 +119,13 @@ function QuizPage() {
                 style={{ width: `${(index / questions.length) * 100}%` }}
               />
             </div>
-            <p className="mt-6 text-lg font-medium text-foreground">{questions[index].q}</p>
+            <p className="mt-6 text-lg font-medium text-foreground">{questions[index]!.q}</p>
             <div className="mt-5 space-y-2">
-              {questions[index].options.map((o, i) => {
+              {questions[index]!.options.map((o, i) => {
                 const cls =
                   chosen === null
                     ? "border-border hover:border-primary"
-                    : i === questions[index].answer
+                    : i === questions[index]!.answer
                       ? "border-success bg-success/10"
                       : i === chosen
                         ? "border-destructive bg-destructive/10"
@@ -144,7 +144,7 @@ function QuizPage() {
             {chosen !== null && (
               <div className="mt-5 flex items-center justify-between">
                 <p className="text-sm font-semibold">
-                  {chosen === questions[index].answer ? "✅ Acertou!" : "❌ Errou"}
+                  {chosen === questions[index]!.answer ? "✅ Acertou!" : "❌ Errou"}
                 </p>
                 <button
                   onClick={() => {

@@ -37,7 +37,7 @@ function SubjectPage() {
   const [chosen, setChosen] = useState<number | null>(null);
   const [score, setScore] = useState(0);
 
-  const q = subject.questions[qIndex];
+  const q = subject.questions[qIndex]!;
   const finished = qIndex >= subject.questions.length;
 
   function pick(i: number) {
