@@ -36,13 +36,14 @@ function SubjectPage() {
   const subject = getSubject(slug);
   const availableYears = YEARS.filter((year) => (curriculum[slug]?.[year]?.length ?? 0) > 0);
   const [year, setYear] = useState<Year>(availableYears[0] ?? "1º EF");
+  const activeYear = availableYears.includes(year) ? year : (availableYears[0] ?? "1º EF");
   const [open, setOpen] = useState<number | null>(null);
   const [qIndex, setQIndex] = useState(0);
   const [chosen, setChosen] = useState<number | null>(null);
   const [score, setScore] = useState(0);
 
   if (!subject) return null;
-  const topics = curriculum[slug]?.[year] ?? [];
+  const topics = curriculum[slug]?.[activeYear] ?? [];
   const q = subject.questions[qIndex];
   const finished = qIndex >= subject.questions.length || !q;
 
@@ -68,19 +69,19 @@ function SubjectPage() {
             <label htmlFor="school-year" className="mt-5 block text-sm font-semibold text-foreground">Ano escolar</label>
             <select
               id="school-year"
-              value={year}
+              value={activeYear}
               onChange={(event) => setYear(event.target.value as Year)}
               className="mt-2 w-full rounded-lg border border-border bg-background px-4 py-3 text-sm text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring sm:max-w-sm"
             >
               {availableYears.map((item) => <option key={item} value={item}>{YEAR_LABEL[item]}</option>)}
             </select>
             <div className="mt-5 space-y-3" aria-live="polite">
-              <h3 className="text-base font-semibold text-foreground">{YEAR_LABEL[year]}</h3>
+              <h3 className="text-base font-semibold text-foreground">{YEAR_LABEL[activeYear]}</h3>
               <ol className="space-y-3">
                 {topics.map((item, index) => {
                   const topic = parseTopic(item);
                   return (
-                    <li key={`${year}-${index}`} className="rounded-lg border border-border bg-card px-4 py-4 shadow-soft">
+                    <li key={`${activeYear}-${index}`} className="rounded-lg border border-border bg-card px-4 py-4 shadow-soft">
                       <h4 className="font-semibold text-foreground">{topic.title}</h4>
                       <p className="mt-1 text-sm leading-relaxed text-muted-foreground">{topic.text}</p>
                     </li>
