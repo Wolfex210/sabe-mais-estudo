@@ -10,3 +10,4 @@
 <!-- LOVABLE:END -->
 
 - Organize os roteiros de estudo por ano em `src/lib/curriculum.ts`, separados das questões gerais; isso mantém a seleção de ano independente dos quizzes existentes.
+- Guarde o progresso autenticado por usuário no Lovable Cloud com políticas por conta; mantenha o conteúdo didático extensível separado de dados pessoais para adicionar aulas sem alterar autenticação.
