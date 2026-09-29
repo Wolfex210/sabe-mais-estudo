@@ -69,7 +69,20 @@ function QuizPage() {
     const ok = i === questions[index]!.answer;
     if (ok) setScore((s) => s + 1);
     const question = questions[index];
-    if (question) setAnswers(a => [...a, { question: question.q, selected: question.options[i] ?? "", expected: question.options[question.answer] ?? "", correct: ok, ...(question.explanation ? { explanation: question.explanation } : {}) }]);
+    if (question) {
+      setAnswers(a => [...a, { question: question.q, selected: question.options[i] ?? "", expected: question.options[question.answer] ?? "", correct: ok, ...(question.explanation ? { explanation: question.explanation } : {}) }]);
+      if (!ok) {
+        actions.recordError({
+          subject: subjects.find(s => s.slug === slug)?.name ?? slug,
+          ...(topic ? { topic } : {}),
+          question: question.q,
+          selected: question.options[i] ?? "",
+          expected: question.options[question.answer] ?? "",
+          ...(question.explanation ? { explanation: question.explanation } : {}),
+          date: new Date().toISOString(),
+        });
+      }
+    }
     actions.answer(ok);
     if (index === questions.length - 1) actions.recordQuiz({ subject: slug, ...(topic ? { topic } : {}), level, correct: score + (ok ? 1 : 0), total: questions.length, date: new Date().toISOString() });
   }
