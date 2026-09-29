@@ -15,6 +15,7 @@ import { Route as ContaRouteImport } from './routes/conta'
 import { Route as DesafiosRouteImport } from './routes/desafios'
 import { Route as FerramentasRouteImport } from './routes/ferramentas'
 import { Route as PerfilRouteImport } from './routes/perfil'
+import { Route as PesquisaRouteImport } from './routes/pesquisa'
 import { Route as PlanosRouteImport } from './routes/planos'
 import { Route as ProgressoRouteImport } from './routes/progresso'
 import { Route as QuizRouteImport } from './routes/quiz'
@@ -51,6 +52,11 @@ const PerfilRoute = PerfilRouteImport.update({
   path: '/perfil',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PesquisaRoute = PesquisaRouteImport.update({
+  id: '/pesquisa',
+  path: '/pesquisa',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const PlanosRoute = PlanosRouteImport.update({
   id: '/planos',
   path: '/planos',
@@ -84,6 +90,7 @@ export interface FileRoutesByFullPath {
   '/desafios': typeof DesafiosRoute
   '/ferramentas': typeof FerramentasRoute
   '/perfil': typeof PerfilRoute
+  '/pesquisa': typeof PesquisaRoute
   '/planos': typeof PlanosRoute
   '/progresso': typeof ProgressoRoute
   '/quiz': typeof QuizRoute
@@ -97,6 +104,7 @@ export interface FileRoutesByTo {
   '/desafios': typeof DesafiosRoute
   '/ferramentas': typeof FerramentasRoute
   '/perfil': typeof PerfilRoute
+  '/pesquisa': typeof PesquisaRoute
   '/planos': typeof PlanosRoute
   '/progresso': typeof ProgressoRoute
   '/quiz': typeof QuizRoute
@@ -111,6 +119,7 @@ export interface FileRoutesById {
   '/desafios': typeof DesafiosRoute
   '/ferramentas': typeof FerramentasRoute
   '/perfil': typeof PerfilRoute
+  '/pesquisa': typeof PesquisaRoute
   '/planos': typeof PlanosRoute
   '/progresso': typeof ProgressoRoute
   '/quiz': typeof QuizRoute
@@ -126,6 +135,7 @@ export interface FileRouteTypes {
     | '/desafios'
     | '/ferramentas'
     | '/perfil'
+    | '/pesquisa'
     | '/planos'
     | '/progresso'
     | '/quiz'
@@ -139,6 +149,7 @@ export interface FileRouteTypes {
     | '/desafios'
     | '/ferramentas'
     | '/perfil'
+    | '/pesquisa'
     | '/planos'
     | '/progresso'
     | '/quiz'
@@ -152,6 +163,7 @@ export interface FileRouteTypes {
     | '/desafios'
     | '/ferramentas'
     | '/perfil'
+    | '/pesquisa'
     | '/planos'
     | '/progresso'
     | '/quiz'
@@ -166,6 +178,7 @@ export interface RootRouteChildren {
   DesafiosRoute: typeof DesafiosRoute
   FerramentasRoute: typeof FerramentasRoute
   PerfilRoute: typeof PerfilRoute
+  PesquisaRoute: typeof PesquisaRoute
   PlanosRoute: typeof PlanosRoute
   ProgressoRoute: typeof ProgressoRoute
   QuizRoute: typeof QuizRoute
@@ -217,6 +230,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PerfilRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/pesquisa': {
+      id: '/pesquisa'
+      path: '/pesquisa'
+      fullPath: '/pesquisa'
+      preLoaderRoute: typeof PesquisaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/planos': {
       id: '/planos'
       path: '/planos'
@@ -262,6 +282,7 @@ const rootRouteChildren: RootRouteChildren = {
   DesafiosRoute: DesafiosRoute,
   FerramentasRoute: FerramentasRoute,
   PerfilRoute: PerfilRoute,
+  PesquisaRoute: PesquisaRoute,
   PlanosRoute: PlanosRoute,
   ProgressoRoute: ProgressoRoute,
   QuizRoute: QuizRoute,

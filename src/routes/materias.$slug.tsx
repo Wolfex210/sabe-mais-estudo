@@ -3,7 +3,8 @@ import { useState } from "react";
 import { SiteLayout, PageHeader, Card, AdSlot } from "@/components/SiteLayout";
 import { Button } from "@/components/ui/button";
 import { getSubject } from "@/lib/content";
-import { curriculum, parseTopic, YEARS, YEAR_LABEL, type Year } from "@/lib/curriculum";
+import { curriculum, YEARS, YEAR_LABEL, type Year } from "@/lib/curriculum";
+import { getTopics } from "@/lib/lessons";
 import { actions } from "@/lib/store";
 
 export const Route = createFileRoute("/materias/$slug")({
@@ -43,7 +44,7 @@ function SubjectPage() {
   const [score, setScore] = useState(0);
 
   if (!subject) return null;
-  const topics = curriculum[slug]?.[activeYear] ?? [];
+  const topics = getTopics(slug, activeYear);
   const q = subject.questions[qIndex];
   const finished = qIndex >= subject.questions.length || !q;
 
@@ -78,12 +79,12 @@ function SubjectPage() {
             <div className="mt-5 space-y-3" aria-live="polite">
               <h3 className="text-base font-semibold text-foreground">{YEAR_LABEL[activeYear]}</h3>
               <ol className="space-y-3">
-                {topics.map((item, index) => {
-                  const topic = parseTopic(item);
+                {topics.map((topic, index) => {
                   return (
                     <li key={`${activeYear}-${index}`} className="rounded-lg border border-border bg-card px-4 py-4 shadow-soft">
                       <h4 className="font-semibold text-foreground">{topic.title}</h4>
                       <p className="mt-1 text-sm leading-relaxed text-muted-foreground">{topic.text}</p>
+                      {topic.lesson && <Link to="/aula/$slug/$year/$topic" params={{ slug, year: activeYear, topic: topic.title }} className="mt-3 inline-block text-sm font-semibold text-primary hover:underline">Abrir aula e atividades →</Link>}
                     </li>
                   );
                 })}
