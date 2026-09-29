@@ -3,6 +3,8 @@ import { Link } from "@tanstack/react-router";
 import { useState, type ReactNode } from "react";
 import { Menu, X, GraduationCap } from "lucide-react";
 import { useAppState, levelOf } from "@/lib/store";
+import { useAuth } from "@/lib/auth";
+import { Button } from "@/components/ui/button";
 
 const nav = [
   { to: "/", label: "Início" },
@@ -12,6 +14,7 @@ const nav = [
   { to: "/desafios", label: "Desafios" },
   { to: "/progresso", label: "Meu Progresso" },
   { to: "/planos", label: "Planos" },
+  { to: "/pesquisa", label: "Pesquisar" },
 ] as const;
 
 export function AdSlot({ label = "Espaço reservado para publicidade" }: { label?: string }) {
@@ -25,6 +28,7 @@ export function AdSlot({ label = "Espaço reservado para publicidade" }: { label
 export function SiteLayout({ children }: { children: ReactNode }) {
   const [open, setOpen] = useState(false);
   const state = useAppState();
+  const { user } = useAuth();
   const { current } = levelOf(state.points);
 
   return (
@@ -59,6 +63,7 @@ export function SiteLayout({ children }: { children: ReactNode }) {
             >
               {current.name} · {state.points} pts
             </Link>
+            <Button asChild variant="outline" size="sm"><Link to={user ? "/perfil" : "/conta"}>{user ? state.avatar : "Entrar"}</Link></Button>
             <Link
               to="/materias"
               className="hidden rounded-xl bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground shadow-soft transition-transform hover:-translate-y-0.5 sm:block"
@@ -77,7 +82,7 @@ export function SiteLayout({ children }: { children: ReactNode }) {
 
         {open && (
           <nav className="border-t border-border bg-background px-4 pb-4 lg:hidden">
-            {[...nav, { to: "/perfil", label: "Perfil" } as const].map((item) => (
+            {[...nav, { to: "/perfil", label: "Perfil" } as const, { to: "/conta", label: "Minha conta" } as const].map((item) => (
               <Link
                 key={item.to}
                 to={item.to}

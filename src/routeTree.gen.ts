@@ -10,6 +10,8 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AlterarSenhaRouteImport } from './routes/alterar-senha'
+import { Route as ContaRouteImport } from './routes/conta'
 import { Route as DesafiosRouteImport } from './routes/desafios'
 import { Route as FerramentasRouteImport } from './routes/ferramentas'
 import { Route as PerfilRouteImport } from './routes/perfil'
@@ -22,6 +24,16 @@ import { Route as MateriasSlugRouteImport } from './routes/materias.$slug'
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AlterarSenhaRoute = AlterarSenhaRouteImport.update({
+  id: '/alterar-senha',
+  path: '/alterar-senha',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContaRoute = ContaRouteImport.update({
+  id: '/conta',
+  path: '/conta',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DesafiosRoute = DesafiosRouteImport.update({
@@ -67,6 +79,8 @@ const MateriasSlugRoute = MateriasSlugRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/alterar-senha': typeof AlterarSenhaRoute
+  '/conta': typeof ContaRoute
   '/desafios': typeof DesafiosRoute
   '/ferramentas': typeof FerramentasRoute
   '/perfil': typeof PerfilRoute
@@ -78,6 +92,8 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/alterar-senha': typeof AlterarSenhaRoute
+  '/conta': typeof ContaRoute
   '/desafios': typeof DesafiosRoute
   '/ferramentas': typeof FerramentasRoute
   '/perfil': typeof PerfilRoute
@@ -90,6 +106,8 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/alterar-senha': typeof AlterarSenhaRoute
+  '/conta': typeof ContaRoute
   '/desafios': typeof DesafiosRoute
   '/ferramentas': typeof FerramentasRoute
   '/perfil': typeof PerfilRoute
@@ -103,6 +121,8 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/alterar-senha'
+    | '/conta'
     | '/desafios'
     | '/ferramentas'
     | '/perfil'
@@ -114,6 +134,8 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/alterar-senha'
+    | '/conta'
     | '/desafios'
     | '/ferramentas'
     | '/perfil'
@@ -125,6 +147,8 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/alterar-senha'
+    | '/conta'
     | '/desafios'
     | '/ferramentas'
     | '/perfil'
@@ -137,6 +161,8 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AlterarSenhaRoute: typeof AlterarSenhaRoute
+  ContaRoute: typeof ContaRoute
   DesafiosRoute: typeof DesafiosRoute
   FerramentasRoute: typeof FerramentasRoute
   PerfilRoute: typeof PerfilRoute
@@ -154,6 +180,20 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/alterar-senha': {
+      id: '/alterar-senha'
+      path: '/alterar-senha'
+      fullPath: '/alterar-senha'
+      preLoaderRoute: typeof AlterarSenhaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/conta': {
+      id: '/conta'
+      path: '/conta'
+      fullPath: '/conta'
+      preLoaderRoute: typeof ContaRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/desafios': {
@@ -217,6 +257,8 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AlterarSenhaRoute: AlterarSenhaRoute,
+  ContaRoute: ContaRoute,
   DesafiosRoute: DesafiosRoute,
   FerramentasRoute: FerramentasRoute,
   PerfilRoute: PerfilRoute,
