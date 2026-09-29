@@ -135,11 +135,6 @@ export interface FileRoutesByFullPath {
   '/caderno-erros': typeof CadernoErrosRoute
   '/revisao': typeof RevisaoRoute
   '/simulados': typeof SimuladosRoute
-  '/dashboard': typeof DashboardRoute
-  '/plano-estudos': typeof PlanoEstudosRoute
-  '/caderno-erros': typeof CadernoErrosRoute
-  '/revisao': typeof RevisaoRoute
-  '/simulados': typeof SimuladosRoute
   '/quiz': typeof QuizRoute
   '/materias/$slug': typeof MateriasSlugRoute
   '/materias/': typeof MateriasIndexRoute
@@ -155,6 +150,11 @@ export interface FileRoutesByTo {
   '/pesquisa': typeof PesquisaRoute
   '/planos': typeof PlanosRoute
   '/progresso': typeof ProgressoRoute
+  '/dashboard': typeof DashboardRoute
+  '/plano-estudos': typeof PlanoEstudosRoute
+  '/caderno-erros': typeof CadernoErrosRoute
+  '/revisao': typeof RevisaoRoute
+  '/simulados': typeof SimuladosRoute
   '/quiz': typeof QuizRoute
   '/materias/$slug': typeof MateriasSlugRoute
   '/materias': typeof MateriasIndexRoute
@@ -171,6 +171,11 @@ export interface FileRoutesById {
   '/pesquisa': typeof PesquisaRoute
   '/planos': typeof PlanosRoute
   '/progresso': typeof ProgressoRoute
+  '/dashboard': typeof DashboardRoute
+  '/plano-estudos': typeof PlanoEstudosRoute
+  '/caderno-erros': typeof CadernoErrosRoute
+  '/revisao': typeof RevisaoRoute
+  '/simulados': typeof SimuladosRoute
   '/quiz': typeof QuizRoute
   '/materias/$slug': typeof MateriasSlugRoute
   '/materias/': typeof MateriasIndexRoute
@@ -188,6 +193,11 @@ export interface FileRouteTypes {
     | '/pesquisa'
     | '/planos'
     | '/progresso'
+    | '/dashboard'
+    | '/plano-estudos'
+    | '/caderno-erros'
+    | '/revisao'
+    | '/simulados'
     | '/quiz'
     | '/materias/$slug'
     | '/materias/'
@@ -203,6 +213,11 @@ export interface FileRouteTypes {
     | '/pesquisa'
     | '/planos'
     | '/progresso'
+    | '/dashboard'
+    | '/plano-estudos'
+    | '/caderno-erros'
+    | '/revisao'
+    | '/simulados'
     | '/quiz'
     | '/materias/$slug'
     | '/materias'
@@ -218,6 +233,11 @@ export interface FileRouteTypes {
     | '/pesquisa'
     | '/planos'
     | '/progresso'
+    | '/dashboard'
+    | '/plano-estudos'
+    | '/caderno-erros'
+    | '/revisao'
+    | '/simulados'
     | '/quiz'
     | '/materias/$slug'
     | '/materias/'
@@ -310,13 +330,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProgressoRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/quiz': {
-      id: '/quiz'
-      path: '/quiz'
-      fullPath: '/quiz'
-      preLoaderRoute: typeof QuizRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/dashboard': {
       id: '/dashboard'
       path: '/dashboard'
@@ -350,6 +363,13 @@ declare module '@tanstack/react-router' {
       path: '/simulados'
       fullPath: '/simulados'
       preLoaderRoute: typeof SimuladosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/quiz': {
+      id: '/quiz'
+      path: '/quiz'
+      fullPath: '/quiz'
+      preLoaderRoute: typeof QuizRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/materias/': {
