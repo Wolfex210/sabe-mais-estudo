@@ -2,7 +2,7 @@ import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { useState } from "react";
 import { SiteLayout, PageHeader, Card, AdSlot } from "@/components/SiteLayout";
 import { Button } from "@/components/ui/button";
-import { getSubject } from "@/lib/content";
+import { getSubject, getStudyHelpLines } from "@/lib/content";
 import { curriculum, YEARS, YEAR_LABEL, type Year } from "@/lib/curriculum";
 import { getTopics } from "@/lib/lessons";
 import { actions } from "@/lib/store";
@@ -47,6 +47,7 @@ function SubjectPage() {
   if (!subject) return null;
   const topics = getTopics(slug, activeYear);
   const q = subject.questions[qIndex];
+  const helpLines = getStudyHelpLines(slug);
   const finished = qIndex >= subject.questions.length || !q;
 
   function pick(i: number) {
@@ -116,6 +117,20 @@ function SubjectPage() {
                   {subject.studyPages.map((page, i) => <button key={page.title} aria-label={`Abrir página ${i + 1}`} onClick={() => setStudyPage(i)} className={`h-2.5 w-2.5 rounded-full transition-all ${i === studyPage ? "bg-primary scale-110" : "bg-border hover:bg-primary/50"}`} />)}
                 </div>
                 <Button disabled={studyPage === 3} onClick={() => setStudyPage((p) => Math.min(3, p + 1))}>Próxima →</Button>
+              </div>
+            </Card>
+          </section>
+
+          <section aria-labelledby="help-heading">
+            <h2 id="help-heading" className="text-xl font-bold text-foreground">📘 Como esta matéria pode ajudar você</h2>
+            <p className="mt-2 text-sm text-muted-foreground">Uma página extensa com explicações para entender o que é a matéria, o que você aprende nela e como usar o conteúdo nos estudos.</p>
+            <Card className="mt-4">
+              <div className="space-y-3">
+                {helpLines.map((line, index) => (
+                  <p key={index} className="text-sm leading-7 text-muted-foreground">
+                    <span className="mr-2 font-semibold text-primary">{index + 1}.</span>{line}
+                  </p>
+                ))}
               </div>
             </Card>
           </section>
@@ -228,6 +243,12 @@ function SubjectPage() {
                       );
                     })}
                   </div>
+                  {chosen !== null && q.explanation && (
+                    <div className={chosen === q.answer ? "quiz-feedback-correct mt-4 rounded-xl border border-success/30 bg-success/10 p-4" : "quiz-feedback-wrong mt-4 rounded-xl border border-destructive/30 bg-destructive/10 p-4"}>
+                      <p className="font-semibold text-foreground">{chosen === q.answer ? "✓ Resposta correta!" : "✕ Vamos entender o erro"}</p>
+                      <p className="mt-2 text-sm leading-6 text-muted-foreground">{q.explanation}</p>
+                    </div>
+                  )}
                   {chosen !== null && (
                     <Button
                       onClick={() => {
