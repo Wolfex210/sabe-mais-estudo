@@ -75,7 +75,7 @@ for (const lesson of lessons) {
   for (const level of ["facil", "medio", "dificil"] as const) {
     const rows = lesson.quizzes?.[level];
     if (!rows) continue;
-    lesson.quizzes = { ...lesson.quizzes, [level]: (rows as unknown as [string, string[], number][]).map(([q, options, answer]) => ({ q, options, answer, level })) };
+    lesson.quizzes = { ...lesson.quizzes, [level]: (rows as unknown as [string, string[], number][]).map(([q, options, answer]) => ({ q, options, answer, level, explanation: `Conte, compare ou agrupe as quantidades passo a passo. Assim, você encontra ${options[answer]}.` })) };
   }
 }
 

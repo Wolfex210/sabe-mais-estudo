@@ -105,7 +105,10 @@ export async function connectUser(userId: string | null, email?: string) {
     return;
   }
   const version = ++revision;
-  const { data, error } = await supabase.from("student_study_data").select("progress").eq("user_id", userId).maybeSingle();
+  const [{ data, error }, { data: profile }] = await Promise.all([
+    supabase.from("student_study_data").select("progress").eq("user_id", userId).maybeSingle(),
+    supabase.from("student_profiles").select("name, school_year, avatar").eq("user_id", userId).maybeSingle(),
+  ]);
   if (connectedUser !== userId || revision !== version) return;
   if (error) console.error("Não foi possível carregar o progresso:", error.message);
   const cached = (() => {
@@ -113,7 +116,7 @@ export async function connectUser(userId: string | null, email?: string) {
     catch { return null; }
   })();
   const cloud = data?.progress as Partial<AppState> | undefined;
-  state = { ...initial, ...(cloud ?? cached ?? (state.answered || state.tasks.length || state.studySeconds ? state : {})), name: cloud?.name ?? cached?.name ?? (state.name !== "Estudante" ? state.name : email?.split("@")[0] ?? "Estudante") };
+  state = { ...initial, ...(cloud ?? cached ?? (state.answered || state.tasks.length || state.studySeconds ? state : {})), name: cloud?.name ?? cached?.name ?? profile?.name ?? (state.name !== "Estudante" ? state.name : email?.split("@")[0] ?? "Estudante"), schoolYear: cloud?.schoolYear ?? cached?.schoolYear ?? profile?.school_year ?? state.schoolYear, avatar: cloud?.avatar ?? cached?.avatar ?? profile?.avatar ?? state.avatar };
   persist();
 }
 

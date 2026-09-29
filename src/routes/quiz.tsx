@@ -43,7 +43,7 @@ function QuizPage() {
   const [index, setIndex] = useState(0);
   const [chosen, setChosen] = useState<number | null>(null);
   const [score, setScore] = useState(0);
-  const [answers, setAnswers] = useState<{ question: string; selected: string; expected: string; correct: boolean }[]>([]);
+  const [answers, setAnswers] = useState<{ question: string; selected: string; expected: string; correct: boolean; explanation?: string }[]>([]);
 
   const topicLessons = lessons.filter(l => l.subject === slug && Object.values(l.quizzes ?? {}).some(list => list?.length === 10));
 
@@ -69,7 +69,7 @@ function QuizPage() {
     const ok = i === questions[index]!.answer;
     if (ok) setScore((s) => s + 1);
     const question = questions[index];
-    if (question) setAnswers(a => [...a, { question: question.q, selected: question.options[i] ?? "", expected: question.options[question.answer] ?? "", correct: ok }]);
+    if (question) setAnswers(a => [...a, { question: question.q, selected: question.options[i] ?? "", expected: question.options[question.answer] ?? "", correct: ok, ...(question.explanation ? { explanation: question.explanation } : {}) }]);
     actions.answer(ok);
     if (index === questions.length - 1) actions.recordQuiz({ subject: slug, ...(topic ? { topic } : {}), level, correct: score + (ok ? 1 : 0), total: questions.length, date: new Date().toISOString() });
   }
@@ -189,7 +189,7 @@ function QuizPage() {
               Você acertou {score} de {questions.length} questões.
             </p>
             <p className="mt-2 text-sm text-muted-foreground">{questions.length - score} erros · {questions.length ? Math.round(score / questions.length * 100) : 0}% de acerto · {score * 5} pontos</p>
-            <div className="mt-6 space-y-3 text-left"><h3 className="font-semibold">Revisão das respostas</h3>{answers.map((answer, i) => <div key={i} className="rounded-lg border border-border p-3 text-sm"><p className="font-semibold">{i + 1}. {answer.question}</p><p className="mt-1">Sua resposta: {answer.selected} · {answer.correct ? "Correta" : "Incorreta"}</p><p className="text-muted-foreground">Resposta certa: {answer.expected}</p></div>)}</div>
+            <div className="mt-6 space-y-3 text-left"><h3 className="font-semibold">Revisão das respostas</h3>{answers.map((answer, i) => <div key={i} className="rounded-lg border border-border p-3 text-sm"><p className="font-semibold">{i + 1}. {answer.question}</p><p className="mt-1">Sua resposta: {answer.selected} · {answer.correct ? "Correta" : "Incorreta"}</p><p className="text-muted-foreground">Resposta certa: {answer.expected}</p>{answer.explanation && <p className="mt-2 text-muted-foreground">{answer.explanation}</p>}</div>)}</div>
             <button
               onClick={restart}
               className="mt-6 rounded-xl bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground"
