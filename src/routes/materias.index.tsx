@@ -37,6 +37,7 @@ function Materias() {
                 </span>
                 <h2 className="mt-4 text-lg font-semibold text-foreground">{s.name}</h2>
                 <p className="mt-1 text-sm text-muted-foreground">{s.intro}</p>
+                <span className="mt-3 inline-block text-sm font-semibold text-primary">Abrir matéria →</span>
               </Card>
             </Link>
           ))}
