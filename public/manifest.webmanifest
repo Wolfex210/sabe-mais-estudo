@@ -1,0 +1,19 @@
+{
+  "name": "Sabe Mais — Plataforma de estudos",
+  "short_name": "Sabe Mais",
+  "description": "Plataforma de estudos com matérias, quizzes, simulados e ferramentas.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#2563eb",
+  "lang": "pt-BR",
+  "icons": [
+    {
+      "src": "/icons/sabe-mais.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
