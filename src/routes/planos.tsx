@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Check } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import { SiteLayout, PageHeader, Card } from "@/components/SiteLayout";
 import { useAppState, trialDaysLeft } from "@/lib/store";
 
@@ -108,16 +109,7 @@ function Planos() {
                   </li>
                 ))}
               </ul>
-              <button
-                onClick={() => actions.choosePlan(p.id)}
-                className={`mt-6 rounded-xl px-5 py-3 text-sm font-semibold transition-transform hover:-translate-y-0.5 ${
-                  p.featured
-                    ? "bg-primary text-primary-foreground"
-                    : "border border-border text-foreground hover:bg-secondary"
-                }`}
-              >
-                {s.plan === p.id ? "Plano escolhido" : "Escolher plano"}
-              </button>
+              <Button disabled variant="outline" className="mt-6 w-full">Em breve</Button>
             </Card>
           ))}
         </div>
