@@ -590,6 +590,92 @@ export const subjects: Subject[] = [
 
 ];
 
+
+// Gera quizzes completos para as novas matérias a partir das páginas didáticas.
+function buildGeneratedQuestions(subject: Subject): Question[] {
+  const pages = subject.studyPages;
+  const result: Question[] = [];
+  const levels: Question["level"][] = ["facil","facil","medio","medio","medio","dificil","medio","dificil","dificil","dificil"];
+
+  pages.forEach((page, pageIndex) => {
+    const otherPages = pages.filter((_, i) => i !== pageIndex);
+    result.push({
+      q: `Qual é o foco principal da página "${page.title}"?`,
+      options: [page.text, ...otherPages.slice(0, 3).map((p) => p.text)],
+      answer: 0,
+      level: levels[result.length]!,
+      explanation: `A resposta correta é a descrição da página "${page.title}". Ela apresenta o assunto central estudado nessa etapa e explica por que esse conteúdo faz parte de ${subject.name}.`,
+    });
+    result.push({
+      q: `Qual destes temas aparece entre os tópicos de "${page.title}"?`,
+      options: [page.topics[0]!, ...otherPages.slice(0, 3).map((p) => p.topics[0]!)],
+      answer: 0,
+      level: levels[result.length]!,
+      explanation: `"${page.topics[0]}" é um dos tópicos indicados para "${page.title}". Estudar esse ponto ajuda a compreender o conteúdo da página e a relacioná-lo com os demais conceitos da matéria.`,
+    });
+  });
+
+  result.push({
+    q: `O que o estudo de ${subject.name} ajuda a compreender?`,
+    options: [subject.intro, pages[0]?.text ?? "Os principais conceitos da disciplina.", "Somente informações sem relação com a disciplina.", "Apenas conteúdos de outra matéria."],
+    answer: 0,
+    level: "dificil",
+    explanation: `A alternativa correta resume o objetivo de ${subject.name}: ${subject.intro} O estudo organizado permite compreender conceitos, relacioná-los e aplicá-los em atividades e questões.`,
+  });
+  result.push({
+    q: `Qual é uma boa forma de estudar ${subject.name} no Sabe Mais?`,
+    options: ["Ler as páginas, revisar os conceitos e usar os quizzes para testar a compreensão.", "Pular as explicações e marcar alternativas ao acaso.", "Estudar somente a última questão.", "Ignorar os conceitos e memorizar apenas palavras isoladas."],
+    answer: 0,
+    level: "medio",
+    explanation: `A melhor alternativa combina explicação, revisão e prática. As páginas apresentam os conceitos e o quiz ajuda a verificar se você consegue reconhecê-los e aplicá-los.`,
+  });
+  return result;
+}
+
+for (const subject of subjects) {
+  if (subject.questions.length === 0 && subject.studyPages.length === 4) {
+    subject.questions = buildGeneratedQuestions(subject);
+  } else {
+    subject.questions = subject.questions.map((question) => ({
+      ...question,
+      explanation: question.explanation ?? `A alternativa correta é "${question.options[question.answer]}". Ela corresponde ao conceito cobrado na questão e deve ser entendida em conjunto com os conteúdos de ${subject.name}, para que você consiga aplicar o conhecimento em situações diferentes.`,
+    }));
+  }
+}
+
+export function getStudyHelpLines(slug: string): string[] {
+  const subject = getSubject(slug);
+  if (!subject) return [];
+  const pageLines = subject.studyPages.flatMap((page) => [
+    `${page.title}: ${page.text}`,
+    `Nesta etapa, o objetivo é entender os conceitos de ${page.topics.join(", ")}.`,
+    `Esse conteúdo pode ajudar na revisão, na resolução de exercícios e na compreensão de questões de ${subject.name}.`,
+  ]);
+  const common = [
+    `Estudar ${subject.name} ajuda a construir uma base para interpretar problemas e conteúdos relacionados.`,
+    "Comece lendo a explicação e tente repetir a ideia principal com suas próprias palavras.",
+    "Depois, observe os exemplos e procure relacionar o conceito com uma situação concreta.",
+    "Use as perguntas do quiz como revisão ativa, tentando responder antes de olhar a explicação.",
+    "Quando errar, leia a explicação completa e volte à página relacionada ao assunto.",
+    "Anotar palavras-chave pode facilitar a revisão em outro momento.",
+    "Dividir o estudo em pequenas etapas ajuda a manter a atenção e perceber o que ainda precisa ser revisado.",
+    "Os conteúdos desta matéria podem se conectar com outras disciplinas do Sabe Mais.",
+    "Essas conexões ajudam a entender que os conhecimentos escolares se complementam.",
+    "Não é necessário memorizar tudo na primeira leitura; primeiro procure compreender.",
+    "Tente explicar cada conceito sem copiar a definição exatamente como está escrita.",
+    "Use os quatro blocos de estudo como uma sequência para avançar gradualmente.",
+    "Os exercícios podem ser usados para transformar a explicação em prática.",
+    "O quiz serve para identificar pontos fortes e assuntos que merecem nova revisão.",
+    "Revisar erros é tão importante quanto comemorar acertos.",
+    "Ao estudar novamente depois de alguns dias, tente lembrar a ideia antes de reler o texto.",
+    "Se um conceito parecer difícil, divida-o em partes menores.",
+    "Compare conceitos parecidos para entender melhor suas diferenças.",
+    "Procure sempre justificar por que uma resposta está correta.",
+    "Com esse ciclo de explicação, prática, revisão e quiz, o estudo fica mais completo.",
+  ];
+  return [...pageLines, ...common].slice(0, 32);
+}
+
 export function getSubject(slug: string) {
   return subjects.find((s) => s.slug === slug);
 }
