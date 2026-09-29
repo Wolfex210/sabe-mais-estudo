@@ -70,6 +70,15 @@ export const lessons: Lesson[] = [
   },
 ];
 
+// Normalize compact, hand-authored question rows into the common quiz format.
+for (const lesson of lessons) {
+  for (const level of ["facil", "medio", "dificil"] as const) {
+    const rows = lesson.quizzes?.[level];
+    if (!rows) continue;
+    lesson.quizzes = { ...lesson.quizzes, [level]: (rows as unknown as [string, string[], number][]).map(([q, options, answer]) => ({ q, options, answer, level })) };
+  }
+}
+
 export function getTopics(subject: string, year: Year) {
   const outlines = (curriculum[subject]?.[year] ?? []).map((line) => {
     const topic = parseTopic(line);
