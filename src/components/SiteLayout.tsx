@@ -47,6 +47,7 @@ export function SiteLayout({ children }: { children: ReactNode }) {
               <Link
                 key={item.to}
                 to={item.to}
+                search={item.to === "/quiz" ? {} : undefined}
                 className="rounded-lg px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
                 activeProps={{ className: "bg-secondary text-foreground" }}
                 activeOptions={{ exact: item.to === "/" }}
@@ -86,6 +87,7 @@ export function SiteLayout({ children }: { children: ReactNode }) {
               <Link
                 key={item.to}
                 to={item.to}
+                search={item.to === "/quiz" ? {} : undefined}
                 onClick={() => setOpen(false)}
                 className="block rounded-lg px-3 py-3 text-sm font-medium text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
                 activeProps={{ className: "bg-secondary text-foreground" }}
@@ -113,7 +115,7 @@ export function SiteLayout({ children }: { children: ReactNode }) {
             <ul className="mt-2 space-y-1 text-muted-foreground">
               {nav.slice(1, 5).map((i) => (
                 <li key={i.to}>
-                  <Link to={i.to} className="hover:text-foreground">
+                  <Link to={i.to} search={i.to === "/quiz" ? {} : undefined} className="hover:text-foreground">
                     {i.label}
                   </Link>
                 </li>

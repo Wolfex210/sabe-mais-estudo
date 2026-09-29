@@ -67,7 +67,7 @@ function Index() {
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Link
-                to="/quiz"
+                to="/quiz" search={{}}
                 className="rounded-xl bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground shadow-soft transition-transform hover:-translate-y-0.5"
               >
                 Começar agora

@@ -225,6 +225,7 @@ function SubjectPage() {
             </p>
             <Link
               to="/quiz"
+              search={{}}
               className="mt-4 inline-block rounded-xl bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground"
             >
               Ir para o Quiz

@@ -8,10 +8,10 @@ import { Button } from "@/components/ui/button";
 
 export const Route = createFileRoute("/quiz")({
   validateSearch: (search: Record<string, unknown>) => ({
-    subject: typeof search.subject === "string" ? search.subject : undefined,
-    year: typeof search.year === "string" ? search.year : undefined,
-    topic: typeof search.topic === "string" ? search.topic : undefined,
-    level: search.level === "facil" || search.level === "medio" || search.level === "dificil" ? search.level : undefined,
+    subject: typeof search['subject'] === "string" ? search['subject'] : undefined,
+    year: typeof search['year'] === "string" ? search['year'] : undefined,
+    topic: typeof search['topic'] === "string" ? search['topic'] : undefined,
+    level: search['level'] === "facil" || search['level'] === "medio" || search['level'] === "dificil" ? search['level'] as Question['level'] : undefined,
   }),
   head: () => ({
     meta: [
@@ -72,7 +72,7 @@ function QuizPage() {
     const question = questions[index];
     if (question) setAnswers(a => [...a, { question: question.q, selected: question.options[i] ?? "", expected: question.options[question.answer] ?? "", correct: ok }]);
     actions.answer(ok);
-    if (index === questions.length - 1) actions.recordQuiz({ subject: slug, topic: topic || undefined, level, correct: score + (ok ? 1 : 0), total: questions.length, date: new Date().toISOString() });
+    if (index === questions.length - 1) actions.recordQuiz({ subject: slug, ...(topic ? { topic } : {}), level, correct: score + (ok ? 1 : 0), total: questions.length, date: new Date().toISOString() });
   }
 
   const finished = started && index >= questions.length;

@@ -15,7 +15,7 @@ export type Lesson = {
   finalSummary?: string;
   exercises?: { prompt: string; answer: string }[];
   review?: string[];
-  quizzes?: Partial<Record<Question["level"], Question[]>>;
+  quizzes?: Partial<Record<Question["level"], Question[]>> | undefined;
 };
 
 export const lessons: Lesson[] = [
