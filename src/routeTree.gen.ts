@@ -10,18 +10,32 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AlterarSenhaRouteImport } from './routes/alterar-senha'
+import { Route as ContaRouteImport } from './routes/conta'
 import { Route as DesafiosRouteImport } from './routes/desafios'
 import { Route as FerramentasRouteImport } from './routes/ferramentas'
 import { Route as PerfilRouteImport } from './routes/perfil'
+import { Route as PesquisaRouteImport } from './routes/pesquisa'
 import { Route as PlanosRouteImport } from './routes/planos'
 import { Route as ProgressoRouteImport } from './routes/progresso'
 import { Route as QuizRouteImport } from './routes/quiz'
 import { Route as MateriasIndexRouteImport } from './routes/materias.index'
 import { Route as MateriasSlugRouteImport } from './routes/materias.$slug'
+import { Route as AulaSlugYearTopicRouteImport } from './routes/aula.$slug.$year.$topic'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AlterarSenhaRoute = AlterarSenhaRouteImport.update({
+  id: '/alterar-senha',
+  path: '/alterar-senha',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContaRoute = ContaRouteImport.update({
+  id: '/conta',
+  path: '/conta',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DesafiosRoute = DesafiosRouteImport.update({
@@ -37,6 +51,11 @@ const FerramentasRoute = FerramentasRouteImport.update({
 const PerfilRoute = PerfilRouteImport.update({
   id: '/perfil',
   path: '/perfil',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PesquisaRoute = PesquisaRouteImport.update({
+  id: '/pesquisa',
+  path: '/pesquisa',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PlanosRoute = PlanosRouteImport.update({
@@ -64,87 +83,120 @@ const MateriasSlugRoute = MateriasSlugRouteImport.update({
   path: '/materias/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AulaSlugYearTopicRoute = AulaSlugYearTopicRouteImport.update({
+  id: '/aula/$slug/$year/$topic',
+  path: '/aula/$slug/$year/$topic',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/alterar-senha': typeof AlterarSenhaRoute
+  '/conta': typeof ContaRoute
   '/desafios': typeof DesafiosRoute
   '/ferramentas': typeof FerramentasRoute
   '/perfil': typeof PerfilRoute
+  '/pesquisa': typeof PesquisaRoute
   '/planos': typeof PlanosRoute
   '/progresso': typeof ProgressoRoute
   '/quiz': typeof QuizRoute
   '/materias/$slug': typeof MateriasSlugRoute
   '/materias/': typeof MateriasIndexRoute
+  '/aula/$slug/$year/$topic': typeof AulaSlugYearTopicRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/alterar-senha': typeof AlterarSenhaRoute
+  '/conta': typeof ContaRoute
   '/desafios': typeof DesafiosRoute
   '/ferramentas': typeof FerramentasRoute
   '/perfil': typeof PerfilRoute
+  '/pesquisa': typeof PesquisaRoute
   '/planos': typeof PlanosRoute
   '/progresso': typeof ProgressoRoute
   '/quiz': typeof QuizRoute
   '/materias/$slug': typeof MateriasSlugRoute
   '/materias': typeof MateriasIndexRoute
+  '/aula/$slug/$year/$topic': typeof AulaSlugYearTopicRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/alterar-senha': typeof AlterarSenhaRoute
+  '/conta': typeof ContaRoute
   '/desafios': typeof DesafiosRoute
   '/ferramentas': typeof FerramentasRoute
   '/perfil': typeof PerfilRoute
+  '/pesquisa': typeof PesquisaRoute
   '/planos': typeof PlanosRoute
   '/progresso': typeof ProgressoRoute
   '/quiz': typeof QuizRoute
   '/materias/$slug': typeof MateriasSlugRoute
   '/materias/': typeof MateriasIndexRoute
+  '/aula/$slug/$year/$topic': typeof AulaSlugYearTopicRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/alterar-senha'
+    | '/conta'
     | '/desafios'
     | '/ferramentas'
     | '/perfil'
+    | '/pesquisa'
     | '/planos'
     | '/progresso'
     | '/quiz'
     | '/materias/$slug'
     | '/materias/'
+    | '/aula/$slug/$year/$topic'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/alterar-senha'
+    | '/conta'
     | '/desafios'
     | '/ferramentas'
     | '/perfil'
+    | '/pesquisa'
     | '/planos'
     | '/progresso'
     | '/quiz'
     | '/materias/$slug'
     | '/materias'
+    | '/aula/$slug/$year/$topic'
   id:
     | '__root__'
     | '/'
+    | '/alterar-senha'
+    | '/conta'
     | '/desafios'
     | '/ferramentas'
     | '/perfil'
+    | '/pesquisa'
     | '/planos'
     | '/progresso'
     | '/quiz'
     | '/materias/$slug'
     | '/materias/'
+    | '/aula/$slug/$year/$topic'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AlterarSenhaRoute: typeof AlterarSenhaRoute
+  ContaRoute: typeof ContaRoute
   DesafiosRoute: typeof DesafiosRoute
   FerramentasRoute: typeof FerramentasRoute
   PerfilRoute: typeof PerfilRoute
+  PesquisaRoute: typeof PesquisaRoute
   PlanosRoute: typeof PlanosRoute
   ProgressoRoute: typeof ProgressoRoute
   QuizRoute: typeof QuizRoute
   MateriasSlugRoute: typeof MateriasSlugRoute
   MateriasIndexRoute: typeof MateriasIndexRoute
+  AulaSlugYearTopicRoute: typeof AulaSlugYearTopicRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -154,6 +206,20 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/alterar-senha': {
+      id: '/alterar-senha'
+      path: '/alterar-senha'
+      fullPath: '/alterar-senha'
+      preLoaderRoute: typeof AlterarSenhaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/conta': {
+      id: '/conta'
+      path: '/conta'
+      fullPath: '/conta'
+      preLoaderRoute: typeof ContaRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/desafios': {
@@ -175,6 +241,13 @@ declare module '@tanstack/react-router' {
       path: '/perfil'
       fullPath: '/perfil'
       preLoaderRoute: typeof PerfilRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/pesquisa': {
+      id: '/pesquisa'
+      path: '/pesquisa'
+      fullPath: '/pesquisa'
+      preLoaderRoute: typeof PesquisaRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/planos': {
@@ -212,19 +285,30 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MateriasSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/aula/$slug/$year/$topic': {
+      id: '/aula/$slug/$year/$topic'
+      path: '/aula/$slug/$year/$topic'
+      fullPath: '/aula/$slug/$year/$topic'
+      preLoaderRoute: typeof AulaSlugYearTopicRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AlterarSenhaRoute: AlterarSenhaRoute,
+  ContaRoute: ContaRoute,
   DesafiosRoute: DesafiosRoute,
   FerramentasRoute: FerramentasRoute,
   PerfilRoute: PerfilRoute,
+  PesquisaRoute: PesquisaRoute,
   PlanosRoute: PlanosRoute,
   ProgressoRoute: ProgressoRoute,
   QuizRoute: QuizRoute,
   MateriasSlugRoute: MateriasSlugRoute,
   MateriasIndexRoute: MateriasIndexRoute,
+  AulaSlugYearTopicRoute: AulaSlugYearTopicRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

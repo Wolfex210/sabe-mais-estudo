@@ -1,7 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Check } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import { SiteLayout, PageHeader, Card } from "@/components/SiteLayout";
-import { useAppState, actions, trialDaysLeft } from "@/lib/store";
+import { useAppState, trialDaysLeft } from "@/lib/store";
 
 export const Route = createFileRoute("/planos")({
   head: () => ({
@@ -9,7 +10,7 @@ export const Route = createFileRoute("/planos")({
       { title: "Planos e Sabe Mais Premium" },
       {
         name: "description",
-        content: "3 dias grátis e depois escolha entre os planos Básico (R$ 9,99), Médio (R$ 19,99) e Master (R$ 49,99).",
+        content: "Conheça os planos Básico (R$ 19,99), Médio (R$ 49,99) e Master (R$ 89,99). Pagamentos ainda indisponíveis.",
       },
       { property: "og:title", content: "Planos e Sabe Mais Premium" },
       { property: "og:description", content: "Teste 3 dias grátis e escolha o plano ideal para seus estudos." },
@@ -24,7 +25,7 @@ const plans = [
   {
     id: "basico" as const,
     name: "Básico",
-    price: "R$ 9,99",
+    price: "R$ 19,99",
     desc: "Poucos recursos, mas o suficiente para estudar todo dia.",
     features: [
       "Todas as matérias e resumos",
@@ -36,7 +37,7 @@ const plans = [
   {
     id: "medio" as const,
     name: "Médio",
-    price: "R$ 19,99",
+    price: "R$ 49,99",
     desc: "Bons métodos de estudo para quem quer evoluir mais rápido.",
     featured: true,
     features: [
@@ -50,7 +51,7 @@ const plans = [
   {
     id: "master" as const,
     name: "Master",
-    price: "R$ 49,99",
+    price: "R$ 89,99",
     desc: "As melhores ferramentas de estudo do Sabe Mais.",
     features: [
       "Tudo do Médio",
@@ -108,24 +109,12 @@ function Planos() {
                   </li>
                 ))}
               </ul>
-              <button
-                onClick={() => actions.choosePlan(p.id)}
-                className={`mt-6 rounded-xl px-5 py-3 text-sm font-semibold transition-transform hover:-translate-y-0.5 ${
-                  p.featured
-                    ? "bg-primary text-primary-foreground"
-                    : "border border-border text-foreground hover:bg-secondary"
-                }`}
-              >
-                {s.plan === p.id ? "Plano escolhido" : "Escolher plano"}
-              </button>
+              <Button disabled variant="outline" className="mt-6 w-full">Em breve</Button>
             </Card>
           ))}
         </div>
 
-        <p className="mt-8 text-center text-xs text-muted-foreground">
-          O pagamento ainda não está ativo: por enquanto a escolha apenas registra o plano de
-          interesse.
-        </p>
+        <p className="mt-8 text-center text-xs text-muted-foreground">Os planos estão disponíveis para consulta. Pagamentos e assinaturas ainda não estão ativos; nenhum valor será cobrado.</p>
       </div>
     </SiteLayout>
   );

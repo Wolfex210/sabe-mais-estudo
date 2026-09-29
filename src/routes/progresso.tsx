@@ -36,6 +36,9 @@ function Progresso() {
     { label: "Tempo estudado", value: `${horas}h ${minutos}min` },
     { label: "Sequência de dias", value: `${streak} dia(s)` },
     { label: "Aproveitamento", value: `${s.answered ? Math.round((s.correct / s.answered) * 100) : 0}%` },
+    { label: "Assuntos concluídos", value: s.completedTopics.length },
+    { label: "Quizzes concluídos", value: s.quizHistory.length },
+    { label: "Sessões de estudo", value: s.studySessions },
   ];
 
   const chart = [

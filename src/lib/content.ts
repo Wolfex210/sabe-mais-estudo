@@ -5,6 +5,7 @@ export type Question = {
   options: string[];
   answer: number; // índice da alternativa correta
   level: "facil" | "medio" | "dificil";
+  explanation?: string;
 };
 
 export type Subject = {

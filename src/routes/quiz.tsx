@@ -3,8 +3,15 @@ import { useMemo, useState } from "react";
 import { SiteLayout, PageHeader, Card, AdSlot } from "@/components/SiteLayout";
 import { subjects, type Question } from "@/lib/content";
 import { actions } from "@/lib/store";
+import { lessons } from "@/lib/lessons";
 
 export const Route = createFileRoute("/quiz")({
+  validateSearch: (search: Record<string, unknown>) => ({
+    ...(typeof search['subject'] === "string" ? { subject: search['subject'] } : {}),
+    ...(typeof search['year'] === "string" ? { year: search['year'] } : {}),
+    ...(typeof search['topic'] === "string" ? { topic: search['topic'] } : {}),
+    ...(search['level'] === "facil" || search['level'] === "medio" || search['level'] === "dificil" ? { level: search['level'] as Question['level'] } : {}),
+  }),
   head: () => ({
     meta: [
       { title: "Quiz — Sabe Mais" },
@@ -28,16 +35,24 @@ const levels = [
 ] as const;
 
 function QuizPage() {
-  const [slug, setSlug] = useState(subjects[0]!.slug);
-  const [level, setLevel] = useState<Question["level"]>("facil");
+  const search = Route.useSearch();
+  const [slug, setSlug] = useState(search.subject ?? subjects[0]!.slug);
+  const [level, setLevel] = useState<Question["level"]>(search.level ?? "facil");
+  const [topic, setTopic] = useState(search.topic ?? "");
   const [started, setStarted] = useState(false);
   const [index, setIndex] = useState(0);
   const [chosen, setChosen] = useState<number | null>(null);
   const [score, setScore] = useState(0);
+  const [answers, setAnswers] = useState<{ question: string; selected: string; expected: string; correct: boolean; explanation?: string }[]>([]);
+
+  const topicLessons = lessons.filter(l => l.subject === slug && Object.values(l.quizzes ?? {}).some(list => list?.length === 10));
 
   const questions = useMemo(
-    () => subjects.find((s) => s.slug === slug)!.questions.filter((q) => q.level === level),
-    [slug, level],
+    () => {
+      const lesson = topicLessons.find(l => l.title === topic && (!search.year || search.year === l.year));
+      return lesson?.quizzes?.[level]?.length === 10 ? lesson.quizzes[level] : (subjects.find(s => s.slug === slug)?.questions ?? []).filter(q => q.level === level);
+    },
+    [slug, level, topic],
   );
 
   function restart() {
@@ -45,6 +60,7 @@ function QuizPage() {
     setIndex(0);
     setChosen(null);
     setScore(0);
+    setAnswers([]);
   }
 
   function pick(i: number) {
@@ -52,7 +68,10 @@ function QuizPage() {
     setChosen(i);
     const ok = i === questions[index]!.answer;
     if (ok) setScore((s) => s + 1);
+    const question = questions[index];
+    if (question) setAnswers(a => [...a, { question: question.q, selected: question.options[i] ?? "", expected: question.options[question.answer] ?? "", correct: ok, ...(question.explanation ? { explanation: question.explanation } : {}) }]);
     actions.answer(ok);
+    if (index === questions.length - 1) actions.recordQuiz({ subject: slug, ...(topic ? { topic } : {}), level, correct: score + (ok ? 1 : 0), total: questions.length, date: new Date().toISOString() });
   }
 
   const finished = started && index >= questions.length;
@@ -63,10 +82,11 @@ function QuizPage() {
       <div className="mx-auto w-full max-w-3xl px-4 py-12">
         {!started && (
           <Card>
-            <label className="text-sm font-semibold text-foreground">Matéria</label>
+            <label htmlFor="quiz-subject" className="text-sm font-semibold text-foreground">Matéria</label>
             <select
+              id="quiz-subject"
               value={slug}
-              onChange={(e) => setSlug(e.target.value)}
+              onChange={(e) => { setSlug(e.target.value); setTopic(""); }}
               className="mt-2 w-full rounded-xl border border-border bg-background px-4 py-3 text-sm"
             >
               {subjects.map((s) => (
@@ -75,6 +95,7 @@ function QuizPage() {
                 </option>
               ))}
             </select>
+            {topicLessons.length > 0 && <><label htmlFor="quiz-topic" className="mt-5 block text-sm font-semibold text-foreground">Assunto</label><select id="quiz-topic" value={topic} onChange={e => setTopic(e.target.value)} className="mt-2 w-full rounded-lg border border-border bg-background p-3"><option value="">Questões gerais da matéria</option>{topicLessons.map(l => <option key={`${l.year}-${l.title}`} value={l.title}>{l.title} · {l.year}</option>)}</select></>}
 
             <p className="mt-6 text-sm font-semibold text-foreground">Dificuldade</p>
             <div className="mt-2 flex flex-wrap gap-2">
@@ -142,7 +163,7 @@ function QuizPage() {
               })}
             </div>
             {chosen !== null && (
-              <div className="mt-5 flex items-center justify-between">
+              <div className="mt-5 flex items-center justify-between gap-3">
                 <p className="text-sm font-semibold">
                   {chosen === questions[index]!.answer ? "✅ Acertou!" : "❌ Errou"}
                 </p>
@@ -167,6 +188,8 @@ function QuizPage() {
             <p className="mt-2 text-lg text-muted-foreground">
               Você acertou {score} de {questions.length} questões.
             </p>
+            <p className="mt-2 text-sm text-muted-foreground">{questions.length - score} erros · {questions.length ? Math.round(score / questions.length * 100) : 0}% de acerto · {score * 5} pontos</p>
+            <div className="mt-6 space-y-3 text-left"><h3 className="font-semibold">Revisão das respostas</h3>{answers.map((answer, i) => <div key={i} className="rounded-lg border border-border p-3 text-sm"><p className="font-semibold">{i + 1}. {answer.question}</p><p className="mt-1">Sua resposta: {answer.selected} · {answer.correct ? "Correta" : "Incorreta"}</p><p className="text-muted-foreground">Resposta certa: {answer.expected}</p>{answer.explanation && <p className="mt-2 text-muted-foreground">{answer.explanation}</p>}</div>)}</div>
             <button
               onClick={restart}
               className="mt-6 rounded-xl bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground"

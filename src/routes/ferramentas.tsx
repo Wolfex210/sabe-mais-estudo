@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import { SiteLayout, PageHeader, Card, AdSlot } from "@/components/SiteLayout";
 import { useAppState, actions, type Task, type ScheduleItem } from "@/lib/store";
+import { Button } from "@/components/ui/button";
 
 export const Route = createFileRoute("/ferramentas")({
   head: () => ({
@@ -25,7 +26,7 @@ function Ferramentas() {
     <SiteLayout>
       <PageHeader
         title="Ferramentas"
-        subtitle="Tudo funciona de verdade e fica salvo no seu navegador."
+        subtitle="Organize seu tempo e acompanhe seus estudos."
       />
       <div className="mx-auto grid w-full max-w-6xl gap-6 px-4 py-12 lg:grid-cols-2">
         <Pomodoro />
@@ -42,35 +43,47 @@ function Ferramentas() {
 
 /* ---------------- Pomodoro ---------------- */
 function Pomodoro() {
-  const FOCUS = 25 * 60;
-  const BREAK = 5 * 60;
-  const [mode, setMode] = useState<"foco" | "pausa">("foco");
-  const [left, setLeft] = useState(FOCUS);
+  const [config, setConfig] = useState({ study: 25, short: 5, long: 15, cycles: 4 });
+  const [preset, setPreset] = useState("25/5");
+  const [mode, setMode] = useState<"foco" | "pausa curta" | "pausa longa">("foco");
+  const [cycle, setCycle] = useState(1);
+  const [left, setLeft] = useState(25 * 60);
   const [running, setRunning] = useState(false);
-  const tick = useRef(0);
+  const elapsed = useRef(0);
+
+  function reset() { setRunning(false); setMode("foco"); setCycle(1); setLeft(config.study * 60); elapsed.current = 0; }
+  function setDuration(key: keyof typeof config, value: number) {
+    const safe = Math.min(key === "cycles" ? 12 : 180, Math.max(1, value || 1));
+    setConfig(c => ({ ...c, [key]: safe })); setPreset("Personalizado");
+    if (!running && mode === "foco" && key === "study") setLeft(safe * 60);
+  }
+  function choosePreset(study: number, short: number, name: string) {
+    setRunning(false); setPreset(name); setConfig(c => ({ ...c, study, short })); setMode("foco"); setCycle(1); setLeft(study * 60); elapsed.current = 0;
+  }
+  function endSession() {
+    setRunning(false);
+    if (elapsed.current) { actions.addStudySeconds(elapsed.current); actions.finishStudySession(); }
+    elapsed.current = 0; setCycle(1); setMode("foco"); setLeft(config.study * 60);
+  }
 
   useEffect(() => {
     if (!running) return;
     const id = setInterval(() => {
       setLeft((v) => {
-        if (mode === "foco") {
-          tick.current += 1;
-          if (tick.current >= 60) {
-            // registra o tempo estudado a cada minuto
-            actions.addStudySeconds(60);
-            tick.current = 0;
-          }
-        }
+        if (mode === "foco") elapsed.current += 1;
         if (v <= 1) {
-          const next = mode === "foco" ? "pausa" : "foco";
+          if (mode === "foco") { actions.addStudySeconds(elapsed.current); actions.finishStudySession(); elapsed.current = 0; }
+          if (mode !== "foco" && cycle >= config.cycles) { setRunning(false); setCycle(1); setMode("foco"); return config.study * 60; }
+          const next = mode === "foco" ? (cycle >= config.cycles ? "pausa longa" : "pausa curta") : "foco";
+          if (mode !== "foco") setCycle(c => c + 1);
           setMode(next);
-          return next === "foco" ? FOCUS : BREAK;
+          return (next === "foco" ? config.study : next === "pausa longa" ? config.long : config.short) * 60;
         }
         return v - 1;
       });
     }, 1000);
     return () => clearInterval(id);
-  }, [running, mode, FOCUS, BREAK]);
+  }, [running, mode, cycle, config]);
 
   const mm = String(Math.floor(left / 60)).padStart(2, "0");
   const ss = String(left % 60).padStart(2, "0");
@@ -78,7 +91,9 @@ function Pomodoro() {
   return (
     <Card>
       <h2 className="text-lg font-bold text-foreground">⏱️ Pomodoro</h2>
-      <p className="text-sm text-muted-foreground">25 minutos de estudo e 5 de descanso.</p>
+      <p className="text-sm text-muted-foreground">Ciclo {cycle} de {config.cycles} · {preset}</p>
+      <div className="mt-4 flex flex-wrap gap-2">{[[25, 5, "25/5"], [40, 10, "40/10"], [50, 10, "50/10"]].map(([study, short, name]) => <Button key={name} type="button" size="sm" variant={preset === name ? "default" : "outline"} onClick={() => choosePreset(Number(study), Number(short), String(name))}>{name} min</Button>)}</div>
+      <div className="mt-4 grid grid-cols-2 gap-3">{([['study', 'Estudo'], ['short', 'Pausa curta'], ['long', 'Pausa longa'], ['cycles', 'Ciclos']] as const).map(([key, label]) => <label key={key} className="text-xs font-semibold text-muted-foreground">{label} {key !== 'cycles' && '(min)'}<input type="number" min="1" max={key === 'cycles' ? 12 : 180} disabled={running} value={config[key]} onChange={e => setDuration(key, Number(e.target.value))} className="mt-1 w-full rounded-lg border border-border bg-background p-2 text-foreground" /></label>)}</div>
       <p className="mt-6 text-center text-6xl font-extrabold tabular-nums text-primary">
         {mm}:{ss}
       </p>
@@ -86,22 +101,13 @@ function Pomodoro() {
         {mode}
       </p>
       <div className="mt-6 flex justify-center gap-3">
-        <button
+        <Button
           onClick={() => setRunning((r) => !r)}
-          className="rounded-xl bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground transition-transform hover:-translate-y-0.5"
         >
           {running ? "Pausar" : "Iniciar"}
-        </button>
-        <button
-          onClick={() => {
-            setRunning(false);
-            setMode("foco");
-            setLeft(FOCUS);
-          }}
-          className="rounded-xl border border-border px-5 py-2.5 text-sm font-semibold text-foreground hover:bg-secondary"
-        >
-          Reiniciar
-        </button>
+        </Button>
+        <Button variant="outline" onClick={reset}>Reiniciar</Button>
+        <Button variant="outline" onClick={endSession}>Encerrar sessão</Button>
       </div>
     </Card>
   );
