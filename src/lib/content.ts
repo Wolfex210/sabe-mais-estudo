@@ -362,7 +362,7 @@ export const subjects: Subject[] = [
       { title: "Movimentos e exploração", text: "Veja os movimentos aparentes dos astros e como estudamos o espaço.", topics: ["Rotação e translação", "Eclipses", "Exploração espacial"] }
     ],
     summaries: [],
-    examples: [],
+    examples: ["Fases da Lua: a aparência da Lua muda conforme sua posição em relação à Terra e ao Sol.","Sistema Solar: a Terra é um dos planetas que orbitam o Sol.","Eclipse solar: acontece quando a Lua passa entre o Sol e a Terra.","Estrelas: o Sol é uma estrela que fornece luz e energia para a Terra."],
     exercises: [],
     questions: [],
   },
@@ -379,7 +379,7 @@ export const subjects: Subject[] = [
       { title: "Cidadania e sociedade", text: "Conheça participação social, instituições e direitos na vida coletiva.", topics: ["Cidadania", "Instituições", "Participação social"] }
     ],
     summaries: [],
-    examples: [],
+    examples: ["Família e escola são exemplos de espaços em que ocorre socialização.","Uma norma social é uma expectativa de comportamento compartilhada por um grupo.","A cultura inclui costumes, valores, conhecimentos, símbolos e práticas de uma sociedade.","A mobilidade social pode ocorrer quando uma pessoa ou grupo muda de posição na estrutura social."],
     exercises: [],
     questions: [],
   },
@@ -396,7 +396,7 @@ export const subjects: Subject[] = [
       { title: "Apresentação e prática", text: "Pratique apresentações curtas e aprenda a lidar com perguntas.", topics: ["Ensaios", "Contato visual", "Perguntas"] }
     ],
     summaries: [],
-    examples: [],
+    examples: ["Abertura: começar uma apresentação dizendo o tema e o objetivo ajuda o público a entender a proposta.","Argumentação: apresentar uma ideia, explicar o motivo e usar um exemplo torna a fala mais clara.","Linguagem corporal: postura equilibrada e gestos naturais podem acompanhar a mensagem.","Perguntas: repetir ou reformular uma pergunta antes de responder ajuda a organizar a resposta."],
     exercises: [],
     questions: [],
   },
@@ -413,7 +413,7 @@ export const subjects: Subject[] = [
       { title: "Política e sociedade", text: "Analise ideias sobre justiça, poder, leis e organização da sociedade.", topics: ["Justiça", "Poder", "Estado e sociedade"] }
     ],
     summaries: [],
-    examples: [],
+    examples: ["Pergunta filosófica: 'O que torna uma ação justa?' pode ser analisada por diferentes argumentos.","Ética: avaliar consequências, princípios e responsabilidades é uma forma de analisar um dilema.","Conhecimento: comparar evidências e justificativas ajuda a avaliar uma afirmação.","Argumentação: uma conclusão deve estar relacionada às razões apresentadas."],
     exercises: [],
     questions: [],
   },
@@ -430,7 +430,7 @@ export const subjects: Subject[] = [
       { title: "Diversidade da vida", text: "Conheça grupos de seres vivos e suas principais características.", topics: ["Classificação", "Reinos e grupos", "Biodiversidade"] }
     ],
     summaries: [],
-    examples: [],
+    examples: ["Célula: plantas e animais são formados por células, embora existam diferenças entre seus tipos celulares.","Genética: genes são segmentos de DNA relacionados às características hereditárias.","Seleção natural: características que favorecem a sobrevivência e reprodução podem se tornar mais frequentes ao longo das gerações.","Biodiversidade: uma floresta reúne diferentes espécies e relações ecológicas."],
     exercises: [],
     questions: [],
   },
@@ -447,7 +447,7 @@ export const subjects: Subject[] = [
       { title: "Laicidade e liberdade", text: "Entenda liberdade de crença e a importância do respeito às diferentes convicções.", topics: ["Liberdade religiosa", "Laicidade", "Direitos"] }
     ],
     summaries: [],
-    examples: [],
+    examples: ["Diversidade: diferentes tradições religiosas podem possuir símbolos, ritos e celebrações próprios.","Cultura: festas, músicas, arquitetura e costumes podem receber influências de tradições religiosas.","Convivência: respeitar uma crença não exige que todas as pessoas tenham a mesma crença.","Liberdade religiosa: pessoas podem ter diferentes convicções e devem ser tratadas com respeito."],
     exercises: [],
     questions: [],
   },
@@ -464,7 +464,7 @@ export const subjects: Subject[] = [
       { title: "Revisão do texto", text: "Revise conteúdo, organização, gramática, pontuação e escolha de palavras.", topics: ["Coesão", "Gramática", "Revisão"] }
     ],
     summaries: [],
-    examples: [],
+    examples: ["Planejamento: antes de escrever, transforme o tema em uma pergunta e liste as ideias que respondem a ela.","Tese: uma frase central deixa claro qual ponto de vista será desenvolvido no texto.","Argumentação: uma afirmação fica mais consistente quando vem acompanhada de explicação, exemplo ou dado.","Revisão: depois de escrever, verifique se cada parágrafo contribui para o tema e se as ideias estão conectadas."],
     exercises: [],
     questions: [],
   },
@@ -481,7 +481,7 @@ export const subjects: Subject[] = [
       { title: "Escolas literárias", text: "Entenda como diferentes períodos apresentam estilos e temas característicos.", topics: ["Contexto histórico", "Estilos", "Autores e obras"] }
     ],
     summaries: [],
-    examples: [],
+    examples: ["Narrativa: personagens, tempo, espaço, narrador e enredo ajudam a construir uma história.","Poesia: versos podem usar ritmo, imagens e figuras de linguagem para produzir efeitos de sentido.","Metáfora: uma expressão pode aproximar duas ideias sem usar uma comparação literal.","Escola literária: obras podem refletir características culturais e históricas do período em que foram produzidas."],
     exercises: [],
     questions: [],
   },
@@ -498,7 +498,7 @@ export const subjects: Subject[] = [
       { title: "Conflitos e cooperação", text: "Analise causas gerais de conflitos e formas de cooperação entre países.", topics: ["Conflitos", "Acordos", "Cooperação"] }
     ],
     summaries: [],
-    examples: [],
+    examples: ["Fronteira: é uma delimitação territorial que pode envolver questões políticas, econômicas e culturais.","Organizações internacionais: países podem cooperar por meio de instituições e acordos.","Comércio internacional: países importam e exportam produtos e serviços conforme suas relações econômicas.","Recursos naturais: petróleo, água e minerais podem ter importância econômica e estratégica."],
     exercises: [],
     questions: [],
   },
@@ -515,7 +515,7 @@ export const subjects: Subject[] = [
       { title: "Comunicação e equipe", text: "Aprenda a apresentar ideias e trabalhar de forma organizada com outras pessoas.", topics: ["Apresentação", "Colaboração", "Metas"] }
     ],
     summaries: [],
-    examples: [],
+    examples: ["Problema e solução: identificar uma dificuldade cotidiana pode ajudar a criar uma ideia de projeto.","Público-alvo: um projeto precisa considerar quem utilizará ou será beneficiado pela solução.","Orçamento: somar custos ajuda a estimar quanto será necessário para realizar um projeto.","Equipe: dividir tarefas e estabelecer metas facilita a execução de uma atividade."],
     exercises: [],
     questions: [],
   },
@@ -532,7 +532,7 @@ export const subjects: Subject[] = [
       { title: "Arte contemporânea", text: "Explore linguagens, materiais e ideias presentes na produção artística contemporânea.", topics: ["Instalação", "Arte digital", "Novas linguagens"] }
     ],
     summaries: [],
-    examples: [],
+    examples: ["Arte egípcia: muitas obras estavam relacionadas à religião, à vida após a morte e à representação de autoridades.","Renascimento: artistas desenvolveram estudos de perspectiva, anatomia e representação do espaço.","Impressionismo: artistas exploraram efeitos de luz e cor em cenas do cotidiano.","Arte contemporânea: instalações e arte digital mostram como diferentes materiais e tecnologias podem ser usados artisticamente."],
     exercises: [],
     questions: [],
   },
@@ -549,7 +549,7 @@ export const subjects: Subject[] = [
       { title: "Educação ambiental", text: "Aprenda formas de compreender problemas ambientais e agir de maneira responsável.", topics: ["Consumo consciente", "Conservação", "Responsabilidade ambiental"] }
     ],
     summaries: [],
-    examples: [],
+    examples: ["Ecossistema: uma lagoa reúne seres vivos e fatores não vivos que interagem entre si.","Cadeia alimentar: plantas podem servir de alimento para herbívoros, que podem ser consumidos por outros animais.","Impacto ambiental: o desmatamento pode alterar habitats e reduzir a biodiversidade.","Consumo consciente: reduzir desperdícios, reutilizar materiais e separar resíduos são atitudes relacionadas à educação ambiental."],
     exercises: [],
     questions: [],
   },
@@ -566,7 +566,7 @@ export const subjects: Subject[] = [
       { title: "Sistemas algébricos", text: "Resolva situações com duas ou mais incógnitas usando sistemas de equações.", topics: ["Substituição", "Adição", "Interpretação"] }
     ],
     summaries: [],
-    examples: [],
+    examples: ["Expressão algébrica: 3x + 5 representa uma relação entre uma variável e números conhecidos.","Equação: em 2x + 4 = 10, podemos isolar x para encontrar o valor desconhecido.","Fatoração: x² + 5x + 6 pode ser escrito como (x + 2)(x + 3).","Sistema: duas equações podem ser usadas juntas para encontrar dois valores desconhecidos."],
     exercises: [],
     questions: [],
   },
@@ -583,7 +583,7 @@ export const subjects: Subject[] = [
       { title: "Geometria espacial", text: "Conheça sólidos e calcule medidas como volume e área em situações simples.", topics: ["Prismas", "Cilindros", "Volume"] }
     ],
     summaries: [],
-    examples: [],
+    examples: ["Ângulos: dois ângulos retos somam 180°.","Perímetro: um retângulo de lados 5 e 3 tem perímetro 16 unidades.","Área: um retângulo de base 8 e altura 4 tem área de 32 unidades quadradas.","Circunferência: o comprimento de um círculo pode ser calculado por C = 2πr."],
     exercises: [],
     questions: [],
   },
