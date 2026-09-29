@@ -4,7 +4,6 @@ import { SiteLayout, PageHeader, Card, AdSlot } from "@/components/SiteLayout";
 import { subjects, type Question } from "@/lib/content";
 import { actions } from "@/lib/store";
 import { lessons } from "@/lib/lessons";
-import { Button } from "@/components/ui/button";
 
 export const Route = createFileRoute("/quiz")({
   validateSearch: (search: Record<string, unknown>) => ({
@@ -50,7 +49,7 @@ function QuizPage() {
 
   const questions = useMemo(
     () => {
-      const lesson = topicLessons.find(l => l.title === topic);
+      const lesson = topicLessons.find(l => l.title === topic && (!search.year || search.year === l.year));
       return lesson?.quizzes?.[level]?.length === 10 ? lesson.quizzes[level] : (subjects.find(s => s.slug === slug)?.questions ?? []).filter(q => q.level === level);
     },
     [slug, level, topic],
@@ -83,8 +82,9 @@ function QuizPage() {
       <div className="mx-auto w-full max-w-3xl px-4 py-12">
         {!started && (
           <Card>
-            <label className="text-sm font-semibold text-foreground">Matéria</label>
+            <label htmlFor="quiz-subject" className="text-sm font-semibold text-foreground">Matéria</label>
             <select
+              id="quiz-subject"
               value={slug}
               onChange={(e) => { setSlug(e.target.value); setTopic(""); }}
               className="mt-2 w-full rounded-xl border border-border bg-background px-4 py-3 text-sm"
