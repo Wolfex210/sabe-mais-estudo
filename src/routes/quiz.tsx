@@ -8,10 +8,10 @@ import { Button } from "@/components/ui/button";
 
 export const Route = createFileRoute("/quiz")({
   validateSearch: (search: Record<string, unknown>) => ({
-    subject: typeof search['subject'] === "string" ? search['subject'] : undefined,
-    year: typeof search['year'] === "string" ? search['year'] : undefined,
-    topic: typeof search['topic'] === "string" ? search['topic'] : undefined,
-    level: search['level'] === "facil" || search['level'] === "medio" || search['level'] === "dificil" ? search['level'] as Question['level'] : undefined,
+    ...(typeof search['subject'] === "string" ? { subject: search['subject'] } : {}),
+    ...(typeof search['year'] === "string" ? { year: search['year'] } : {}),
+    ...(typeof search['topic'] === "string" ? { topic: search['topic'] } : {}),
+    ...(search['level'] === "facil" || search['level'] === "medio" || search['level'] === "dificil" ? { level: search['level'] as Question['level'] } : {}),
   }),
   head: () => ({
     meta: [
