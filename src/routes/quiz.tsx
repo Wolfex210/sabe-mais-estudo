@@ -155,7 +155,13 @@ function QuizPage() {
                   <button
                     key={o}
                     onClick={() => pick(i)}
-                    className={`w-full rounded-xl border px-4 py-3 text-left text-sm transition-colors ${cls}`}
+                    className={`w-full rounded-xl border px-4 py-3 text-left text-sm transition-colors ${cls} ${
+  chosen !== null && i === chosen
+    ? i === questions[index]!.answer
+      ? "quiz-answer-correct"
+      : "quiz-answer-wrong"
+    : ""
+}`}
                   >
                     {o}
                   </button>
@@ -164,8 +170,14 @@ function QuizPage() {
             </div>
             {chosen !== null && (
               <div className="mt-5 flex items-center justify-between gap-3">
-                <p className="text-sm font-semibold">
-                  {chosen === questions[index]!.answer ? "✅ Acertou!" : "❌ Errou"}
+                <p
+                  key={`feedback-${index}-${chosen}`}
+                  className={`text-sm font-semibold ${chosen === questions[index]!.answer ? "quiz-feedback-correct" : "quiz-feedback-wrong"}`}
+                >
+                  <span className="quiz-feedback-icon" aria-hidden="true">
+                    {chosen === questions[index]!.answer ? "✓" : "×"}
+                  </span>
+                  {chosen === questions[index]!.answer ? "Acertou!" : "Errou"}
                 </p>
                 <button
                   onClick={() => {
