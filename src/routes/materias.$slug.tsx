@@ -2,7 +2,7 @@ import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { useState } from "react";
 import { SiteLayout, PageHeader, Card, AdSlot } from "@/components/SiteLayout";
 import { Button } from "@/components/ui/button";
-import { getSubject, getStudyHelpLines } from "@/lib/content";
+import { getExamPrep, getSubject, getStudyHelpLines } from "@/lib/content";
 import { curriculum, YEARS, YEAR_LABEL, type Year } from "@/lib/curriculum";
 import { getTopics } from "@/lib/lessons";
 import { actions } from "@/lib/store";
@@ -47,7 +47,7 @@ function SubjectPage() {
   if (!subject) return null;
   const topics = getTopics(slug, activeYear);
   const q = subject.questions[qIndex];
-  const helpLines = getStudyHelpLines(slug);
+  const helpLines = getStudyHelpLines(slug);\n  const examPrep = getExamPrep(slug);
   const finished = qIndex >= subject.questions.length || !q;
 
   function pick(i: number) {
@@ -119,6 +119,31 @@ function SubjectPage() {
                 <Button disabled={studyPage === 3} onClick={() => setStudyPage((p) => Math.min(3, p + 1))}>Próxima →</Button>
               </div>
             </Card>
+          </section>
+
+          <section aria-labelledby="exam-prep-heading">
+            <div>
+              <h2 id="exam-prep-heading" className="text-xl font-bold text-foreground">🎓 ENEM e Vestibulares</h2>
+              <p className="mt-2 text-sm leading-6 text-muted-foreground">
+                Conteúdo complementar para transformar o que você já estuda em preparação para provas. Nada das matérias, páginas, resumos, exemplos, exercícios ou quizzes anteriores foi removido.
+              </p>
+            </div>
+            <div className="mt-4 space-y-4">
+              {examPrep.map((section) => (
+                <Card key={section.title}>
+                  <h3 className="font-semibold text-foreground">{section.title}</h3>
+                  <p className="mt-2 text-sm leading-7 text-muted-foreground">{section.explanation}</p>
+                  <div className="mt-4 grid gap-2 sm:grid-cols-2">
+                    {section.topics.map((topic) => (
+                      <div key={topic} className="rounded-lg bg-secondary px-3 py-2 text-sm font-medium text-foreground">• {topic}</div>
+                    ))}
+                  </div>
+                  <p className="mt-4 rounded-lg border border-primary/20 bg-primary/5 px-4 py-3 text-sm leading-6 text-foreground">
+                    <span className="font-semibold text-primary">Como praticar:</span> {section.practice}
+                  </p>
+                </Card>
+              ))}
+            </div>
           </section>
 
           <section aria-labelledby="help-heading">
