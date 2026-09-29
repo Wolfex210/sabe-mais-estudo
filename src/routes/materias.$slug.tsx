@@ -42,7 +42,7 @@ function SubjectPage() {
   const [qIndex, setQIndex] = useState(0);
   const [chosen, setChosen] = useState<number | null>(null);
   const [score, setScore] = useState(0);
-  const [studyPage, setStudyPage] = useState(0);
+  const [studyPage, setStudyPage] = useState(0);\n  const studyImages = [\n    "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=1200&q=80",\n    "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1200&q=80",\n    "https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&w=1200&q=80",\n    "https://images.unsplash.com/photo-1497633762265-9d179a990aa6?auto=format&fit=crop&w=1200&q=80",\n  ];
 
   if (!subject) return null;
   const topics = getTopics(slug, activeYear);
@@ -97,26 +97,68 @@ function SubjectPage() {
           <section aria-labelledby="study-pages-heading">
             <div className="flex flex-wrap items-end justify-between gap-3">
               <div>
-                <h2 id="study-pages-heading" className="text-xl font-bold text-foreground">📚 Páginas de estudo</h2>
-                <p className="mt-2 text-sm text-muted-foreground">Aprenda os principais assuntos de {subject.name} em 4 páginas explicativas.</p>
+                <h2 id="study-pages-heading" className="text-xl font-bold text-foreground">📚 Abas de estudo</h2>
+                <p className="mt-2 text-sm text-muted-foreground">
+                  Explore cada parte da matéria com uma imagem temática, explicação, tópicos principais e aplicação em provas.
+                </p>
               </div>
-              <span className="rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold text-primary">Página {studyPage + 1} de 4</span>
+              <span className="rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold text-primary">Aba {studyPage + 1} de {subject.studyPages.length}</span>
             </div>
+
+            <div className="mt-4 grid gap-2 sm:grid-cols-4" role="tablist" aria-label={`Abas de estudo de ${subject.name}`}>
+              {subject.studyPages.map((page, i) => (
+                <button
+                  key={page.title}
+                  role="tab"
+                  aria-selected={i === studyPage}
+                  onClick={() => setStudyPage(i)}
+                  className={`group overflow-hidden rounded-xl border text-left transition-all ${i === studyPage ? "border-primary bg-primary/10 shadow-soft ring-2 ring-primary/20" : "border-border bg-card hover:border-primary/50"}`}
+                >
+                  <img
+                    src={studyImages[i % studyImages.length]}
+                    alt={`Imagem ilustrativa sobre ${page.title}`}
+                    className="h-24 w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                    loading="lazy"
+                  />
+                  <div className="p-3">
+                    <span className="text-xs font-semibold text-primary">Página {i + 1}</span>
+                    <p className="mt-1 line-clamp-2 text-sm font-semibold text-foreground">{page.title}</p>
+                  </div>
+                </button>
+              ))}
+            </div>
+
             <Card className="mt-4 overflow-hidden">
-              <div className="h-1.5 bg-primary/15"><div className="h-full bg-primary transition-all duration-300" style={{ width: `${((studyPage + 1) / 4) * 100}%` }} /></div>
-              <h3 className="mt-5 text-xl font-bold text-foreground">{subject.studyPages[studyPage]?.title}</h3>
-              <p className="mt-3 text-sm leading-7 text-muted-foreground">{subject.studyPages[studyPage]?.text}</p>
-              <div className="mt-5 grid gap-2 sm:grid-cols-3">
-                {subject.studyPages[studyPage]?.topics.map((item) => (
-                  <div key={item} className="rounded-lg bg-secondary px-3 py-3 text-sm font-medium text-foreground">• {item}</div>
-                ))}
-              </div>
-              <div className="mt-6 flex items-center justify-between gap-3">
-                <Button variant="outline" disabled={studyPage === 0} onClick={() => setStudyPage((p) => Math.max(0, p - 1))}>← Anterior</Button>
-                <div className="flex gap-1.5" aria-label="Páginas de estudo">
-                  {subject.studyPages.map((page, i) => <button key={page.title} aria-label={`Abrir página ${i + 1}`} onClick={() => setStudyPage(i)} className={`h-2.5 w-2.5 rounded-full transition-all ${i === studyPage ? "bg-primary scale-110" : "bg-border hover:bg-primary/50"}`} />)}
+              <img
+                src={studyImages[studyPage % studyImages.length]}
+                alt={`Imagem ilustrativa sobre ${subject.studyPages[studyPage]?.title ?? subject.name}`}
+                className="h-52 w-full object-cover sm:h-64"
+              />
+              <div className="p-5 sm:p-6">
+                <div className="h-1.5 overflow-hidden rounded-full bg-primary/15">
+                  <div className="h-full bg-primary transition-all duration-300" style={{ width: `${((studyPage + 1) / subject.studyPages.length) * 100}%` }} />
                 </div>
-                <Button disabled={studyPage === 3} onClick={() => setStudyPage((p) => Math.min(3, p + 1))}>Próxima →</Button>
+                <h3 className="mt-5 text-xl font-bold text-foreground">{subject.studyPages[studyPage]?.title}</h3>
+                <p className="mt-3 text-sm leading-7 text-muted-foreground">{subject.studyPages[studyPage]?.text}</p>
+
+                <div className="mt-5 grid gap-2 sm:grid-cols-3">
+                  {subject.studyPages[studyPage]?.topics.map((item) => (
+                    <div key={item} className="rounded-lg bg-secondary px-3 py-3 text-sm font-medium text-foreground">• {item}</div>
+                  ))}
+                </div>
+
+                <div className="mt-5 rounded-xl border border-primary/20 bg-primary/5 p-4">
+                  <p className="text-sm font-semibold text-foreground">🎯 Como estudar esta parte</p>
+                  <p className="mt-1 text-sm leading-6 text-muted-foreground">
+                    Leia a explicação, revise os tópicos e tente explicar o conteúdo sem consultar a página. Depois, pratique questões relacionadas a este assunto.
+                  </p>
+                </div>
+
+                <div className="mt-6 flex items-center justify-between gap-3">
+                  <Button variant="outline" disabled={studyPage === 0} onClick={() => setStudyPage((p) => Math.max(0, p - 1))}>← Anterior</Button>
+                  <div className="hidden text-xs font-medium text-muted-foreground sm:block">Aba {studyPage + 1} de {subject.studyPages.length}</div>
+                  <Button disabled={studyPage === subject.studyPages.length - 1} onClick={() => setStudyPage((p) => Math.min(subject.studyPages.length - 1, p + 1))}>Próxima →</Button>
+                </div>
               </div>
             </Card>
           </section>
