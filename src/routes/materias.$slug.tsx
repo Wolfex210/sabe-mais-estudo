@@ -42,6 +42,7 @@ function SubjectPage() {
   const [qIndex, setQIndex] = useState(0);
   const [chosen, setChosen] = useState<number | null>(null);
   const [score, setScore] = useState(0);
+  const [studyPage, setStudyPage] = useState(0);
 
   if (!subject) return null;
   const topics = getTopics(slug, activeYear);
@@ -90,6 +91,33 @@ function SubjectPage() {
                 })}
               </ol>
             </div>
+          </section>
+
+          <section aria-labelledby="study-pages-heading">
+            <div className="flex flex-wrap items-end justify-between gap-3">
+              <div>
+                <h2 id="study-pages-heading" className="text-xl font-bold text-foreground">📚 Páginas de estudo</h2>
+                <p className="mt-2 text-sm text-muted-foreground">Aprenda os principais assuntos de {subject.name} em 4 páginas explicativas.</p>
+              </div>
+              <span className="rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold text-primary">Página {studyPage + 1} de 4</span>
+            </div>
+            <Card className="mt-4 overflow-hidden">
+              <div className="h-1.5 bg-primary/15"><div className="h-full bg-primary transition-all duration-300" style={{ width: `${((studyPage + 1) / 4) * 100}%` }} /></div>
+              <h3 className="mt-5 text-xl font-bold text-foreground">{subject.studyPages[studyPage]?.title}</h3>
+              <p className="mt-3 text-sm leading-7 text-muted-foreground">{subject.studyPages[studyPage]?.text}</p>
+              <div className="mt-5 grid gap-2 sm:grid-cols-3">
+                {subject.studyPages[studyPage]?.topics.map((item) => (
+                  <div key={item} className="rounded-lg bg-secondary px-3 py-3 text-sm font-medium text-foreground">• {item}</div>
+                ))}
+              </div>
+              <div className="mt-6 flex items-center justify-between gap-3">
+                <Button variant="outline" disabled={studyPage === 0} onClick={() => setStudyPage((p) => Math.max(0, p - 1))}>← Anterior</Button>
+                <div className="flex gap-1.5" aria-label="Páginas de estudo">
+                  {subject.studyPages.map((page, i) => <button key={page.title} aria-label={`Abrir página ${i + 1}`} onClick={() => setStudyPage(i)} className={`h-2.5 w-2.5 rounded-full transition-all ${i === studyPage ? "bg-primary scale-110" : "bg-border hover:bg-primary/50"}`} />)}
+                </div>
+                <Button disabled={studyPage === 3} onClick={() => setStudyPage((p) => Math.min(3, p + 1))}>Próxima →</Button>
+              </div>
+            </Card>
           </section>
 
           <section>
