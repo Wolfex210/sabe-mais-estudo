@@ -42,12 +42,20 @@ function SubjectPage() {
   const [qIndex, setQIndex] = useState(0);
   const [chosen, setChosen] = useState<number | null>(null);
   const [score, setScore] = useState(0);
-  const [studyPage, setStudyPage] = useState(0);\n  const studyImages = [\n    "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=1200&q=80",\n    "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1200&q=80",\n    "https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&w=1200&q=80",\n    "https://images.unsplash.com/photo-1497633762265-9d179a990aa6?auto=format&fit=crop&w=1200&q=80",\n  ];
+  const [studyPage, setStudyPage] = useState(0);
+  const studyImages = [
+    "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=1200&q=80",
+    "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1200&q=80",
+    "https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&w=1200&q=80",
+    "https://images.unsplash.com/photo-1497633762265-9d179a990aa6?auto=format&fit=crop&w=1200&q=80",
+  ];
 
   if (!subject) return null;
   const topics = getTopics(slug, activeYear);
   const q = subject.questions[qIndex];
-  const helpLines = getStudyHelpLines(slug);\n  const examPrep = getExamPrep(slug);\n  const deepStudy = getDeepStudy(slug);
+  const helpLines = getStudyHelpLines(slug);
+  const examPrep = getExamPrep(slug);
+  const deepStudy = getDeepStudy(slug);
   const finished = qIndex >= subject.questions.length || !q;
 
   function pick(i: number) {
