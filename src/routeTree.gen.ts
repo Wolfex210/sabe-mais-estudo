@@ -22,6 +22,11 @@ import { Route as QuizRouteImport } from './routes/quiz'
 import { Route as MateriasIndexRouteImport } from './routes/materias.index'
 import { Route as MateriasSlugRouteImport } from './routes/materias.$slug'
 import { Route as AulaSlugYearTopicRouteImport } from './routes/aula.$slug.$year.$topic'
+import { Route as DashboardRouteImport } from './routes/dashboard'
+import { Route as PlanoEstudosRouteImport } from './routes/plano-estudos'
+import { Route as CadernoErrosRouteImport } from './routes/caderno-erros'
+import { Route as RevisaoRouteImport } from './routes/revisao'
+import { Route as SimuladosRouteImport } from './routes/simulados'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -83,6 +88,32 @@ const MateriasSlugRoute = MateriasSlugRouteImport.update({
   path: '/materias/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DashboardRoute = DashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PlanoEstudosRoute = PlanoEstudosRouteImport.update({
+  id: '/plano-estudos',
+  path: '/plano-estudos',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CadernoErrosRoute = CadernoErrosRouteImport.update({
+  id: '/caderno-erros',
+  path: '/caderno-erros',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RevisaoRoute = RevisaoRouteImport.update({
+  id: '/revisao',
+  path: '/revisao',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SimuladosRoute = SimuladosRouteImport.update({
+  id: '/simulados',
+  path: '/simulados',
+  getParentRoute: () => rootRouteImport,
+} as any)
+
 const AulaSlugYearTopicRoute = AulaSlugYearTopicRouteImport.update({
   id: '/aula/$slug/$year/$topic',
   path: '/aula/$slug/$year/$topic',
@@ -99,6 +130,16 @@ export interface FileRoutesByFullPath {
   '/pesquisa': typeof PesquisaRoute
   '/planos': typeof PlanosRoute
   '/progresso': typeof ProgressoRoute
+  '/dashboard': typeof DashboardRoute
+  '/plano-estudos': typeof PlanoEstudosRoute
+  '/caderno-erros': typeof CadernoErrosRoute
+  '/revisao': typeof RevisaoRoute
+  '/simulados': typeof SimuladosRoute
+  '/dashboard': typeof DashboardRoute
+  '/plano-estudos': typeof PlanoEstudosRoute
+  '/caderno-erros': typeof CadernoErrosRoute
+  '/revisao': typeof RevisaoRoute
+  '/simulados': typeof SimuladosRoute
   '/quiz': typeof QuizRoute
   '/materias/$slug': typeof MateriasSlugRoute
   '/materias/': typeof MateriasIndexRoute
@@ -193,6 +234,11 @@ export interface RootRouteChildren {
   PesquisaRoute: typeof PesquisaRoute
   PlanosRoute: typeof PlanosRoute
   ProgressoRoute: typeof ProgressoRoute
+  DashboardRoute: typeof DashboardRoute
+  PlanoEstudosRoute: typeof PlanoEstudosRoute
+  CadernoErrosRoute: typeof CadernoErrosRoute
+  RevisaoRoute: typeof RevisaoRoute
+  SimuladosRoute: typeof SimuladosRoute
   QuizRoute: typeof QuizRoute
   MateriasSlugRoute: typeof MateriasSlugRoute
   MateriasIndexRoute: typeof MateriasIndexRoute
@@ -271,6 +317,41 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof QuizRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/dashboard': {
+      id: '/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof DashboardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/plano-estudos': {
+      id: '/plano-estudos'
+      path: '/plano-estudos'
+      fullPath: '/plano-estudos'
+      preLoaderRoute: typeof PlanoEstudosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/caderno-erros': {
+      id: '/caderno-erros'
+      path: '/caderno-erros'
+      fullPath: '/caderno-erros'
+      preLoaderRoute: typeof CadernoErrosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/revisao': {
+      id: '/revisao'
+      path: '/revisao'
+      fullPath: '/revisao'
+      preLoaderRoute: typeof RevisaoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/simulados': {
+      id: '/simulados'
+      path: '/simulados'
+      fullPath: '/simulados'
+      preLoaderRoute: typeof SimuladosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/materias/': {
       id: '/materias/'
       path: '/materias'
@@ -305,6 +386,11 @@ const rootRouteChildren: RootRouteChildren = {
   PesquisaRoute: PesquisaRoute,
   PlanosRoute: PlanosRoute,
   ProgressoRoute: ProgressoRoute,
+  DashboardRoute: DashboardRoute,
+  PlanoEstudosRoute: PlanoEstudosRoute,
+  CadernoErrosRoute: CadernoErrosRoute,
+  RevisaoRoute: RevisaoRoute,
+  SimuladosRoute: SimuladosRoute,
   QuizRoute: QuizRoute,
   MateriasSlugRoute: MateriasSlugRoute,
   MateriasIndexRoute: MateriasIndexRoute,
