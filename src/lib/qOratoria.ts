@@ -1,0 +1,1 @@
+export const qOratoria = [{q:"Qual é um objetivo da oratória?",options:["Comunicar","Confundir"],answer:0,level:"facil",explanation:"A oratória organiza a comunicação para tornar uma mensagem clara e compreensível."}];
