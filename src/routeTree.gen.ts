@@ -21,6 +21,7 @@ import { Route as ProgressoRouteImport } from './routes/progresso'
 import { Route as QuizRouteImport } from './routes/quiz'
 import { Route as MateriasIndexRouteImport } from './routes/materias.index'
 import { Route as MateriasSlugRouteImport } from './routes/materias.$slug'
+import { Route as AulaSlugYearTopicRouteImport } from './routes/aula.$slug.$year.$topic'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -82,6 +83,11 @@ const MateriasSlugRoute = MateriasSlugRouteImport.update({
   path: '/materias/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AulaSlugYearTopicRoute = AulaSlugYearTopicRouteImport.update({
+  id: '/aula/$slug/$year/$topic',
+  path: '/aula/$slug/$year/$topic',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -96,6 +102,7 @@ export interface FileRoutesByFullPath {
   '/quiz': typeof QuizRoute
   '/materias/$slug': typeof MateriasSlugRoute
   '/materias/': typeof MateriasIndexRoute
+  '/aula/$slug/$year/$topic': typeof AulaSlugYearTopicRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -110,6 +117,7 @@ export interface FileRoutesByTo {
   '/quiz': typeof QuizRoute
   '/materias/$slug': typeof MateriasSlugRoute
   '/materias': typeof MateriasIndexRoute
+  '/aula/$slug/$year/$topic': typeof AulaSlugYearTopicRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -125,6 +133,7 @@ export interface FileRoutesById {
   '/quiz': typeof QuizRoute
   '/materias/$slug': typeof MateriasSlugRoute
   '/materias/': typeof MateriasIndexRoute
+  '/aula/$slug/$year/$topic': typeof AulaSlugYearTopicRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -141,6 +150,7 @@ export interface FileRouteTypes {
     | '/quiz'
     | '/materias/$slug'
     | '/materias/'
+    | '/aula/$slug/$year/$topic'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -155,6 +165,7 @@ export interface FileRouteTypes {
     | '/quiz'
     | '/materias/$slug'
     | '/materias'
+    | '/aula/$slug/$year/$topic'
   id:
     | '__root__'
     | '/'
@@ -169,6 +180,7 @@ export interface FileRouteTypes {
     | '/quiz'
     | '/materias/$slug'
     | '/materias/'
+    | '/aula/$slug/$year/$topic'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -184,6 +196,7 @@ export interface RootRouteChildren {
   QuizRoute: typeof QuizRoute
   MateriasSlugRoute: typeof MateriasSlugRoute
   MateriasIndexRoute: typeof MateriasIndexRoute
+  AulaSlugYearTopicRoute: typeof AulaSlugYearTopicRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -272,6 +285,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MateriasSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/aula/$slug/$year/$topic': {
+      id: '/aula/$slug/$year/$topic'
+      path: '/aula/$slug/$year/$topic'
+      fullPath: '/aula/$slug/$year/$topic'
+      preLoaderRoute: typeof AulaSlugYearTopicRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -288,6 +308,7 @@ const rootRouteChildren: RootRouteChildren = {
   QuizRoute: QuizRoute,
   MateriasSlugRoute: MateriasSlugRoute,
   MateriasIndexRoute: MateriasIndexRoute,
+  AulaSlugYearTopicRoute: AulaSlugYearTopicRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
