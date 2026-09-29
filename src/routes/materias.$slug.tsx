@@ -1,7 +1,9 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { useState } from "react";
 import { SiteLayout, PageHeader, Card, AdSlot } from "@/components/SiteLayout";
+import { Button } from "@/components/ui/button";
 import { getSubject } from "@/lib/content";
+import { curriculum, parseTopic, YEARS, YEAR_LABEL, type Year } from "@/lib/curriculum";
 import { actions } from "@/lib/store";
 
 export const Route = createFileRoute("/materias/$slug")({
@@ -31,17 +33,21 @@ export const Route = createFileRoute("/materias/$slug")({
 
 function SubjectPage() {
   const { slug } = Route.useParams();
-  const subject = getSubject(slug)!;
+  const subject = getSubject(slug);
+  const availableYears = YEARS.filter((year) => (curriculum[slug]?.[year]?.length ?? 0) > 0);
+  const [year, setYear] = useState<Year>(availableYears[0] ?? "1º EF");
   const [open, setOpen] = useState<number | null>(null);
   const [qIndex, setQIndex] = useState(0);
   const [chosen, setChosen] = useState<number | null>(null);
   const [score, setScore] = useState(0);
 
-  const q = subject.questions[qIndex]!;
-  const finished = qIndex >= subject.questions.length;
+  if (!subject) return null;
+  const topics = curriculum[slug]?.[year] ?? [];
+  const q = subject.questions[qIndex];
+  const finished = qIndex >= subject.questions.length || !q;
 
   function pick(i: number) {
-    if (chosen !== null) return;
+    if (chosen !== null || !q) return;
     setChosen(i);
     const ok = i === q.answer;
     if (ok) setScore((s) => s + 1);
@@ -53,8 +59,39 @@ function SubjectPage() {
       <PageHeader title={`${subject.emoji} ${subject.name}`} subtitle={subject.intro} />
       <div className="mx-auto grid w-full max-w-6xl gap-8 px-4 py-12 lg:grid-cols-3">
         <div className="space-y-8 lg:col-span-2">
+          <section aria-labelledby="year-heading">
+            <h2 id="year-heading" className="text-xl font-bold text-foreground">Estude por ano escolar</h2>
+            <p className="mt-2 text-sm text-muted-foreground">
+              Selecione seu ano para ver um roteiro introdutório dos principais assuntos. A ordem pode variar conforme a escola.
+            </p>
+            <label htmlFor="school-year" className="mt-5 block text-sm font-semibold text-foreground">Ano escolar</label>
+            <select
+              id="school-year"
+              value={year}
+              onChange={(event) => setYear(event.target.value as Year)}
+              className="mt-2 w-full rounded-lg border border-border bg-background px-4 py-3 text-sm text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring sm:max-w-sm"
+            >
+              {availableYears.map((item) => <option key={item} value={item}>{YEAR_LABEL[item]}</option>)}
+            </select>
+            <div className="mt-5 space-y-3" aria-live="polite">
+              <h3 className="text-base font-semibold text-foreground">{YEAR_LABEL[year]}</h3>
+              <ol className="space-y-3">
+                {topics.map((item, index) => {
+                  const topic = parseTopic(item);
+                  return (
+                    <li key={`${year}-${index}`} className="rounded-lg border border-border bg-card px-4 py-4 shadow-soft">
+                      <h4 className="font-semibold text-foreground">{topic.title}</h4>
+                      <p className="mt-1 text-sm leading-relaxed text-muted-foreground">{topic.text}</p>
+                    </li>
+                  );
+                })}
+              </ol>
+            </div>
+          </section>
+
           <section>
-            <h2 className="text-xl font-bold text-foreground">Resumos e explicações</h2>
+            <h2 className="text-xl font-bold text-foreground">Resumos e explicações complementares</h2>
+            <p className="mt-2 text-sm text-muted-foreground">Materiais gerais da disciplina, não específicos do ano selecionado.</p>
             <div className="mt-4 space-y-4">
               {subject.summaries.map((s) => (
                 <Card key={s.title}>
@@ -97,12 +134,12 @@ function SubjectPage() {
               {subject.exercises.map((ex, i) => (
                 <Card key={ex.q} className="p-4">
                   <p className="text-sm font-medium text-foreground">{ex.q}</p>
-                  <button
+                  <Button variant="link"
                     onClick={() => setOpen(open === i ? null : i)}
-                    className="mt-2 text-xs font-semibold text-primary hover:underline"
+                    className="mt-2 h-auto p-0 text-xs"
                   >
                     {open === i ? "Ocultar resposta" : "Ver resposta"}
-                  </button>
+                  </Button>
                   {open === i && (
                     <p className="mt-2 rounded-lg bg-secondary px-3 py-2 text-sm text-foreground">
                       {ex.a}
@@ -132,7 +169,7 @@ function SubjectPage() {
                     Tentar novamente
                   </button>
                 </div>
-              ) : (
+              ) : q ? (
                 <>
                   <p className="text-xs font-semibold uppercase text-muted-foreground">
                     Questão {qIndex + 1} de {subject.questions.length}
@@ -171,7 +208,7 @@ function SubjectPage() {
                     </button>
                   )}
                 </>
-              )}
+              ) : null}
             </Card>
           </section>
         </div>
