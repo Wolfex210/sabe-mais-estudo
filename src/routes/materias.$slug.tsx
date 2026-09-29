@@ -2,7 +2,7 @@ import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { useState } from "react";
 import { SiteLayout, PageHeader, Card, AdSlot } from "@/components/SiteLayout";
 import { Button } from "@/components/ui/button";
-import { getExamPrep, getSubject, getStudyHelpLines } from "@/lib/content";
+import { getDeepStudy, getExamPrep, getSubject, getStudyHelpLines } from "@/lib/content";
 import { curriculum, YEARS, YEAR_LABEL, type Year } from "@/lib/curriculum";
 import { getTopics } from "@/lib/lessons";
 import { actions } from "@/lib/store";
@@ -47,7 +47,7 @@ function SubjectPage() {
   if (!subject) return null;
   const topics = getTopics(slug, activeYear);
   const q = subject.questions[qIndex];
-  const helpLines = getStudyHelpLines(slug);\n  const examPrep = getExamPrep(slug);
+  const helpLines = getStudyHelpLines(slug);\n  const examPrep = getExamPrep(slug);\n  const deepStudy = getDeepStudy(slug);
   const finished = qIndex >= subject.questions.length || !q;
 
   function pick(i: number) {
@@ -162,6 +162,48 @@ function SubjectPage() {
               </div>
             </Card>
           </section>
+
+          {deepStudy && (
+            <section aria-labelledby="deep-study-heading">
+              <div>
+                <h2 id="deep-study-heading" className="text-xl font-bold text-foreground">🔎 Aprofunde seus estudos</h2>
+                <p className="mt-2 text-sm leading-6 text-muted-foreground">
+                  Uma página especial para entender melhor {subject.name}, com explicação aprofundada, imagem ilustrativa e pontos essenciais.
+                </p>
+              </div>
+              <Card className="mt-4 overflow-hidden p-0">
+                <div className="grid lg:grid-cols-2">
+                  <div className="order-2 p-6 sm:p-8 lg:order-1">
+                    <span className="inline-flex rounded-full bg-primary/10 px-3 py-1 text-xs font-bold text-primary">GUIA COMPLETO</span>
+                    <h3 className="mt-4 text-2xl font-bold leading-tight text-foreground">{deepStudy.title}</h3>
+                    <p className="mt-4 text-sm leading-7 text-muted-foreground">{deepStudy.text}</p>
+                    <div className="mt-6 space-y-3">
+                      {deepStudy.highlights.map((item) => (
+                        <div key={item} className="flex items-start gap-3 rounded-lg bg-secondary px-4 py-3">
+                          <span className="mt-0.5 text-primary">✓</span>
+                          <span className="text-sm font-medium text-foreground">{item}</span>
+                        </div>
+                      ))}
+                    </div>
+                    <div className="mt-6 rounded-xl border border-primary/20 bg-primary/5 p-4">
+                      <p className="text-sm font-semibold text-foreground">🎓 Para ENEM e vestibulares</p>
+                      <p className="mt-1 text-sm leading-6 text-muted-foreground">
+                        Use esta explicação como revisão, depois pratique questões e tente relacionar o conteúdo a situações, textos, gráficos ou problemas.
+                      </p>
+                    </div>
+                  </div>
+                  <div className="order-1 min-h-[300px] lg:order-2 lg:min-h-full">
+                    <img
+                      src={deepStudy.image}
+                      alt={deepStudy.imageAlt}
+                      className="h-full min-h-[300px] w-full object-cover"
+                      loading="lazy"
+                    />
+                  </div>
+                </div>
+              </Card>
+            </section>
+          )}
 
           <section aria-labelledby="exam-prep-heading">
             <div>
