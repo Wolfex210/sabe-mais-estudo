@@ -1,8 +1,9 @@
 /**
  * Estado global do Sabe Mais, salvo no localStorage do navegador.
- * Sem servidor e sem banco de dados: tudo fica no dispositivo do estudante.
+ * Dados anônimos ficam no navegador; contas sincronizam seu progresso na nuvem.
  */
 import { useSyncExternalStore } from "react";
+import { supabase } from "@/integrations/supabase/client";
 
 export type Task = { id: string; text: string; done: boolean };
 export type ScheduleItem = { id: string; day: string; time: string; subject: string };
@@ -19,6 +20,11 @@ export type AppState = {
   achievements: string[];
   tasks: Task[];
   schedule: ScheduleItem[];
+  schoolYear: string;
+  avatar: string;
+  completedTopics: string[];
+  quizHistory: { subject: string; topic?: string; level: string; correct: number; total: number; date: string }[];
+  studySessions: number;
   trialStart: string | null; // início dos 3 dias grátis
   plan: "trial" | "basico" | "medio" | "master" | null;
 };
@@ -37,12 +43,20 @@ const initial: AppState = {
   achievements: [],
   tasks: [],
   schedule: [],
+  schoolYear: "",
+  avatar: "📚",
+  completedTopics: [],
+  quizHistory: [],
+  studySessions: 0,
   trialStart: null,
   plan: null,
 };
 
 let state: AppState = initial;
 let hydrated = false;
+let connectedUser: string | null = null;
+let revision = 0;
+let syncTimer: ReturnType<typeof setTimeout> | undefined;
 const listeners = new Set<() => void>();
 
 function read(): AppState {
@@ -60,12 +74,47 @@ function emit() {
 }
 
 function persist() {
+  revision++;
   try {
-    window.localStorage.setItem(KEY, JSON.stringify(state));
+    window.localStorage.setItem(connectedUser ? `${KEY}:${connectedUser}` : KEY, JSON.stringify(state));
   } catch {
     /* armazenamento indisponível */
   }
   emit();
+  if (connectedUser) {
+    clearTimeout(syncTimer);
+    const userId = connectedUser;
+    const snapshot = state;
+    syncTimer = setTimeout(async () => {
+      if (connectedUser !== userId) return;
+      const { error } = await supabase.from("student_study_data").upsert({ user_id: userId, progress: JSON.parse(JSON.stringify(snapshot)) });
+      if (error) console.error("Não foi possível salvar o progresso:", error.message);
+      await supabase.from("student_profiles").upsert({ user_id: userId, name: snapshot.name, school_year: snapshot.schoolYear || null, avatar: snapshot.avatar });
+    }, 500);
+  }
+}
+
+/** Troca de conta sem misturar dados de estudantes no mesmo navegador. */
+export async function connectUser(userId: string | null, email?: string) {
+  if (connectedUser === userId) return;
+  clearTimeout(syncTimer);
+  connectedUser = userId;
+  if (!userId) {
+    state = read();
+    emit();
+    return;
+  }
+  const version = ++revision;
+  const { data, error } = await supabase.from("student_study_data").select("progress").eq("user_id", userId).maybeSingle();
+  if (connectedUser !== userId || revision !== version) return;
+  if (error) console.error("Não foi possível carregar o progresso:", error.message);
+  const cached = (() => {
+    try { return JSON.parse(window.localStorage.getItem(`${KEY}:${userId}`) || "null") as Partial<AppState> | null; }
+    catch { return null; }
+  })();
+  const cloud = data?.progress as Partial<AppState> | undefined;
+  state = { ...initial, ...(cloud ?? cached ?? (state.answered || state.tasks.length || state.studySeconds ? state : {})), name: cloud?.name ?? cached?.name ?? (state.name !== "Estudante" ? state.name : email?.split("@")[0] ?? "Estudante") };
+  persist();
 }
 
 function subscribe(cb: () => void) {
@@ -145,6 +194,11 @@ export const actions = {
   setName(name: string) {
     update((s) => ({ ...s, name }));
   },
+  setSchoolYear(schoolYear: string) { update((s) => ({ ...s, schoolYear })); },
+  setAvatar(avatar: string) { update((s) => ({ ...s, avatar })); },
+  completeTopic(id: string) { update((s) => ({ ...s, completedTopics: s.completedTopics.includes(id) ? s.completedTopics : [...s.completedTopics, id] })); },
+  recordQuiz(result: AppState["quizHistory"][number]) { update((s) => ({ ...s, quizHistory: [...s.quizHistory, result] })); },
+  finishStudySession() { update((s) => ({ ...s, studySessions: s.studySessions + 1 })); },
   setTasks(tasks: Task[]) {
     update((s) => ({ ...s, tasks }));
   },
