@@ -1,6 +1,7 @@
 /**
- * Conteúdo por ano escolar (1º ano do Fundamental ao 3º ano do Médio),
- * organizado com base na BNCC. Cada item: "Tópico | explicação".
+ * Roteiro introdutório por ano escolar (1º ano do Fundamental ao 3º ano do Médio).
+ * A sequência é aproximada: redes e escolas podem distribuir os temas em anos diferentes.
+ * Cada item: "Tópico | explicação". Não substitui o currículo completo da escola.
  */
 
 export const YEARS = [

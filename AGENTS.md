@@ -8,3 +8,5 @@
 > Commits you push to the connected branch sync back to Lovable and show up in
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
+
+- Organize os roteiros de estudo por ano em `src/lib/curriculum.ts`, separados das questões gerais; isso mantém a seleção de ano independente dos quizzes existentes.
