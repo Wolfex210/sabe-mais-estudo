@@ -18,6 +18,7 @@ export type Subject = {
   formulas?: string[];
   examples: string[];
   exercises: { q: string; a: string }[];
+  studyPages: { title: string; text: string; topics: string[] }[];
   questions: Question[];
 };
 
@@ -28,6 +29,12 @@ export const subjects: Subject[] = [
     emoji: "🧮",
     color: "bg-sky-100",
     intro: "Números, operações, álgebra e geometria explicados passo a passo.",
+    studyPages: [
+      { title: "Números e operações", text: "Aprenda números, operações, frações, decimais e porcentagens.", topics: ["Operações fundamentais", "Frações e decimais", "Razão e porcentagem"] },
+      { title: "Álgebra", text: "Use letras para representar valores e aprenda a simplificar expressões e resolver equações.", topics: ["Expressões algébricas", "Equações do 1º grau", "Equações do 2º grau"] },
+      { title: "Geometria", text: "Estude formas, medidas, áreas, perímetros e o Teorema de Pitágoras.", topics: ["Ângulos e figuras", "Áreas e perímetros", "Teorema de Pitágoras"] },
+      { title: "Estatística e problemas", text: "Aprenda a interpretar médias, tabelas, gráficos e enunciados matemáticos.", topics: ["Média aritmética", "Tabelas e gráficos", "Estratégias de resolução"] }
+    ],
     summaries: [
       {
         title: "Frações",
@@ -86,6 +93,12 @@ export const subjects: Subject[] = [
     emoji: "📖",
     color: "bg-rose-100",
     intro: "Gramática, interpretação de texto e produção escrita sem complicação.",
+    studyPages: [
+      { title: "Classes de palavras", text: "As palavras exercem funções diferentes nas frases, como nomear, caracterizar ou indicar ações.", topics: ["Substantivos", "Adjetivos e advérbios", "Verbos"] },
+      { title: "Sintaxe", text: "Entenda como as palavras se organizam nas orações e identifique seus principais termos.", topics: ["Sujeito e predicado", "Complementos", "Concordância"] },
+      { title: "Pontuação e crase", text: "A pontuação organiza as ideias e a crase ocorre pela união de preposição e artigo em situações específicas.", topics: ["Pontuação", "Crase", "Regência"] },
+      { title: "Interpretação e textos", text: "Aprenda a localizar informações, fazer inferências e reconhecer diferentes gêneros textuais.", topics: ["Ideia principal", "Inferência", "Gêneros textuais"] }
+    ],
     summaries: [
       {
         title: "Classes de palavras",
@@ -144,6 +157,12 @@ export const subjects: Subject[] = [
     emoji: "🏛️",
     color: "bg-amber-100",
     intro: "Do Brasil colônia ao mundo contemporâneo, com linha do tempo clara.",
+    studyPages: [
+      { title: "Brasil Colônia", text: "Estude a formação da sociedade colonial, a produção açucareira, a mineração e as relações de trabalho.", topics: ["Chegada portuguesa", "Açúcar e mineração", "Sociedade colonial"] },
+      { title: "Independência e Império", text: "Entenda a independência de 1822 e as principais características dos períodos imperiais.", topics: ["Independência", "Primeiro Reinado", "Segundo Reinado"] },
+      { title: "República brasileira", text: "Conheça a Proclamação da República, a Era Vargas, o período militar e a redemocratização.", topics: ["Primeira República", "Era Vargas", "Redemocratização"] },
+      { title: "Mundo contemporâneo", text: "Veja acontecimentos que transformaram o século XX, como guerras mundiais e a Guerra Fria.", topics: ["Primeira Guerra Mundial", "Segunda Guerra Mundial", "Guerra Fria"] }
+    ],
     summaries: [
       {
         title: "Brasil Colônia",
@@ -179,6 +198,12 @@ export const subjects: Subject[] = [
     emoji: "🌎",
     color: "bg-emerald-100",
     intro: "Relevo, clima, população e o espaço brasileiro e mundial.",
+    studyPages: [
+      { title: "Espaço geográfico", text: "A Geografia analisa as relações entre sociedade e natureza e as transformações do espaço.", topics: ["Paisagem e território", "Lugar e região", "Sociedade e natureza"] },
+      { title: "Brasil: território e regiões", text: "Conheça as cinco regiões brasileiras e suas características naturais, populacionais e econômicas.", topics: ["Norte e Nordeste", "Centro-Oeste e Sudeste", "Sul"] },
+      { title: "Clima e relevo", text: "Estude fatores climáticos e as diferentes formas da superfície terrestre.", topics: ["Climas", "Relevo", "Vegetação e biomas"] },
+      { title: "População e economia", text: "Aprenda sobre distribuição da população, urbanização, migrações e atividades econômicas.", topics: ["População", "Urbanização", "Setores da economia"] }
+    ],
     summaries: [
       { title: "Regiões do Brasil", text: "O Brasil tem 5 regiões: Norte, Nordeste, Centro-Oeste, Sudeste e Sul." },
       { title: "Climas", text: "Predominam no Brasil os climas equatorial, tropical, semiárido e subtropical." },
@@ -204,6 +229,12 @@ export const subjects: Subject[] = [
     emoji: "🔬",
     color: "bg-lime-100",
     intro: "Corpo humano, ecologia e os fenômenos da natureza.",
+    studyPages: [
+      { title: "Células", text: "A célula é a unidade básica dos seres vivos. Conheça suas estruturas e diferenças gerais.", topics: ["Núcleo", "Mitocôndrias", "Células animais e vegetais"] },
+      { title: "Corpo humano", text: "Estude como os principais sistemas do organismo trabalham em conjunto.", topics: ["Respiração", "Circulação", "Digestão e excreção"] },
+      { title: "Ecologia", text: "Ecologia estuda as relações entre seres vivos e ambiente.", topics: ["Ecossistemas", "Cadeias alimentares", "Relações ecológicas"] },
+      { title: "Matéria e energia", text: "Conheça propriedades da matéria, transformações e formas de energia.", topics: ["Estados físicos", "Transformações", "Energia"] }
+    ],
     summaries: [
       { title: "Célula", text: "A célula é a menor unidade viva. Células animais não têm parede celular nem cloroplastos." },
       { title: "Fotossíntese", text: "As plantas usam luz, gás carbônico e água para produzir glicose e liberar oxigênio." },
@@ -229,6 +260,12 @@ export const subjects: Subject[] = [
     emoji: "🇬🇧",
     color: "bg-indigo-100",
     intro: "Vocabulário, verbos e estruturas básicas da língua inglesa.",
+    studyPages: [
+      { title: "Vocabulary", text: "Amplie seu vocabulário com palavras usadas em situações do dia a dia.", topics: ["Saudações", "Família e escola", "Rotina"] },
+      { title: "Verb to be e pronomes", text: "Aprenda as formas do verbo to be e os pronomes pessoais.", topics: ["I, you, he, she, it, we, they", "Am, is, are", "Frases negativas"] },
+      { title: "Simple Present", text: "Use o Simple Present para hábitos, rotinas e fatos.", topics: ["Afirmativas", "Do e does", "Hábitos"] },
+      { title: "Past e estruturas comuns", text: "Aprenda a falar sobre acontecimentos passados e reconhecer estruturas frequentes.", topics: ["Simple Past", "Verbos regulares e irregulares", "Perguntas e respostas"] }
+    ],
     summaries: [
       { title: "Verb to be", text: "I am, you are, he/she/it is, we are, they are." },
       { title: "Simple Present", text: "Usado para hábitos e fatos. Na 3ª pessoa do singular acrescenta-se -s ao verbo." },
@@ -254,6 +291,12 @@ export const subjects: Subject[] = [
     emoji: "⚛️",
     color: "bg-cyan-100",
     intro: "Movimento, forças e energia com fórmulas aplicadas.",
+    studyPages: [
+      { title: "Movimento", text: "Estude posição, deslocamento, tempo e velocidade.", topics: ["Posição e deslocamento", "Velocidade média", "Movimento uniforme"] },
+      { title: "Forças e Leis de Newton", text: "As Leis de Newton ajudam a explicar inércia, aceleração e ação e reação.", topics: ["Primeira Lei", "Segunda Lei: F = m·a", "Terceira Lei"] },
+      { title: "Energia e trabalho", text: "Aprenda como energia aparece e se transforma em diferentes situações.", topics: ["Trabalho", "Energia cinética", "Energia potencial"] },
+      { title: "Grandezas e unidades", text: "Conheça unidades padronizadas e aprenda a interpretar fórmulas físicas.", topics: ["Sistema Internacional", "Conversão de unidades", "Leitura de fórmulas"] }
+    ],
     summaries: [
       { title: "MRU", text: "No movimento retilíneo uniforme a velocidade é constante e a posição varia linearmente com o tempo." },
       { title: "Leis de Newton", text: "Inércia, princípio fundamental (F = m·a) e ação e reação." },
@@ -280,6 +323,12 @@ export const subjects: Subject[] = [
     emoji: "⚗️",
     color: "bg-violet-100",
     intro: "Átomos, tabela periódica e reações químicas.",
+    studyPages: [
+      { title: "Átomos", text: "Estude prótons, nêutrons e elétrons e entenda o número atômico.", topics: ["Prótons e nêutrons", "Elétrons", "Número atômico"] },
+      { title: "Tabela periódica", text: "A tabela organiza os elementos por número atômico e famílias.", topics: ["Períodos", "Famílias", "Metais e ametais"] },
+      { title: "Substâncias e ligações", text: "Conheça moléculas, íons e noções de ligações químicas.", topics: ["Moléculas", "Íons", "Ligações"] },
+      { title: "Reações e soluções", text: "Aprenda sobre transformações químicas, ácidos, bases e soluções.", topics: ["Reações químicas", "Ácidos e bases", "Soluções"] }
+    ],
     summaries: [
       { title: "Átomo", text: "Formado por prótons e nêutrons no núcleo e elétrons na eletrosfera." },
       { title: "Tabela periódica", text: "Os elementos estão organizados por número atômico crescente em períodos e famílias." },
