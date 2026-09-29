@@ -31,6 +31,9 @@ function Perfil() {
   const { current, next, progress } = levelOf(s.points);
   const [name, setName] = useState(s.name);
   const { user } = useAuth();
+  const joinedDate = user?.created_at ?? s.joinedAt;
+  const joinedLabel = joinedDate ? new Date(joinedDate).toLocaleDateString("pt-BR") : "Data ainda não registrada";
+  const daysLinked = joinedDate ? Math.max(0, Math.floor((Date.now() - new Date(joinedDate).getTime()) / 86400000)) : 0;
 
   return (
     <SiteLayout>
@@ -47,6 +50,11 @@ function Perfil() {
                 {current.name} · {s.points} pontos · {streakOf(s)} dia(s) seguidos
               </p>
               {user && <p className="text-sm text-muted-foreground">{user.email}</p>}
+              <div className="mt-3 rounded-xl bg-secondary p-3">
+                <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">⏳ Tempo vinculado ao Sabe Mais</p>
+                <p className="mt-1 text-sm font-semibold text-foreground">Desde {joinedLabel} · {daysLinked === 0 ? "menos de 1 dia" : daysLinked === 1 ? "1 dia" : daysLinked + " dias"}</p>
+                <p className="mt-1 text-xs text-muted-foreground">Esse contador mostra há quanto tempo este perfil está vinculado à plataforma.</p>
+              </div>
             </div>
           </div>
 
