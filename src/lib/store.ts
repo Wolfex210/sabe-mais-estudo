@@ -95,9 +95,11 @@ function persist() {
 }
 
 /** Troca de conta sem misturar dados de estudantes no mesmo navegador. */
-export async function connectUser(userId: string | null, email?: string) {
+export async function connectUser(userId: string | null, email?: string, metadata?: { name?: string; school_year?: string; avatar?: string }) {
   if (connectedUser === userId) return;
   clearTimeout(syncTimer);
+  const previousUser = connectedUser;
+  const guestState = previousUser === null ? state : read();
   connectedUser = userId;
   if (!userId) {
     state = read();
@@ -116,7 +118,9 @@ export async function connectUser(userId: string | null, email?: string) {
     catch { return null; }
   })();
   const cloud = data?.progress as Partial<AppState> | undefined;
-  state = { ...initial, ...(cloud ?? cached ?? (state.answered || state.tasks.length || state.studySeconds ? state : {})), name: cloud?.name ?? cached?.name ?? profile?.name ?? (state.name !== "Estudante" ? state.name : email?.split("@")[0] ?? "Estudante"), schoolYear: cloud?.schoolYear ?? cached?.schoolYear ?? profile?.school_year ?? state.schoolYear, avatar: cloud?.avatar ?? cached?.avatar ?? profile?.avatar ?? state.avatar };
+  const firstLogin = !cloud && !cached && previousUser === null;
+  const base = cloud ?? cached ?? (firstLogin ? guestState : initial);
+  state = { ...initial, ...base, name: cloud?.name ?? cached?.name ?? metadata?.name ?? profile?.name ?? (firstLogin && guestState.name !== "Estudante" ? guestState.name : email?.split("@")[0] ?? "Estudante"), schoolYear: cloud?.schoolYear ?? cached?.schoolYear ?? metadata?.school_year ?? profile?.school_year ?? (firstLogin ? guestState.schoolYear : ""), avatar: cloud?.avatar ?? cached?.avatar ?? metadata?.avatar ?? profile?.avatar ?? (firstLogin ? guestState.avatar : "📚") };
   persist();
 }
 
@@ -142,6 +146,12 @@ export const ACHIEVEMENTS: { id: string; label: string; test: (s: AppState) => b
   { id: "challenge1", label: "🏆 Primeiro desafio", test: (s) => s.challenges.length >= 1 },
   { id: "days7", label: "🏆 7 dias estudando", test: (s) => s.days.length >= 7 },
   { id: "points100", label: "🏆 100 pontos", test: (s) => s.points >= 100 },
+  { id: "quiz1", label: "🏆 Primeiro quiz concluído", test: s => s.quizHistory.length >= 1 },
+  { id: "quiz10", label: "🏆 10 quizzes concluídos", test: s => s.quizHistory.length >= 10 },
+  { id: "q100", label: "🏆 100 questões respondidas", test: s => s.answered >= 100 },
+  { id: "perfect", label: "🏆 100% de acerto em um quiz", test: s => s.quizHistory.some(q => q.total > 0 && q.correct === q.total) },
+  { id: "hour1", label: "🏆 Primeira hora estudada", test: s => s.studySeconds >= 3600 },
+  { id: "hour10", label: "🏆 10 horas estudadas", test: s => s.studySeconds >= 36000 },
 ];
 
 export const LEVELS = [

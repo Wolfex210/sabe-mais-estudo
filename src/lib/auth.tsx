@@ -13,14 +13,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     supabase.auth.getUser().then(({ data }) => {
       if (!active) return;
       setUser(data.user);
-      void connectUser(data.user?.id ?? null, data.user?.email);
+      void connectUser(data.user?.id ?? null, data.user?.email, data.user?.user_metadata);
       setLoading(false);
     });
     const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
       if (!active) return;
       setUser(session?.user ?? null);
       // Defer database calls outside the auth callback.
-      setTimeout(() => { if (active) void connectUser(session?.user.id ?? null, session?.user.email); }, 0);
+      setTimeout(() => { if (active) void connectUser(session?.user.id ?? null, session?.user.email, session?.user.user_metadata); }, 0);
     });
     return () => { active = false; subscription.unsubscribe(); };
   }, []);

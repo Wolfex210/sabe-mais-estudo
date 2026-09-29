@@ -7,6 +7,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { YEARS, YEAR_LABEL, type Year } from "@/lib/curriculum";
 import { Link } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
+import { subjects } from "@/lib/content";
 
 export const Route = createFileRoute("/perfil")({
   head: () => ({
@@ -82,8 +83,12 @@ function Perfil() {
           <ul className="mt-3 space-y-2 text-sm text-muted-foreground">
             <li>Questões respondidas: <strong className="text-foreground">{s.answered}</strong></li>
             <li>Acertos: <strong className="text-foreground">{s.correct}</strong></li>
+            <li>Erros: <strong className="text-foreground">{s.wrong}</strong></li>
+            <li>Pontos: <strong className="text-foreground">{s.points}</strong></li>
+            <li>Tempo de estudo: <strong className="text-foreground">{Math.floor(s.studySeconds / 3600)}h {Math.floor(s.studySeconds % 3600 / 60)}min</strong></li>
             <li>Desafios: <strong className="text-foreground">{s.challenges.length}</strong></li>
             <li>Assuntos concluídos: <strong className="text-foreground">{s.completedTopics.length}</strong></li>
+            <li>Exercícios realizados: <strong className="text-foreground">{s.answered}</strong></li>
             <li>Quizzes concluídos: <strong className="text-foreground">{s.quizHistory.length}</strong></li>
             <li>Sessões de estudo: <strong className="text-foreground">{s.studySessions}</strong></li>
           </ul>
@@ -96,9 +101,18 @@ function Perfil() {
         </Card>
 
         <div className="lg:col-span-3">
+          <h2 className="text-xl font-bold text-foreground">Matérias estudadas</h2>
+          <p className="mt-3 text-sm text-muted-foreground">{Array.from(new Set([...s.quizHistory.map(q => q.subject), ...s.completedTopics.map(t => t.split(":")[0])])).map(slug => subjects.find(subject => subject.slug === slug)?.name ?? slug).join(", ") || "Comece uma aula ou quiz para registrar suas matérias."}</p>
+          <h2 className="mt-6 text-xl font-bold text-foreground">Assuntos concluídos</h2>
+          <p className="mt-3 text-sm text-muted-foreground">{s.completedTopics.map(t => t.split(":").slice(2).join(":")).join(", ") || "Nenhum assunto concluído ainda."}</p>
+        </div>
+
+        <div className="lg:col-span-3">
           <h2 className="text-xl font-bold text-foreground">Histórico de quizzes</h2>
           {s.quizHistory.length ? <ul className="mt-4 space-y-2">{[...s.quizHistory].reverse().slice(0, 20).map((result, i) => <li key={i} className="rounded-lg border border-border bg-card p-4 text-sm">{result.subject}{result.topic ? ` · ${result.topic}` : ""} · {result.level} — {result.correct}/{result.total} acertos · {new Date(result.date).toLocaleDateString("pt-BR")}</li>)}</ul> : <p className="mt-3 text-sm text-muted-foreground">Nenhum quiz concluído ainda.</p>}
         </div>
+
+        <div className="lg:col-span-3"><h2 className="text-xl font-bold text-foreground">Histórico de compras</h2><p className="mt-3 text-sm text-muted-foreground">Nenhuma compra realizada. Os pagamentos ainda não estão disponíveis.</p></div>
 
         <div className="lg:col-span-3">
           <h2 className="text-xl font-bold text-foreground">Conquistas</h2>
