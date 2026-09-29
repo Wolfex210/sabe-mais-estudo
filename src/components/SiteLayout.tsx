@@ -1,6 +1,6 @@
 /** Cabeçalho, menu (com versão mobile) e rodapé compartilhados. */
 import { Link } from "@tanstack/react-router";
-import { useState, type ReactNode } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 import { Menu, X, GraduationCap, Download } from "lucide-react";
 import { useAppState, levelOf } from "@/lib/store";
 import { useAuth } from "@/lib/auth";
