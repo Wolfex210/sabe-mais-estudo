@@ -2,6 +2,11 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { SiteLayout, PageHeader, Card, AdSlot } from "@/components/SiteLayout";
 import { useAppState, actions, levelOf, ACHIEVEMENTS, streakOf } from "@/lib/store";
+import { useAuth } from "@/lib/auth";
+import { supabase } from "@/integrations/supabase/client";
+import { YEARS, YEAR_LABEL, type Year } from "@/lib/curriculum";
+import { Link } from "@tanstack/react-router";
+import { Button } from "@/components/ui/button";
 
 export const Route = createFileRoute("/perfil")({
   head: () => ({
@@ -24,6 +29,7 @@ function Perfil() {
   const s = useAppState();
   const { current, next, progress } = levelOf(s.points);
   const [name, setName] = useState(s.name);
+  const { user } = useAuth();
 
   return (
     <SiteLayout>
@@ -32,13 +38,14 @@ function Perfil() {
         <Card className="lg:col-span-2">
           <div className="flex items-center gap-4">
             <span className="flex h-16 w-16 items-center justify-center rounded-2xl bg-primary/10 text-2xl font-bold text-primary">
-              {s.name.slice(0, 1).toUpperCase()}
+              {s.avatar || s.name.slice(0, 1).toUpperCase()}
             </span>
             <div>
               <p className="text-xl font-bold text-foreground">{s.name}</p>
               <p className="text-sm text-muted-foreground">
                 {current.name} · {s.points} pontos · {streakOf(s)} dia(s) seguidos
               </p>
+              {user && <p className="text-sm text-muted-foreground">{user.email}</p>}
             </div>
           </div>
 
@@ -63,6 +70,11 @@ function Perfil() {
               Salvar nome
             </button>
           </div>
+          <div className="mt-5 grid gap-3 sm:grid-cols-2">
+            <label className="text-sm font-semibold">Ano escolar<select value={s.schoolYear} onChange={e => actions.setSchoolYear(e.target.value)} className="mt-1 w-full rounded-lg border border-border bg-background p-2"><option value="">Selecionar ano</option>{YEARS.map(y => <option key={y} value={y}>{YEAR_LABEL[y]}</option>)}</select></label>
+            <label className="text-sm font-semibold">Avatar<select value={s.avatar} onChange={e => actions.setAvatar(e.target.value)} className="mt-1 w-full rounded-lg border border-border bg-background p-2">{["📚", "🎓", "⭐", "🧠", "🚀"].map(a => <option key={a} value={a}>{a}</option>)}</select></label>
+          </div>
+          <div className="mt-5 flex flex-wrap gap-3">{user ? <><Button variant="outline" asChild><Link to="/alterar-senha">Alterar senha</Link></Button><Button variant="outline" onClick={() => void supabase.auth.signOut()}>Sair</Button></> : <Button asChild><Link to="/conta">Criar conta ou entrar</Link></Button>}</div>
         </Card>
 
         <Card>
@@ -71,6 +83,9 @@ function Perfil() {
             <li>Questões respondidas: <strong className="text-foreground">{s.answered}</strong></li>
             <li>Acertos: <strong className="text-foreground">{s.correct}</strong></li>
             <li>Desafios: <strong className="text-foreground">{s.challenges.length}</strong></li>
+            <li>Assuntos concluídos: <strong className="text-foreground">{s.completedTopics.length}</strong></li>
+            <li>Quizzes concluídos: <strong className="text-foreground">{s.quizHistory.length}</strong></li>
+            <li>Sessões de estudo: <strong className="text-foreground">{s.studySessions}</strong></li>
           </ul>
           <button
             onClick={() => actions.reset()}
@@ -79,6 +94,11 @@ function Perfil() {
             Zerar meus dados
           </button>
         </Card>
+
+        <div className="lg:col-span-3">
+          <h2 className="text-xl font-bold text-foreground">Histórico de quizzes</h2>
+          {s.quizHistory.length ? <ul className="mt-4 space-y-2">{[...s.quizHistory].reverse().slice(0, 20).map((result, i) => <li key={i} className="rounded-lg border border-border bg-card p-4 text-sm">{result.subject}{result.topic ? ` · ${result.topic}` : ""} · {result.level} — {result.correct}/{result.total} acertos · {new Date(result.date).toLocaleDateString("pt-BR")}</li>)}</ul> : <p className="mt-3 text-sm text-muted-foreground">Nenhum quiz concluído ainda.</p>}
+        </div>
 
         <div className="lg:col-span-3">
           <h2 className="text-xl font-bold text-foreground">Conquistas</h2>
