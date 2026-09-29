@@ -676,6 +676,50 @@ export function getStudyHelpLines(slug: string): string[] {
   return [...pageLines, ...common].slice(0, 32);
 }
 
+export type ExamPrepSection = {
+  title: string;
+  explanation: string;
+  topics: string[];
+  practice: string;
+};
+
+const examPrepTips: Record<string, string> = {
+  matematica: "Em ENEM e vestibulares, priorize interpretação de problemas, proporcionalidade, porcentagem, funções, estatística, geometria e leitura de gráficos. Treine reconhecer qual ferramenta matemática o enunciado pede antes de calcular.",
+  portugues: "Em provas, treine interpretação, inferência, efeitos de sentido, gêneros textuais, gramática em contexto, variação linguística e relações entre texto e linguagem. Leia o enunciado até identificar exatamente o que está sendo perguntado.",
+  historia: "Em ENEM e vestibulares, relacione acontecimentos históricos a contexto, causas, consequências, permanências e mudanças. Questões podem combinar texto, imagem, fonte histórica, mapa ou gráfico.",
+  geografia: "Priorize leitura de mapas, gráficos e tabelas, território, população, urbanização, economia, ambiente e relações entre sociedade e natureza. Procure sempre relacionar fenômenos locais e globais.",
+  ciencias: "Use os conceitos científicos para explicar situações do cotidiano e interpretar experimentos, tabelas e gráficos. Procure entender causa e consequência em vez de decorar definições isoladas.",
+  ingles: "Em ENEM e vestibulares, a leitura e a compreensão global são fundamentais. Treine identificar tema, objetivo, informação explícita, inferência, palavras pelo contexto e intenção comunicativa.",
+  fisica: "Priorize interpretação de situações, unidades, gráficos, movimento, energia, forças, eletricidade e fenômenos do cotidiano. Antes de usar uma fórmula, identifique as grandezas e o que o problema realmente pede.",
+  quimica: "Treine interpretação de fenômenos, gráficos, tabelas e situações ambientais ou tecnológicas. Dê atenção a matéria, transformações, estequiometria, soluções, energia e química orgânica conforme seu nível.",
+  astronomia: "Astronomia pode fortalecer questões interdisciplinares de Ciências e Geografia. Revise movimentos da Terra, fases, estações, sistema solar, gravitação, escalas e interpretação de dados astronômicos.",
+  sociologia: "Para provas de Humanas, relacione conceitos sociológicos a situações sociais, textos e dados. Revise cultura, socialização, desigualdade, trabalho, poder, cidadania e instituições.",
+  oratoria: "Oratória ajuda na comunicação e na produção de argumentos. Treine tese, organização de ideias, clareza, seleção de evidências e apresentação oral, competências úteis para estudos e trabalhos.",
+  filosofia: "Em provas, treine identificar a tese de um texto, conceitos, argumentos e relações entre ideias. Revise ética, política, conhecimento, filosofia antiga e moderna e autores estudados no ensino médio.",
+  biologia: "Priorize interpretação de fenômenos e experimentos ligados a células, genética, evolução, ecologia, fisiologia e biodiversidade. Questões frequentemente exigem aplicar conceitos a situações novas.",
+  "ensino-religioso": "O conteúdo pode contribuir principalmente para repertório cultural e compreensão da diversidade, ética e relações sociais. Em provas, conecte religião a cultura, direitos, cidadania, história e respeito à diversidade sem confundir perspectivas religiosas diferentes.",
+  redacao: "Na preparação para o ENEM, treine texto dissertativo-argumentativo, leitura cuidadosa do tema, tese, argumentos, repertório pertinente, coesão e proposta de intervenção. Revise cada parágrafo e verifique se todas as ideias estão ligadas ao tema.",
+  literatura: "Revise escolas literárias, gêneros, contexto histórico, linguagem e características das obras. Em vestibulares, treine relacionar trecho, estilo, contexto e recursos de linguagem, em vez de decorar somente listas de autores.",
+  geopolitica: "Relacione território, poder, economia e relações internacionais a acontecimentos e processos contemporâneos. Treine mapas, gráficos e textos sobre globalização, conflitos, blocos econômicos e recursos estratégicos.",
+  empreendedorismo: "Pode contribuir para questões e projetos interdisciplinares sobre economia, trabalho, planejamento e cidadania. Revise orçamento, custos, organização de projetos, inovação e tomada de decisão responsável.",
+  "historia-da-arte": "Revise movimentos artísticos junto de seus contextos históricos, técnicas e características. Em provas, treine observar imagens e relacionar elementos visuais ao período, movimento e contexto cultural.",
+  "ecologia-e-educacao-ambiental": "É especialmente útil para Ciências da Natureza e questões interdisciplinares. Revise ecossistemas, ciclos, biodiversidade, impactos ambientais, conservação e sustentabilidade, sempre relacionando causas, consequências e possíveis soluções.",
+  algebra: "Em Matemática, treine expressões, equações, sistemas, funções e modelagem de situações. O mais importante é transformar o enunciado em uma relação matemática e conferir se a resposta faz sentido.",
+  geometria: "Treine interpretação de figuras, medidas, áreas, perímetros, circunferência, semelhança, Pitágoras e geometria espacial. Faça desenhos quando necessário e confira unidades antes de concluir.",
+};
+
+export function getExamPrep(slug: string): ExamPrepSection[] {
+  const subject = getSubject(slug);
+  if (!subject) return [];
+  const tip = examPrepTips[slug] ?? ("Para provas e vestibulares, revise os conceitos fundamentais de " + subject.name + ", pratique questões contextualizadas e aprenda a justificar suas respostas.");
+  return subject.studyPages.map((page, index) => ({
+    title: (index + 1) + ". " + page.title + " — preparação para provas",
+    explanation: page.text + " Em uma preparação para ENEM e vestibulares, transforme esse conteúdo em compreensão aplicada: identifique os conceitos principais, relacione-os com situações e pratique a interpretação de questões. " + tip,
+    topics: [...page.topics, "Interpretação de questões", "Aplicação do conceito"],
+    practice: "Prática sugerida: revise " + page.topics.join(", ") + ", depois resolva questões sobre esses assuntos e explique com suas próprias palavras por que a resposta escolhida está correta.",
+  }));
+}
+
 export function getSubject(slug: string) {
   return subjects.find((s) => s.slug === slug);
 }
