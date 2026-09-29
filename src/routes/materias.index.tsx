@@ -9,7 +9,7 @@ export const Route = createFileRoute("/materias/")({
       {
         name: "description",
         content:
-          "Matemática, Português, História, Geografia, Ciências, Inglês, Física e Química com resumos, exemplos, exercícios e quiz.",
+          "Matemática, Português, História, Geografia, Ciências, Inglês, Física e Química com roteiros por ano, resumos, exemplos, exercícios e quiz.",
       },
       { property: "og:title", content: "Matérias — Sabe Mais" },
       { property: "og:description", content: "Resumos, fórmulas, exemplos e exercícios de 8 matérias." },
@@ -25,7 +25,7 @@ function Materias() {
     <SiteLayout>
       <PageHeader
         title="Matérias"
-        subtitle="Escolha uma matéria e veja resumos, explicações, fórmulas, exemplos, exercícios e quiz."
+        subtitle="Escolha uma matéria para estudar por ano escolar, do Fundamental ao Ensino Médio."
       />
       <div className="mx-auto w-full max-w-6xl px-4 py-12">
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">

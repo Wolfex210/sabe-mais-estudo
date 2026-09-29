@@ -63,6 +63,7 @@ function SubjectPage() {
             <h2 id="year-heading" className="text-xl font-bold text-foreground">Estude por ano escolar</h2>
             <p className="mt-2 text-sm text-muted-foreground">
               Selecione seu ano para ver um roteiro introdutório dos principais assuntos. A ordem pode variar conforme a escola.
+              {(slug === "fisica" || slug === "quimica") && " Antes do 9º ano, estes temas aparecem principalmente em Ciências."}
             </p>
             <label htmlFor="school-year" className="mt-5 block text-sm font-semibold text-foreground">Ano escolar</label>
             <select
@@ -158,16 +159,16 @@ function SubjectPage() {
                   <p className="text-lg font-semibold text-foreground">
                     Você acertou {score} de {subject.questions.length} questões.
                   </p>
-                  <button
+                  <Button
                     onClick={() => {
                       setQIndex(0);
                       setChosen(null);
                       setScore(0);
                     }}
-                    className="mt-4 rounded-xl bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground"
+                    className="mt-4"
                   >
                     Tentar novamente
-                  </button>
+                  </Button>
                 </div>
               ) : q ? (
                 <>
@@ -186,26 +187,27 @@ function SubjectPage() {
                               ? "border-destructive bg-destructive/10"
                               : "border-border opacity-60";
                       return (
-                        <button
+                        <Button
                           key={o}
+                          variant="outline"
                           onClick={() => pick(i)}
-                          className={`w-full rounded-xl border px-4 py-3 text-left text-sm transition-colors ${state}`}
+                          className={`h-auto min-h-11 w-full justify-start whitespace-normal px-4 py-3 text-left text-sm ${state}`}
                         >
                           {o}
-                        </button>
+                        </Button>
                       );
                     })}
                   </div>
                   {chosen !== null && (
-                    <button
+                    <Button
                       onClick={() => {
                         setQIndex((i) => i + 1);
                         setChosen(null);
                       }}
-                      className="mt-4 rounded-xl bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground"
+                      className="mt-4"
                     >
                       Próxima
-                    </button>
+                    </Button>
                   )}
                 </>
               ) : null}
