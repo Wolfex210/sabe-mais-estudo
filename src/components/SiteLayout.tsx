@@ -1,7 +1,7 @@
 /** Cabeçalho, menu (com versão mobile) e rodapé compartilhados. */
 import { Link } from "@tanstack/react-router";
 import { useState, type ReactNode } from "react";
-import { Menu, X, GraduationCap } from "lucide-react";
+import { Menu, X, GraduationCap, Download } from "lucide-react";
 import { useAppState, levelOf } from "@/lib/store";
 import { useAuth } from "@/lib/auth";
 import { Button } from "@/components/ui/button";
@@ -30,8 +30,42 @@ export function AdSlot({ label = "Espaço reservado para publicidade" }: { label
   );
 }
 
+type BeforeInstallPromptEvent = Event & {
+  prompt: () => Promise<void>;
+  userChoice: Promise<{ outcome: "accepted" | "dismissed"; platform: string }>;
+};
+
 export function SiteLayout({ children }: { children: ReactNode }) {
   const [open, setOpen] = useState(false);
+  const [installPrompt, setInstallPrompt] = useState<BeforeInstallPromptEvent | null>(null);
+
+  useEffect(() => {
+    const handleBeforeInstallPrompt = (event: Event) => {
+      event.preventDefault();
+      setInstallPrompt(event as BeforeInstallPromptEvent);
+    };
+
+    window.addEventListener("beforeinstallprompt", handleBeforeInstallPrompt);
+
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker.register("/sw.js").catch(() => {});
+    }
+
+    return () => window.removeEventListener("beforeinstallprompt", handleBeforeInstallPrompt);
+  }, []);
+
+  const handleInstallApp = async () => {
+    if (installPrompt) {
+      await installPrompt.prompt();
+      await installPrompt.userChoice;
+      setInstallPrompt(null);
+      return;
+    }
+
+    window.alert(
+      "Para instalar o Sabe Mais como aplicativo, use o botão de instalar do navegador. No Chrome/Edge, procure o ícone de instalação na barra de endereço."
+    );
+  };
   const state = useAppState();
   const { user } = useAuth();
   const { current } = levelOf(state.points);
@@ -68,6 +102,15 @@ export function SiteLayout({ children }: { children: ReactNode }) {
             >
               {current.name} · {state.points} pts
             </Link>
+            <button
+              type="button"
+              onClick={handleInstallApp}
+              className="inline-flex items-center gap-1.5 rounded-lg border border-primary/25 bg-primary/10 px-3 py-2 text-xs font-semibold text-primary transition-colors hover:bg-primary/15"
+              title="Instalar o Sabe Mais como aplicativo"
+            >
+              <Download className="h-4 w-4" />
+              <span className="hidden sm:inline">Baixar app</span>
+            </button>
             <Button asChild variant="outline" size="sm"><Link to={user ? "/perfil" : "/conta"}>{user ? state.avatar : "Entrar"}</Link></Button>
             <Link
               to="/materias"
