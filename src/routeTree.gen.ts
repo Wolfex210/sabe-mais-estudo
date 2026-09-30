@@ -11,22 +11,22 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AlterarSenhaRouteImport } from './routes/alterar-senha'
+import { Route as CadernoErrosRouteImport } from './routes/caderno-erros'
 import { Route as ContaRouteImport } from './routes/conta'
+import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as DesafiosRouteImport } from './routes/desafios'
 import { Route as FerramentasRouteImport } from './routes/ferramentas'
 import { Route as PerfilRouteImport } from './routes/perfil'
 import { Route as PesquisaRouteImport } from './routes/pesquisa'
+import { Route as PlanoEstudosRouteImport } from './routes/plano-estudos'
 import { Route as PlanosRouteImport } from './routes/planos'
 import { Route as ProgressoRouteImport } from './routes/progresso'
 import { Route as QuizRouteImport } from './routes/quiz'
+import { Route as RevisaoRouteImport } from './routes/revisao'
+import { Route as SimuladosRouteImport } from './routes/simulados'
 import { Route as MateriasIndexRouteImport } from './routes/materias.index'
 import { Route as MateriasSlugRouteImport } from './routes/materias.$slug'
 import { Route as AulaSlugYearTopicRouteImport } from './routes/aula.$slug.$year.$topic'
-import { Route as DashboardRouteImport } from './routes/dashboard'
-import { Route as PlanoEstudosRouteImport } from './routes/plano-estudos'
-import { Route as CadernoErrosRouteImport } from './routes/caderno-erros'
-import { Route as RevisaoRouteImport } from './routes/revisao'
-import { Route as SimuladosRouteImport } from './routes/simulados'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -38,9 +38,19 @@ const AlterarSenhaRoute = AlterarSenhaRouteImport.update({
   path: '/alterar-senha',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CadernoErrosRoute = CadernoErrosRouteImport.update({
+  id: '/caderno-erros',
+  path: '/caderno-erros',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ContaRoute = ContaRouteImport.update({
   id: '/conta',
   path: '/conta',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DashboardRoute = DashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DesafiosRoute = DesafiosRouteImport.update({
@@ -63,6 +73,11 @@ const PesquisaRoute = PesquisaRouteImport.update({
   path: '/pesquisa',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PlanoEstudosRoute = PlanoEstudosRouteImport.update({
+  id: '/plano-estudos',
+  path: '/plano-estudos',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const PlanosRoute = PlanosRouteImport.update({
   id: '/planos',
   path: '/planos',
@@ -78,31 +93,6 @@ const QuizRoute = QuizRouteImport.update({
   path: '/quiz',
   getParentRoute: () => rootRouteImport,
 } as any)
-const MateriasIndexRoute = MateriasIndexRouteImport.update({
-  id: '/materias/',
-  path: '/materias/',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const MateriasSlugRoute = MateriasSlugRouteImport.update({
-  id: '/materias/$slug',
-  path: '/materias/$slug',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const DashboardRoute = DashboardRouteImport.update({
-  id: '/dashboard',
-  path: '/dashboard',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const PlanoEstudosRoute = PlanoEstudosRouteImport.update({
-  id: '/plano-estudos',
-  path: '/plano-estudos',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const CadernoErrosRoute = CadernoErrosRouteImport.update({
-  id: '/caderno-erros',
-  path: '/caderno-erros',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const RevisaoRoute = RevisaoRouteImport.update({
   id: '/revisao',
   path: '/revisao',
@@ -113,7 +103,16 @@ const SimuladosRoute = SimuladosRouteImport.update({
   path: '/simulados',
   getParentRoute: () => rootRouteImport,
 } as any)
-
+const MateriasIndexRoute = MateriasIndexRouteImport.update({
+  id: '/materias/',
+  path: '/materias/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MateriasSlugRoute = MateriasSlugRouteImport.update({
+  id: '/materias/$slug',
+  path: '/materias/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AulaSlugYearTopicRoute = AulaSlugYearTopicRouteImport.update({
   id: '/aula/$slug/$year/$topic',
   path: '/aula/$slug/$year/$topic',
@@ -123,19 +122,19 @@ const AulaSlugYearTopicRoute = AulaSlugYearTopicRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/alterar-senha': typeof AlterarSenhaRoute
+  '/caderno-erros': typeof CadernoErrosRoute
   '/conta': typeof ContaRoute
+  '/dashboard': typeof DashboardRoute
   '/desafios': typeof DesafiosRoute
   '/ferramentas': typeof FerramentasRoute
   '/perfil': typeof PerfilRoute
   '/pesquisa': typeof PesquisaRoute
+  '/plano-estudos': typeof PlanoEstudosRoute
   '/planos': typeof PlanosRoute
   '/progresso': typeof ProgressoRoute
-  '/dashboard': typeof DashboardRoute
-  '/plano-estudos': typeof PlanoEstudosRoute
-  '/caderno-erros': typeof CadernoErrosRoute
+  '/quiz': typeof QuizRoute
   '/revisao': typeof RevisaoRoute
   '/simulados': typeof SimuladosRoute
-  '/quiz': typeof QuizRoute
   '/materias/$slug': typeof MateriasSlugRoute
   '/materias/': typeof MateriasIndexRoute
   '/aula/$slug/$year/$topic': typeof AulaSlugYearTopicRoute
@@ -143,19 +142,19 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/alterar-senha': typeof AlterarSenhaRoute
+  '/caderno-erros': typeof CadernoErrosRoute
   '/conta': typeof ContaRoute
+  '/dashboard': typeof DashboardRoute
   '/desafios': typeof DesafiosRoute
   '/ferramentas': typeof FerramentasRoute
   '/perfil': typeof PerfilRoute
   '/pesquisa': typeof PesquisaRoute
+  '/plano-estudos': typeof PlanoEstudosRoute
   '/planos': typeof PlanosRoute
   '/progresso': typeof ProgressoRoute
-  '/dashboard': typeof DashboardRoute
-  '/plano-estudos': typeof PlanoEstudosRoute
-  '/caderno-erros': typeof CadernoErrosRoute
+  '/quiz': typeof QuizRoute
   '/revisao': typeof RevisaoRoute
   '/simulados': typeof SimuladosRoute
-  '/quiz': typeof QuizRoute
   '/materias/$slug': typeof MateriasSlugRoute
   '/materias': typeof MateriasIndexRoute
   '/aula/$slug/$year/$topic': typeof AulaSlugYearTopicRoute
@@ -164,19 +163,19 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/alterar-senha': typeof AlterarSenhaRoute
+  '/caderno-erros': typeof CadernoErrosRoute
   '/conta': typeof ContaRoute
+  '/dashboard': typeof DashboardRoute
   '/desafios': typeof DesafiosRoute
   '/ferramentas': typeof FerramentasRoute
   '/perfil': typeof PerfilRoute
   '/pesquisa': typeof PesquisaRoute
+  '/plano-estudos': typeof PlanoEstudosRoute
   '/planos': typeof PlanosRoute
   '/progresso': typeof ProgressoRoute
-  '/dashboard': typeof DashboardRoute
-  '/plano-estudos': typeof PlanoEstudosRoute
-  '/caderno-erros': typeof CadernoErrosRoute
+  '/quiz': typeof QuizRoute
   '/revisao': typeof RevisaoRoute
   '/simulados': typeof SimuladosRoute
-  '/quiz': typeof QuizRoute
   '/materias/$slug': typeof MateriasSlugRoute
   '/materias/': typeof MateriasIndexRoute
   '/aula/$slug/$year/$topic': typeof AulaSlugYearTopicRoute
@@ -186,19 +185,19 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/alterar-senha'
+    | '/caderno-erros'
     | '/conta'
+    | '/dashboard'
     | '/desafios'
     | '/ferramentas'
     | '/perfil'
     | '/pesquisa'
+    | '/plano-estudos'
     | '/planos'
     | '/progresso'
-    | '/dashboard'
-    | '/plano-estudos'
-    | '/caderno-erros'
+    | '/quiz'
     | '/revisao'
     | '/simulados'
-    | '/quiz'
     | '/materias/$slug'
     | '/materias/'
     | '/aula/$slug/$year/$topic'
@@ -206,19 +205,19 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/alterar-senha'
+    | '/caderno-erros'
     | '/conta'
+    | '/dashboard'
     | '/desafios'
     | '/ferramentas'
     | '/perfil'
     | '/pesquisa'
+    | '/plano-estudos'
     | '/planos'
     | '/progresso'
-    | '/dashboard'
-    | '/plano-estudos'
-    | '/caderno-erros'
+    | '/quiz'
     | '/revisao'
     | '/simulados'
-    | '/quiz'
     | '/materias/$slug'
     | '/materias'
     | '/aula/$slug/$year/$topic'
@@ -226,19 +225,19 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/alterar-senha'
+    | '/caderno-erros'
     | '/conta'
+    | '/dashboard'
     | '/desafios'
     | '/ferramentas'
     | '/perfil'
     | '/pesquisa'
+    | '/plano-estudos'
     | '/planos'
     | '/progresso'
-    | '/dashboard'
-    | '/plano-estudos'
-    | '/caderno-erros'
+    | '/quiz'
     | '/revisao'
     | '/simulados'
-    | '/quiz'
     | '/materias/$slug'
     | '/materias/'
     | '/aula/$slug/$year/$topic'
@@ -247,19 +246,19 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AlterarSenhaRoute: typeof AlterarSenhaRoute
+  CadernoErrosRoute: typeof CadernoErrosRoute
   ContaRoute: typeof ContaRoute
+  DashboardRoute: typeof DashboardRoute
   DesafiosRoute: typeof DesafiosRoute
   FerramentasRoute: typeof FerramentasRoute
   PerfilRoute: typeof PerfilRoute
   PesquisaRoute: typeof PesquisaRoute
+  PlanoEstudosRoute: typeof PlanoEstudosRoute
   PlanosRoute: typeof PlanosRoute
   ProgressoRoute: typeof ProgressoRoute
-  DashboardRoute: typeof DashboardRoute
-  PlanoEstudosRoute: typeof PlanoEstudosRoute
-  CadernoErrosRoute: typeof CadernoErrosRoute
+  QuizRoute: typeof QuizRoute
   RevisaoRoute: typeof RevisaoRoute
   SimuladosRoute: typeof SimuladosRoute
-  QuizRoute: typeof QuizRoute
   MateriasSlugRoute: typeof MateriasSlugRoute
   MateriasIndexRoute: typeof MateriasIndexRoute
   AulaSlugYearTopicRoute: typeof AulaSlugYearTopicRoute
@@ -281,11 +280,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AlterarSenhaRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/caderno-erros': {
+      id: '/caderno-erros'
+      path: '/caderno-erros'
+      fullPath: '/caderno-erros'
+      preLoaderRoute: typeof CadernoErrosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/conta': {
       id: '/conta'
       path: '/conta'
       fullPath: '/conta'
       preLoaderRoute: typeof ContaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/dashboard': {
+      id: '/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof DashboardRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/desafios': {
@@ -316,6 +329,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PesquisaRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/plano-estudos': {
+      id: '/plano-estudos'
+      path: '/plano-estudos'
+      fullPath: '/plano-estudos'
+      preLoaderRoute: typeof PlanoEstudosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/planos': {
       id: '/planos'
       path: '/planos'
@@ -330,25 +350,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProgressoRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/dashboard': {
-      id: '/dashboard'
-      path: '/dashboard'
-      fullPath: '/dashboard'
-      preLoaderRoute: typeof DashboardRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/plano-estudos': {
-      id: '/plano-estudos'
-      path: '/plano-estudos'
-      fullPath: '/plano-estudos'
-      preLoaderRoute: typeof PlanoEstudosRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/caderno-erros': {
-      id: '/caderno-erros'
-      path: '/caderno-erros'
-      fullPath: '/caderno-erros'
-      preLoaderRoute: typeof CadernoErrosRouteImport
+    '/quiz': {
+      id: '/quiz'
+      path: '/quiz'
+      fullPath: '/quiz'
+      preLoaderRoute: typeof QuizRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/revisao': {
@@ -363,13 +369,6 @@ declare module '@tanstack/react-router' {
       path: '/simulados'
       fullPath: '/simulados'
       preLoaderRoute: typeof SimuladosRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/quiz': {
-      id: '/quiz'
-      path: '/quiz'
-      fullPath: '/quiz'
-      preLoaderRoute: typeof QuizRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/materias/': {
@@ -399,19 +398,19 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AlterarSenhaRoute: AlterarSenhaRoute,
+  CadernoErrosRoute: CadernoErrosRoute,
   ContaRoute: ContaRoute,
+  DashboardRoute: DashboardRoute,
   DesafiosRoute: DesafiosRoute,
   FerramentasRoute: FerramentasRoute,
   PerfilRoute: PerfilRoute,
   PesquisaRoute: PesquisaRoute,
+  PlanoEstudosRoute: PlanoEstudosRoute,
   PlanosRoute: PlanosRoute,
   ProgressoRoute: ProgressoRoute,
-  DashboardRoute: DashboardRoute,
-  PlanoEstudosRoute: PlanoEstudosRoute,
-  CadernoErrosRoute: CadernoErrosRoute,
+  QuizRoute: QuizRoute,
   RevisaoRoute: RevisaoRoute,
   SimuladosRoute: SimuladosRoute,
-  QuizRoute: QuizRoute,
   MateriasSlugRoute: MateriasSlugRoute,
   MateriasIndexRoute: MateriasIndexRoute,
   AulaSlugYearTopicRoute: AulaSlugYearTopicRoute,
