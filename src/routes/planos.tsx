@@ -16,7 +16,7 @@ export const Route = createFileRoute("/planos")({
         content: "Conheça os planos Básico (R$ 19,99), Médio (R$ 49,99) e Master (R$ 89,99).",
       },
       { property: "og:title", content: "Planos e Sabe Mais Premium" },
-      { property: "og:description", content: "Teste 3 dias grátis e escolha um plano mensal." },
+      { property: "og:description", content: "Teste 4 dias grátis e escolha um plano mensal." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
@@ -127,7 +127,7 @@ function Planos() {
     <SiteLayout>
       <PageHeader
         title="Sabe Mais Premium"
-        subtitle="Comece com 3 dias grátis e depois escolha o plano que combina com a sua rotina."
+        subtitle="Comece com 4 dias grátis e depois escolha o plano que combina com a sua rotina."
       />
       <div className="mx-auto w-full max-w-6xl px-4 py-12">
         <Card className="text-center">
