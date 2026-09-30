@@ -563,7 +563,7 @@ export const curriculum: Record<string, Topics> = {
     "3º EM": ["Biologia avançada | Genética, evolução, fisiologia, ecologia e biotecnologia.","Biologia no ENEM | Integre saúde, ambiente, genética e evolução."],
   },
 
-  ensino-religioso: {
+  "ensino-religioso": {
     "1º EF": ["Diversidade e respeito | Reconheça diferentes crenças, convicções e culturas.","Símbolos e celebrações | Conheça manifestações culturais e religiosas."],
     "2º EF": ["Diversidade e respeito | Reconheça diferentes crenças, convicções e culturas.","Símbolos e celebrações | Conheça manifestações culturais e religiosas."],
     "3º EF": ["Tradições e cultura | Observe ritos, festas, costumes e formas de transmissão.","Convivência | Pratique diálogo e respeito às diferenças."],
@@ -638,7 +638,7 @@ export const curriculum: Record<string, Topics> = {
     "3º EM": ["Empreendedorismo avançado | Planejamento estratégico, marketing, inovação e finanças.","Projeto final | Desenvolva e apresente uma proposta de forma estruturada."],
   },
 
-  historia-da-arte: {
+  "historia-da-arte": {
     "1º EF": ["Arte e cultura | Observe cores, formas, desenhos, música e manifestações culturais.","Criação artística | Experimente diferentes materiais e linguagens."],
     "2º EF": ["Arte e cultura | Observe cores, formas, desenhos, música e manifestações culturais.","Criação artística | Experimente diferentes materiais e linguagens."],
     "3º EF": ["Antiguidade e patrimônio | Conheça arte egípcia, grega, romana e manifestações culturais.","Renascimento | Observe perspectiva, proporção e novas técnicas."],
@@ -653,7 +653,7 @@ export const curriculum: Record<string, Topics> = {
     "3º EM": ["História da arte | Organize períodos, movimentos, obras e contextos.","Arte no ENEM | Interprete imagens, textos, técnicas e relações culturais."],
   },
 
-  ecologia-e-educacao-ambiental: {
+  "ecologia-e-educacao-ambiental": {
     "1º EF": ["Natureza e cuidado | Observe seres vivos, água, solo e resíduos.","Consumo consciente | Aprenda atitudes de cuidado e redução de desperdício."],
     "2º EF": ["Natureza e cuidado | Observe seres vivos, água, solo e resíduos.","Consumo consciente | Aprenda atitudes de cuidado e redução de desperdício."],
     "3º EF": ["Ecossistemas | Relacione seres vivos e fatores do ambiente.","Cadeias alimentares | Entenda produtores, consumidores e decompositores."],
