@@ -1,5 +1,5 @@
 /** Cabeçalho, menu (com versão mobile) e rodapé compartilhados. */
-import { Link } from "@tanstack/react-router";
+import { Link, useLocation } from "@tanstack/react-router";
 import { useEffect, useState, type ReactNode } from "react";
 import { Menu, X, GraduationCap, Download } from "lucide-react";
 import { useAppState, levelOf, trialExpired } from "@/lib/store";
@@ -67,9 +67,10 @@ export function SiteLayout({ children }: { children: ReactNode }) {
     );
   };
   const state = useAppState();
+  const location = useLocation();
   const { user } = useAuth();
   const { current } = levelOf(state.points);
-  const accessLocked = trialExpired(state);
+  const accessLocked = trialExpired(state) && location.pathname !== "/planos";
 
   return (
     <div className="flex min-h-screen flex-col bg-background">
