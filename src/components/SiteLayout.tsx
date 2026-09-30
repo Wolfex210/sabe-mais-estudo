@@ -148,7 +148,22 @@ export function SiteLayout({ children }: { children: ReactNode }) {
         )}
       </header>
 
-      <main className="flex-1">{children}</main>\n      {accessLocked && (\n        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-background/95 px-4 backdrop-blur-sm">\n          <div className="w-full max-w-2xl rounded-3xl border border-border bg-card p-8 text-center shadow-lift sm:p-10">\n            <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-primary/10 text-3xl">🔒</div>\n            <h2 className="mt-5 text-2xl font-extrabold text-foreground sm:text-3xl">Seu período grátis terminou</h2>\n            <p className="mx-auto mt-3 max-w-xl text-muted-foreground">\n              Seus 4 dias gratuitos terminaram. Para continuar usando as matérias, quizzes, ferramentas e demais recursos do Sabe Mais, escolha um plano mensal.\n            </p>\n            <Link to="/planos" className="mt-7 inline-flex rounded-xl bg-primary px-6 py-3 font-semibold text-primary-foreground shadow-soft transition-transform hover:-translate-y-0.5">\n              Ver planos e continuar estudando\n            </Link>\n            <p className="mt-4 text-xs text-muted-foreground">Você continuará podendo acessar esta tela e a página de planos.</p>\n          </div>\n        </div>\n      )}
+      <main className="flex-1">{children}</main>
+      {accessLocked && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-background/95 px-4 backdrop-blur-sm">
+          <div className="w-full max-w-2xl rounded-3xl border border-border bg-card p-8 text-center shadow-lift sm:p-10">
+            <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-primary/10 text-3xl">🔒</div>
+            <h2 className="mt-5 text-2xl font-extrabold text-foreground sm:text-3xl">Seu período grátis terminou</h2>
+            <p className="mx-auto mt-3 max-w-xl text-muted-foreground">
+              Seus 4 dias gratuitos terminaram. Para continuar usando as matérias, quizzes, ferramentas e demais recursos do Sabe Mais, escolha um plano mensal.
+            </p>
+            <Link to="/planos" className="mt-7 inline-flex rounded-xl bg-primary px-6 py-3 font-semibold text-primary-foreground shadow-soft transition-transform hover:-translate-y-0.5">
+              Ver planos e continuar estudando
+            </Link>
+            <p className="mt-4 text-xs text-muted-foreground">Você continuará podendo acessar esta tela e a página de planos.</p>
+          </div>
+        </div>
+      )}
 
       <footer className="border-t border-border bg-secondary/40">
         <div className="mx-auto grid w-full max-w-6xl gap-8 px-4 py-10 sm:grid-cols-3">
