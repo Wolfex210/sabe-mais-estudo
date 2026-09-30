@@ -1,10 +1,10 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Check, Loader2 } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { SiteLayout, PageHeader, Card } from "@/components/SiteLayout";
 import { useAppState, trialDaysLeft } from "@/lib/store";
-import { useAuth } from "@/lib/auth";
+import { supabase } from "@/integrations/supabase/client";
 import { supabase } from "@/integrations/supabase/client";
 import type { PlanId } from "@/lib/stripe-plans";
 
@@ -77,8 +77,18 @@ const plans: Array<{
 function Planos() {
   const s = useAppState();
   const left = trialDaysLeft(s);
-  const { user } = useAuth();
+  const [user, setUser] = useState<{ id: string } | null>(null);
   const [loadingPlan, setLoadingPlan] = useState<PlanId | null>(null);
+  useEffect(() => {
+    let active = true;
+    void supabase.auth.getSession().then(({ data }) => {
+      if (active) setUser(data.session?.user ? { id: data.session.user.id } : null);
+    });
+    const { data } = supabase.auth.onAuthStateChange((_event, session) => {
+      if (active) setUser(session?.user ? { id: session.user.id } : null);
+    });
+    return () => { active = false; data.subscription.unsubscribe(); };
+  }, []);
   const [error, setError] = useState("");
 
   async function startCheckout(plan: PlanId) {
