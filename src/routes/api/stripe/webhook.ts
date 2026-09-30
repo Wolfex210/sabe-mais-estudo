@@ -7,8 +7,8 @@ function env(name: string) {
 }
 
 function getStripe() {
-  const key = env("STRIPE_SECRET_KEY");
-  if (!key) throw new Error("STRIPE_SECRET_KEY não configurada.");
+  const key = env("STRIPE_SECRET_KEY") || env("STRIPE_SANDBOX_API_KEY");
+  if (!key) throw new Error("STRIPE_SECRET_KEY ou STRIPE_SANDBOX_API_KEY não configurada.");
   return new Stripe(key);
 }
 
@@ -47,7 +47,7 @@ export const Route = createFileRoute("/api/stripe/webhook")({
   server: {
     handlers: {
       POST: async ({ request }) => {
-        const secret = env("STRIPE_WEBHOOK_SECRET");
+        const secret = env("STRIPE_WEBHOOK_SECRET") || env("PAYMENTS_SANDBOX_WEBHOOK_SECRET");
         const signature = request.headers.get("stripe-signature");
         if (!secret || !signature) return new Response("Webhook não configurado.", { status: 400 });
 
