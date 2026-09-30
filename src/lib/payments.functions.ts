@@ -13,13 +13,14 @@ async function resolveOrCreateCustomer(
   if (options.userId && !/^[a-zA-Z0-9_-]+$/.test(options.userId)) throw new Error('Invalid userId');
   if (options.userId) {
     const found = await stripe.customers.search({ query: `metadata['userId']:'${options.userId}'`, limit: 1 });
-    if (found.data.length) return found.data[0].id;
+    const matched = found.data[0];
+    if (matched) return matched.id;
   }
   if (options.email) {
     const existing = await stripe.customers.list({ email: options.email, limit: 1 });
-    if (existing.data.length) {
-      const customer = existing.data[0];
-      if (options.userId && customer.metadata?.userId !== options.userId) {
+    const customer = existing.data[0];
+    if (customer) {
+      if (options.userId && customer.metadata?.['userId'] !== options.userId) {
         await stripe.customers.update(customer.id, { metadata: { ...customer.metadata, userId: options.userId } });
       }
       return customer.id;
@@ -52,7 +53,7 @@ export const createCheckoutSession = createServerFn({ method: 'POST' })
       const prices = await stripe.prices.list({ lookup_keys: [data.priceId] });
       const price = prices.data[0];
       if (!price || price.type !== 'recurring') return { error: 'Este plano ainda não está disponível.' };
-      const customerId = await resolveOrCreateCustomer(stripe, { userId: context.userId, email: user.email });
+      const customerId = await resolveOrCreateCustomer(stripe, { userId: context.userId, ...(user.email ? { email: user.email } : {}) });
       const origin = new URL(getRequest().url).origin;
       const session = await stripe.checkout.sessions.create({
         line_items: [{ price: price.id, quantity: 1 }], mode: 'subscription', ui_mode: 'embedded_page',
@@ -75,7 +76,7 @@ export const getCheckoutStatus = createServerFn({ method: 'POST' })
   .handler(async ({ data, context }): Promise<{ status: string; paymentStatus: string } | { error: string }> => {
     try {
       const session = await createStripeClient(data.environment).checkout.sessions.retrieve(data.sessionId);
-      if (session.metadata?.userId !== context.userId) return { error: 'Este pagamento não pertence à sua conta.' };
+      if (session.metadata?.['userId'] !== context.userId) return { error: 'Este pagamento não pertence à sua conta.' };
       return { status: session.status ?? 'open', paymentStatus: session.payment_status };
     } catch (error) { return { error: getStripeErrorMessage(error) }; }
   });
