@@ -486,7 +486,7 @@ export const curriculum: Record<string, Topics> = {
       "Reações orgânicas e polímeros | Adição, substituição, combustão; plásticos.",
       "Química ambiental | Chuva ácida, efeito estufa e radioatividade.",
     ],
-  },,
+  },
 
   astronomia: {
     "1º EF": ["Céu e observação | Reconheça Sol, Lua, estrelas e mudanças aparentes no céu.","Dia e noite | Relacione a observação do céu com a passagem do tempo."],
