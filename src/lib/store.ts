@@ -139,7 +139,8 @@ export const actions = {
   setStudyPlan(plan: StudyPlan) { update(s => ({ ...s, studyPlan: plan })); },
   reset() { state = { ...initial, trialStart: today(), joinedAt: new Date().toISOString() }; persist(); },
 };
-export function trialDaysLeft(s: AppState) { if (!s.trialStart) return 3; const start = new Date(s.trialStart + "T00:00:00").getTime(); const passed = Math.floor((Date.now() - start) / 86400000); return Math.max(0, 3 - passed); }
+export function trialDaysLeft(s: AppState) { if (!s.trialStart) return 4; const start = new Date(s.trialStart + "T00:00:00").getTime(); const passed = Math.floor((Date.now() - start) / 86400000); return Math.max(0, 4 - passed); }
+export function trialExpired(s: AppState) { return trialDaysLeft(s) === 0 && s.plan === null; }
 export function streakOf(s: AppState) {
   const set = new Set(s.days); let streak = 0; const d = new Date();
   for (;;) { const key = d.toISOString().slice(0, 10); if (set.has(key)) { streak++; d.setDate(d.getDate() - 1); } else break; }
