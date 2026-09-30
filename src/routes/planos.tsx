@@ -5,7 +5,6 @@ import { Button } from "@/components/ui/button";
 import { SiteLayout, PageHeader, Card } from "@/components/SiteLayout";
 import { useAppState, trialDaysLeft } from "@/lib/store";
 import { supabase } from "@/integrations/supabase/client";
-import { supabase } from "@/integrations/supabase/client";
 import type { PlanId } from "@/lib/stripe-plans";
 
 export const Route = createFileRoute("/planos")({
