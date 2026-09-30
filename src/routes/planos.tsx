@@ -77,14 +77,15 @@ function Planos() {
   const s = useAppState();
   const left = trialDaysLeft(s);
   const [user, setUser] = useState<{ id: string } | null>(null);
+  const [authChecked, setAuthChecked] = useState(false);
   const [loadingPlan, setLoadingPlan] = useState<PlanId | null>(null);
   useEffect(() => {
     let active = true;
     void supabase.auth.getSession().then(({ data }) => {
-      if (active) setUser(data.session?.user ? { id: data.session.user.id } : null);
+      if (active) { setUser(data.session?.user ? { id: data.session.user.id } : null); setAuthChecked(true); }
     });
     const { data } = supabase.auth.onAuthStateChange((_event, session) => {
-      if (active) setUser(session?.user ? { id: session.user.id } : null);
+      if (active) { setUser(session?.user ? { id: session.user.id } : null); setAuthChecked(true); }
     });
     return () => { active = false; data.subscription.unsubscribe(); };
   }, []);
@@ -172,11 +173,11 @@ function Planos() {
               </ul>
               <Button
                 onClick={() => void startCheckout(p.id)}
-                disabled={loadingPlan !== null}
+                disabled={loadingPlan !== null || !authChecked}
                 className="mt-6 w-full"
               >
                 {loadingPlan === p.id && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-                {user ? "Assinar com Stripe" : "Entrar para assinar"}
+                {!authChecked ? "Carregando..." : user ? "Assinar com Stripe" : "Entrar para assinar"}
               </Button>
             </Card>
           ))}
