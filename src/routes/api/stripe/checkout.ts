@@ -12,8 +12,8 @@ function json(data: unknown, status = 200) {
 }
 
 function getStripe() {
-  const key = env("STRIPE_SECRET_KEY");
-  if (!key) throw new Error("STRIPE_SECRET_KEY não configurada.");
+  const key = env("STRIPE_SECRET_KEY") || env("STRIPE_SANDBOX_API_KEY");
+  if (!key) throw new Error("STRIPE_SECRET_KEY ou STRIPE_SANDBOX_API_KEY não configurada.");
   return new Stripe(key);
 }
 
@@ -78,7 +78,7 @@ export const Route = createFileRoute("/api/stripe/checkout")({
             customer: customerId,
             line_items: [{ price: priceId, quantity: 1 }],
             subscription_data: {
-              trial_period_days: 3,
+              trial_period_days: 4,
               metadata: { user_id: user.id, plan: body.plan },
             },
             metadata: { user_id: user.id, plan: body.plan },
