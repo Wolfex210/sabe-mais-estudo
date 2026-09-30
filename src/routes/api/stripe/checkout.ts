@@ -49,7 +49,7 @@ export const Route = createFileRoute("/api/stripe/checkout")({
           const plan = STRIPE_PLANS[body.plan];
           const priceId = env(plan.envKey);
           if (!priceId) {
-            return json({ error: \`O preço do plano \${plan.name} ainda não foi configurado no servidor.\` }, 503);
+            return json({ error: `O preço do plano ${plan.name} ainda não foi configurado no servidor.` }, 503);
           }
 
           const stripe = getStripe();
@@ -83,8 +83,8 @@ export const Route = createFileRoute("/api/stripe/checkout")({
             },
             metadata: { user_id: user.id, plan: body.plan },
             allow_promotion_codes: true,
-            success_url: \`\${origin}/pagamento-sucesso?session_id={CHECKOUT_SESSION_ID}\`,
-            cancel_url: \`\${origin}/pagamento-cancelado\`,
+            success_url: `${origin}/pagamento-sucesso?session_id={CHECKOUT_SESSION_ID}`,
+            cancel_url: `${origin}/pagamento-cancelado`,
           });
 
           if (!session.url) return json({ error: "O Stripe não retornou a página de checkout." }, 502);
