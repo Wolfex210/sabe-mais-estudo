@@ -1,8 +1,12 @@
-import { createFileRoute } from "@tanstack/react-router";
-import { Check } from "lucide-react";
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { Check, Loader2 } from "lucide-react";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { SiteLayout, PageHeader, Card } from "@/components/SiteLayout";
 import { useAppState, trialDaysLeft } from "@/lib/store";
+import { useAuth } from "@/lib/auth";
+import { supabase } from "@/integrations/supabase/client";
+import type { PlanId } from "@/lib/stripe-plans";
 
 export const Route = createFileRoute("/planos")({
   head: () => ({
@@ -10,10 +14,10 @@ export const Route = createFileRoute("/planos")({
       { title: "Planos e Sabe Mais Premium" },
       {
         name: "description",
-        content: "Conheça os planos Básico (R$ 19,99), Médio (R$ 49,99) e Master (R$ 89,99). Pagamentos ainda indisponíveis.",
+        content: "Conheça os planos Básico (R$ 19,99), Médio (R$ 49,99) e Master (R$ 89,99).",
       },
       { property: "og:title", content: "Planos e Sabe Mais Premium" },
-      { property: "og:description", content: "Teste 3 dias grátis e escolha o plano ideal para seus estudos." },
+      { property: "og:description", content: "Teste 3 dias grátis e escolha um plano mensal." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
@@ -21,9 +25,16 @@ export const Route = createFileRoute("/planos")({
   component: Planos,
 });
 
-const plans = [
+const plans: Array<{
+  id: PlanId;
+  name: string;
+  price: string;
+  desc: string;
+  featured?: boolean;
+  features: string[];
+}> = [
   {
-    id: "basico" as const,
+    id: "basico",
     name: "Básico",
     price: "R$ 19,99",
     desc: "Poucos recursos, mas o suficiente para estudar todo dia.",
@@ -35,7 +46,7 @@ const plans = [
     ],
   },
   {
-    id: "medio" as const,
+    id: "medio",
     name: "Médio",
     price: "R$ 49,99",
     desc: "Bons métodos de estudo para quem quer evoluir mais rápido.",
@@ -49,7 +60,7 @@ const plans = [
     ],
   },
   {
-    id: "master" as const,
+    id: "master",
     name: "Master",
     price: "R$ 89,99",
     desc: "As melhores ferramentas de estudo do Sabe Mais.",
@@ -66,6 +77,41 @@ const plans = [
 function Planos() {
   const s = useAppState();
   const left = trialDaysLeft(s);
+  const { user } = useAuth();
+  const [loadingPlan, setLoadingPlan] = useState<PlanId | null>(null);
+  const [error, setError] = useState("");
+
+  async function startCheckout(plan: PlanId) {
+    setError("");
+    if (!user) {
+      window.location.href = "/conta";
+      return;
+    }
+
+    setLoadingPlan(plan);
+    try {
+      const { data: sessionData } = await supabase.auth.getSession();
+      const token = sessionData.session?.access_token;
+      if (!token) throw new Error("Sua sessão expirou. Entre novamente para continuar.");
+
+      const response = await fetch("/api/stripe/checkout", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ plan }),
+      });
+
+      const data = (await response.json()) as { url?: string; error?: string };
+      if (!response.ok || !data.url) throw new Error(data.error || "Não foi possível iniciar o checkout.");
+
+      window.location.assign(data.url);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Não foi possível iniciar o checkout.");
+      setLoadingPlan(null);
+    }
+  }
 
   return (
     <SiteLayout>
@@ -80,9 +126,15 @@ function Planos() {
             {left > 0 ? `Você tem ${left} dia(s) grátis restantes` : "Seu período grátis terminou"}
           </p>
           <p className="mt-1 text-sm text-muted-foreground">
-            Durante o teste, todas as ferramentas ficam liberadas.
+            O checkout é hospedado pelo Stripe e a assinatura só é registrada no Sabe Mais após a confirmação do webhook.
           </p>
         </Card>
+
+        {error && (
+          <div className="mt-6 rounded-xl border border-destructive/30 bg-destructive/10 px-4 py-3 text-sm text-destructive">
+            {error}
+          </div>
+        )}
 
         <div className="mt-10 grid gap-6 lg:grid-cols-3">
           {plans.map((p) => (
@@ -109,12 +161,27 @@ function Planos() {
                   </li>
                 ))}
               </ul>
-              <Button disabled variant="outline" className="mt-6 w-full">Em breve</Button>
+              <Button
+                onClick={() => void startCheckout(p.id)}
+                disabled={loadingPlan !== null}
+                className="mt-6 w-full"
+              >
+                {loadingPlan === p.id && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+                {user ? "Assinar com Stripe" : "Entrar para assinar"}
+              </Button>
             </Card>
           ))}
         </div>
 
-        <p className="mt-8 text-center text-xs text-muted-foreground">Os planos estão disponíveis para consulta. Pagamentos e assinaturas ainda não estão ativos; nenhum valor será cobrado.</p>
+        {!user && (
+          <p className="mt-8 text-center text-sm text-muted-foreground">
+            <Link to="/conta" className="font-semibold text-primary hover:underline">Entre ou crie sua conta</Link> para iniciar o checkout.
+          </p>
+        )}
+
+        <p className="mt-8 text-center text-xs text-muted-foreground">
+          A conta Stripe que receberá os pagamentos e as configurações de cobrança devem ser administradas por um responsável elegível. Nunca coloque a chave secreta do Stripe no código, no GitHub ou no navegador.
+        </p>
       </div>
     </SiteLayout>
   );
