@@ -177,9 +177,9 @@ function SubjectPage() {
       "https://images.unsplash.com/photo-1561214115-f2f134cc4912?auto=format&fit=crop&w=1200&q=80",
     ],
   };
-  const studyImages = studyImagesBySubject[slug] ?? studyImagesBySubject.matematica;
+  const studyImages = studyImagesBySubject[slug] ?? studyImagesBySubject["matematica"];
 
-  if (!subject) return null;
+  if (!subject || !studyImages?.length) return null;
   const topics = getTopics(slug, activeYear);
   const q = subject.questions[qIndex];
   const helpLines = getStudyHelpLines(slug);
