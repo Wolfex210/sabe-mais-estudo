@@ -1,15 +1,15 @@
 import { createFileRoute } from "@tanstack/react-router";
-import Stripe from "stripe";
+import type Stripe from "stripe";
 import { createClient } from "@supabase/supabase-js";
+import { createStripeClient } from "@/lib/stripe.server";
+import type { Database } from "@/integrations/supabase/types";
 
 function env(name: string) {
   return process.env[name] ?? "";
 }
 
 function getStripe() {
-  const key = env("STRIPE_SECRET_KEY") || env("STRIPE_SANDBOX_API_KEY");
-  if (!key) throw new Error("STRIPE_SECRET_KEY ou STRIPE_SANDBOX_API_KEY não configurada.");
-  return new Stripe(key);
+  return createStripeClient("sandbox");
 }
 
 function planFromPrice(priceId: string) {
@@ -19,8 +19,8 @@ function planFromPrice(priceId: string) {
   return null;
 }
 
-async function saveSubscription(subscription: Stripe.Subscription, admin: ReturnType<typeof createClient>) {
-  const userId = subscription.metadata?.user_id;
+async function saveSubscription(subscription: Stripe.Subscription, admin: ReturnType<typeof createClient<Database>>) {
+  const userId = subscription.metadata?.['user_id'];
   if (!userId) return;
 
   const item = subscription.items.data[0];
@@ -60,7 +60,7 @@ export const Route = createFileRoute("/api/stripe/webhook")({
           const serviceKey = env("SUPABASE_SERVICE_ROLE_KEY");
           if (!supabaseUrl || !serviceKey) return new Response("Supabase servidor não configurado.", { status: 500 });
 
-          const admin = createClient(supabaseUrl, serviceKey, {
+          const admin = createClient<Database>(supabaseUrl, serviceKey, {
             auth: { autoRefreshToken: false, persistSession: false },
           });
 
