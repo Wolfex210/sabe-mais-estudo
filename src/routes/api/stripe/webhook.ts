@@ -7,8 +7,8 @@ function env(name: string) {
 }
 
 function getStripe() {
-  const key = env("STRIPE_SECRET_KEY") || env("STRIPE_SANDBOX_API_KEY");
-  if (!key) throw new Error("STRIPE_SECRET_KEY ou STRIPE_SANDBOX_API_KEY não configurada.");
+  const key = env("STRIPE_SECRET_KEY");
+  if (!key) throw new Error("STRIPE_SECRET_KEY não configurada.");
   return new Stripe(key);
 }
 
