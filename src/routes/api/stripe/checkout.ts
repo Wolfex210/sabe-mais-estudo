@@ -1,7 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
-import Stripe from "stripe";
 import { createClient } from "@supabase/supabase-js";
 import { isPlanId, STRIPE_PLANS, type PlanId } from "@/lib/stripe-plans";
+import { createStripeClient } from "@/lib/stripe.server";
+import type { Database } from "@/integrations/supabase/types";
 
 function env(name: string) {
   return process.env[name] ?? "";
@@ -12,9 +13,7 @@ function json(data: unknown, status = 200) {
 }
 
 function getStripe() {
-  const key = env("STRIPE_SECRET_KEY") || env("STRIPE_SANDBOX_API_KEY");
-  if (!key) throw new Error("STRIPE_SECRET_KEY ou STRIPE_SANDBOX_API_KEY não configurada.");
-  return new Stripe(key);
+  return createStripeClient("sandbox");
 }
 
 async function getAuthenticatedUser(request: Request) {
@@ -26,7 +25,7 @@ async function getAuthenticatedUser(request: Request) {
   const serviceKey = env("SUPABASE_SERVICE_ROLE_KEY");
   if (!supabaseUrl || !serviceKey) throw new Error("Credenciais do Supabase no servidor não configuradas.");
 
-  const admin = createClient(supabaseUrl, serviceKey, {
+  const admin = createClient<Database>(supabaseUrl, serviceKey, {
     auth: { autoRefreshToken: false, persistSession: false },
   });
   const { data, error } = await admin.auth.getUser(token);
@@ -67,7 +66,7 @@ export const Route = createFileRoute("/api/stripe/checkout")({
 
           if (!customerId) {
             const customer = await stripe.customers.create({
-              email: user.email ?? undefined,
+              ...(user.email ? { email: user.email } : {}),
               metadata: { user_id: user.id },
             });
             customerId = customer.id;
