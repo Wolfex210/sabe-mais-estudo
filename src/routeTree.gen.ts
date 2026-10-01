@@ -16,6 +16,8 @@ import { Route as ContaRouteImport } from './routes/conta'
 import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as DesafiosRouteImport } from './routes/desafios'
 import { Route as FerramentasRouteImport } from './routes/ferramentas'
+import { Route as PagamentoCanceladoRouteImport } from './routes/pagamento-cancelado'
+import { Route as PagamentoSucessoRouteImport } from './routes/pagamento-sucesso'
 import { Route as PerfilRouteImport } from './routes/perfil'
 import { Route as PesquisaRouteImport } from './routes/pesquisa'
 import { Route as PlanoEstudosRouteImport } from './routes/plano-estudos'
@@ -27,6 +29,8 @@ import { Route as SimuladosRouteImport } from './routes/simulados'
 import { Route as CheckoutReturnRouteImport } from './routes/checkout/return'
 import { Route as MateriasIndexRouteImport } from './routes/materias.index'
 import { Route as MateriasSlugRouteImport } from './routes/materias.$slug'
+import { Route as ApiStripeCheckoutRouteImport } from './routes/api/stripe/checkout'
+import { Route as ApiStripeWebhookRouteImport } from './routes/api/stripe/webhook'
 import { Route as ApiPublicPaymentsWebhookRouteImport } from './routes/api/public/payments/webhook'
 import { Route as AulaSlugYearTopicRouteImport } from './routes/aula.$slug.$year.$topic'
 
@@ -63,6 +67,16 @@ const DesafiosRoute = DesafiosRouteImport.update({
 const FerramentasRoute = FerramentasRouteImport.update({
   id: '/ferramentas',
   path: '/ferramentas',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PagamentoCanceladoRoute = PagamentoCanceladoRouteImport.update({
+  id: '/pagamento-cancelado',
+  path: '/pagamento-cancelado',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PagamentoSucessoRoute = PagamentoSucessoRouteImport.update({
+  id: '/pagamento-sucesso',
+  path: '/pagamento-sucesso',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PerfilRoute = PerfilRouteImport.update({
@@ -120,6 +134,16 @@ const MateriasSlugRoute = MateriasSlugRouteImport.update({
   path: '/materias/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiStripeCheckoutRoute = ApiStripeCheckoutRouteImport.update({
+  id: '/api/stripe/checkout',
+  path: '/api/stripe/checkout',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiStripeWebhookRoute = ApiStripeWebhookRouteImport.update({
+  id: '/api/stripe/webhook',
+  path: '/api/stripe/webhook',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiPublicPaymentsWebhookRoute =
   ApiPublicPaymentsWebhookRouteImport.update({
     id: '/api/public/payments/webhook',
@@ -140,6 +164,8 @@ export interface FileRoutesByFullPath {
   '/dashboard': typeof DashboardRoute
   '/desafios': typeof DesafiosRoute
   '/ferramentas': typeof FerramentasRoute
+  '/pagamento-cancelado': typeof PagamentoCanceladoRoute
+  '/pagamento-sucesso': typeof PagamentoSucessoRoute
   '/perfil': typeof PerfilRoute
   '/pesquisa': typeof PesquisaRoute
   '/plano-estudos': typeof PlanoEstudosRoute
@@ -151,6 +177,8 @@ export interface FileRoutesByFullPath {
   '/checkout/return': typeof CheckoutReturnRoute
   '/materias/$slug': typeof MateriasSlugRoute
   '/materias/': typeof MateriasIndexRoute
+  '/api/stripe/checkout': typeof ApiStripeCheckoutRoute
+  '/api/stripe/webhook': typeof ApiStripeWebhookRoute
   '/api/public/payments/webhook': typeof ApiPublicPaymentsWebhookRoute
   '/aula/$slug/$year/$topic': typeof AulaSlugYearTopicRoute
 }
@@ -162,6 +190,8 @@ export interface FileRoutesByTo {
   '/dashboard': typeof DashboardRoute
   '/desafios': typeof DesafiosRoute
   '/ferramentas': typeof FerramentasRoute
+  '/pagamento-cancelado': typeof PagamentoCanceladoRoute
+  '/pagamento-sucesso': typeof PagamentoSucessoRoute
   '/perfil': typeof PerfilRoute
   '/pesquisa': typeof PesquisaRoute
   '/plano-estudos': typeof PlanoEstudosRoute
@@ -173,6 +203,8 @@ export interface FileRoutesByTo {
   '/checkout/return': typeof CheckoutReturnRoute
   '/materias/$slug': typeof MateriasSlugRoute
   '/materias': typeof MateriasIndexRoute
+  '/api/stripe/checkout': typeof ApiStripeCheckoutRoute
+  '/api/stripe/webhook': typeof ApiStripeWebhookRoute
   '/api/public/payments/webhook': typeof ApiPublicPaymentsWebhookRoute
   '/aula/$slug/$year/$topic': typeof AulaSlugYearTopicRoute
 }
@@ -185,6 +217,8 @@ export interface FileRoutesById {
   '/dashboard': typeof DashboardRoute
   '/desafios': typeof DesafiosRoute
   '/ferramentas': typeof FerramentasRoute
+  '/pagamento-cancelado': typeof PagamentoCanceladoRoute
+  '/pagamento-sucesso': typeof PagamentoSucessoRoute
   '/perfil': typeof PerfilRoute
   '/pesquisa': typeof PesquisaRoute
   '/plano-estudos': typeof PlanoEstudosRoute
@@ -196,6 +230,8 @@ export interface FileRoutesById {
   '/checkout/return': typeof CheckoutReturnRoute
   '/materias/$slug': typeof MateriasSlugRoute
   '/materias/': typeof MateriasIndexRoute
+  '/api/stripe/checkout': typeof ApiStripeCheckoutRoute
+  '/api/stripe/webhook': typeof ApiStripeWebhookRoute
   '/api/public/payments/webhook': typeof ApiPublicPaymentsWebhookRoute
   '/aula/$slug/$year/$topic': typeof AulaSlugYearTopicRoute
 }
@@ -209,6 +245,8 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/desafios'
     | '/ferramentas'
+    | '/pagamento-cancelado'
+    | '/pagamento-sucesso'
     | '/perfil'
     | '/pesquisa'
     | '/plano-estudos'
@@ -220,6 +258,8 @@ export interface FileRouteTypes {
     | '/checkout/return'
     | '/materias/$slug'
     | '/materias/'
+    | '/api/stripe/checkout'
+    | '/api/stripe/webhook'
     | '/api/public/payments/webhook'
     | '/aula/$slug/$year/$topic'
   fileRoutesByTo: FileRoutesByTo
@@ -231,6 +271,8 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/desafios'
     | '/ferramentas'
+    | '/pagamento-cancelado'
+    | '/pagamento-sucesso'
     | '/perfil'
     | '/pesquisa'
     | '/plano-estudos'
@@ -242,6 +284,8 @@ export interface FileRouteTypes {
     | '/checkout/return'
     | '/materias/$slug'
     | '/materias'
+    | '/api/stripe/checkout'
+    | '/api/stripe/webhook'
     | '/api/public/payments/webhook'
     | '/aula/$slug/$year/$topic'
   id:
@@ -253,6 +297,8 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/desafios'
     | '/ferramentas'
+    | '/pagamento-cancelado'
+    | '/pagamento-sucesso'
     | '/perfil'
     | '/pesquisa'
     | '/plano-estudos'
@@ -264,6 +310,8 @@ export interface FileRouteTypes {
     | '/checkout/return'
     | '/materias/$slug'
     | '/materias/'
+    | '/api/stripe/checkout'
+    | '/api/stripe/webhook'
     | '/api/public/payments/webhook'
     | '/aula/$slug/$year/$topic'
   fileRoutesById: FileRoutesById
@@ -276,6 +324,8 @@ export interface RootRouteChildren {
   DashboardRoute: typeof DashboardRoute
   DesafiosRoute: typeof DesafiosRoute
   FerramentasRoute: typeof FerramentasRoute
+  PagamentoCanceladoRoute: typeof PagamentoCanceladoRoute
+  PagamentoSucessoRoute: typeof PagamentoSucessoRoute
   PerfilRoute: typeof PerfilRoute
   PesquisaRoute: typeof PesquisaRoute
   PlanoEstudosRoute: typeof PlanoEstudosRoute
@@ -287,6 +337,8 @@ export interface RootRouteChildren {
   CheckoutReturnRoute: typeof CheckoutReturnRoute
   MateriasSlugRoute: typeof MateriasSlugRoute
   MateriasIndexRoute: typeof MateriasIndexRoute
+  ApiStripeCheckoutRoute: typeof ApiStripeCheckoutRoute
+  ApiStripeWebhookRoute: typeof ApiStripeWebhookRoute
   ApiPublicPaymentsWebhookRoute: typeof ApiPublicPaymentsWebhookRoute
   AulaSlugYearTopicRoute: typeof AulaSlugYearTopicRoute
 }
@@ -340,6 +392,20 @@ declare module '@tanstack/react-router' {
       path: '/ferramentas'
       fullPath: '/ferramentas'
       preLoaderRoute: typeof FerramentasRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/pagamento-cancelado': {
+      id: '/pagamento-cancelado'
+      path: '/pagamento-cancelado'
+      fullPath: '/pagamento-cancelado'
+      preLoaderRoute: typeof PagamentoCanceladoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/pagamento-sucesso': {
+      id: '/pagamento-sucesso'
+      path: '/pagamento-sucesso'
+      fullPath: '/pagamento-sucesso'
+      preLoaderRoute: typeof PagamentoSucessoRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/perfil': {
@@ -419,6 +485,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MateriasSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/stripe/checkout': {
+      id: '/api/stripe/checkout'
+      path: '/api/stripe/checkout'
+      fullPath: '/api/stripe/checkout'
+      preLoaderRoute: typeof ApiStripeCheckoutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/stripe/webhook': {
+      id: '/api/stripe/webhook'
+      path: '/api/stripe/webhook'
+      fullPath: '/api/stripe/webhook'
+      preLoaderRoute: typeof ApiStripeWebhookRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/public/payments/webhook': {
       id: '/api/public/payments/webhook'
       path: '/api/public/payments/webhook'
@@ -444,6 +524,8 @@ const rootRouteChildren: RootRouteChildren = {
   DashboardRoute: DashboardRoute,
   DesafiosRoute: DesafiosRoute,
   FerramentasRoute: FerramentasRoute,
+  PagamentoCanceladoRoute: PagamentoCanceladoRoute,
+  PagamentoSucessoRoute: PagamentoSucessoRoute,
   PerfilRoute: PerfilRoute,
   PesquisaRoute: PesquisaRoute,
   PlanoEstudosRoute: PlanoEstudosRoute,
@@ -455,6 +537,8 @@ const rootRouteChildren: RootRouteChildren = {
   CheckoutReturnRoute: CheckoutReturnRoute,
   MateriasSlugRoute: MateriasSlugRoute,
   MateriasIndexRoute: MateriasIndexRoute,
+  ApiStripeCheckoutRoute: ApiStripeCheckoutRoute,
+  ApiStripeWebhookRoute: ApiStripeWebhookRoute,
   ApiPublicPaymentsWebhookRoute: ApiPublicPaymentsWebhookRoute,
   AulaSlugYearTopicRoute: AulaSlugYearTopicRoute,
 }
