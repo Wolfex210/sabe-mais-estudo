@@ -11,4 +11,5 @@
 - [x] Conferir fluxos públicos e apresentação em telas pequenas.
 - [ ] Verificar cadastro, login, confirmação de e-mail, Google e recuperação de senha de ponta a ponta no ambiente publicado.
 - [ ] Ampliar as aulas e bancos de questões por ano e matéria; atualmente há uma aula completa de exemplo com 30 questões, além dos roteiros introdutórios já existentes.
-- [ ] Integrar compras reais e histórico somente quando pagamentos forem habilitados, sem realizar upgrade automaticamente.
+- [x] Corrigir o checkout de teste dos três planos para resolver Price IDs reais via catálogo Stripe, sem usar textos monetários como identificadores.
+- [ ] Ativar cobranças reais e histórico somente após confirmação da conta de pagamentos, sem realizar upgrade automaticamente.

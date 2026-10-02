@@ -2,8 +2,9 @@ import { createServerFn } from '@tanstack/react-start';
 import { getRequest } from '@tanstack/react-start/server';
 import { requireSupabaseAuth } from '@/integrations/supabase/auth-middleware';
 import { createStripeClient, getStripeErrorMessage, type StripeEnv } from '@/lib/stripe.server';
+import { STRIPE_PLANS } from '@/lib/stripe-plans';
 
-const PRICES = ['sabe_mais_basico_mensal', 'sabe_mais_medio_mensal', 'sabe_mais_master_mensal'] as const;
+const PRICES = Object.values(STRIPE_PLANS);
 const validEnv = (value: unknown): value is StripeEnv => value === 'sandbox' || value === 'live';
 
 async function resolveOrCreateCustomer(
@@ -36,7 +37,7 @@ async function resolveOrCreateCustomer(
 export const createCheckoutSession = createServerFn({ method: 'POST' })
   .middleware([requireSupabaseAuth])
   .inputValidator((data: { priceId: string; environment: StripeEnv }) => {
-    if (!PRICES.some(price => price === data.priceId) || !validEnv(data.environment)) throw new Error('Plano inválido');
+    if (!PRICES.some(price => price.lookupKey === data.priceId) || !validEnv(data.environment)) throw new Error('Plano inválido');
     return data;
   })
   .handler(async ({ data, context }): Promise<{ clientSecret: string } | { error: string }> => {
@@ -52,15 +53,18 @@ export const createCheckoutSession = createServerFn({ method: 'POST' })
       const stripe = createStripeClient(data.environment);
       const prices = await stripe.prices.list({ lookup_keys: [data.priceId] });
       const price = prices.data[0];
-      if (!price || price.type !== 'recurring') return { error: 'Este plano ainda não está disponível.' };
+      const expected = PRICES.find(plan => plan.lookupKey === data.priceId);
+      if (!price || !price.active || price.type !== 'recurring' || price.recurring?.interval !== 'month' || price.currency !== 'brl' || price.unit_amount !== expected?.amount) {
+        return { error: 'O preço deste plano não corresponde ao cadastro. Entre em contato com o suporte.' };
+      }
       const customerId = await resolveOrCreateCustomer(stripe, { userId: context.userId, ...(user.email ? { email: user.email } : {}) });
       const origin = new URL(getRequest().url).origin;
       const session = await stripe.checkout.sessions.create({
         line_items: [{ price: price.id, quantity: 1 }], mode: 'subscription', ui_mode: 'embedded_page',
+        adaptive_pricing: { enabled: false },
         return_url: `${origin}/checkout/return?session_id={CHECKOUT_SESSION_ID}`,
         customer: customerId, metadata: { userId: context.userId },
         subscription_data: { metadata: { userId: context.userId } },
-        automatic_tax: { enabled: true },
       });
       if (!session.client_secret) return { error: 'Não foi possível iniciar o pagamento. Tente novamente.' };
       return { clientSecret: session.client_secret };

@@ -29,8 +29,6 @@ import { Route as SimuladosRouteImport } from './routes/simulados'
 import { Route as CheckoutReturnRouteImport } from './routes/checkout/return'
 import { Route as MateriasIndexRouteImport } from './routes/materias.index'
 import { Route as MateriasSlugRouteImport } from './routes/materias.$slug'
-import { Route as ApiStripeCheckoutRouteImport } from './routes/api/stripe/checkout'
-import { Route as ApiStripeWebhookRouteImport } from './routes/api/stripe/webhook'
 import { Route as ApiPublicPaymentsWebhookRouteImport } from './routes/api/public/payments/webhook'
 import { Route as AulaSlugYearTopicRouteImport } from './routes/aula.$slug.$year.$topic'
 
@@ -134,16 +132,6 @@ const MateriasSlugRoute = MateriasSlugRouteImport.update({
   path: '/materias/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ApiStripeCheckoutRoute = ApiStripeCheckoutRouteImport.update({
-  id: '/api/stripe/checkout',
-  path: '/api/stripe/checkout',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ApiStripeWebhookRoute = ApiStripeWebhookRouteImport.update({
-  id: '/api/stripe/webhook',
-  path: '/api/stripe/webhook',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const ApiPublicPaymentsWebhookRoute =
   ApiPublicPaymentsWebhookRouteImport.update({
     id: '/api/public/payments/webhook',
@@ -177,8 +165,6 @@ export interface FileRoutesByFullPath {
   '/checkout/return': typeof CheckoutReturnRoute
   '/materias/$slug': typeof MateriasSlugRoute
   '/materias/': typeof MateriasIndexRoute
-  '/api/stripe/checkout': typeof ApiStripeCheckoutRoute
-  '/api/stripe/webhook': typeof ApiStripeWebhookRoute
   '/api/public/payments/webhook': typeof ApiPublicPaymentsWebhookRoute
   '/aula/$slug/$year/$topic': typeof AulaSlugYearTopicRoute
 }
@@ -203,8 +189,6 @@ export interface FileRoutesByTo {
   '/checkout/return': typeof CheckoutReturnRoute
   '/materias/$slug': typeof MateriasSlugRoute
   '/materias': typeof MateriasIndexRoute
-  '/api/stripe/checkout': typeof ApiStripeCheckoutRoute
-  '/api/stripe/webhook': typeof ApiStripeWebhookRoute
   '/api/public/payments/webhook': typeof ApiPublicPaymentsWebhookRoute
   '/aula/$slug/$year/$topic': typeof AulaSlugYearTopicRoute
 }
@@ -230,8 +214,6 @@ export interface FileRoutesById {
   '/checkout/return': typeof CheckoutReturnRoute
   '/materias/$slug': typeof MateriasSlugRoute
   '/materias/': typeof MateriasIndexRoute
-  '/api/stripe/checkout': typeof ApiStripeCheckoutRoute
-  '/api/stripe/webhook': typeof ApiStripeWebhookRoute
   '/api/public/payments/webhook': typeof ApiPublicPaymentsWebhookRoute
   '/aula/$slug/$year/$topic': typeof AulaSlugYearTopicRoute
 }
@@ -258,8 +240,6 @@ export interface FileRouteTypes {
     | '/checkout/return'
     | '/materias/$slug'
     | '/materias/'
-    | '/api/stripe/checkout'
-    | '/api/stripe/webhook'
     | '/api/public/payments/webhook'
     | '/aula/$slug/$year/$topic'
   fileRoutesByTo: FileRoutesByTo
@@ -284,8 +264,6 @@ export interface FileRouteTypes {
     | '/checkout/return'
     | '/materias/$slug'
     | '/materias'
-    | '/api/stripe/checkout'
-    | '/api/stripe/webhook'
     | '/api/public/payments/webhook'
     | '/aula/$slug/$year/$topic'
   id:
@@ -310,8 +288,6 @@ export interface FileRouteTypes {
     | '/checkout/return'
     | '/materias/$slug'
     | '/materias/'
-    | '/api/stripe/checkout'
-    | '/api/stripe/webhook'
     | '/api/public/payments/webhook'
     | '/aula/$slug/$year/$topic'
   fileRoutesById: FileRoutesById
@@ -337,8 +313,6 @@ export interface RootRouteChildren {
   CheckoutReturnRoute: typeof CheckoutReturnRoute
   MateriasSlugRoute: typeof MateriasSlugRoute
   MateriasIndexRoute: typeof MateriasIndexRoute
-  ApiStripeCheckoutRoute: typeof ApiStripeCheckoutRoute
-  ApiStripeWebhookRoute: typeof ApiStripeWebhookRoute
   ApiPublicPaymentsWebhookRoute: typeof ApiPublicPaymentsWebhookRoute
   AulaSlugYearTopicRoute: typeof AulaSlugYearTopicRoute
 }
@@ -485,20 +459,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MateriasSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/api/stripe/checkout': {
-      id: '/api/stripe/checkout'
-      path: '/api/stripe/checkout'
-      fullPath: '/api/stripe/checkout'
-      preLoaderRoute: typeof ApiStripeCheckoutRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/api/stripe/webhook': {
-      id: '/api/stripe/webhook'
-      path: '/api/stripe/webhook'
-      fullPath: '/api/stripe/webhook'
-      preLoaderRoute: typeof ApiStripeWebhookRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/api/public/payments/webhook': {
       id: '/api/public/payments/webhook'
       path: '/api/public/payments/webhook'
@@ -537,8 +497,6 @@ const rootRouteChildren: RootRouteChildren = {
   CheckoutReturnRoute: CheckoutReturnRoute,
   MateriasSlugRoute: MateriasSlugRoute,
   MateriasIndexRoute: MateriasIndexRoute,
-  ApiStripeCheckoutRoute: ApiStripeCheckoutRoute,
-  ApiStripeWebhookRoute: ApiStripeWebhookRoute,
   ApiPublicPaymentsWebhookRoute: ApiPublicPaymentsWebhookRoute,
   AulaSlugYearTopicRoute: AulaSlugYearTopicRoute,
 }

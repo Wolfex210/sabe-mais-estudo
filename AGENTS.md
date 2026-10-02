@@ -11,3 +11,4 @@
 
 - Organize os roteiros de estudo por ano em `src/lib/curriculum.ts`, separados das questões gerais; isso mantém a seleção de ano independente dos quizzes existentes.
 - Guarde o progresso autenticado por usuário no Lovable Cloud com políticas por conta; mantenha o conteúdo didático extensível separado de dados pessoais para adicionar aulas sem alterar autenticação.
+- Use as lookup keys estáveis dos planos Stripe no checkout incorporado e resolva Price IDs no servidor; isso separa preços exibidos de identificadores de cobrança e mantém o Preview e a produção consistentes.
