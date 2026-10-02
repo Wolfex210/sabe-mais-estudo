@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Check } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { SiteLayout, PageHeader, Card } from "@/components/SiteLayout";
 import { useAppState, trialDaysLeft } from "@/lib/store";
@@ -126,7 +126,11 @@ function Planos() {
                 ))}
               </ul>
               <Button
-                onClick={() => void startCheckout(p.id)}
+                onClick={() => {
+                  if (!user) { window.location.href = "/conta"; return; }
+                  setSelectedPlan(p.id);
+                  window.setTimeout(() => document.getElementById("checkout")?.scrollIntoView({ behavior: "smooth" }), 100);
+                }}
                 disabled={loading || !paymentsAvailable()}
                 className="mt-6 w-full"
               >
