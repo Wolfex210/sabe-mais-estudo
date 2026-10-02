@@ -61,6 +61,7 @@ export const createCheckoutSession = createServerFn({ method: 'POST' })
       const origin = new URL(getRequest().url).origin;
       const session = await stripe.checkout.sessions.create({
         line_items: [{ price: price.id, quantity: 1 }], mode: 'subscription', ui_mode: 'embedded_page',
+        adaptive_pricing: { enabled: false },
         return_url: `${origin}/checkout/return?session_id={CHECKOUT_SESSION_ID}`,
         customer: customerId, metadata: { userId: context.userId },
         subscription_data: { metadata: { userId: context.userId } },
