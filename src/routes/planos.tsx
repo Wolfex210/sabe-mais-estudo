@@ -1,11 +1,13 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { Check, Loader2 } from "lucide-react";
+import { Check } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { SiteLayout, PageHeader, Card } from "@/components/SiteLayout";
 import { useAppState, trialDaysLeft } from "@/lib/store";
-import { supabase } from "@/integrations/supabase/client";
-import type { PlanId } from "@/lib/stripe-plans";
+import { useAuth } from "@/lib/auth";
+import { STRIPE_PLANS, type PlanId } from "@/lib/stripe-plans";
+import { paymentsAvailable, isTestPayment } from "@/lib/stripe";
+import { StripeEmbeddedCheckout } from "@/components/StripeEmbeddedCheckout";
 
 export const Route = createFileRoute("/planos")({
   head: () => ({
@@ -76,55 +78,13 @@ const plans: Array<{
 function Planos() {
   const s = useAppState();
   const left = trialDaysLeft(s);
-  const [user, setUser] = useState<{ id: string } | null>(null);
-  const [authChecked, setAuthChecked] = useState(false);
-  const [loadingPlan, setLoadingPlan] = useState<PlanId | null>(null);
-  useEffect(() => {
-    let active = true;
-    void supabase.auth.getSession().then(({ data }) => {
-      if (active) { setUser(data.session?.user ? { id: data.session.user.id } : null); setAuthChecked(true); }
-    });
-    const { data } = supabase.auth.onAuthStateChange((_event, session) => {
-      if (active) { setUser(session?.user ? { id: session.user.id } : null); setAuthChecked(true); }
-    });
-    return () => { active = false; data.subscription.unsubscribe(); };
-  }, []);
-  const [error, setError] = useState("");
-
-  async function startCheckout(plan: PlanId) {
-    setError("");
-    if (!user) {
-      window.location.href = "/conta";
-      return;
-    }
-
-    setLoadingPlan(plan);
-    try {
-      const { data: sessionData } = await supabase.auth.getSession();
-      const token = sessionData.session?.access_token;
-      if (!token) throw new Error("Sua sessão expirou. Entre novamente para continuar.");
-
-      const response = await fetch("/api/stripe/checkout", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({ plan }),
-      });
-
-      const data = (await response.json()) as { url?: string; error?: string };
-      if (!response.ok || !data.url) throw new Error(data.error || "Não foi possível iniciar o checkout.");
-
-      window.location.assign(data.url);
-    } catch (err) {
-      setError(err instanceof Error ? err.message : "Não foi possível iniciar o checkout.");
-      setLoadingPlan(null);
-    }
-  }
+  const { user, loading } = useAuth();
+  const [selectedPlan, setSelectedPlan] = useState<PlanId | null>(null);
 
   return (
     <SiteLayout>
+      {!paymentsAvailable() && <div className="border-b border-destructive/30 bg-destructive/10 px-4 py-2 text-center text-sm text-destructive">Pagamentos ainda não estão configurados neste site. Conclua a ativação antes de assinar.</div>}
+      {isTestPayment() && <div className="border-b border-primary/30 bg-primary/10 px-4 py-2 text-center text-sm text-foreground">Os pagamentos nesta prévia são apenas de teste. Nenhum valor real será cobrado.</div>}
       <PageHeader
         title="Sabe Mais Premium"
         subtitle="Comece com 4 dias grátis e depois escolha o plano que combina com a sua rotina."
@@ -136,15 +96,9 @@ function Planos() {
             {left > 0 ? `Você tem ${left} dia(s) grátis restantes` : "Seu período grátis terminou"}
           </p>
           <p className="mt-1 text-sm text-muted-foreground">
-            O checkout é hospedado pelo Stripe e a assinatura só é registrada no Sabe Mais após a confirmação do webhook.
+            A assinatura só é registrada no Sabe Mais após a confirmação do pagamento.
           </p>
         </Card>
-
-        {error && (
-          <div className="mt-6 rounded-xl border border-destructive/30 bg-destructive/10 px-4 py-3 text-sm text-destructive">
-            {error}
-          </div>
-        )}
 
         <div className="mt-10 grid gap-6 lg:grid-cols-3">
           {plans.map((p) => (
@@ -173,15 +127,18 @@ function Planos() {
               </ul>
               <Button
                 onClick={() => void startCheckout(p.id)}
-                disabled={loadingPlan !== null || !authChecked}
+                disabled={loading || !paymentsAvailable()}
                 className="mt-6 w-full"
               >
-                {loadingPlan === p.id && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-                {!authChecked ? "Carregando..." : user ? "Assinar com Stripe" : "Entrar para assinar"}
+                {loading ? "Carregando..." : user ? "Assinar com Stripe" : "Entrar para assinar"}
               </Button>
             </Card>
           ))}
         </div>
+
+        {selectedPlan && user && <div className="mx-auto max-w-3xl" key={selectedPlan}>
+          <StripeEmbeddedCheckout priceId={STRIPE_PLANS[selectedPlan].lookupKey} />
+        </div>}
 
         {!user && (
           <p className="mt-8 text-center text-sm text-muted-foreground">
