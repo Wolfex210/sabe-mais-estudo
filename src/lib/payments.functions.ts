@@ -64,7 +64,6 @@ export const createCheckoutSession = createServerFn({ method: 'POST' })
         return_url: `${origin}/checkout/return?session_id={CHECKOUT_SESSION_ID}`,
         customer: customerId, metadata: { userId: context.userId },
         subscription_data: { metadata: { userId: context.userId } },
-        automatic_tax: { enabled: true },
       });
       if (!session.client_secret) return { error: 'Não foi possível iniciar o pagamento. Tente novamente.' };
       return { clientSecret: session.client_secret };
