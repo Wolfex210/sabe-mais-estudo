@@ -12,4 +12,5 @@
 - [ ] Verificar cadastro, login, confirmação de e-mail, Google e recuperação de senha de ponta a ponta no ambiente publicado.
 - [ ] Ampliar as aulas e bancos de questões por ano e matéria; atualmente há uma aula completa de exemplo com 30 questões, além dos roteiros introdutórios já existentes.
 - [x] Corrigir o checkout de teste dos três planos para resolver Price IDs reais via catálogo Stripe, sem usar textos monetários como identificadores.
-- [ ] Ativar cobranças reais e histórico somente após confirmação da conta de pagamentos, sem realizar upgrade automaticamente.
+- [ ] Ativar cobranças reais e histórico após o responsável vincular a conta Stripe de teste, concluir a ativação da conta real e instalar o aplicativo Lovable na Stripe; então verificar a prontidão e o checkout real.
+- [ ] Verificar Pix nas assinaturas após identificar o país e a disponibilidade de Pix Automático na conta Stripe real; não oferecer Pix recorrente se não estiver disponível.
