@@ -4,6 +4,7 @@
 - [x] Conferir a navegação e a apresentação nos tamanhos desktop e celular.
 
 # Ampliação conforme o documento enviado
+- [ ] Adicionar busca instantânea no canto superior esquerdo da página Matérias para filtrar as matérias pelo nome.
 - [x] Organizar assuntos e aulas para inclusão progressiva por ano e matéria; pesquisa e quiz por assunto quando houver questões completas.
 - [x] Personalizar Pomodoro e registrar sessões de estudo.
 - [x] Criar telas de cadastro, login, recuperação de senha e perfil, com tabelas de progresso restritas por usuário.
