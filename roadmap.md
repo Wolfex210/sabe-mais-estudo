@@ -1,4 +1,6 @@
 # Conteúdo por ano
+- [ ] Implementar área Faculdade com 40 cursos, disciplinas, aulas, exercícios, quizzes e progresso compartilhado.
+- [ ] Verificar busca, navegação e conclusão de aulas e quizzes universitários.
 - [x] Organizar tópicos introdutórios do 1º EF ao 3º EM nas oito matérias, respeitando a introdução tardia de Física e Química.
 - [x] Mostrar seletor de ano e conteúdos na página de cada matéria.
 - [x] Conferir a navegação e a apresentação nos tamanhos desktop e celular.
