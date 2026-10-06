@@ -20,6 +20,9 @@ export type FacultyCourse = {
   profile: string;
   careers: string[];
   competencies: string[];
+  coverEmoji: string;
+  coverAlt: string;
+  examples: string[];
   semesters: FacultySemester[];
 };
 
@@ -159,6 +162,51 @@ const trackDetails: Record<string,{foundation:string[];core:string[];advanced:st
   }
 };
 
+
+
+const courseVisuals: Record<string,{emoji:string;alt:string;topics:string[]}> = {
+  "engenharia-de-petroleo":{emoji:"🛢️",alt:"Plataforma de petróleo e engenharia de poços",topics:["exploração de reservatórios","perfuração de poços","completação","produção offshore","simulação de reservatórios","perfilagem","mecânica dos fluidos","segurança operacional","avaliação econômica","transição energética"]},
+  "engenharia-mecanica":{emoji:"⚙️",alt:"Máquinas, engrenagens e projeto mecânico",topics:["projeto de máquinas","mecânica dos sólidos","termodinâmica","usinagem","materiais","vibrações","manutenção","CAD","transferência de calor","automação industrial"]},
+  "engenharia-civil":{emoji:"🏗️",alt:"Construção civil e estruturas",topics:["estruturas de concreto","fundações","topografia","materiais de construção","estradas","hidráulica","orçamento de obras","planejamento de obras","geotecnia","gestão de canteiro"]},
+  "engenharia-eletrica":{emoji:"⚡",alt:"Circuitos elétricos e sistemas de energia",topics:["circuitos","eletrônica","máquinas elétricas","sistemas de potência","instalações elétricas","controle","instrumentação","proteção","energias renováveis","automação"]},
+  "engenharia-de-producao":{emoji:"🏭",alt:"Linha de produção e gestão industrial",topics:["planejamento da produção","qualidade","logística","estoques","processos","ergonomia","custos","Lean","cadeia de suprimentos","indicadores"]},
+  "engenharia-quimica":{emoji:"🧪",alt:"Processos químicos e equipamentos industriais",topics:["balanço de massa","balanço de energia","reatores","separações","termodinâmica","fenômenos de transporte","controle de processos","petroquímica","processos industriais","segurança de processos"]},
+  "engenharia-ambiental":{emoji:"🌱",alt:"Engenharia ambiental, água e sustentabilidade",topics:["tratamento de água","esgoto","resíduos sólidos","qualidade do ar","licenciamento","impacto ambiental","recuperação de áreas","sustentabilidade","monitoramento ambiental","gestão de recursos hídricos"]},
+  "engenharia-de-computacao":{emoji:"💻",alt:"Computadores, eletrônica e sistemas embarcados",topics:["arquitetura de computadores","microcontroladores","sistemas embarcados","redes","eletrônica digital","programação","sistemas operacionais","IoT","robótica","hardware"]},
+  "engenharia-de-software":{emoji:"🧑‍💻",alt:"Desenvolvimento e arquitetura de software",topics:["requisitos","arquitetura","APIs","testes","versionamento","bancos de dados","DevOps","segurança","design de sistemas","qualidade de software"]},
+  "engenharia-robotica":{emoji:"🤖",alt:"Robô industrial e sistemas autônomos",topics:["robôs móveis","manipuladores","sensores","atuadores","controle","visão computacional","planejamento de movimento","ROS","interação humano-robô","sistemas autônomos"]},
+  "ciencia-da-computacao":{emoji:"🖥️",alt:"Algoritmos e ciência da computação",topics:["algoritmos","estruturas de dados","complexidade","linguagens de programação","sistemas operacionais","redes","bancos de dados","computação teórica","IA","segurança"]},
+  "sistemas-de-informacao":{emoji:"🗄️",alt:"Sistemas de informação e dados empresariais",topics:["sistemas empresariais","bancos de dados","processos de negócio","ERP","análise de requisitos","BI","gestão de projetos","segurança da informação","integração de sistemas","governança de TI"]},
+  "inteligencia-artificial":{emoji:"🧠",alt:"Inteligência artificial e modelos computacionais",topics:["aprendizado supervisionado","aprendizado não supervisionado","redes neurais","visão computacional","processamento de linguagem","modelos generativos","avaliação de modelos","engenharia de dados","ética em IA","MLOps"]},
+  "analise-e-desenvolvimento-de-sistemas":{emoji:"📱",alt:"Aplicações, programação e sistemas",topics:["levantamento de requisitos","interfaces","programação web","APIs","bancos de dados","testes","Git","deploy","segurança","manutenção"]},
+  "arquitetura-e-urbanismo":{emoji:"🏛️",alt:"Projeto arquitetônico e planejamento urbano",topics:["projeto arquitetônico","desenho técnico","urbanismo","paisagismo","conforto térmico","iluminação","materiais","BIM","acessibilidade","sustentabilidade"]},
+  "administracao":{emoji:"📊",alt:"Gestão, negócios e organizações",topics:["planejamento estratégico","finanças","marketing","recursos humanos","operações","liderança","empreendedorismo","processos","indicadores","gestão de projetos"]},
+  "ciencias-contabeis":{emoji:"🧾",alt:"Contabilidade e análise financeira",topics:["balanço patrimonial","DRE","custos","tributação","auditoria","controladoria","fluxo de caixa","contabilidade gerencial","perícia","relatórios"]},
+  "economia":{emoji:"📈",alt:"Economia, mercados e análise de dados",topics:["oferta e demanda","inflação","juros","PIB","política monetária","política fiscal","economia internacional","econometria","mercados","desenvolvimento econômico"]},
+  "direito":{emoji:"⚖️",alt:"Direito, legislação e argumentação jurídica",topics:["direito constitucional","direito civil","direito penal","direito do trabalho","direito empresarial","processo","contratos","direitos fundamentais","ética jurídica","pesquisa jurisprudencial"]},
+  "medicina":{emoji:"🩺",alt:"Medicina e cuidado em saúde",topics:["anatomia","fisiologia","semiologia","diagnóstico","farmacologia","epidemiologia","prevenção","urgência","saúde coletiva","medicina baseada em evidências"]},
+  "enfermagem":{emoji:"🩹",alt:"Enfermagem e cuidado integral",topics:["sistematização da assistência","sinais vitais","administração segura","feridas","saúde coletiva","urgência","centro cirúrgico","saúde do adulto","saúde da criança","gestão em enfermagem"]},
+  "farmacia":{emoji:"💊",alt:"Farmácia, medicamentos e análises",topics:["farmacologia","química farmacêutica","formas farmacêuticas","controle de qualidade","análises clínicas","toxicologia","farmácia hospitalar","assistência farmacêutica","microbiologia","cosmetologia"]},
+  "biomedicina":{emoji:"🔬",alt:"Laboratório, células e análises biomédicas",topics:["biologia celular","genética","microbiologia","imunologia","hematologia","bioquímica clínica","parasitologia","biologia molecular","análises clínicas","pesquisa"]},
+  "nutricao":{emoji:"🥗",alt:"Nutrição, alimentos e saúde",topics:["avaliação nutricional","bioquímica","dietética","nutrição clínica","nutrição esportiva","saúde coletiva","segurança alimentar","educação alimentar","tecnologia de alimentos","planejamento alimentar"]},
+  "psicologia":{emoji:"🧠",alt:"Psicologia e comportamento humano",topics:["desenvolvimento humano","aprendizagem","personalidade","psicologia social","avaliação psicológica","psicologia clínica","saúde mental","pesquisa","ética profissional","processos cognitivos"]},
+  "fisioterapia":{emoji:"🦴",alt:"Fisioterapia, movimento e reabilitação",topics:["anatomia funcional","cinesiologia","avaliação funcional","terapia manual","eletroterapia","fisioterapia respiratória","neurologia","ortopedia","reabilitação","prevenção"]},
+  "educacao-fisica":{emoji:"🏃",alt:"Movimento, esporte e atividade física",topics:["fisiologia do exercício","treinamento","biomecânica","avaliação física","esportes","atividade física e saúde","pedagogia do esporte","força","resistência","prescrição de exercícios"]},
+  "odontologia":{emoji:"🦷",alt:"Odontologia e saúde bucal",topics:["anatomia oral","prevenção","dentística","periodontia","endodontia","prótese","cirurgia oral","radiologia","odontopediatria","saúde coletiva"]},
+  "medicina-veterinaria":{emoji:"🐾",alt:"Medicina veterinária e saúde animal",topics:["anatomia animal","fisiologia","clínica","cirurgia","farmacologia veterinária","diagnóstico","produção animal","zoonoses","saúde pública","bem-estar animal"]},
+  "agronomia":{emoji:"🌾",alt:"Agronomia, solo e produção agrícola",topics:["ciência do solo","fitotecnia","irrigação","máquinas agrícolas","fitossanidade","melhoramento vegetal","agricultura de precisão","gestão rural","agroecologia","pós-colheita"]},
+  "gastronomia":{emoji:"👨‍🍳",alt:"Gastronomia, cozinha e alimentos",topics:["técnicas culinárias","panificação","confeitaria","cozinha brasileira","cozinha internacional","higiene dos alimentos","fichas técnicas","custos","gestão de cozinha","criação de cardápios"]},
+  "marketing":{emoji:"📣",alt:"Marketing, marcas e comunicação",topics:["comportamento do consumidor","posicionamento","branding","marketing digital","SEO","mídias sociais","pesquisa de mercado","funil de vendas","métricas","estratégia"]},
+  "publicidade-e-propaganda":{emoji:"📺",alt:"Publicidade, campanhas e criação",topics:["briefing","redação publicitária","direção de arte","planejamento","mídia","campanhas","branding","audiovisual","copywriting","mensuração"]},
+  "jornalismo":{emoji:"📰",alt:"Jornalismo, apuração e produção de notícias",topics:["apuração","entrevista","reportagem","redação","fotojornalismo","radiojornalismo","telejornalismo","jornalismo digital","checagem","ética"]},
+  "design":{emoji:"🎨",alt:"Design visual, produto e experiência",topics:["tipografia","cor","composição","identidade visual","UX","UI","design de produto","prototipação","pesquisa com usuários","portfólio"]},
+  "relacoes-internacionais":{emoji:"🌎",alt:"Relações internacionais e diplomacia",topics:["teorias internacionais","diplomacia","política externa","organizações internacionais","comércio internacional","geopolítica","conflitos","direitos humanos","negociação","cooperação"]},
+  "biblioteconomia-e-arquivologia":{emoji:"📚",alt:"Bibliotecas, arquivos e organização da informação",topics:["classificação","catalogação","descrição arquivística","preservação","acervos digitais","curadoria","gestão documental","metadados","serviços de referência","memória institucional"]},
+  "turismo":{emoji:"🧳",alt:"Turismo, destinos e hospitalidade",topics:["planejamento turístico","roteiros","hospitalidade","eventos","marketing de destinos","patrimônio","turismo sustentável","hotelaria","experiência do visitante","gestão de destinos"]},
+  "matematica":{emoji:"∑",alt:"Matemática, estruturas e modelagem",topics:["álgebra","cálculo","geometria","análise","probabilidade","estatística","equações diferenciais","álgebra linear","modelagem","matemática discreta"]},
+  "fisica":{emoji:"⚛️",alt:"Física, matéria, energia e fenômenos naturais",topics:["mecânica","termodinâmica","ondas","eletromagnetismo","óptica","física moderna","quântica","relatividade","laboratório","modelagem computacional"]}
+};
+
 function makeDiscipline(name:string, seed:string, phase:string, practice:string):FacultyDiscipline {
   const overview = `${name} é estudada dentro de ${seed}. O aluno parte dos fundamentos, conecta teoria e aplicações e aprende a interpretar problemas da área antes de avançar para situações mais complexas.`;
   return {
@@ -203,6 +251,9 @@ export const facultyCourses: FacultyCourse[] = courseSeeds.map(([slug,name,area,
       "Planejar e avaliar projetos",
       "Comunicar resultados com clareza e responsabilidade"
     ],
+    coverEmoji: courseVisuals[slug].emoji,
+    coverAlt: courseVisuals[slug].alt,
+    examples: courseVisuals[slug].topics.map((topic,i)=>`Exemplo ${i+1}: ${topic} aplicado em uma situação de estudo ou projeto de ${name.toLowerCase()}.`),
     semesters:phases.map((p,si)=>({
       period:p.period,
       theme:p.theme,
