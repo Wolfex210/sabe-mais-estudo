@@ -8,6 +8,7 @@ import {
   CalendarDays,
   Target,
   BarChart3,
+  GraduationCap,
 } from "lucide-react";
 import { SiteLayout, Card, AdSlot } from "@/components/SiteLayout";
 import { subjects } from "@/lib/content";
@@ -43,6 +44,7 @@ const tools = [
   { icon: CalendarDays, emoji: "📅", title: "Cronograma", desc: "Monte seu cronograma semanal de estudos.", to: "/ferramentas" },
   { icon: Target, emoji: "🎯", title: "Desafio do dia", desc: "Uma pergunta nova para resolver todo dia.", to: "/desafios" },
   { icon: BarChart3, emoji: "📊", title: "Meu progresso", desc: "Acompanhe suas estatísticas de estudo.", to: "/progresso" },
+  { icon: GraduationCap, emoji: "🎓", title: "Faculdade", desc: "Explore 40 trilhas educacionais aprofundadas.", to: "/faculdade" },
 ] as const;
 
 function Index() {
