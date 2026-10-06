@@ -36,6 +36,12 @@ function FaculdadeCurso(){
             <p className="text-sm font-semibold text-primary">{course.area}</p>
             <h1 className="mt-1 text-3xl font-extrabold tracking-tight text-foreground sm:text-4xl">{course.name}</h1>
             <p className="mt-3 max-w-3xl text-muted-foreground">{course.description}</p>
+        <div className="mt-6 overflow-hidden rounded-2xl border border-border bg-background">
+          <div className="flex min-h-44 items-center gap-5 bg-gradient-to-br from-primary/15 via-secondary to-background p-6">
+            <div className="flex h-28 w-28 shrink-0 items-center justify-center rounded-3xl bg-primary/10 text-7xl" role="img" aria-label={course.coverAlt}>{course.coverEmoji}</div>
+            <div><p className="text-xs font-bold uppercase tracking-wider text-primary">Imagem do curso</p><p className="mt-2 text-sm leading-6 text-muted-foreground">{course.coverAlt}. Ilustração temática criada para identificar visualmente esta trilha.</p></div>
+          </div>
+        </div>
           </div>
         </div>
       </div>
@@ -50,6 +56,17 @@ function FaculdadeCurso(){
           </div>
           <div className="mt-4 h-3 overflow-hidden rounded-full bg-secondary"><div className="h-full rounded-full bg-primary transition-all" style={{width:`${progress}%`}}/></div>
         </Card>
+
+        <section>
+          <h2 className="text-2xl font-bold text-foreground">10 exemplos sobre este curso</h2>
+          <p className="mt-2 text-sm text-muted-foreground">Exemplos práticos e temas que ajudam a visualizar o que pode ser estudado ao longo da trilha.</p>
+          <div className="mt-5 grid gap-3 sm:grid-cols-2">
+            {course.examples.map((example,i)=><div key={example} className="rounded-xl border border-border bg-background p-4">
+              <span className="text-xs font-bold text-primary">EXEMPLO {i+1}</span>
+              <p className="mt-1 text-sm leading-6 text-foreground">{example.replace(/^Exemplo \d+: /,"")}</p>
+            </div>)}
+          </div>
+        </section>
 
         <section>
           <h2 className="text-2xl font-bold text-foreground">Currículo em 8 semestres</h2>
