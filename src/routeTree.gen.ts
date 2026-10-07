@@ -27,6 +27,8 @@ import { Route as QuizRouteImport } from './routes/quiz'
 import { Route as RevisaoRouteImport } from './routes/revisao'
 import { Route as SimuladosRouteImport } from './routes/simulados'
 import { Route as CheckoutReturnRouteImport } from './routes/checkout/return'
+import { Route as FaculdadeIndexRouteImport } from './routes/faculdade.index'
+import { Route as FaculdadeSlugRouteImport } from './routes/faculdade.$slug'
 import { Route as MateriasIndexRouteImport } from './routes/materias.index'
 import { Route as MateriasSlugRouteImport } from './routes/materias.$slug'
 import { Route as ApiPublicPaymentsWebhookRouteImport } from './routes/api/public/payments/webhook'
@@ -122,6 +124,16 @@ const CheckoutReturnRoute = CheckoutReturnRouteImport.update({
   path: '/checkout/return',
   getParentRoute: () => rootRouteImport,
 } as any)
+const FaculdadeIndexRoute = FaculdadeIndexRouteImport.update({
+  id: '/faculdade/',
+  path: '/faculdade/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FaculdadeSlugRoute = FaculdadeSlugRouteImport.update({
+  id: '/faculdade/$slug',
+  path: '/faculdade/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const MateriasIndexRoute = MateriasIndexRouteImport.update({
   id: '/materias/',
   path: '/materias/',
@@ -163,7 +175,9 @@ export interface FileRoutesByFullPath {
   '/revisao': typeof RevisaoRoute
   '/simulados': typeof SimuladosRoute
   '/checkout/return': typeof CheckoutReturnRoute
+  '/faculdade/$slug': typeof FaculdadeSlugRoute
   '/materias/$slug': typeof MateriasSlugRoute
+  '/faculdade/': typeof FaculdadeIndexRoute
   '/materias/': typeof MateriasIndexRoute
   '/api/public/payments/webhook': typeof ApiPublicPaymentsWebhookRoute
   '/aula/$slug/$year/$topic': typeof AulaSlugYearTopicRoute
@@ -187,7 +201,9 @@ export interface FileRoutesByTo {
   '/revisao': typeof RevisaoRoute
   '/simulados': typeof SimuladosRoute
   '/checkout/return': typeof CheckoutReturnRoute
+  '/faculdade/$slug': typeof FaculdadeSlugRoute
   '/materias/$slug': typeof MateriasSlugRoute
+  '/faculdade': typeof FaculdadeIndexRoute
   '/materias': typeof MateriasIndexRoute
   '/api/public/payments/webhook': typeof ApiPublicPaymentsWebhookRoute
   '/aula/$slug/$year/$topic': typeof AulaSlugYearTopicRoute
@@ -212,7 +228,9 @@ export interface FileRoutesById {
   '/revisao': typeof RevisaoRoute
   '/simulados': typeof SimuladosRoute
   '/checkout/return': typeof CheckoutReturnRoute
+  '/faculdade/$slug': typeof FaculdadeSlugRoute
   '/materias/$slug': typeof MateriasSlugRoute
+  '/faculdade/': typeof FaculdadeIndexRoute
   '/materias/': typeof MateriasIndexRoute
   '/api/public/payments/webhook': typeof ApiPublicPaymentsWebhookRoute
   '/aula/$slug/$year/$topic': typeof AulaSlugYearTopicRoute
@@ -238,7 +256,9 @@ export interface FileRouteTypes {
     | '/revisao'
     | '/simulados'
     | '/checkout/return'
+    | '/faculdade/$slug'
     | '/materias/$slug'
+    | '/faculdade/'
     | '/materias/'
     | '/api/public/payments/webhook'
     | '/aula/$slug/$year/$topic'
@@ -262,7 +282,9 @@ export interface FileRouteTypes {
     | '/revisao'
     | '/simulados'
     | '/checkout/return'
+    | '/faculdade/$slug'
     | '/materias/$slug'
+    | '/faculdade'
     | '/materias'
     | '/api/public/payments/webhook'
     | '/aula/$slug/$year/$topic'
@@ -286,7 +308,9 @@ export interface FileRouteTypes {
     | '/revisao'
     | '/simulados'
     | '/checkout/return'
+    | '/faculdade/$slug'
     | '/materias/$slug'
+    | '/faculdade/'
     | '/materias/'
     | '/api/public/payments/webhook'
     | '/aula/$slug/$year/$topic'
@@ -311,7 +335,9 @@ export interface RootRouteChildren {
   RevisaoRoute: typeof RevisaoRoute
   SimuladosRoute: typeof SimuladosRoute
   CheckoutReturnRoute: typeof CheckoutReturnRoute
+  FaculdadeSlugRoute: typeof FaculdadeSlugRoute
   MateriasSlugRoute: typeof MateriasSlugRoute
+  FaculdadeIndexRoute: typeof FaculdadeIndexRoute
   MateriasIndexRoute: typeof MateriasIndexRoute
   ApiPublicPaymentsWebhookRoute: typeof ApiPublicPaymentsWebhookRoute
   AulaSlugYearTopicRoute: typeof AulaSlugYearTopicRoute
@@ -445,6 +471,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CheckoutReturnRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/faculdade/': {
+      id: '/faculdade/'
+      path: '/faculdade'
+      fullPath: '/faculdade/'
+      preLoaderRoute: typeof FaculdadeIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/faculdade/$slug': {
+      id: '/faculdade/$slug'
+      path: '/faculdade/$slug'
+      fullPath: '/faculdade/$slug'
+      preLoaderRoute: typeof FaculdadeSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/materias/': {
       id: '/materias/'
       path: '/materias'
@@ -495,7 +535,9 @@ const rootRouteChildren: RootRouteChildren = {
   RevisaoRoute: RevisaoRoute,
   SimuladosRoute: SimuladosRoute,
   CheckoutReturnRoute: CheckoutReturnRoute,
+  FaculdadeSlugRoute: FaculdadeSlugRoute,
   MateriasSlugRoute: MateriasSlugRoute,
+  FaculdadeIndexRoute: FaculdadeIndexRoute,
   MateriasIndexRoute: MateriasIndexRoute,
   ApiPublicPaymentsWebhookRoute: ApiPublicPaymentsWebhookRoute,
   AulaSlugYearTopicRoute: AulaSlugYearTopicRoute,
