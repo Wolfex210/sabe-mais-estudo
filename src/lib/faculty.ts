@@ -66,7 +66,7 @@ const courseSeeds = [
   ["biblioteconomia-e-arquivologia","Biblioteconomia e Arquivologia","Informação","Organização da informação, acervos, preservação, pesquisa e gestão documental"],
   ["turismo","Turismo","Turismo e Hospitalidade","Planejamento turístico, hospitalidade, eventos, destinos e gestão"],
   ["matematica","Matemática","Ciências Exatas","Álgebra, cálculo, geometria, análise, probabilidade e modelagem"],
-  ["fisica","Física","Ciências Exatas","Mecânica, termodinâmica, eletromagnetismo, ondas, quântica e experimentação"]
+  ["fisica","Física","Ciências Exatas","Mecânica, termodinâmica, eletromagnetismo, ondas, quântica e experimentação"],
   ["pedagogia","Pedagogia","Educação","Didática, aprendizagem, currículo, inclusão e gestão educacional"],
   ["educacao-especial","Educação Especial","Educação","Inclusão, acessibilidade, desenvolvimento e práticas pedagógicas"],
   ["letras-portugues","Letras — Português","Educação","Língua portuguesa, linguística, literatura e ensino"],
