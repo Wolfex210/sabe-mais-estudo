@@ -352,7 +352,7 @@ function makeDiscipline(name:string, seed:string, phase:string, practice:string)
 }
 
 export const facultyCourses: FacultyCourse[] = courseSeeds.map(([slug,name,area,focus],index)=>{
-  const t = trackDetails[area];
+  const t = trackDetails[area] ?? (area === "Educação" || area === "Humanidades" ? trackDetails["Ciências Humanas"] : trackDetails["Ciências Humanas"]);
   const phases = [
     {period:"1º semestre",theme:"Fundamentos e linguagem profissional",items:t.foundation},
     {period:"2º semestre",theme:"Bases científicas e técnicas",items:t.foundation.map((x,i)=>x+" aplicado")},
