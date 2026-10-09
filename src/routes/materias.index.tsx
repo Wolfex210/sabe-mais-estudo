@@ -11,7 +11,7 @@ export const Route = createFileRoute("/materias/")({
       {
         name: "description",
         content:
-          "Matemática, Português, História, Geografia, Ciências, Inglês, Física e Química com roteiros por ano, resumos, exemplos, exercícios e quiz.",
+          "Explore matérias de linguagens, ciências, tecnologia, artes, sociedade e outras áreas com roteiros por ano, páginas de estudo, resumos, exemplos, exercícios e quizzes.",
       },
       { property: "og:title", content: "Matérias — Sabe Mais" },
       { property: "og:description", content: "Resumos, fórmulas, exemplos e exercícios de 8 matérias." },
