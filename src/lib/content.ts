@@ -591,6 +591,1525 @@ export const subjects: Subject[] = [
 ];
 
 
+// Catálogo ampliado de matérias: cada área usa a mesma estrutura didática da plataforma.
+const expandedSubjectCatalog: { slug: string; name: string; emoji: string; color: string; intro: string; topics: string[] }[] = [
+  {
+    "slug": "artes",
+    "name": "Artes",
+    "emoji": "🎨",
+    "color": "bg-fuchsia-100",
+    "intro": "Linguagens artísticas, criação, leitura de imagens e cultura visual.",
+    "topics": [
+      "Desenho e composição",
+      "Teoria das cores",
+      "Formas e texturas",
+      "Pintura e técnicas",
+      "Escultura e volume",
+      "Arte digital",
+      "Arte brasileira",
+      "Arte indígena e afro-brasileira",
+      "Arte moderna",
+      "Arte contemporânea",
+      "Leitura de imagens",
+      "Criação de portfólio"
+    ]
+  },
+  {
+    "slug": "educacao-fisica",
+    "name": "Educação Física",
+    "emoji": "🏃",
+    "color": "bg-lime-100",
+    "intro": "Movimento, jogos, esportes, saúde e práticas corporais.",
+    "topics": [
+      "Consciência corporal",
+      "Jogos e brincadeiras",
+      "Esportes coletivos",
+      "Esportes individuais",
+      "Ginástica",
+      "Dança e expressão corporal",
+      "Lutas e cultura",
+      "Atividades ao ar livre",
+      "Regras e fair play",
+      "Corpo e movimento",
+      "Lazer ativo",
+      "Inclusão no esporte"
+    ]
+  },
+  {
+    "slug": "musica",
+    "name": "Música",
+    "emoji": "🎵",
+    "color": "bg-violet-100",
+    "intro": "Ritmo, melodia, instrumentos, escuta e criação musical.",
+    "topics": [
+      "Pulso e ritmo",
+      "Melodia e harmonia",
+      "Famílias de instrumentos",
+      "Leitura musical básica",
+      "Voz e canto",
+      "Composição",
+      "Música brasileira",
+      "Música de diferentes culturas",
+      "Tecnologia musical",
+      "Escuta crítica",
+      "Forma musical",
+      "Criação sonora"
+    ]
+  },
+  {
+    "slug": "teatro",
+    "name": "Teatro",
+    "emoji": "🎭",
+    "color": "bg-rose-100",
+    "intro": "Expressão cênica, personagens, dramaturgia e criação coletiva.",
+    "topics": [
+      "Corpo e presença",
+      "Voz e dicção",
+      "Improvisação",
+      "Personagens",
+      "Texto dramático",
+      "Cenário e figurino",
+      "Iluminação e som",
+      "Direção cênica",
+      "Teatro brasileiro",
+      "Teatro de diferentes culturas",
+      "Produção de espetáculo",
+      "Crítica teatral"
+    ]
+  },
+  {
+    "slug": "danca",
+    "name": "Dança",
+    "emoji": "💃",
+    "color": "bg-pink-100",
+    "intro": "Movimento, ritmo, expressão, estilos e história da dança.",
+    "topics": [
+      "Consciência corporal",
+      "Ritmo e musicalidade",
+      "Dança popular brasileira",
+      "Danças urbanas",
+      "Ballet e dança clássica",
+      "Dança contemporânea",
+      "Coreografia",
+      "Espaço e deslocamento",
+      "Dança e identidade cultural",
+      "Improvisação corporal",
+      "Preparação e cuidado corporal",
+      "Criação coreográfica"
+    ]
+  },
+  {
+    "slug": "espanhol",
+    "name": "Espanhol",
+    "emoji": "🇪🇸",
+    "color": "bg-orange-100",
+    "intro": "Vocabulário, compreensão, gramática e culturas de língua espanhola.",
+    "topics": [
+      "Saudações e apresentações",
+      "Vocabulário cotidiano",
+      "Artigos e substantivos",
+      "Pronomes pessoais",
+      "Verbos no presente",
+      "Perguntas e respostas",
+      "Leitura de textos curtos",
+      "Falsos cognatos",
+      "Pronúncia e escuta",
+      "Culturas hispânicas",
+      "Passado básico",
+      "Produção de pequenos textos"
+    ]
+  },
+  {
+    "slug": "frances",
+    "name": "Francês",
+    "emoji": "🇫🇷",
+    "color": "bg-blue-100",
+    "intro": "Vocabulário, pronúncia, estruturas e culturas francófonas.",
+    "topics": [
+      "Saudações e apresentações",
+      "Alfabeto e sons",
+      "Números e datas",
+      "Artigos e gênero",
+      "Pronomes pessoais",
+      "Verbos essenciais",
+      "Vocabulário da escola",
+      "Compreensão oral",
+      "Leitura de textos simples",
+      "Culturas francófonas",
+      "Perguntas e negação",
+      "Escrita cotidiana"
+    ]
+  },
+  {
+    "slug": "alemao",
+    "name": "Alemão",
+    "emoji": "🇩🇪",
+    "color": "bg-yellow-100",
+    "intro": "Comunicação inicial, estruturas gramaticais e culturas de língua alemã.",
+    "topics": [
+      "Saudações",
+      "Pronúncia e alfabeto",
+      "Números e horários",
+      "Artigos e gênero",
+      "Pronomes pessoais",
+      "Verbos no presente",
+      "Ordem das palavras",
+      "Vocabulário cotidiano",
+      "Leitura simples",
+      "Escuta e compreensão",
+      "Culturas de língua alemã",
+      "Pequenas apresentações"
+    ]
+  },
+  {
+    "slug": "mandarim",
+    "name": "Mandarim",
+    "emoji": "🀄",
+    "color": "bg-red-100",
+    "intro": "Introdução à língua chinesa, tons, caracteres e comunicação cotidiana.",
+    "topics": [
+      "Pinyin",
+      "Tons do mandarim",
+      "Saudações",
+      "Números e datas",
+      "Caracteres básicos",
+      "Ordem das palavras",
+      "Pronomes e apresentações",
+      "Vocabulário cotidiano",
+      "Compreensão oral",
+      "Leitura inicial",
+      "Aspectos culturais",
+      "Diálogos simples"
+    ]
+  },
+  {
+    "slug": "libras",
+    "name": "Libras",
+    "emoji": "🤟",
+    "color": "bg-teal-100",
+    "intro": "Língua Brasileira de Sinais, comunicação visual e cultura surda.",
+    "topics": [
+      "Comunicação visual",
+      "Alfabeto manual",
+      "Apresentações pessoais",
+      "Números em Libras",
+      "Expressões faciais",
+      "Parâmetros dos sinais",
+      "Vocabulário cotidiano",
+      "Estrutura de frases",
+      "Cultura surda",
+      "Acessibilidade comunicacional",
+      "Interação respeitosa",
+      "Interpretação básica"
+    ]
+  },
+  {
+    "slug": "latim",
+    "name": "Latim",
+    "emoji": "🏺",
+    "color": "bg-amber-100",
+    "intro": "Estruturas do latim, vocabulário, etimologia e legado cultural.",
+    "topics": [
+      "Alfabeto e pronúncia",
+      "Casos gramaticais",
+      "Declinações",
+      "Conjugações verbais",
+      "Ordem das palavras",
+      "Vocabulário latino",
+      "Etimologia portuguesa",
+      "Inscrições e textos",
+      "Mitologia romana",
+      "Literatura latina",
+      "Expressões latinas",
+      "Legado do latim"
+    ]
+  },
+  {
+    "slug": "computacao",
+    "name": "Computação",
+    "emoji": "💻",
+    "color": "bg-sky-100",
+    "intro": "Fundamentos de computadores, sistemas, dados e pensamento computacional.",
+    "topics": [
+      "Hardware e software",
+      "Sistemas operacionais",
+      "Arquivos e pastas",
+      "Representação de dados",
+      "Redes e internet",
+      "Algoritmos",
+      "Pensamento computacional",
+      "Banco de dados",
+      "Segurança digital",
+      "Nuvem e serviços",
+      "Computação e sociedade",
+      "Resolução de problemas"
+    ]
+  },
+  {
+    "slug": "programacao",
+    "name": "Programação",
+    "emoji": "👨‍💻",
+    "color": "bg-indigo-100",
+    "intro": "Lógica, algoritmos, variáveis, estruturas de controle e desenvolvimento.",
+    "topics": [
+      "Algoritmos e passos",
+      "Variáveis e tipos",
+      "Entrada e saída",
+      "Operadores",
+      "Condicionais",
+      "Laços de repetição",
+      "Funções",
+      "Listas e coleções",
+      "Depuração",
+      "Testes",
+      "Estrutura de projetos",
+      "Boas práticas"
+    ]
+  },
+  {
+    "slug": "robotica",
+    "name": "Robótica",
+    "emoji": "🤖",
+    "color": "bg-slate-100",
+    "intro": "Robôs, sensores, atuadores, programação e sistemas automatizados.",
+    "topics": [
+      "O que é um robô",
+      "Sensores",
+      "Atuadores e motores",
+      "Circuitos básicos",
+      "Controle e movimento",
+      "Programação de robôs",
+      "Automação",
+      "Robótica educacional",
+      "Robôs e ambiente",
+      "Projeto e prototipagem",
+      "Segurança e ética",
+      "Testes e melhoria"
+    ]
+  },
+  {
+    "slug": "inteligencia-artificial",
+    "name": "Inteligência Artificial",
+    "emoji": "🧠",
+    "color": "bg-purple-100",
+    "intro": "Conceitos de IA, dados, aprendizado de máquina, usos e responsabilidade.",
+    "topics": [
+      "O que é IA",
+      "Dados e padrões",
+      "Aprendizado supervisionado",
+      "Aprendizado não supervisionado",
+      "Modelos e previsões",
+      "Linguagem e IA generativa",
+      "Visão computacional",
+      "Avaliação de resultados",
+      "Vieses e equidade",
+      "Privacidade e segurança",
+      "Usos cotidianos",
+      "Ética e responsabilidade"
+    ]
+  },
+  {
+    "slug": "cultura-digital",
+    "name": "Cultura Digital",
+    "emoji": "🌐",
+    "color": "bg-cyan-100",
+    "intro": "Tecnologias digitais, participação online, informação e convivência.",
+    "topics": [
+      "Identidade digital",
+      "Comunicação online",
+      "Pesquisa na internet",
+      "Verificação de fontes",
+      "Privacidade",
+      "Senhas e autenticação",
+      "Direitos autorais",
+      "Colaboração digital",
+      "Desinformação",
+      "Acessibilidade digital",
+      "Bem-estar tecnológico",
+      "Cidadania digital"
+    ]
+  },
+  {
+    "slug": "educacao-financeira",
+    "name": "Educação Financeira",
+    "emoji": "💰",
+    "color": "bg-emerald-100",
+    "intro": "Orçamento, poupança, consumo consciente e planejamento financeiro.",
+    "topics": [
+      "Necessidades e desejos",
+      "Orçamento pessoal",
+      "Receitas e despesas",
+      "Poupança e metas",
+      "Consumo consciente",
+      "Preço e comparação",
+      "Juros básicos",
+      "Crédito e dívidas",
+      "Inflação",
+      "Planejamento de compras",
+      "Fraudes financeiras",
+      "Decisões responsáveis"
+    ]
+  },
+  {
+    "slug": "economia",
+    "name": "Economia",
+    "emoji": "📈",
+    "color": "bg-green-100",
+    "intro": "Produção, consumo, mercados, recursos e decisões econômicas.",
+    "topics": [
+      "Escassez e escolhas",
+      "Oferta e demanda",
+      "Mercados",
+      "Produção e produtividade",
+      "Trabalho e renda",
+      "Inflação",
+      "Moeda e bancos",
+      "Comércio internacional",
+      "Setores econômicos",
+      "Desigualdade e distribuição",
+      "Políticas econômicas",
+      "Economia sustentável"
+    ]
+  },
+  {
+    "slug": "contabilidade",
+    "name": "Contabilidade",
+    "emoji": "🧾",
+    "color": "bg-stone-100",
+    "intro": "Registros financeiros, receitas, despesas, patrimônio e relatórios.",
+    "topics": [
+      "Patrimônio",
+      "Ativos e passivos",
+      "Receitas e despesas",
+      "Registro de transações",
+      "Balanço patrimonial",
+      "Demonstração de resultados",
+      "Custos e despesas",
+      "Orçamento",
+      "Controles internos",
+      "Ética contábil",
+      "Indicadores financeiros",
+      "Informação para decisões"
+    ]
+  },
+  {
+    "slug": "direito-e-cidadania",
+    "name": "Direito e Cidadania",
+    "emoji": "⚖️",
+    "color": "bg-blue-100",
+    "intro": "Direitos, deveres, leis, instituições e participação cidadã.",
+    "topics": [
+      "Constituição e leis",
+      "Direitos fundamentais",
+      "Deveres cidadãos",
+      "Organização do Estado",
+      "Poderes públicos",
+      "Acesso à justiça",
+      "Direitos do consumidor",
+      "Direitos da criança e do adolescente",
+      "Trabalho e direitos",
+      "Mediação de conflitos",
+      "Participação democrática",
+      "Ética e responsabilidade"
+    ]
+  },
+  {
+    "slug": "ciencia-politica",
+    "name": "Ciência Política",
+    "emoji": "🏛️",
+    "color": "bg-amber-100",
+    "intro": "Estado, poder, instituições, democracia e participação política.",
+    "topics": [
+      "Estado e governo",
+      "Poder e legitimidade",
+      "Democracia",
+      "Constituições",
+      "Instituições políticas",
+      "Eleições e representação",
+      "Partidos e movimentos",
+      "Políticas públicas",
+      "Cidadania",
+      "Participação social",
+      "Sistemas políticos",
+      "Política internacional"
+    ]
+  },
+  {
+    "slug": "antropologia",
+    "name": "Antropologia",
+    "emoji": "🪶",
+    "color": "bg-orange-100",
+    "intro": "Culturas, diversidade humana, identidade, práticas sociais e pesquisa.",
+    "topics": [
+      "Cultura e sociedade",
+      "Identidade e pertencimento",
+      "Diversidade cultural",
+      "Etnografia",
+      "Parentesco e família",
+      "Rituais e símbolos",
+      "Linguagem e cultura",
+      "Migrações",
+      "Mudanças culturais",
+      "Povos tradicionais",
+      "Ética na pesquisa",
+      "Antropologia contemporânea"
+    ]
+  },
+  {
+    "slug": "etica",
+    "name": "Ética",
+    "emoji": "🧭",
+    "color": "bg-yellow-100",
+    "intro": "Reflexão sobre escolhas, valores, responsabilidade e convivência.",
+    "topics": [
+      "Valores e princípios",
+      "Dilemas éticos",
+      "Responsabilidade",
+      "Justiça e equidade",
+      "Respeito e empatia",
+      "Ética na ciência",
+      "Ética digital",
+      "Direitos humanos",
+      "Decisões coletivas",
+      "Ética ambiental",
+      "Ética profissional",
+      "Argumentação moral"
+    ]
+  },
+  {
+    "slug": "estudos-de-midia",
+    "name": "Estudos de Mídia",
+    "emoji": "📺",
+    "color": "bg-red-100",
+    "intro": "Como mídias produzem, distribuem e influenciam informações e cultura.",
+    "topics": [
+      "Tipos de mídia",
+      "Linguagem audiovisual",
+      "Público e audiência",
+      "Publicidade e persuasão",
+      "Representação e estereótipos",
+      "Algoritmos e recomendações",
+      "Notícia e opinião",
+      "Desinformação",
+      "Produção de conteúdo",
+      "Privacidade e dados",
+      "Mídia e democracia",
+      "Análise crítica"
+    ]
+  },
+  {
+    "slug": "jornalismo",
+    "name": "Jornalismo",
+    "emoji": "📰",
+    "color": "bg-sky-100",
+    "intro": "Apuração, notícias, fontes, entrevistas e responsabilidade informativa.",
+    "topics": [
+      "Notícia e reportagem",
+      "Apuração de fatos",
+      "Fontes e evidências",
+      "Entrevista",
+      "Título e lead",
+      "Checagem de informações",
+      "Ética jornalística",
+      "Fotojornalismo",
+      "Jornalismo digital",
+      "Opinião e notícia",
+      "Desinformação",
+      "Produção de reportagem"
+    ]
+  },
+  {
+    "slug": "fotografia",
+    "name": "Fotografia",
+    "emoji": "📷",
+    "color": "bg-neutral-100",
+    "intro": "Imagem, composição, luz, enquadramento e narrativa visual.",
+    "topics": [
+      "Enquadramento",
+      "Composição",
+      "Luz natural",
+      "Exposição",
+      "Foco e profundidade",
+      "Cor e contraste",
+      "Retrato",
+      "Fotografia documental",
+      "Edição responsável",
+      "Narrativa visual",
+      "Direitos de imagem",
+      "Projeto fotográfico"
+    ]
+  },
+  {
+    "slug": "cinema-audiovisual",
+    "name": "Cinema e Audiovisual",
+    "emoji": "🎬",
+    "color": "bg-zinc-100",
+    "intro": "Linguagem cinematográfica, roteiro, imagem, som e montagem.",
+    "topics": [
+      "Planos e enquadramentos",
+      "Movimentos de câmera",
+      "Roteiro",
+      "Personagem e narrativa",
+      "Iluminação",
+      "Som e trilha",
+      "Montagem e edição",
+      "Gêneros cinematográficos",
+      "Documentário",
+      "Cinema brasileiro",
+      "Análise de filmes",
+      "Produção audiovisual"
+    ]
+  },
+  {
+    "slug": "design-grafico",
+    "name": "Design Gráfico",
+    "emoji": "🖌️",
+    "color": "bg-fuchsia-100",
+    "intro": "Comunicação visual, tipografia, cor, composição e identidade gráfica.",
+    "topics": [
+      "Princípios visuais",
+      "Tipografia",
+      "Teoria das cores",
+      "Composição e hierarquia",
+      "Identidade visual",
+      "Design editorial",
+      "Cartazes e peças",
+      "Ícones e símbolos",
+      "Acessibilidade visual",
+      "Ferramentas digitais",
+      "Portfólio",
+      "Crítica e revisão"
+    ]
+  },
+  {
+    "slug": "arquitetura",
+    "name": "Arquitetura",
+    "emoji": "🏠",
+    "color": "bg-orange-100",
+    "intro": "Espaços, formas, representação, conforto e relação com o ambiente.",
+    "topics": [
+      "Desenho e representação",
+      "Escala e proporção",
+      "Formas e volumes",
+      "Plantas e cortes",
+      "Materiais construtivos",
+      "Conforto térmico",
+      "Iluminação natural",
+      "Acessibilidade espacial",
+      "Arquitetura e cidade",
+      "Sustentabilidade",
+      "História da arquitetura",
+      "Projeto de espaços"
+    ]
+  },
+  {
+    "slug": "moda-textil",
+    "name": "Moda e Têxtil",
+    "emoji": "🧵",
+    "color": "bg-pink-100",
+    "intro": "Vestuário, tecidos, criação, história da moda e produção responsável.",
+    "topics": [
+      "Fibras e tecidos",
+      "Tipos de trama",
+      "História da moda",
+      "Desenho de moda",
+      "Modelagem básica",
+      "Cores e tendências",
+      "Confecção",
+      "Estilo e identidade",
+      "Moda e cultura",
+      "Consumo responsável",
+      "Reaproveitamento têxtil",
+      "Coleção e portfólio"
+    ]
+  },
+  {
+    "slug": "artesanato",
+    "name": "Artesanato",
+    "emoji": "🧶",
+    "color": "bg-amber-100",
+    "intro": "Técnicas manuais, materiais, design, cultura e criação de objetos.",
+    "topics": [
+      "Materiais e ferramentas",
+      "Papel e dobraduras",
+      "Tecelagem",
+      "Cerâmica e modelagem",
+      "Madeira e formas",
+      "Bordado e costura",
+      "Cores e padrões",
+      "Artesanato tradicional",
+      "Reaproveitamento de materiais",
+      "Planejamento de peças",
+      "Segurança no trabalho manual",
+      "Feira e exposição"
+    ]
+  },
+  {
+    "slug": "pesquisa-cientifica",
+    "name": "Pesquisa Científica",
+    "emoji": "🔍",
+    "color": "bg-indigo-100",
+    "intro": "Perguntas de pesquisa, evidências, métodos, dados e comunicação científica.",
+    "topics": [
+      "Pergunta de pesquisa",
+      "Hipótese",
+      "Revisão de literatura",
+      "Fontes confiáveis",
+      "Métodos de pesquisa",
+      "Variáveis e amostras",
+      "Coleta de dados",
+      "Análise de resultados",
+      "Ética científica",
+      "Reprodutibilidade",
+      "Citações e referências",
+      "Comunicação de resultados"
+    ]
+  },
+  {
+    "slug": "metodologia-cientifica",
+    "name": "Metodologia Científica",
+    "emoji": "🧪",
+    "color": "bg-teal-100",
+    "intro": "Métodos, evidências, análise crítica e organização de estudos científicos.",
+    "topics": [
+      "Conhecimento científico",
+      "Problema e objetivo",
+      "Hipóteses",
+      "Métodos qualitativos",
+      "Métodos quantitativos",
+      "Observação e experimento",
+      "Amostragem",
+      "Análise de dados",
+      "Limites e incerteza",
+      "Ética em pesquisa",
+      "Referências",
+      "Relatório científico"
+    ]
+  },
+  {
+    "slug": "escrita-academica",
+    "name": "Escrita Acadêmica",
+    "emoji": "✍️",
+    "color": "bg-slate-100",
+    "intro": "Planejamento de textos, argumentação, coesão, fontes e revisão.",
+    "topics": [
+      "Objetivo e público",
+      "Estrutura de parágrafos",
+      "Tese e argumentos",
+      "Coesão e coerência",
+      "Paráfrase e citação",
+      "Referências bibliográficas",
+      "Resumo acadêmico",
+      "Relatório",
+      "Linguagem formal",
+      "Revisão textual",
+      "Integridade acadêmica",
+      "Apresentação de trabalhos"
+    ]
+  },
+  {
+    "slug": "logica",
+    "name": "Lógica",
+    "emoji": "🔗",
+    "color": "bg-violet-100",
+    "intro": "Argumentos, proposições, padrões, inferências e resolução de problemas.",
+    "topics": [
+      "Proposições",
+      "Conectivos lógicos",
+      "Tabelas-verdade",
+      "Condição e equivalência",
+      "Argumentos válidos",
+      "Dedução e indução",
+      "Falácias comuns",
+      "Conjuntos e relações",
+      "Sequências e padrões",
+      "Problemas de lógica",
+      "Árvores de decisão",
+      "Pensamento crítico"
+    ]
+  },
+  {
+    "slug": "probabilidade-estatistica",
+    "name": "Probabilidade e Estatística",
+    "emoji": "📊",
+    "color": "bg-emerald-100",
+    "intro": "Dados, gráficos, chance, amostras e interpretação de resultados.",
+    "topics": [
+      "Coleta e organização de dados",
+      "Tabelas",
+      "Gráficos",
+      "Média e mediana",
+      "Moda e amplitude",
+      "Frequência",
+      "Probabilidade básica",
+      "Eventos independentes",
+      "Amostras e população",
+      "Variação e dispersão",
+      "Correlação e limites",
+      "Estatística no cotidiano"
+    ]
+  },
+  {
+    "slug": "geologia",
+    "name": "Geologia",
+    "emoji": "🪨",
+    "color": "bg-stone-100",
+    "intro": "Rochas, minerais, placas tectônicas, relevo e história da Terra.",
+    "topics": [
+      "Minerais e propriedades",
+      "Tipos de rocha",
+      "Ciclo das rochas",
+      "Estrutura da Terra",
+      "Placas tectônicas",
+      "Vulcanismo",
+      "Terremotos",
+      "Formação do relevo",
+      "Fósseis e tempo geológico",
+      "Erosão e sedimentação",
+      "Recursos minerais",
+      "Riscos geológicos"
+    ]
+  },
+  {
+    "slug": "oceanografia",
+    "name": "Oceanografia",
+    "emoji": "🌊",
+    "color": "bg-cyan-100",
+    "intro": "Oceanos, correntes, ecossistemas marinhos, clima e zonas costeiras.",
+    "topics": [
+      "Zonas oceânicas",
+      "Salinidade e temperatura",
+      "Correntes marinhas",
+      "Marés e ondas",
+      "Ecossistemas marinhos",
+      "Plâncton e cadeias alimentares",
+      "Recifes e manguezais",
+      "Costa e erosão",
+      "Poluição marinha",
+      "Pesca sustentável",
+      "Oceano e clima",
+      "Conservação marinha"
+    ]
+  },
+  {
+    "slug": "meteorologia",
+    "name": "Meteorologia",
+    "emoji": "🌦️",
+    "color": "bg-sky-100",
+    "intro": "Atmosfera, tempo, nuvens, precipitação e previsão meteorológica.",
+    "topics": [
+      "Camadas da atmosfera",
+      "Temperatura e pressão",
+      "Umidade do ar",
+      "Formação de nuvens",
+      "Frentes e massas de ar",
+      "Ventos",
+      "Precipitação",
+      "Instrumentos meteorológicos",
+      "Mapas do tempo",
+      "Eventos extremos",
+      "Tempo e clima",
+      "Previsão e incerteza"
+    ]
+  },
+  {
+    "slug": "ciencias-da-terra",
+    "name": "Ciências da Terra",
+    "emoji": "🌍",
+    "color": "bg-green-100",
+    "intro": "Sistemas terrestres, rochas, atmosfera, água e processos naturais.",
+    "topics": [
+      "Estrutura terrestre",
+      "Ciclo da água",
+      "Atmosfera",
+      "Rochas e minerais",
+      "Tectônica de placas",
+      "Relevo e erosão",
+      "Solo e paisagem",
+      "Oceanos",
+      "Clima e mudanças",
+      "Recursos naturais",
+      "Desastres naturais",
+      "Sistema Terra"
+    ]
+  },
+  {
+    "slug": "ciencias-do-solo",
+    "name": "Ciências do Solo",
+    "emoji": "🌱",
+    "color": "bg-lime-100",
+    "intro": "Formação, propriedades, vida, conservação e uso sustentável do solo.",
+    "topics": [
+      "Formação do solo",
+      "Horizontes do solo",
+      "Textura e estrutura",
+      "Matéria orgânica",
+      "Organismos do solo",
+      "Água e nutrientes",
+      "Erosão",
+      "Fertilidade",
+      "Contaminação",
+      "Conservação do solo",
+      "Uso agrícola",
+      "Recuperação de áreas"
+    ]
+  },
+  {
+    "slug": "agricultura-agroecologia",
+    "name": "Agricultura e Agroecologia",
+    "emoji": "🌾",
+    "color": "bg-lime-100",
+    "intro": "Cultivo, solo, biodiversidade, produção de alimentos e sustentabilidade.",
+    "topics": [
+      "Solo e fertilidade",
+      "Sementes e germinação",
+      "Ciclos das plantas",
+      "Irrigação",
+      "Manejo integrado",
+      "Compostagem",
+      "Biodiversidade agrícola",
+      "Agroecologia",
+      "Sistemas agroflorestais",
+      "Produção de alimentos",
+      "Conservação da água",
+      "Agricultura sustentável"
+    ]
+  },
+  {
+    "slug": "nutricao",
+    "name": "Nutrição",
+    "emoji": "🥗",
+    "color": "bg-emerald-100",
+    "intro": "Alimentação, nutrientes, hábitos saudáveis e leitura crítica de informações.",
+    "topics": [
+      "Grupos de alimentos",
+      "Carboidratos, proteínas e lipídios",
+      "Vitaminas e minerais",
+      "Água e hidratação",
+      "Digestão e absorção",
+      "Rótulos alimentares",
+      "Segurança alimentar",
+      "Cultura e alimentação",
+      "Planejamento de refeições",
+      "Mitos sobre alimentação",
+      "Alimentação sustentável",
+      "Hábitos e bem-estar"
+    ]
+  },
+  {
+    "slug": "saude-bem-estar",
+    "name": "Saúde e Bem-estar",
+    "emoji": "💚",
+    "color": "bg-green-100",
+    "intro": "Hábitos de saúde, prevenção, sono, atividade física e bem-estar integral.",
+    "topics": [
+      "Saúde integral",
+      "Sono e rotina",
+      "Atividade física segura",
+      "Higiene e prevenção",
+      "Alimentação equilibrada",
+      "Estresse e emoções",
+      "Relações saudáveis",
+      "Prevenção de doenças",
+      "Uso responsável de telas",
+      "Informação confiável em saúde",
+      "Ambientes saudáveis",
+      "Autocuidado e apoio"
+    ]
+  },
+  {
+    "slug": "primeiros-socorros",
+    "name": "Primeiros Socorros",
+    "emoji": "🩹",
+    "color": "bg-red-100",
+    "intro": "Reconhecimento de emergências, prevenção e busca segura por ajuda.",
+    "topics": [
+      "Reconhecer uma emergência",
+      "Acionar serviços de emergência",
+      "Segurança do local",
+      "Comunicação clara",
+      "Cuidados básicos sem risco",
+      "Desmaio: buscar ajuda",
+      "Queimaduras: prevenção e ajuda",
+      "Engasgo: procurar orientação imediata",
+      "Sangramentos: pedir assistência",
+      "Kit de primeiros socorros",
+      "Prevenção de acidentes",
+      "Limites do atendimento leigo"
+    ]
+  },
+  {
+    "slug": "psicologia",
+    "name": "Psicologia",
+    "emoji": "🧠",
+    "color": "bg-purple-100",
+    "intro": "Comportamento, emoções, aprendizagem, relações e pensamento crítico.",
+    "topics": [
+      "Processos psicológicos",
+      "Emoções",
+      "Memória e atenção",
+      "Aprendizagem",
+      "Desenvolvimento humano",
+      "Personalidade",
+      "Psicologia social",
+      "Relações interpessoais",
+      "Estresse e estratégias saudáveis",
+      "Pesquisa em psicologia",
+      "Ética e privacidade",
+      "Mitos e evidências"
+    ]
+  },
+  {
+    "slug": "direitos-humanos",
+    "name": "Direitos Humanos",
+    "emoji": "🕊️",
+    "color": "bg-sky-100",
+    "intro": "Dignidade, igualdade, liberdades, direitos e convivência democrática.",
+    "topics": [
+      "Dignidade humana",
+      "Declaração Universal",
+      "Igualdade e não discriminação",
+      "Liberdade de expressão",
+      "Direitos sociais",
+      "Direitos da criança",
+      "Acessibilidade e inclusão",
+      "Refúgio e migração",
+      "Direitos e ambiente",
+      "Participação cidadã",
+      "Prevenção da violência",
+      "Instituições de proteção"
+    ]
+  },
+  {
+    "slug": "relacoes-internacionais",
+    "name": "Relações Internacionais",
+    "emoji": "🌐",
+    "color": "bg-blue-100",
+    "intro": "Países, organizações, diplomacia, comércio e cooperação global.",
+    "topics": [
+      "Estado e soberania",
+      "Diplomacia",
+      "Organizações internacionais",
+      "Cooperação global",
+      "Comércio internacional",
+      "Conflitos e paz",
+      "Direitos humanos globais",
+      "Migrações",
+      "Blocos econômicos",
+      "Política externa",
+      "Desenvolvimento internacional",
+      "Desafios globais"
+    ]
+  },
+  {
+    "slug": "estudos-culturais",
+    "name": "Estudos Culturais",
+    "emoji": "🎎",
+    "color": "bg-fuchsia-100",
+    "intro": "Identidade, cultura popular, mídia, representação e diversidade cultural.",
+    "topics": [
+      "Conceito de cultura",
+      "Identidade e pertencimento",
+      "Cultura popular",
+      "Mídia e representação",
+      "Tradições e mudanças",
+      "Língua e identidade",
+      "Globalização cultural",
+      "Patrimônio cultural",
+      "Diversidade e inclusão",
+      "Consumo cultural",
+      "Cultura digital",
+      "Análise de manifestações"
+    ]
+  },
+  {
+    "slug": "cultura-indigena",
+    "name": "Culturas Indígenas",
+    "emoji": "🪶",
+    "color": "bg-amber-100",
+    "intro": "Diversidade dos povos indígenas, línguas, conhecimentos e direitos.",
+    "topics": [
+      "Diversidade dos povos",
+      "Línguas indígenas",
+      "Territórios e modos de vida",
+      "Histórias e memórias",
+      "Conhecimentos tradicionais",
+      "Arte e oralidade",
+      "Relação com o ambiente",
+      "Povos indígenas no Brasil atual",
+      "Direitos indígenas",
+      "Resistência e protagonismo",
+      "Representações na mídia",
+      "Respeito e combate a estereótipos"
+    ]
+  },
+  {
+    "slug": "historia-africa",
+    "name": "História da África",
+    "emoji": "🌍",
+    "color": "bg-amber-100",
+    "intro": "Sociedades africanas, reinos, culturas, diáspora e história contemporânea.",
+    "topics": [
+      "África e diversidade regional",
+      "Sociedades antigas",
+      "Reinos e impérios africanos",
+      "Rotas comerciais",
+      "Culturas e religiões",
+      "Escravização e diáspora",
+      "Colonialismo",
+      "Lutas de independência",
+      "África contemporânea",
+      "Intelectuais e movimentos",
+      "Conexões afro-brasileiras",
+      "Fontes históricas africanas"
+    ]
+  },
+  {
+    "slug": "historia-mundial",
+    "name": "História Mundial",
+    "emoji": "🌎",
+    "color": "bg-orange-100",
+    "intro": "Sociedades, transformações, conexões e acontecimentos da história global.",
+    "topics": [
+      "Primeiras sociedades",
+      "Civilizações antigas",
+      "Rotas e intercâmbios",
+      "Religiões e impérios",
+      "Idade Média global",
+      "Renascimento e expansão marítima",
+      "Revoluções modernas",
+      "Industrialização",
+      "Imperialismo e guerras",
+      "Guerra Fria",
+      "Globalização",
+      "História e fontes"
+    ]
+  },
+  {
+    "slug": "sustentabilidade",
+    "name": "Sustentabilidade",
+    "emoji": "♻️",
+    "color": "bg-green-100",
+    "intro": "Uso responsável de recursos, consumo, biodiversidade e soluções sustentáveis.",
+    "topics": [
+      "Desenvolvimento sustentável",
+      "Recursos naturais",
+      "Pegada ecológica",
+      "Consumo responsável",
+      "Resíduos e reciclagem",
+      "Energia limpa",
+      "Água e saneamento",
+      "Biodiversidade",
+      "Cidades sustentáveis",
+      "Economia circular",
+      "Justiça ambiental",
+      "Projetos de sustentabilidade"
+    ]
+  },
+  {
+    "slug": "mudancas-climaticas",
+    "name": "Mudanças Climáticas",
+    "emoji": "🌡️",
+    "color": "bg-orange-100",
+    "intro": "Clima, efeito estufa, evidências científicas, impactos e adaptação.",
+    "topics": [
+      "Tempo e clima",
+      "Efeito estufa natural",
+      "Gases de efeito estufa",
+      "Evidências de aquecimento",
+      "Fontes de emissão",
+      "Impactos nos ecossistemas",
+      "Impactos nas cidades",
+      "Eventos extremos",
+      "Mitigação",
+      "Adaptação",
+      "Justiça climática",
+      "Soluções coletivas"
+    ]
+  },
+  {
+    "slug": "educacao-consumo",
+    "name": "Educação para o Consumo",
+    "emoji": "🛒",
+    "color": "bg-emerald-100",
+    "intro": "Publicidade, direitos do consumidor, orçamento e escolhas conscientes.",
+    "topics": [
+      "Necessidades e desejos",
+      "Publicidade e persuasão",
+      "Comparação de preços",
+      "Rótulos e informações",
+      "Direitos do consumidor",
+      "Garantias e compras",
+      "Consumo digital",
+      "Privacidade de dados",
+      "Resíduos e descarte",
+      "Consumo sustentável",
+      "Golpes e prevenção",
+      "Decisão de compra"
+    ]
+  },
+  {
+    "slug": "debate-argumentacao",
+    "name": "Debate e Argumentação",
+    "emoji": "🗣️",
+    "color": "bg-violet-100",
+    "intro": "Construção de argumentos, escuta ativa, evidências e diálogo respeitoso.",
+    "topics": [
+      "Tese e ponto de vista",
+      "Argumentos e evidências",
+      "Exemplos e analogias",
+      "Contra-argumentação",
+      "Falácias comuns",
+      "Escuta ativa",
+      "Perguntas investigativas",
+      "Debate regrado",
+      "Linguagem respeitosa",
+      "Síntese de posições",
+      "Pesquisa de fontes",
+      "Conclusão argumentativa"
+    ]
+  },
+  {
+    "slug": "gestao-projetos",
+    "name": "Gestão de Projetos",
+    "emoji": "📋",
+    "color": "bg-blue-100",
+    "intro": "Objetivos, planejamento, etapas, colaboração e avaliação de projetos.",
+    "topics": [
+      "Definição do problema",
+      "Objetivos e resultados",
+      "Escopo",
+      "Cronograma",
+      "Recursos e orçamento",
+      "Papéis da equipe",
+      "Riscos e prevenção",
+      "Comunicação",
+      "Acompanhamento",
+      "Indicadores",
+      "Avaliação final",
+      "Aprendizados e melhoria"
+    ]
+  },
+  {
+    "slug": "logistica",
+    "name": "Logística",
+    "emoji": "🚚",
+    "color": "bg-orange-100",
+    "intro": "Fluxos de materiais, estoque, transporte, distribuição e planejamento.",
+    "topics": [
+      "Cadeia de suprimentos",
+      "Estoque e inventário",
+      "Armazenagem",
+      "Transporte",
+      "Rotas e distribuição",
+      "Previsão de demanda",
+      "Custos logísticos",
+      "Rastreabilidade",
+      "Logística reversa",
+      "Segurança e qualidade",
+      "Tecnologia logística",
+      "Sustentabilidade nas operações"
+    ]
+  },
+  {
+    "slug": "marketing",
+    "name": "Marketing",
+    "emoji": "📣",
+    "color": "bg-pink-100",
+    "intro": "Públicos, marcas, comunicação, pesquisa e estratégias de marketing.",
+    "topics": [
+      "Público-alvo",
+      "Pesquisa de mercado",
+      "Proposta de valor",
+      "Marca e posicionamento",
+      "Produto e serviço",
+      "Preço",
+      "Canais de distribuição",
+      "Comunicação e campanhas",
+      "Marketing digital",
+      "Métricas e resultados",
+      "Ética na publicidade",
+      "Relacionamento com clientes"
+    ]
+  },
+  {
+    "slug": "turismo",
+    "name": "Turismo",
+    "emoji": "🧳",
+    "color": "bg-sky-100",
+    "intro": "Destinos, patrimônios, hospitalidade, roteiros e turismo responsável.",
+    "topics": [
+      "Tipos de turismo",
+      "Patrimônio natural",
+      "Patrimônio cultural",
+      "Planejamento de roteiros",
+      "Hospitalidade",
+      "Turismo comunitário",
+      "Marketing de destinos",
+      "Impactos ambientais",
+      "Acessibilidade turística",
+      "Eventos e serviços",
+      "Economia local",
+      "Turismo sustentável"
+    ]
+  },
+  {
+    "slug": "gastronomia",
+    "name": "Gastronomia",
+    "emoji": "🍲",
+    "color": "bg-amber-100",
+    "intro": "Cultura alimentar, técnicas culinárias, higiene e planejamento de refeições.",
+    "topics": [
+      "Cultura e tradições alimentares",
+      "Técnicas de preparo",
+      "Cortes e ingredientes",
+      "Higiene e segurança alimentar",
+      "Panificação e massas",
+      "Temperos e sabores",
+      "Apresentação de pratos",
+      "Planejamento de cardápios",
+      "Desperdício de alimentos",
+      "Custos e porções",
+      "Cozinhas do mundo",
+      "Sustentabilidade na cozinha"
+    ]
+  },
+  {
+    "slug": "seguranca-trabalho",
+    "name": "Segurança do Trabalho",
+    "emoji": "🦺",
+    "color": "bg-yellow-100",
+    "intro": "Prevenção de riscos, ergonomia, ambientes seguros e cultura preventiva.",
+    "topics": [
+      "Identificação de perigos",
+      "Avaliação de riscos",
+      "Equipamentos de proteção",
+      "Ergonomia",
+      "Sinalização",
+      "Prevenção de incêndios",
+      "Organização do ambiente",
+      "Saúde ocupacional",
+      "Comunicação de riscos",
+      "Planos de emergência",
+      "Cultura de prevenção",
+      "Melhoria contínua"
+    ]
+  },
+  {
+    "slug": "engenharia-tecnologia",
+    "name": "Engenharia e Tecnologia",
+    "emoji": "⚙️",
+    "color": "bg-slate-100",
+    "intro": "Projeto, sistemas, materiais, medidas e resolução de problemas práticos.",
+    "topics": [
+      "Processo de projeto",
+      "Desenho técnico",
+      "Medidas e unidades",
+      "Forças e estruturas",
+      "Materiais e propriedades",
+      "Energia e eficiência",
+      "Mecanismos",
+      "Sensores e controle",
+      "Prototipagem",
+      "Testes e validação",
+      "Segurança e ética",
+      "Inovação responsável"
+    ]
+  },
+  {
+    "slug": "ciencias-materiais",
+    "name": "Ciência dos Materiais",
+    "emoji": "🧱",
+    "color": "bg-stone-100",
+    "intro": "Propriedades, estrutura, processamento e usos de materiais.",
+    "topics": [
+      "Metais e ligas",
+      "Polímeros",
+      "Cerâmicas e vidros",
+      "Compósitos",
+      "Estrutura atômica",
+      "Propriedades mecânicas",
+      "Condutividade",
+      "Corrosão e desgaste",
+      "Reciclagem de materiais",
+      "Ensaios e testes",
+      "Seleção de materiais",
+      "Materiais inovadores"
+    ]
+  },
+  {
+    "slug": "biotecnologia",
+    "name": "Biotecnologia",
+    "emoji": "🧬",
+    "color": "bg-lime-100",
+    "intro": "Aplicações de organismos e processos biológicos em ciência e tecnologia.",
+    "topics": [
+      "Células e microrganismos",
+      "DNA e genes",
+      "Fermentação",
+      "Enzimas",
+      "Biotecnologia na agricultura",
+      "Biotecnologia na saúde",
+      "Bioinformática",
+      "Biorremediação",
+      "Biossegurança",
+      "Ética e regulamentação",
+      "Bioprocessos",
+      "Impactos sociais"
+    ]
+  },
+  {
+    "slug": "genetica",
+    "name": "Genética",
+    "emoji": "🧬",
+    "color": "bg-violet-100",
+    "intro": "Genes, hereditariedade, variação, DNA e aplicações da genética.",
+    "topics": [
+      "DNA e genes",
+      "Cromossomos",
+      "Hereditariedade",
+      "Alelos e características",
+      "Divisão celular",
+      "Mutações e variação",
+      "Genética mendeliana",
+      "Genética molecular",
+      "Genética de populações",
+      "Biotecnologia",
+      "Aconselhamento e limites",
+      "Ética genética"
+    ]
+  },
+  {
+    "slug": "neurociencia",
+    "name": "Neurociência",
+    "emoji": "🧠",
+    "color": "bg-purple-100",
+    "intro": "Sistema nervoso, percepção, memória, aprendizagem e comportamento.",
+    "topics": [
+      "Neurônios e sinapses",
+      "Organização do sistema nervoso",
+      "Percepção sensorial",
+      "Atenção",
+      "Memória",
+      "Aprendizagem",
+      "Sono e cérebro",
+      "Emoções e comportamento",
+      "Plasticidade neural",
+      "Métodos de pesquisa",
+      "Mitos sobre o cérebro",
+      "Ética em neurociência"
+    ]
+  },
+  {
+    "slug": "saude-publica",
+    "name": "Saúde Pública",
+    "emoji": "🏥",
+    "color": "bg-red-100",
+    "intro": "Saúde coletiva, prevenção, determinantes sociais e organização dos cuidados.",
+    "topics": [
+      "Conceito de saúde pública",
+      "Prevenção e promoção",
+      "Determinantes sociais",
+      "Vacinação e prevenção",
+      "Saneamento e saúde",
+      "Vigilância em saúde",
+      "Epidemiologia básica",
+      "Acesso aos serviços",
+      "Comunicação em saúde",
+      "Equidade e inclusão",
+      "Políticas públicas",
+      "Dados e indicadores"
+    ]
+  },
+  {
+    "slug": "desenvolvimento-sustentavel",
+    "name": "Desenvolvimento Sustentável",
+    "emoji": "🌱",
+    "color": "bg-green-100",
+    "intro": "Integração entre ambiente, sociedade, economia e bem-estar de longo prazo.",
+    "topics": [
+      "Dimensões da sustentabilidade",
+      "Objetivos globais de desenvolvimento",
+      "Pobreza e desigualdade",
+      "Educação e oportunidades",
+      "Água e saneamento",
+      "Energia acessível",
+      "Cidades e comunidades",
+      "Consumo e produção",
+      "Proteção dos ecossistemas",
+      "Parcerias e cooperação",
+      "Indicadores de progresso",
+      "Projetos locais"
+    ]
+  },
+  {
+    "slug": "estudos-espaciais",
+    "name": "Estudos Espaciais",
+    "emoji": "🛰️",
+    "color": "bg-indigo-100",
+    "intro": "Exploração espacial, satélites, missões, observação da Terra e ciência planetária.",
+    "topics": [
+      "Sistema Solar",
+      "Satélites artificiais",
+      "Foguetes e propulsão",
+      "Órbitas",
+      "Observação da Terra",
+      "Missões espaciais",
+      "Exploração lunar e marciana",
+      "Instrumentos científicos",
+      "Lixo espacial",
+      "Cooperação internacional",
+      "Ética e sustentabilidade espacial",
+      "Futuro da exploração"
+    ]
+  },
+  {
+    "slug": "defesa-civil",
+    "name": "Defesa Civil",
+    "emoji": "🚨",
+    "color": "bg-orange-100",
+    "intro": "Prevenção, preparação, resposta comunitária e recuperação após desastres.",
+    "topics": [
+      "Riscos e vulnerabilidades",
+      "Mapas de risco",
+      "Alertas e comunicação",
+      "Planos familiares",
+      "Rotas de evacuação",
+      "Prevenção de enchentes",
+      "Prevenção de deslizamentos",
+      "Segurança em tempestades",
+      "Organização comunitária",
+      "Serviços de emergência",
+      "Abrigos e apoio",
+      "Recuperação e resiliência"
+    ]
+  }
+];
+
+for (const item of expandedSubjectCatalog) {
+  const groups = [item.topics.slice(0,3), item.topics.slice(3,6), item.topics.slice(6,9), item.topics.slice(9,12)];
+  const pageTitles = ["Fundamentos e conceitos", "Linguagem e ferramentas", "Aplicações e contexto", "Revisão e projeto" ];
+  const pageTexts = [
+    `Conheça os conceitos fundamentais de ${item.name}. Esta etapa apresenta ${groups[0].join(", ")} e explica como esses assuntos ajudam a construir a base da matéria.`,
+    `Explore métodos, vocabulário e ferramentas de ${item.name}, relacionando ${groups[1].join(", ")} a exemplos e situações de estudo.`,
+    `Veja como ${item.name} se conecta ao cotidiano e a outras áreas por meio de ${groups[2].join(", ")}. Observe contextos, evidências e aplicações.`,
+    `Revise ${groups[3].join(", ")} e organize o que aprendeu em uma atividade ou pequeno projeto. Use o quiz para verificar sua compreensão.`
+  ];
+  subjects.push({
+    slug: item.slug,
+    name: item.name,
+    emoji: item.emoji,
+    color: item.color,
+    intro: item.intro,
+    studyPages: groups.map((topics, index) => ({ title: pageTitles[index]!, text: pageTexts[index]!, topics })),
+    summaries: groups.slice(0,3).map((topics,index)=>({title: pageTitles[index]!, text: `${item.name} aborda ${topics.join(", ")}. Procure entender o significado de cada conceito, reconhecer exemplos e explicar como os temas se relacionam.`})),
+    examples: item.topics.slice(0,6).map((topic,index)=>`Exemplo ${index+1}: observe ${topic.toLowerCase()} em uma situação cotidiana, escolar ou de pesquisa relacionada a ${item.name}.`),
+    exercises: item.topics.slice(0,4).map((topic,index)=>({q:`Explique com suas palavras o que significa “${topic}” em ${item.name}.`,a:`Resposta esperada: uma explicação correta de “${topic}”, com um exemplo pertinente à área de ${item.name}.`})),
+    questions: [],
+  });
+}
+
+
 // Gera quizzes completos para as novas matérias a partir das páginas didáticas.
 function buildGeneratedQuestions(subject: Subject): Question[] {
   const pages = subject.studyPages;
