@@ -177,7 +177,12 @@ function SubjectPage() {
       "https://images.unsplash.com/photo-1561214115-f2f134cc4912?auto=format&fit=crop&w=1200&q=80",
     ],
   };
-  const studyImages = studyImagesBySubject[slug] ?? studyImagesBySubject["matematica"];
+  const studyImages = studyImagesBySubject[slug] ?? [
+    studyImagesBySubject["ciencias"]![0]!,
+    studyImagesBySubject["portugues"]![1]!,
+    studyImagesBySubject["geografia"]![0]!,
+    studyImagesBySubject["astronomia"]![0]!,
+  ];
 
   if (!subject || !studyImages?.length) return null;
   const topics = getTopics(slug, activeYear);
