@@ -1,3 +1,5 @@
+import { subjects } from "@/lib/content";
+
 /**
  * Roteiro introdutório por ano escolar (1º ano do Fundamental ao 3º ano do Médio).
  * A sequência é aproximada: redes e escolas podem distribuir os temas em anos diferentes.
@@ -698,6 +700,24 @@ export const curriculum: Record<string, Topics> = {
     "3º EM": ["Geometria avançada | Analítica, trigonometria, cônicas e sólidos.","Geometria no ENEM | Trabalhe escalas, mapas, áreas, volumes e interpretação."],
   },
 };
+
+// Garante seletor de ano escolar também para as matérias adicionadas ao catálogo.
+for (const subject of subjects) {
+  if (curriculum[subject.slug]) continue;
+  const topicsByYear: Topics = {};
+  YEARS.forEach((year, yearIndex) => {
+    const page = subject.studyPages[yearIndex % subject.studyPages.length]!;
+    const stage = yearIndex <= 4
+      ? "com exemplos concretos e linguagem simples"
+      : yearIndex <= 8
+        ? "relacionando conceitos, causas e exemplos"
+        : "com análise crítica, aplicações e preparação para provas";
+    topicsByYear[year] = page.topics.map((topic) =>
+      `${topic} | Estude ${topic.toLowerCase()} no nível de ${YEAR_LABEL[year]}, ${stage}, conectando a ideia a situações adequadas ao ano escolar.`,
+    );
+  });
+  curriculum[subject.slug] = topicsByYear;
+}
 
 export function parseTopic(t: string) {
   const [title, text] = t.split(" | ");
