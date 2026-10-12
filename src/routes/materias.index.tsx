@@ -10,11 +10,10 @@ export const Route = createFileRoute("/materias/")({
       { title: "Matérias — Sabe Mais" },
       {
         name: "description",
-        content:
-          "Explore matérias de linguagens, ciências, tecnologia, artes, sociedade e outras áreas com roteiros por ano, páginas de estudo, resumos, exemplos, exercícios e quizzes.",
+        content: "Estude matérias fundamentais e áreas complementares com conteúdos por ano, explicações, exemplos, exercícios e quizzes.",
       },
       { property: "og:title", content: "Matérias — Sabe Mais" },
-      { property: "og:description", content: "Resumos, fórmulas, exemplos e exercícios de 8 matérias." },
+      { property: "og:description", content: "Matérias fundamentais e catálogo completo de estudos." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
@@ -22,18 +21,52 @@ export const Route = createFileRoute("/materias/")({
   component: Materias,
 });
 
+const fundamentalSlugs = new Set(["portugues", "matematica", "ciencias", "biologia", "historia", "geografia", "ingles"]);
+
 function Materias() {
   const [query, setQuery] = useState("");
+  const [category, setCategory] = useState<"fundamentais" | "todas">("fundamentais");
   const normalize = (text: string) => text.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
-  const filteredSubjects = subjects.filter((subject) => normalize(subject.name).includes(normalize(query.trim())));
+  const filteredSubjects = subjects.filter((subject) => {
+    const matchesQuery = normalize(subject.name).includes(normalize(query.trim()));
+    return matchesQuery && (category === "todas" || fundamentalSlugs.has(subject.slug));
+  });
 
   return (
     <SiteLayout>
       <PageHeader
         title="Matérias"
-        subtitle="Escolha uma matéria para estudar por ano escolar, do Fundamental ao Ensino Médio."
+        subtitle="Comece pelas matérias fundamentais, com trilhas reforçadas por ano escolar, ou explore o catálogo completo."
       />
       <div className="mx-auto w-full max-w-6xl px-4 py-12">
+        <div className="mb-6 flex flex-wrap gap-3" role="tablist" aria-label="Categorias de matérias">
+          <button
+            type="button"
+            role="tab"
+            aria-selected={category === "fundamentais"}
+            onClick={() => setCategory("fundamentais")}
+            className={`rounded-full border px-5 py-2.5 text-sm font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${category === "fundamentais" ? "border-primary bg-primary text-primary-foreground" : "border-border bg-card text-foreground hover:bg-muted"}`}
+          >
+            ⭐ Fundamentais
+          </button>
+          <button
+            type="button"
+            role="tab"
+            aria-selected={category === "todas"}
+            onClick={() => setCategory("todas")}
+            className={`rounded-full border px-5 py-2.5 text-sm font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${category === "todas" ? "border-primary bg-primary text-primary-foreground" : "border-border bg-card text-foreground hover:bg-muted"}`}
+          >
+            Todas as matérias
+          </button>
+        </div>
+        {category === "fundamentais" && (
+          <div className="mb-8 rounded-xl border border-border bg-card p-5">
+            <h2 className="text-lg font-bold text-foreground">Trilha Fundamentais</h2>
+            <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
+              Português, Matemática, Ciências, Biologia, História, Geografia e Inglês com oito unidades aprofundadas, exemplos, exercícios, quiz e conteúdo organizado para os 12 anos escolares.
+            </p>
+          </div>
+        )}
         <div className="mb-8 max-w-sm">
           <label htmlFor="subject-search" className="mb-2 block text-sm font-semibold text-foreground">Buscar matéria</label>
           <div className="relative">
