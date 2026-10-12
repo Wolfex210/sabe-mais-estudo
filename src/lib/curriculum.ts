@@ -772,7 +772,7 @@ const fundamentalYearThemes: Record<string, string[]> = {
     "Citologia, metabolismo, reprodução e biodiversidade",
     "Genética inicial, evolução e fisiologia",
     "Genética, ecologia, classificação e saúde",
-    "Evolução, biomas, fisiologia e genética aplicada",
+    "Evolução, biomas, fisiologia e genética",
     "Citologia, bioquímica, metabolismo e genética",
     "Evolução, fisiologia, ecologia e biotecnologia",
     "Genética molecular, ecologia, evolução e questões integradas"
@@ -822,10 +822,10 @@ const fundamentalYearThemes: Record<string, string[]> = {
 };
 const fundamentalLessonTypes: Record<string, string[]> = {
   "portugues": [
-    "Leitura guiada",
+    "Leitura e compreensão",
     "Vocabulário e conceito",
-    "Exemplo comentado",
-    "Prática de escrita"
+    "Análise de exemplo",
+    "Produção e revisão"
   ],
   "matematica": [
     "Conceito e representação",
@@ -864,13 +864,199 @@ const fundamentalLessonTypes: Record<string, string[]> = {
     "Speaking or writing task"
   ]
 };
-for (const [slug, themes] of Object.entries(fundamentalYearThemes)) {
+const fundamentalTopicBanks: Record<string, string[]> = {
+  "portugues": [
+    "Alfabetização e consciência fonológica",
+    "Sistema alfabético e ortografia",
+    "Leitura fluente e compreensão",
+    "Gêneros textuais e finalidade",
+    "Narrativa: personagens, tempo e espaço",
+    "Poema, ritmo, rima e figuras de linguagem",
+    "Substantivo, adjetivo, artigo e numeral",
+    "Pronomes, verbos, advérbios e conectivos",
+    "Frase, oração e período",
+    "Sujeito, predicado e complementos",
+    "Concordância verbal e nominal",
+    "Regência e crase",
+    "Pontuação e efeitos de sentido",
+    "Coesão, coerência e progressão temática",
+    "Variação linguística e preconceito linguístico",
+    "Argumentação, tese e evidências",
+    "Artigo de opinião e editorial",
+    "Notícia, reportagem e checagem de fontes",
+    "Conto, crônica, romance e novela",
+    "Literatura brasileira: escolas e contextos",
+    "Intertextualidade e análise literária",
+    "Resumo, resenha e paráfrase",
+    "Redação dissertativo-argumentativa",
+    "Revisão, reescrita e adequação ao público"
+  ],
+  "matematica": [
+    "Contagem, leitura e escrita de números",
+    "Sistema decimal e valor posicional",
+    "Adição, subtração, multiplicação e divisão",
+    "Cálculo mental e estimativa",
+    "Frações e representações",
+    "Números decimais e operações",
+    "Múltiplos, divisores e números primos",
+    "Razão, proporção e regra de três",
+    "Porcentagem, aumentos e descontos",
+    "Números inteiros e racionais",
+    "Potências, raízes e notação científica",
+    "Expressões algébricas e produtos notáveis",
+    "Equações e inequações",
+    "Sistemas de equações",
+    "Sequências, padrões e funções",
+    "Plano cartesiano e gráficos",
+    "Ângulos, polígonos e circunferência",
+    "Perímetro, áreas e volumes",
+    "Semelhança, escala e Teorema de Pitágoras",
+    "Trigonometria no triângulo retângulo",
+    "Geometria analítica",
+    "Estatística: média, mediana e dispersão",
+    "Probabilidade e análise combinatória",
+    "Funções, exponenciais, logaritmos e matemática financeira"
+  ],
+  "ciencias": [
+    "Observação, perguntas e método científico",
+    "Seres vivos e necessidades básicas",
+    "Células e organização dos organismos",
+    "Corpo humano e sistemas",
+    "Alimentação, nutrientes e saúde",
+    "Microrganismos e prevenção de doenças",
+    "Ecossistemas e cadeias alimentares",
+    "Biodiversidade e conservação",
+    "Água: ciclo, usos e tratamento",
+    "Ar, atmosfera e clima",
+    "Solo, rochas e formação do relevo",
+    "Matéria, propriedades e estados físicos",
+    "Misturas e métodos de separação",
+    "Transformações físicas e químicas",
+    "Átomos, moléculas e elementos",
+    "Forças, movimento e máquinas simples",
+    "Energia, calor e temperatura",
+    "Luz, som e ondas",
+    "Eletricidade e magnetismo",
+    "Sistema Solar e movimentos da Terra",
+    "Lua, fases e eclipses",
+    "Recursos naturais e sustentabilidade",
+    "Mudanças climáticas e impactos",
+    "Investigação, dados, modelos e evidências"
+  ],
+  "biologia": [
+    "Características dos seres vivos",
+    "Microscopia e teoria celular",
+    "Organelas e metabolismo celular",
+    "Membrana, transporte e comunicação celular",
+    "Fotossíntese e respiração celular",
+    "Mitose, meiose e reprodução",
+    "DNA, RNA e síntese de proteínas",
+    "Genes, alelos e hereditariedade",
+    "Genética mendeliana e heredogramas",
+    "Mutações e variabilidade genética",
+    "Evolução, seleção natural e adaptação",
+    "Origem e diversidade da vida",
+    "Classificação e filogenia",
+    "Vírus, bactérias, fungos e protistas",
+    "Botânica: tecidos, órgãos e reprodução vegetal",
+    "Zoologia e adaptações animais",
+    "Anatomia e fisiologia humana",
+    "Sistema nervoso e endócrino",
+    "Imunidade, saúde e prevenção",
+    "Ecologia de populações e comunidades",
+    "Fluxo de energia e ciclos biogeoquímicos",
+    "Biomas brasileiros e biodiversidade",
+    "Biotecnologia e bioética",
+    "Evidências, experimentos e interpretação de dados"
+  ],
+  "historia": [
+    "Tempo histórico, memória e fontes",
+    "Povos originários e primeiras sociedades",
+    "Agricultura e sedentarização",
+    "Civilizações da Mesopotâmia e do Egito",
+    "Grécia antiga e cidadania",
+    "Roma antiga e legado",
+    "África antiga e reinos africanos",
+    "Sociedades americanas antes da colonização",
+    "Feudalismo e mundo medieval",
+    "Islamismo e redes de intercâmbio",
+    "Renascimento e reformas religiosas",
+    "Expansão marítima e colonização",
+    "Povos indígenas e colonização do Brasil",
+    "Escravidão, resistência e diáspora africana",
+    "Brasil colonial: economia e sociedade",
+    "Iluminismo e revoluções atlânticas",
+    "Independência e formação do Brasil",
+    "Império, abolição e República",
+    "Industrialização e movimentos sociais",
+    "Imperialismo e Primeira Guerra Mundial",
+    "Revolução Russa e entre-guerras",
+    "Nazifascismo e Segunda Guerra Mundial",
+    "Guerra Fria, ditadura e redemocratização",
+    "História contemporânea, direitos e memória"
+  ],
+  "geografia": [
+    "Lugar, paisagem, território e região",
+    "Orientação, pontos cardeais e localização",
+    "Mapas, escalas, legendas e coordenadas",
+    "Globo terrestre, continentes e oceanos",
+    "Relevo, rochas e agentes modeladores",
+    "Tempo atmosférico e clima",
+    "Água, bacias hidrográficas e oceanos",
+    "Biomas, vegetação e biodiversidade",
+    "Solo, uso da terra e conservação",
+    "População, distribuição e migrações",
+    "Urbanização, cidades e redes urbanas",
+    "Campo, agricultura e sistemas alimentares",
+    "Indústria, energia e cadeias produtivas",
+    "Transportes, comércio e globalização",
+    "Desigualdades socioespaciais",
+    "Brasil: regiões, estados e território",
+    "América Latina e relações regionais",
+    "Europa, África, Ásia e Oceania",
+    "Geopolítica, fronteiras e conflitos",
+    "Recursos naturais e sustentabilidade",
+    "Riscos naturais e prevenção",
+    "Mudanças climáticas e justiça ambiental",
+    "Tecnologias, dados e geografia digital",
+    "Leitura de mapas, gráficos e indicadores"
+  ],
+  "ingles": [
+    "Greetings, introductions and classroom language",
+    "Alphabet, numbers, dates and time",
+    "Pronouns, be and basic sentence order",
+    "Family, routines and everyday vocabulary",
+    "Present simple and frequency adverbs",
+    "There is/there are and prepositions",
+    "Countable and uncountable nouns",
+    "Present continuous and current actions",
+    "Past simple: regular and irregular verbs",
+    "Future with will and going to",
+    "Comparatives, superlatives and quantifiers",
+    "Modal verbs: can, should, must and have to",
+    "Questions, negatives and auxiliary verbs",
+    "Reading strategies and context clues",
+    "Listening for gist and specific information",
+    "Pronunciation, word stress and connected speech",
+    "Describing people, places and experiences",
+    "Narratives, biographies and short stories",
+    "Opinions, reasons and persuasive language",
+    "Emails, messages and formal/informal registers",
+    "Present perfect and past experiences",
+    "Conditionals, passive voice and reported speech",
+    "Media literacy and English-speaking cultures",
+    "Essay writing, presentations and exam strategies"
+  ]
+};
+for (const [slug, yearThemes] of Object.entries(fundamentalYearThemes)) {
   const byYear: Topics = {};
-  themes.forEach((theme, yearIndex) => {
+  const topicBank = fundamentalTopicBanks[slug]!;
+  yearThemes.forEach((theme, yearIndex) => {
     const year = YEARS[yearIndex]!;
-    const types = fundamentalLessonTypes[slug]!;
-    byYear[year] = types.map((type, lessonIndex) => {
+    const lessonTypes = fundamentalLessonTypes[slug]!;
+    byYear[year] = lessonTypes.map((lessonType, lessonIndex) => {
       const subjectName = subjects.find((item) => item.slug === slug)?.name ?? slug;
+      const topic = lessonIndex === 0 ? theme : topicBank[(yearIndex * 2 + lessonIndex - 1) % topicBank.length]!;
       const complexity = yearIndex < 5
         ? "Use exemplos concretos, linguagem simples, desenhos ou situações próximas da vida do estudante."
         : yearIndex < 9
@@ -880,7 +1066,7 @@ for (const [slug, themes] of Object.entries(fundamentalYearThemes)) {
         : lessonIndex === 1 ? "Acompanhe um exemplo explicado e observe como chegar à conclusão."
         : lessonIndex === 2 ? "Compare duas situações e justifique sem pular etapas."
         : "Resolva uma atividade, confira evidências e escreva uma breve autoexplicação.";
-      return `${theme} — ${type}: ${task} ${complexity} Na revisão de ${subjectName}, explique o conceito com suas palavras, anote dúvidas e pratique com questões relacionadas a este ano escolar.`;
+      return `${topic} — ${lessonType}: ${task} ${complexity} Na revisão de ${subjectName}, explique o conceito com suas palavras, anote dúvidas e pratique com questões relacionadas a ${theme.toLowerCase()} neste ano escolar.`;
     });
   });
   curriculum[slug] = byYear;
