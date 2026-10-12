@@ -719,6 +719,173 @@ for (const subject of subjects) {
   curriculum[subject.slug] = topicsByYear;
 }
 
+// Currículos aprofundados das matérias fundamentais, com trilhas específicas para cada ano.
+const fundamentalYearThemes: Record<string, string[]> = {
+  "portugues": [
+    "Alfabeto, sons e consciência fonológica",
+    "Leitura de palavras, frases e pequenos textos",
+    "Fluência, pontuação e compreensão",
+    "Narrativas, poemas e instruções",
+    "Ortografia, parágrafos e gêneros textuais",
+    "Classes de palavras e interpretação",
+    "Verbos, pronomes, conectivos e coesão",
+    "Orações, pontuação e efeitos de sentido",
+    "Concordância, regência e análise linguística",
+    "Argumentação, gêneros jornalísticos e literatura",
+    "Literatura brasileira, sintaxe e redação",
+    "Interpretação avançada, repertório e redação ENEM"
+  ],
+  "matematica": [
+    "Contagem, números, formas e adição/subtração",
+    "Sistema decimal, operações e medidas",
+    "Multiplicação, divisão, frações iniciais e problemas",
+    "Frações, decimais, perímetro e área",
+    "Operações com naturais, frações e geometria",
+    "Inteiros, divisibilidade, razões e ângulos",
+    "Racionais, porcentagem, álgebra e estatística",
+    "Equações, proporção, funções iniciais e geometria",
+    "Potências, raízes, sistemas, semelhança e Pitágoras",
+    "Funções, trigonometria, estatística e matemática financeira",
+    "Funções, geometria analítica, probabilidade e contagem",
+    "Funções avançadas, geometria espacial, estatística e revisão ENEM"
+  ],
+  "ciencias": [
+    "Seres vivos, sentidos, materiais e ambiente",
+    "Corpo humano, alimentação, plantas e água",
+    "Animais, plantas, solo, céu e ciclo da água",
+    "Ecossistemas, cadeias alimentares e misturas",
+    "Sistemas do corpo, matéria, energia e ambiente",
+    "Células, níveis de organização, rochas e água",
+    "Ecologia, atmosfera, calor e máquinas simples",
+    "Reprodução, hereditariedade, eletricidade e clima",
+    "Evolução, química básica, física e sustentabilidade",
+    "Investigação científica, matéria, energia e vida",
+    "Genética, ecologia, química e física integradas",
+    "Biotecnologia, clima, energia, saúde e preparação para exames"
+  ],
+  "biologia": [
+    "Características da vida e diversidade dos seres vivos",
+    "Células, tecidos, organismos e ecossistemas",
+    "Corpo humano, nutrição, reprodução e ambiente",
+    "Classificação, plantas, animais e relações ecológicas",
+    "Sistemas humanos, microrganismos e cadeias alimentares",
+    "Citologia, metabolismo, reprodução e biodiversidade",
+    "Genética inicial, evolução e fisiologia",
+    "Genética, ecologia, classificação e saúde",
+    "Evolução, biomas, fisiologia e genética aplicada",
+    "Citologia, bioquímica, metabolismo e genética",
+    "Evolução, fisiologia, ecologia e biotecnologia",
+    "Genética molecular, ecologia, evolução e questões integradas"
+  ],
+  "historia": [
+    "Família, memória, passado e fontes históricas",
+    "Comunidades, modos de vida e mudanças no tempo",
+    "Povos antigos, agricultura e patrimônio cultural",
+    "Civilizações antigas, África e povos americanos",
+    "Grécia, Roma, África e sociedades medievais",
+    "Feudalismo, islamismo, África e intercâmbios",
+    "Renascimento, reformas, expansão e colonização",
+    "Brasil colonial, escravidão, resistências e revoluções",
+    "Independência, Império, abolição e República",
+    "Industrialização, imperialismo e guerras mundiais",
+    "Brasil republicano, ditaduras, Guerra Fria e movimentos sociais",
+    "História contemporânea, democracia, memória e revisão ENEM"
+  ],
+  "geografia": [
+    "Lugar, paisagem, moradia e orientação",
+    "Mapas simples, campo/cidade e recursos naturais",
+    "Município, paisagens, trabalho e água",
+    "Mapas, regiões, clima e vegetação",
+    "Brasil, população, biomas e atividades econômicas",
+    "Cartografia, relevo, água e clima",
+    "População, urbanização, agricultura e indústria",
+    "Globalização, América, África e desigualdades",
+    "Território brasileiro, economia, ambiente e geopolítica",
+    "Cartografia avançada, população, urbanização e economia",
+    "Geopolítica, globalização, energia e questões ambientais",
+    "Geografia mundial, indicadores, clima e análise espacial ENEM"
+  ],
+  "ingles": [
+    "Greetings, classroom words and alphabet",
+    "Numbers, colors, family and simple sentences",
+    "Daily routines, time, places and questions",
+    "Present simple, descriptions and short readings",
+    "Vocabulary, present simple and everyday communication",
+    "Present continuous, directions and descriptions",
+    "Past simple, routines, plans and short texts",
+    "Comparatives, future forms and listening strategies",
+    "Modal verbs, narratives and connected paragraphs",
+    "Reading, listening, grammar in context and opinions",
+    "Present perfect, conditionals, media and essay structure",
+    "Advanced reading, argumentation, writing and ENEM strategies"
+  ]
+};
+const fundamentalLessonTypes: Record<string, string[]> = {
+  "portugues": [
+    "Leitura guiada",
+    "Vocabulário e conceito",
+    "Exemplo comentado",
+    "Prática de escrita"
+  ],
+  "matematica": [
+    "Conceito e representação",
+    "Exemplo resolvido passo a passo",
+    "Estratégia de resolução",
+    "Problema aplicado"
+  ],
+  "ciencias": [
+    "Conceito científico",
+    "Observação e evidências",
+    "Exemplo do cotidiano",
+    "Investigação e registro"
+  ],
+  "biologia": [
+    "Conceito e vocabulário",
+    "Processo explicado",
+    "Exemplo biológico",
+    "Interpretação de evidências"
+  ],
+  "historia": [
+    "Contexto e cronologia",
+    "Fontes e perspectivas",
+    "Causa, mudança e consequência",
+    "Comparação e reflexão"
+  ],
+  "geografia": [
+    "Conceito espacial",
+    "Mapa, gráfico ou dado",
+    "Estudo de caso",
+    "Relação sociedade-ambiente"
+  ],
+  "ingles": [
+    "Vocabulary in context",
+    "Grammar in use",
+    "Reading or listening practice",
+    "Speaking or writing task"
+  ]
+};
+for (const [slug, themes] of Object.entries(fundamentalYearThemes)) {
+  const byYear: Topics = {};
+  themes.forEach((theme, yearIndex) => {
+    const year = YEARS[yearIndex]!;
+    const types = fundamentalLessonTypes[slug]!;
+    byYear[year] = types.map((type, lessonIndex) => {
+      const subjectName = subjects.find((item) => item.slug === slug)?.name ?? slug;
+      const complexity = yearIndex < 5
+        ? "Use exemplos concretos, linguagem simples, desenhos ou situações próximas da vida do estudante."
+        : yearIndex < 9
+          ? "Relacione conceitos, compare exemplos e registre o raciocínio em etapas."
+          : "Aprofunde a análise, use vocabulário específico, interprete dados e conecte o tema a questões de vestibulares e ENEM.";
+      const task = lessonIndex === 0 ? "Aprenda as definições e identifique as ideias principais."
+        : lessonIndex === 1 ? "Acompanhe um exemplo explicado e observe como chegar à conclusão."
+        : lessonIndex === 2 ? "Compare duas situações e justifique sem pular etapas."
+        : "Resolva uma atividade, confira evidências e escreva uma breve autoexplicação.";
+      return `${theme} — ${type}: ${task} ${complexity} Na revisão de ${subjectName}, explique o conceito com suas palavras, anote dúvidas e pratique com questões relacionadas a este ano escolar.`;
+    });
+  });
+  curriculum[slug] = byYear;
+}
+
 export function parseTopic(t: string) {
   const [title, text] = t.split(" | ");
   return { title: title ?? t, text: text ?? "" };
