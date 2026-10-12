@@ -2110,6 +2110,293 @@ for (const item of expandedSubjectCatalog) {
 }
 
 
+// Trilhas Fundamentais aprofundadas: conteúdos próprios para as sete matérias centrais.
+const fundamentalTracks = [
+  {
+    "slug": "portugues",
+    "name": "Português",
+    "emoji": "📚",
+    "color": "bg-rose-100",
+    "intro": "Leitura, interpretação, gramática, literatura, oralidade e produção textual em uma trilha aprofundada por ano.",
+    "topics": [
+      "Alfabetização e consciência fonológica",
+      "Sistema alfabético e ortografia",
+      "Leitura fluente e compreensão",
+      "Gêneros textuais e finalidade",
+      "Narrativa: personagens, tempo e espaço",
+      "Poema, ritmo, rima e figuras de linguagem",
+      "Substantivo, adjetivo, artigo e numeral",
+      "Pronomes, verbos, advérbios e conectivos",
+      "Frase, oração e período",
+      "Sujeito, predicado e complementos",
+      "Concordância verbal e nominal",
+      "Regência e crase",
+      "Pontuação e efeitos de sentido",
+      "Coesão, coerência e progressão temática",
+      "Variação linguística e preconceito linguístico",
+      "Argumentação, tese e evidências",
+      "Artigo de opinião e editorial",
+      "Notícia, reportagem e checagem de fontes",
+      "Conto, crônica, romance e novela",
+      "Literatura brasileira: escolas e contextos",
+      "Intertextualidade e análise literária",
+      "Resumo, resenha e paráfrase",
+      "Redação dissertativo-argumentativa",
+      "Revisão, reescrita e adequação ao público"
+    ]
+  },
+  {
+    "slug": "matematica",
+    "name": "Matemática",
+    "emoji": "🧮",
+    "color": "bg-sky-100",
+    "intro": "Uma trilha completa de matemática com conceitos, estratégias, resolução passo a passo e aplicações por ano escolar.",
+    "topics": [
+      "Contagem, leitura e escrita de números",
+      "Sistema decimal e valor posicional",
+      "Adição, subtração, multiplicação e divisão",
+      "Cálculo mental e estimativa",
+      "Frações e representações",
+      "Números decimais e operações",
+      "Múltiplos, divisores e números primos",
+      "Razão, proporção e regra de três",
+      "Porcentagem, aumentos e descontos",
+      "Números inteiros e racionais",
+      "Potências, raízes e notação científica",
+      "Expressões algébricas e produtos notáveis",
+      "Equações e inequações",
+      "Sistemas de equações",
+      "Sequências, padrões e funções",
+      "Plano cartesiano e gráficos",
+      "Ângulos, polígonos e circunferência",
+      "Perímetro, áreas e volumes",
+      "Semelhança, escala e Teorema de Pitágoras",
+      "Trigonometria no triângulo retângulo",
+      "Geometria analítica",
+      "Estatística: média, mediana e dispersão",
+      "Probabilidade e análise combinatória",
+      "Funções, exponenciais, logaritmos e matemática financeira"
+    ]
+  },
+  {
+    "slug": "ciencias",
+    "name": "Ciências",
+    "emoji": "🔬",
+    "color": "bg-emerald-100",
+    "intro": "Ciências da natureza com investigação, experiências seguras, vida, matéria, energia, Terra e ambiente em todos os anos.",
+    "topics": [
+      "Observação, perguntas e método científico",
+      "Seres vivos e necessidades básicas",
+      "Células e organização dos organismos",
+      "Corpo humano e sistemas",
+      "Alimentação, nutrientes e saúde",
+      "Microrganismos e prevenção de doenças",
+      "Ecossistemas e cadeias alimentares",
+      "Biodiversidade e conservação",
+      "Água: ciclo, usos e tratamento",
+      "Ar, atmosfera e clima",
+      "Solo, rochas e formação do relevo",
+      "Matéria, propriedades e estados físicos",
+      "Misturas e métodos de separação",
+      "Transformações físicas e químicas",
+      "Átomos, moléculas e elementos",
+      "Forças, movimento e máquinas simples",
+      "Energia, calor e temperatura",
+      "Luz, som e ondas",
+      "Eletricidade e magnetismo",
+      "Sistema Solar e movimentos da Terra",
+      "Lua, fases e eclipses",
+      "Recursos naturais e sustentabilidade",
+      "Mudanças climáticas e impactos",
+      "Investigação, dados, modelos e evidências"
+    ]
+  },
+  {
+    "slug": "biologia",
+    "name": "Biologia",
+    "emoji": "🧬",
+    "color": "bg-lime-100",
+    "intro": "Biologia aprofundada: células, genética, evolução, ecologia, fisiologia e investigação da vida, do básico ao Ensino Médio.",
+    "topics": [
+      "Características dos seres vivos",
+      "Microscopia e teoria celular",
+      "Organelas e metabolismo celular",
+      "Membrana, transporte e comunicação celular",
+      "Fotossíntese e respiração celular",
+      "Mitose, meiose e reprodução",
+      "DNA, RNA e síntese de proteínas",
+      "Genes, alelos e hereditariedade",
+      "Genética mendeliana e heredogramas",
+      "Mutações e variabilidade genética",
+      "Evolução, seleção natural e adaptação",
+      "Origem e diversidade da vida",
+      "Classificação e filogenia",
+      "Vírus, bactérias, fungos e protistas",
+      "Botânica: tecidos, órgãos e reprodução vegetal",
+      "Zoologia e adaptações animais",
+      "Anatomia e fisiologia humana",
+      "Sistema nervoso e endócrino",
+      "Imunidade, saúde e prevenção",
+      "Ecologia de populações e comunidades",
+      "Fluxo de energia e ciclos biogeoquímicos",
+      "Biomas brasileiros e biodiversidade",
+      "Biotecnologia e bioética",
+      "Evidências, experimentos e interpretação de dados"
+    ]
+  },
+  {
+    "slug": "historia",
+    "name": "História",
+    "emoji": "🏛️",
+    "color": "bg-amber-100",
+    "intro": "História mundial e do Brasil com fontes históricas, cronologia, diferentes perspectivas e análise crítica em cada ano.",
+    "topics": [
+      "Tempo histórico, memória e fontes",
+      "Povos originários e primeiras sociedades",
+      "Agricultura e sedentarização",
+      "Civilizações da Mesopotâmia e do Egito",
+      "Grécia antiga e cidadania",
+      "Roma antiga e legado",
+      "África antiga e reinos africanos",
+      "Sociedades americanas antes da colonização",
+      "Feudalismo e mundo medieval",
+      "Islamismo e redes de intercâmbio",
+      "Renascimento e reformas religiosas",
+      "Expansão marítima e colonização",
+      "Povos indígenas e colonização do Brasil",
+      "Escravidão, resistência e diáspora africana",
+      "Brasil colonial: economia e sociedade",
+      "Iluminismo e revoluções atlânticas",
+      "Independência e formação do Brasil",
+      "Império, abolição e República",
+      "Industrialização e movimentos sociais",
+      "Imperialismo e Primeira Guerra Mundial",
+      "Revolução Russa e entre-guerras",
+      "Nazifascismo e Segunda Guerra Mundial",
+      "Guerra Fria, ditadura e redemocratização",
+      "História contemporânea, direitos e memória"
+    ]
+  },
+  {
+    "slug": "geografia",
+    "name": "Geografia",
+    "emoji": "🌎",
+    "color": "bg-green-100",
+    "intro": "Geografia física e humana, cartografia, população, economia, território e ambiente com estudos de caso por ano.",
+    "topics": [
+      "Lugar, paisagem, território e região",
+      "Orientação, pontos cardeais e localização",
+      "Mapas, escalas, legendas e coordenadas",
+      "Globo terrestre, continentes e oceanos",
+      "Relevo, rochas e agentes modeladores",
+      "Tempo atmosférico e clima",
+      "Água, bacias hidrográficas e oceanos",
+      "Biomas, vegetação e biodiversidade",
+      "Solo, uso da terra e conservação",
+      "População, distribuição e migrações",
+      "Urbanização, cidades e redes urbanas",
+      "Campo, agricultura e sistemas alimentares",
+      "Indústria, energia e cadeias produtivas",
+      "Transportes, comércio e globalização",
+      "Desigualdades socioespaciais",
+      "Brasil: regiões, estados e território",
+      "América Latina e relações regionais",
+      "Europa, África, Ásia e Oceania",
+      "Geopolítica, fronteiras e conflitos",
+      "Recursos naturais e sustentabilidade",
+      "Riscos naturais e prevenção",
+      "Mudanças climáticas e justiça ambiental",
+      "Tecnologias, dados e geografia digital",
+      "Leitura de mapas, gráficos e indicadores"
+    ]
+  },
+  {
+    "slug": "ingles",
+    "name": "Inglês",
+    "emoji": "🇬🇧",
+    "color": "bg-indigo-100",
+    "intro": "Inglês por níveis e anos: vocabulário, gramática em contexto, leitura, escuta, fala e escrita comunicativa.",
+    "topics": [
+      "Greetings, introductions and classroom language",
+      "Alphabet, numbers, dates and time",
+      "Pronouns, be and basic sentence order",
+      "Family, routines and everyday vocabulary",
+      "Present simple and frequency adverbs",
+      "There is/there are and prepositions",
+      "Countable and uncountable nouns",
+      "Present continuous and current actions",
+      "Past simple: regular and irregular verbs",
+      "Future with will and going to",
+      "Comparatives, superlatives and quantifiers",
+      "Modal verbs: can, should, must and have to",
+      "Questions, negatives and auxiliary verbs",
+      "Reading strategies and context clues",
+      "Listening for gist and specific information",
+      "Pronunciation, word stress and connected speech",
+      "Describing people, places and experiences",
+      "Narratives, biographies and short stories",
+      "Opinions, reasons and persuasive language",
+      "Emails, messages and formal/informal registers",
+      "Present perfect and past experiences",
+      "Conditionals, passive voice and reported speech",
+      "Media literacy and English-speaking cultures",
+      "Essay writing, presentations and exam strategies"
+    ]
+  }
+] as const;
+const fundamentalPageTitles = [
+  "Conceitos essenciais", "Vocabulário e linguagem da matéria", "Como interpretar e analisar",
+  "Métodos e estratégias", "Exemplos resolvidos e comentados", "Aplicações no cotidiano",
+  "Desafios e pensamento crítico", "Revisão e preparação para avaliações",
+];
+for (const track of fundamentalTracks) {
+  const subject = subjects.find((item) => item.slug === track.slug);
+  if (!subject) continue;
+  subject.intro = track.intro;
+  subject.studyPages = Array.from({ length: 8 }, (_, index) => {
+    const topics = track.topics.slice(index * 3, index * 3 + 3);
+    const text = index === 0
+      ? `Esta unidade estabelece a base de ${track.name}. Você vai estudar ${topics.join(", ")}, aprender o vocabulário essencial e relacionar cada conceito a exemplos claros.`
+      : index === 4
+        ? `Aprofunde ${topics.join(", ")} com exemplos comentados. Observe os passos, identifique as ideias principais e tente resolver uma situação semelhante antes de consultar a explicação.`
+        : index === 7
+          ? `Consolide ${topics.join(", ")} por meio de revisão ativa, comparação de conceitos e questões de aplicação. Registre dúvidas, explique as respostas com suas palavras e retome os pontos que ainda exigem prática.`
+          : `Estude ${topics.join(", ")} em sequência. A página apresenta definições, relações entre ideias, exemplos e estratégias para interpretar problemas e aplicar o conhecimento de ${track.name} em diferentes contextos.`;
+    return { title: fundamentalPageTitles[index]!, text, topics: [...topics] };
+  });
+  subject.summaries = track.topics.slice(0, 16).reduce((all, topic, index) => {
+    if (index % 2 === 0) all.push({ title: topic, text: `Em ${track.name}, “${topic}” é um conceito importante. Entenda a definição, observe como se relaciona aos outros temas e procure um exemplo que demonstre sua aplicação. Ao revisar, explique a ideia sem copiar a frase do material.` });
+    return all;
+  }, [] as {title:string;text:string}[]);
+  subject.examples = track.topics.slice(0, 20).map((topic, index) => `Exemplo ${index + 1} — ${topic}: identifique a ideia central, explique o conceito com suas próprias palavras e relacione-o a uma situação real, texto, problema, observação ou dado pertinente a ${track.name}.`);
+  subject.exercises = track.topics.slice(0, 16).map((topic, index) => ({
+    q: `Explique ${topic.toLowerCase()} e apresente um exemplo ou aplicação em ${track.name}.`,
+    a: `Uma boa resposta deve definir ${topic.toLowerCase()} com clareza, apresentar uma relação correta com ${track.name} e incluir um exemplo pertinente. Confira se a explicação está completa e se distingue esse conceito de ideias semelhantes.`,
+  }));
+  subject.questions = Array.from({ length: 10 }, (_, index) => {
+    const topic = track.topics[index];
+    const otherTopics = track.topics.filter((_, i) => i !== index);
+    const options = [
+      `A alternativa que define ou aplica corretamente ${topic.toLowerCase()} em ${track.name}.`,
+      `Uma ideia de outra área que não explica diretamente ${topic.toLowerCase()}.`,
+      `Uma afirmação sem evidências ou relação com o conceito estudado.`,
+      `Uma interpretação que confunde ${topic.toLowerCase()} com outro assunto.`,
+    ];
+    const answer = (index * 3) % 4;
+    const correct = options[0];
+    const shuffled = [...options];
+    const swap = shuffled[answer]; shuffled[answer] = correct; shuffled[0] = swap;
+    return {
+      q: `Na matéria ${track.name}, qual alternativa representa a compreensão mais adequada de “${topic}”?`,
+      options: shuffled,
+      answer,
+      level: (index < 3 ? "facil" : index < 7 ? "medio" : "dificil") as "facil" | "medio" | "dificil",
+      explanation: `A resposta correta relaciona “${topic}” ao campo de ${track.name}. Para dominar o conceito, revise a página correspondente, identifique a definição e observe como ela se aplica em exemplos e situações concretas. ${otherTopics[index % otherTopics.length]} também pode ajudar a conectar esse tema ao restante da matéria.`,
+    };
+  });
+}
+
+
 // Gera quizzes completos para as novas matérias a partir das páginas didáticas.
 function buildGeneratedQuestions(subject: Subject): Question[] {
   const pages = subject.studyPages;
