@@ -28,12 +28,13 @@ function Materias() {
   const [query, setQuery] = useState("");
   const [category, setCategory] = useState<"fundamentais" | "todas">("fundamentais");
   const { limits, plan } = usePlanAccess();
-  const catalogSubjects = subjects.slice(0, limits.subjects);
+  const catalogSubjects = subjects;
   const normalize = (text: string) => text.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
   const filteredSubjects = catalogSubjects.filter((subject) => {
     const matchesQuery = normalize(subject.name).includes(normalize(query.trim()));
     return matchesQuery && (category === "todas" || fundamentalSlugs.has(subject.slug));
   });
+  const availableCount = Math.min(limits.subjects, subjects.length);
 
   return (
     <SiteLayout>
@@ -84,25 +85,28 @@ function Materias() {
             />
           </div>
         </div>
-        <p className="mb-4 text-sm text-muted-foreground">Exibindo {filteredSubjects.length} de {catalogSubjects.length} matérias disponíveis neste plano.</p>
+        <p className="mb-4 text-sm text-muted-foreground">Exibindo {availableCount} de {catalogSubjects.length} matérias liberadas neste plano. As demais aparecem bloqueadas.</p>
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          {filteredSubjects.map((s) => (
-            <Link key={s.slug} to="/materias/$slug" params={{ slug: s.slug }}>
-              <Card className="h-full">
-                <span className={`flex h-12 w-12 items-center justify-center rounded-xl text-2xl ${s.color}`}>
-                  {s.emoji}
-                </span>
-                <h2 className="mt-4 text-lg font-semibold text-foreground">{s.name}</h2>
-                <p className="mt-1 text-sm text-muted-foreground">{s.intro}</p>
-                <span className="mt-3 inline-block text-sm font-semibold text-primary">Abrir matéria →</span>
-              </Card>
-            </Link>
-          ))}
+          {filteredSubjects.map((s) => {
+            const locked = subjects.findIndex((item) => item.slug === s.slug) >= limits.subjects;
+            const contents = <Card className={`h-full ${locked ? "opacity-80" : ""}`}>
+              <div className="flex items-start justify-between gap-2">
+                <span className={`flex h-12 w-12 items-center justify-center rounded-xl text-2xl ${s.color}`}>{s.emoji}</span>
+                {locked && <span className="inline-flex items-center gap-1 rounded-full bg-muted px-2 py-1 text-xs font-bold text-muted-foreground">🔒 Bloqueada</span>}
+              </div>
+              <h2 className="mt-4 text-lg font-semibold text-foreground">{s.name}</h2>
+              <p className="mt-1 text-sm text-muted-foreground">{s.intro}</p>
+              <span className={`mt-3 inline-block text-sm font-semibold ${locked ? "text-muted-foreground" : "text-primary"}`}>{locked ? "Fazer upgrade para acessar →" : "Abrir matéria →"}</span>
+            </Card>;
+            return locked
+              ? <Link key={s.slug} to="/planos" aria-label={`${s.name} bloqueada. Ver planos para liberar.`}>{contents}</Link>
+              : <Link key={s.slug} to="/materias/$slug" params={{ slug: s.slug }}>{contents}</Link>;
+          })}
         </div>
         {!limits.isUnlimited && (
           <div className="mt-8 rounded-2xl border border-primary/20 bg-primary/5 p-5 text-sm text-foreground">
             <p className="font-semibold">Quer estudar mais matérias?</p>
-            <p className="mt-1 text-muted-foreground">O plano Médio libera até 60 matérias e o Master libera todas.</p>
+            <p className="mt-1 text-muted-foreground">O Básico libera 25 matérias, o Médio 60 e o Master libera todas.</p>
             <Link to="/planos" className="mt-3 inline-flex font-semibold text-primary hover:underline">Comparar planos →</Link>
           </div>
         )}
