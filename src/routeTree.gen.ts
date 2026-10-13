@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AlterarSenhaRouteImport } from './routes/alterar-senha'
+import { Route as AjudaRouteImport } from './routes/ajuda'
 import { Route as CadernoErrosRouteImport } from './routes/caderno-erros'
 import { Route as CartoesRouteImport } from './routes/cartoes'
 import { Route as RedacaoRouteImport } from './routes/redacao'
@@ -39,6 +40,11 @@ import { Route as AulaSlugYearTopicRouteImport } from './routes/aula.$slug.$year
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AjudaRoute = AjudaRouteImport.update({
+  id: '/ajuda',
+  path: '/ajuda',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AlterarSenhaRoute = AlterarSenhaRouteImport.update({
@@ -171,6 +177,7 @@ const AulaSlugYearTopicRoute = AulaSlugYearTopicRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/alterar-senha': typeof AlterarSenhaRoute
+  '/ajuda': typeof AjudaRoute
   '/caderno-erros': typeof CadernoErrosRoute
   '/cartoes': typeof CartoesRoute
   '/redacao': typeof RedacaoRoute
@@ -254,6 +261,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/alterar-senha'
+    | '/ajuda'
     | '/caderno-erros'
     | '/cartoes'
     | '/redacao'
@@ -282,6 +290,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/alterar-senha'
+    | '/ajuda'
     | '/caderno-erros'
     | '/cartoes'
     | '/redacao'
@@ -310,6 +319,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/alterar-senha'
+    | '/ajuda'
     | '/caderno-erros'
     | '/cartoes'
     | '/redacao'
@@ -377,6 +387,13 @@ declare module '@tanstack/react-router' {
       path: '/alterar-senha'
       fullPath: '/alterar-senha'
       preLoaderRoute: typeof AlterarSenhaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ajuda': {
+      id: '/ajuda'
+      path: '/ajuda'
+      fullPath: '/ajuda'
+      preLoaderRoute: typeof AjudaRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/caderno-erros': {
@@ -553,6 +570,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AlterarSenhaRoute: AlterarSenhaRoute,
+  AjudaRoute: AjudaRoute,
   CadernoErrosRoute: CadernoErrosRoute,
   CartoesRoute: CartoesRoute,
   RedacaoRoute: RedacaoRoute,
