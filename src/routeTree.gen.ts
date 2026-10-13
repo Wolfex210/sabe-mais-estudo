@@ -182,6 +182,7 @@ export interface FileRoutesByFullPath {
   '/simulados': typeof SimuladosRoute
   '/tutor-ia': typeof TutorIaRoute
   '/tutor-ia': typeof TutorIaRoute
+  '/tutor-ia': typeof TutorIaRoute
   '/checkout/return': typeof CheckoutReturnRoute
   '/faculdade/$slug': typeof FaculdadeSlugRoute
   '/materias/$slug': typeof MateriasSlugRoute
@@ -290,6 +291,7 @@ export interface FileRouteTypes {
     | '/quiz'
     | '/revisao'
     | '/simulados'
+    | '/tutor-ia'
     | '/checkout/return'
     | '/faculdade/$slug'
     | '/materias/$slug'
@@ -316,6 +318,7 @@ export interface FileRouteTypes {
     | '/quiz'
     | '/revisao'
     | '/simulados'
+    | '/tutor-ia'
     | '/checkout/return'
     | '/faculdade/$slug'
     | '/materias/$slug'
