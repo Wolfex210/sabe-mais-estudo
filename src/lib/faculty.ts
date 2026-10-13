@@ -336,18 +336,21 @@ const courseVisuals: Record<string,{emoji:string;alt:string;topics:string[]}> = 
   "fisica":{emoji:"⚛️",alt:"Física, matéria, energia e fenômenos naturais",topics:["mecânica","termodinâmica","ondas","eletromagnetismo","óptica","física moderna","quântica","relatividade","laboratório","modelagem computacional"]}
 };
 
-function makeDiscipline(name:string, seed:string, phase:string, practice:string):FacultyDiscipline {
-  const overview = `${name} é estudada dentro de ${seed}. O aluno parte dos fundamentos, conecta teoria e aplicações e aprende a interpretar problemas da área antes de avançar para situações mais complexas.`;
+function makeDiscipline(
+  name:string, courseName:string, focus:string, phase:string, practice:string, topics:string[], topicOffset:number
+):FacultyDiscipline {
+  const selected = Array.from({length:4},(_,i)=>topics[(topicOffset+i)%topics.length]);
+  const overview = `${name} integra a trilha de ${courseName} e aprofunda ${focus.toLowerCase()} por meio de conceitos, métodos e aplicações. Nesta etapa (${phase.toLowerCase()}), o estudante deve compreender os fundamentos, justificar escolhas com evidências e relacionar o conteúdo a situações reais da área. Os exemplos são educacionais e devem ser adaptados às normas, aos equipamentos e ao contexto profissional.`;
   return {
     name,
     overview,
     modules:[
-      `Fundamentos e vocabulário essencial de ${name.toLowerCase()}`,
-      `Modelos, métodos e ferramentas usados em ${seed.toLowerCase()}`,
-      `Análise de problemas, evidências e tomada de decisão`,
-      `${phase}: integração do conteúdo com situações profissionais`
+      `Conceitos essenciais: ${selected[0]} e sua relação com ${name.toLowerCase()}`,
+      `Métodos e ferramentas: como analisar ${selected[1]} passo a passo`,
+      `Estudo de caso: aplicação de ${selected[2]} em um problema de ${courseName.toLowerCase()}`,
+      `Análise crítica: limites, riscos, ética e indicadores ligados a ${selected[3]}`
     ],
-    practice
+    practice: `${practice} — registre o objetivo, os dados ou pressupostos utilizados, as etapas da análise, o resultado esperado e uma limitação que precisaria ser verificada.`
   };
 }
 
@@ -386,7 +389,11 @@ export const facultyCourses: FacultyCourse[] = courseSeeds.map(([slug,name,area,
     semesters:phases.map((p,si)=>({
       period:p.period,
       theme:p.theme,
-      disciplines:p.items.map((item,di)=>makeDiscipline(item,name,p.period,t.practice[(si+di+index)%t.practice.length]))
+      disciplines:p.items.map((item,di)=>makeDiscipline(
+        item, name, focus, p.period, t.practice[(si+di+index)%t.practice.length],
+        (courseVisuals[slug] ?? {topics:[focus,"fundamentos da área","métodos de pesquisa","ferramentas profissionais","estudo de caso","análise de dados","ética e responsabilidade","projeto aplicado","inovação","carreiras e aplicações"]}).topics,
+        (si*3+di+index)%((courseVisuals[slug] ?? {topics:[focus]}).topics.length)
+      ))
     }))
   };
 });
