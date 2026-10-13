@@ -26,7 +26,7 @@ const navGroups = [
     items: [
       { to: "/plano-estudos", label: "Plano de estudos", icon: CalendarDays },
       { to: "/quiz", label: "Quizzes", icon: Brain },
-      { to: "/desafios", label: "Desafios", icon: Trophy },
+      { to: "/desafios", label: "Gamificação", icon: Trophy },
       { to: "/simulados", label: "Simulados", icon: ClipboardCheck },
       { to: "/revisao", label: "Revisão inteligente", icon: RotateCcw },
       { to: "/caderno-erros", label: "Caderno de erros", icon: NotebookPen },
