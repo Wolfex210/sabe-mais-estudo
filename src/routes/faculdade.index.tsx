@@ -3,6 +3,7 @@ import { Search, GraduationCap, Clock3, ArrowRight } from "lucide-react";
 import { useMemo, useState } from "react";
 import { SiteLayout, PageHeader, Card } from "@/components/SiteLayout";
 import { facultyCourses } from "@/lib/faculty";
+import { usePlanAccess } from "@/lib/plan-access";
 
 export const Route = createFileRoute("/faculdade/")({
   head: () => ({ meta: [
@@ -15,14 +16,16 @@ export const Route = createFileRoute("/faculdade/")({
 function Faculdade() {
   const [query,setQuery]=useState("");
   const [area,setArea]=useState("Todas");
-  const areas=["Todas",...Array.from(new Set(facultyCourses.map(c=>c.area)))];
+  const { limits, plan } = usePlanAccess();
+  const catalogCourses = facultyCourses.slice(0, limits.courses);
+  const areas=["Todas",...Array.from(new Set(catalogCourses.map(c=>c.area)))];
   const filtered=useMemo(()=>{
     const q=query.trim().toLowerCase();
-    return facultyCourses.filter(c=>(area==="Todas"||c.area===area)&&(!q||c.name.toLowerCase().includes(q)||c.description.toLowerCase().includes(q)));
-  },[query,area]);
+    return catalogCourses.filter(c=>(area==="Todas"||c.area===area)&&(!q||c.name.toLowerCase().includes(q)||c.description.toLowerCase().includes(q)));
+  },[query,area,catalogCourses]);
 
   return <SiteLayout>
-    <PageHeader title="Faculdade" subtitle="Explore 40 trilhas educacionais aprofundadas, do primeiro semestre ao projeto final." />
+    <PageHeader title="Faculdade" subtitle={plan === "basico" ? "Plano Básico: 25 cursos de faculdade disponíveis." : plan === "medio" ? "Plano Médio: 70 cursos de faculdade disponíveis." : "Explore o catálogo completo de trilhas educacionais, do primeiro semestre ao projeto final."} />
     <div className="mx-auto w-full max-w-6xl px-4 py-10">
       <div className="grid gap-4 md:grid-cols-[1fr_auto]">
         <div className="relative">
@@ -44,7 +47,8 @@ function Faculdade() {
         </div>
       </div>
 
-      <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+      <p className="mt-6 text-sm text-muted-foreground">Exibindo {filtered.length} de {catalogCourses.length} cursos disponíveis neste plano.</p>
+      <div className="mt-4 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
         {filtered.map(course=><Link key={course.slug} to="/faculdade/$slug" params={{slug:course.slug}}>
           <Card className="h-full">
             <div className="flex items-start justify-between gap-3">
@@ -59,6 +63,11 @@ function Faculdade() {
           </Card>
         </Link>)}
       </div>
+      {!limits.isUnlimited && <div className="mt-8 rounded-2xl border border-primary/20 bg-primary/5 p-5 text-sm">
+        <p className="font-semibold text-foreground">Quer explorar mais cursos?</p>
+        <p className="mt-1 text-muted-foreground">O plano Básico inclui 25 cursos, o Médio inclui 70 e o Master libera todos.</p>
+        <Link to="/planos" className="mt-3 inline-flex font-semibold text-primary hover:underline">Comparar planos →</Link>
+      </div>}
       {filtered.length===0&&<p className="py-12 text-center text-sm text-muted-foreground">Nenhum curso encontrado.</p>}
     </div>
   </SiteLayout>;
