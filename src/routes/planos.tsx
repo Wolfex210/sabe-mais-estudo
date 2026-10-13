@@ -42,10 +42,7 @@ const plans: Array<{
     features: [
       "Até 25 matérias do catálogo",
       "Até 25 trilhas de cursos de faculdade",
-      "Quizzes e explicações das questões",
-      "Plano de estudos e ferramentas de foco",
-      "Caderno de erros, flashcards e favoritos",
-      "Dashboard e acompanhamento do progresso",
+      "Acesso às ferramentas de estudo da plataforma",
     ],
   },
   {
@@ -57,10 +54,7 @@ const plans: Array<{
     features: [
       "Até 60 matérias do catálogo",
       "Até 70 trilhas de cursos de faculdade",
-      "Todos os recursos de estudo do Sabe Mais",
-      "Simulados cronometrados com relatório",
-      "Oficina de redação e checklist de revisão",
-      "Certificados internos de conclusão de trilha",
+      "Acesso às ferramentas de estudo da plataforma",
     ],
   },
   {
@@ -71,10 +65,7 @@ const plans: Array<{
     features: [
       "Todas as matérias disponíveis no catálogo",
       "Todas as trilhas de cursos de faculdade disponíveis",
-      "Todos os recursos de estudo do Sabe Mais",
-      "Quizzes, simulados e revisões",
-      "Plano personalizado e relatórios de desempenho",
-      "Flashcards, oficina de redação e certificados internos",
+      "Acesso às ferramentas de estudo da plataforma",
     ],
   },
 ];
@@ -143,6 +134,14 @@ function Planos() {
             </Card>
           ))}
         </div>
+
+        <Card className="mt-8">
+          <h2 className="text-lg font-bold">Ferramentas de estudo incluídas</h2>
+          <p className="mt-2 text-sm text-muted-foreground">Os recursos abaixo estão disponíveis na plataforma; o que muda entre os planos é o limite de acesso ao catálogo de matérias e trilhas.</p>
+          <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+            {["Quizzes com explicações", "Plano de estudos personalizado", "Simulados cronometrados", "Caderno de erros e revisão", "Flashcards e favoritos", "Oficina de redação", "Dashboard e progresso", "Gamificação e ferramentas de foco", "Comprovantes internos de conclusão"].map(item => <div key={item} className="rounded-xl border border-border p-3 text-sm">✓ {item}</div>)}
+          </div>
+        </Card>
 
         {selectedPlan && user && <div className="mx-auto max-w-3xl" key={selectedPlan}>
           <StripeEmbeddedCheckout priceId={STRIPE_PLANS[selectedPlan].lookupKey} />
