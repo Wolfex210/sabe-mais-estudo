@@ -4,7 +4,7 @@ import { useEffect, useState, type ReactNode } from "react";
 import {
   Menu, X, GraduationCap, Download, House, BookOpen, GraduationCap as College,
   Wrench, Brain, Trophy, LayoutDashboard, CalendarDays, NotebookPen,
-  RotateCcw, ClipboardCheck, TrendingUp, CreditCard, Search, UserRound, Sparkles,
+  RotateCcw, ClipboardCheck, TrendingUp, CreditCard, Search, UserRound,
 } from "lucide-react";
 import { useAppState, levelOf, trialExpired } from "@/lib/store";
 import { useAuth } from "@/lib/auth";
@@ -32,7 +32,6 @@ const navGroups = [
     items: [
       { to: "/plano-estudos", label: "Plano de estudos", icon: CalendarDays },
       { to: "/quiz", label: "Quizzes", icon: Brain },
-      { to: "/tutor-ia", label: "Tutor de estudos IA", icon: Sparkles },
       { to: "/desafios", label: "Gamificação", icon: Trophy },
       { to: "/simulados", label: "Simulados", icon: ClipboardCheck },
       { to: "/revisao", label: "Revisão inteligente", icon: RotateCcw },
