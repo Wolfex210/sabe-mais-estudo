@@ -12,6 +12,8 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AlterarSenhaRouteImport } from './routes/alterar-senha'
 import { Route as CadernoErrosRouteImport } from './routes/caderno-erros'
+import { Route as CartoesRouteImport } from './routes/cartoes'
+import { Route as RedacaoRouteImport } from './routes/redacao'
 import { Route as ContaRouteImport } from './routes/conta'
 import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as DesafiosRouteImport } from './routes/desafios'
@@ -47,6 +49,16 @@ const AlterarSenhaRoute = AlterarSenhaRouteImport.update({
 const CadernoErrosRoute = CadernoErrosRouteImport.update({
   id: '/caderno-erros',
   path: '/caderno-erros',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CartoesRoute = CartoesRouteImport.update({
+  id: '/cartoes',
+  path: '/cartoes',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RedacaoRoute = RedacaoRouteImport.update({
+  id: '/redacao',
+  path: '/redacao',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ContaRoute = ContaRouteImport.update({
@@ -160,6 +172,8 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/alterar-senha': typeof AlterarSenhaRoute
   '/caderno-erros': typeof CadernoErrosRoute
+  '/cartoes': typeof CartoesRoute
+  '/redacao': typeof RedacaoRoute
   '/conta': typeof ContaRoute
   '/dashboard': typeof DashboardRoute
   '/desafios': typeof DesafiosRoute
@@ -241,6 +255,8 @@ export interface FileRouteTypes {
     | '/'
     | '/alterar-senha'
     | '/caderno-erros'
+    | '/cartoes'
+    | '/redacao'
     | '/conta'
     | '/dashboard'
     | '/desafios'
@@ -267,6 +283,8 @@ export interface FileRouteTypes {
     | '/'
     | '/alterar-senha'
     | '/caderno-erros'
+    | '/cartoes'
+    | '/redacao'
     | '/conta'
     | '/dashboard'
     | '/desafios'
@@ -293,6 +311,8 @@ export interface FileRouteTypes {
     | '/'
     | '/alterar-senha'
     | '/caderno-erros'
+    | '/cartoes'
+    | '/redacao'
     | '/conta'
     | '/dashboard'
     | '/desafios'
@@ -364,6 +384,20 @@ declare module '@tanstack/react-router' {
       path: '/caderno-erros'
       fullPath: '/caderno-erros'
       preLoaderRoute: typeof CadernoErrosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/cartoes': {
+      id: '/cartoes'
+      path: '/cartoes'
+      fullPath: '/cartoes'
+      preLoaderRoute: typeof CartoesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/redacao': {
+      id: '/redacao'
+      path: '/redacao'
+      fullPath: '/redacao'
+      preLoaderRoute: typeof RedacaoRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/conta': {
@@ -520,6 +554,8 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AlterarSenhaRoute: AlterarSenhaRoute,
   CadernoErrosRoute: CadernoErrosRoute,
+  CartoesRoute: CartoesRoute,
+  RedacaoRoute: RedacaoRoute,
   ContaRoute: ContaRoute,
   DashboardRoute: DashboardRoute,
   DesafiosRoute: DesafiosRoute,
