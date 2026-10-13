@@ -2,7 +2,8 @@ import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { useState } from "react";
 import { ArrowLeft, CheckCircle2, ChevronDown, GraduationCap, LockKeyhole } from "lucide-react";
 import { SiteLayout, Card } from "@/components/SiteLayout";
-import { getFacultyCourse } from "@/lib/faculty";
+import { getFacultyCourse, facultyCourses } from "@/lib/faculty";
+import { usePlanAccess } from "@/lib/plan-access";
 
 export const Route = createFileRoute("/faculdade/$slug")({
   loader: ({params}) => {
@@ -19,12 +20,26 @@ export const Route = createFileRoute("/faculdade/$slug")({
 
 function FaculdadeCurso(){
   const course=Route.useLoaderData();
+  const { limits, plan } = usePlanAccess();
+  const courseIndex = facultyCourses.findIndex((item) => item.slug === course.slug);
   const [open,setOpen]=useState<string|null>(null);
   const [completed,setCompleted]=useState<string[]>([]);
   const toggle=(id:string)=>setOpen(v=>v===id?null:id);
   const mark=(id:string)=>setCompleted(v=>v.includes(id)?v.filter(x=>x!==id):[...v,id]);
   const total=course.semesters.reduce((n,s)=>n+s.disciplines.length,0);
   const progress=total?Math.round(completed.length/total*100):0;
+
+  if (courseIndex >= limits.courses) {
+    return <SiteLayout>
+      <div className="mx-auto max-w-2xl px-4 py-20 text-center">
+        <h1 className="text-2xl font-bold text-foreground">Curso indisponível neste plano</h1>
+        <p className="mt-3 text-muted-foreground">
+          {plan === "basico" ? "O Básico inclui 25 cursos. Faça upgrade para continuar." : "O Médio inclui 70 cursos. O Master libera todos."}
+        </p>
+        <Link to="/planos" className="mt-6 inline-flex rounded-xl bg-primary px-5 py-3 font-semibold text-primary-foreground">Comparar planos</Link>
+      </div>
+    </SiteLayout>;
+  }
 
   return <SiteLayout>
     <div className="border-b border-border bg-gradient-hero">
