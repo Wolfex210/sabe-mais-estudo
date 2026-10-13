@@ -17,7 +17,7 @@ function Faculdade() {
   const [query,setQuery]=useState("");
   const [area,setArea]=useState("Todas");
   const { limits, plan } = usePlanAccess();
-  const catalogCourses = facultyCourses.slice(0, limits.courses);
+  const catalogCourses = facultyCourses;
   const areas=["Todas",...Array.from(new Set(catalogCourses.map(c=>c.area)))];
   const filtered=useMemo(()=>{
     const q=query.trim().toLowerCase();
@@ -47,25 +47,29 @@ function Faculdade() {
         </div>
       </div>
 
-      <p className="mt-6 text-sm text-muted-foreground">Exibindo {filtered.length} de {catalogCourses.length} cursos disponíveis neste plano.</p>
+      <p className="mt-6 text-sm text-muted-foreground">Exibindo {Math.min(limits.courses, facultyCourses.length)} de {catalogCourses.length} cursos liberados neste plano. Os demais aparecem bloqueados.</p>
       <div className="mt-4 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-        {filtered.map(course=><Link key={course.slug} to="/faculdade/$slug" params={{slug:course.slug}}>
-          <Card className="h-full">
+        {filtered.map(course => {
+          const locked = facultyCourses.findIndex((item) => item.slug === course.slug) >= limits.courses;
+          const contents = <Card className={`h-full ${locked ? "opacity-80" : ""}`}>
             <div className="flex items-start justify-between gap-3">
               <span className="rounded-lg bg-primary/10 px-3 py-1 text-xs font-bold text-primary">{course.area}</span>
-              <Clock3 className="h-4 w-4 text-muted-foreground"/>
+              {locked ? <span className="rounded-full bg-muted px-2 py-1 text-xs font-bold text-muted-foreground">🔒 Bloqueado</span> : <Clock3 className="h-4 w-4 text-muted-foreground"/>}
             </div>
             <h2 className="mt-4 text-xl font-bold text-foreground">{course.name}</h2>
             <p className="mt-2 text-sm leading-6 text-muted-foreground">{course.description}</p>
             <div className="mt-5 flex items-center justify-between text-xs text-muted-foreground">
-              <span>{course.duration}</span><span className="font-semibold text-primary">Começar →</span>
+              <span>{course.duration}</span><span className={`font-semibold ${locked ? "text-muted-foreground" : "text-primary"}`}>{locked ? "Fazer upgrade →" : "Começar →"}</span>
             </div>
-          </Card>
-        </Link>)}
+          </Card>;
+          return locked
+            ? <Link key={course.slug} to="/planos" aria-label={`${course.name} bloqueado. Ver planos para liberar.`}>{contents}</Link>
+            : <Link key={course.slug} to="/faculdade/$slug" params={{slug:course.slug}}>{contents}</Link>;
+        })}
       </div>
       {!limits.isUnlimited && <div className="mt-8 rounded-2xl border border-primary/20 bg-primary/5 p-5 text-sm">
         <p className="font-semibold text-foreground">Quer explorar mais cursos?</p>
-        <p className="mt-1 text-muted-foreground">O plano Básico inclui 25 cursos, o Médio inclui 70 e o Master libera todos.</p>
+        <p className="mt-1 text-muted-foreground">O Básico libera 25 cursos, o Médio 70 e o Master libera todos.</p>
         <Link to="/planos" className="mt-3 inline-flex font-semibold text-primary hover:underline">Comparar planos →</Link>
       </div>}
       {filtered.length===0&&<p className="py-12 text-center text-sm text-muted-foreground">Nenhum curso encontrado.</p>}
