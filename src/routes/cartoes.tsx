@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { SiteLayout, PageHeader, Card } from "@/components/SiteLayout";
 import { subjects } from "@/lib/content";
 
@@ -18,7 +18,8 @@ function Cartoes() {
   const [subjectSlug, setSubjectSlug] = useState(subjects[0]?.slug ?? "");
   const [index, setIndex] = useState(0);
   const [flipped, setFlipped] = useState(false);
-  const [reviews, setReviews] = useState<ReviewMap>(loadReviews);
+  const [reviews, setReviews] = useState<ReviewMap>({});
+  useEffect(() => { setReviews(loadReviews()); }, []);
   const deck = useMemo(() => {
     const subject = subjects.find(s => s.slug === subjectSlug);
     return (subject?.questions ?? []).map((q, i) => ({
