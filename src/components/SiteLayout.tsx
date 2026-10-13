@@ -1,27 +1,54 @@
-/** Cabeçalho, menu (com versão mobile) e rodapé compartilhados. */
+/** Cabeçalho, navegação lateral responsiva e rodapé compartilhados. */
 import { Link, useLocation } from "@tanstack/react-router";
 import { useEffect, useState, type ReactNode } from "react";
-import { Menu, X, GraduationCap, Download } from "lucide-react";
+import {
+  Menu, X, GraduationCap, Download, House, BookOpen, GraduationCap as College,
+  Wrench, Brain, Trophy, LayoutDashboard, CalendarDays, NotebookPen,
+  RotateCcw, ClipboardCheck, TrendingUp, CreditCard, Search, UserRound,
+} from "lucide-react";
 import { useAppState, levelOf, trialExpired } from "@/lib/store";
 import { useAuth } from "@/lib/auth";
 import { Button } from "@/components/ui/button";
 
-const nav = [
-  { to: "/", label: "Início" },
-  { to: "/materias", label: "Matérias" },
-  { to: "/faculdade", label: "Faculdade" },
-  { to: "/ferramentas", label: "Ferramentas" },
-  { to: "/quiz", label: "Quiz" },
-  { to: "/desafios", label: "Desafios" },
-  { to: "/dashboard", label: "Dashboard" },
-  { to: "/plano-estudos", label: "Plano de Estudos" },
-  { to: "/caderno-erros", label: "Caderno de Erros" },
-  { to: "/revisao", label: "Revisão" },
-  { to: "/simulados", label: "Simulados" },
-  { to: "/progresso", label: "Meu Progresso" },
-  { to: "/planos", label: "Planos" },
-  { to: "/pesquisa", label: "Pesquisar" },
+const navGroups = [
+  {
+    label: "PRINCIPAL",
+    items: [
+      { to: "/", label: "Início", icon: House },
+      { to: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
+      { to: "/materias", label: "Matérias", icon: BookOpen },
+      { to: "/faculdade", label: "Faculdade", icon: College },
+    ],
+  },
+  {
+    label: "ESTUDAR",
+    items: [
+      { to: "/plano-estudos", label: "Plano de estudos", icon: CalendarDays },
+      { to: "/quiz", label: "Quizzes", icon: Brain },
+      { to: "/desafios", label: "Desafios", icon: Trophy },
+      { to: "/simulados", label: "Simulados", icon: ClipboardCheck },
+      { to: "/revisao", label: "Revisão inteligente", icon: RotateCcw },
+      { to: "/caderno-erros", label: "Caderno de erros", icon: NotebookPen },
+    ],
+  },
+  {
+    label: "ACOMPANHAMENTO",
+    items: [
+      { to: "/progresso", label: "Meu progresso", icon: TrendingUp },
+      { to: "/ferramentas", label: "Ferramentas", icon: Wrench },
+      { to: "/pesquisa", label: "Pesquisar", icon: Search },
+    ],
+  },
+  {
+    label: "CONTA",
+    items: [
+      { to: "/planos", label: "Planos", icon: CreditCard },
+      { to: "/perfil", label: "Meu perfil", icon: UserRound },
+    ],
+  },
 ] as const;
+
+const nav = navGroups.flatMap((group) => group.items);
 
 export function AdSlot({ label = "Espaço reservado para publicidade" }: { label?: string }) {
   return (
@@ -47,11 +74,9 @@ export function SiteLayout({ children }: { children: ReactNode }) {
     };
 
     window.addEventListener("beforeinstallprompt", handleBeforeInstallPrompt);
-
     if ("serviceWorker" in navigator) {
       navigator.serviceWorker.register("/sw.js").catch(() => {});
     }
-
     return () => window.removeEventListener("beforeinstallprompt", handleBeforeInstallPrompt);
   }, []);
 
@@ -62,43 +87,59 @@ export function SiteLayout({ children }: { children: ReactNode }) {
       setInstallPrompt(null);
       return;
     }
-
     window.alert(
       "Para instalar o Sabe Mais como aplicativo, use o botão de instalar do navegador. No Chrome/Edge, procure o ícone de instalação na barra de endereço."
     );
   };
+
   const state = useAppState();
   const location = useLocation();
   const { user } = useAuth();
   const { current } = levelOf(state.points);
   const accessLocked = trialExpired(state) && location.pathname !== "/planos";
 
+  const navigation = (mobile = false) => (
+    <div className="space-y-5">
+      {navGroups.map((group) => (
+        <section key={group.label}>
+          <p className="px-3 pb-2 text-[10px] font-extrabold tracking-[0.16em] text-muted-foreground/75">
+            {group.label}
+          </p>
+          <div className="space-y-1">
+            {group.items.map((item) => {
+              const Icon = item.icon;
+              return (
+                <Link
+                  key={item.to}
+                  to={item.to}
+                  onClick={() => mobile && setOpen(false)}
+                  activeOptions={{ exact: item.to === "/" }}
+                  activeProps={{ className: "bg-primary/10 text-primary font-semibold shadow-sm" }}
+                  className="group flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground [&.active]:bg-primary/10 [&.active]:text-primary"
+                >
+                  <Icon className="h-[18px] w-[18px] shrink-0" />
+                  <span>{item.label}</span>
+                </Link>
+              );
+            })}
+          </div>
+        </section>
+      ))}
+    </div>
+  );
+
   return (
     <div className="flex min-h-screen flex-col bg-background">
-      <header className="sticky top-0 z-40 border-b border-border/70 bg-background/85 backdrop-blur">
-        <div className="mx-auto flex h-16 w-full max-w-6xl items-center justify-between px-4">
-          <Link to="/" className="flex items-center gap-2 font-bold text-foreground">
+      <header className="sticky top-0 z-40 border-b border-border/70 bg-background/95 backdrop-blur">
+        <div className="flex h-16 w-full items-center justify-between gap-3 px-4 sm:px-6">
+          <Link to="/" className="flex shrink-0 items-center gap-2 font-bold text-foreground">
             <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-primary text-primary-foreground">
               <GraduationCap className="h-5 w-5" />
             </span>
             <span className="text-lg tracking-tight">Sabe Mais</span>
           </Link>
 
-          <nav className="hidden items-center gap-1 lg:flex">
-            {nav.map((item) => (
-              <Link
-                key={item.to}
-                to={item.to}
-                className="rounded-lg px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
-                activeProps={{ className: "bg-secondary text-foreground" }}
-                activeOptions={{ exact: item.to === "/" }}
-              >
-                {item.label}
-              </Link>
-            ))}
-          </nav>
-
-          <div className="flex items-center gap-2">
+          <div className="ml-auto flex items-center gap-2">
             <Link
               to="/perfil"
               className="hidden rounded-lg border border-border px-3 py-2 text-xs font-semibold text-muted-foreground transition-colors hover:text-foreground sm:block"
@@ -114,15 +155,12 @@ export function SiteLayout({ children }: { children: ReactNode }) {
               <Download className="h-4 w-4" />
               <span className="hidden sm:inline">Baixar app</span>
             </button>
-            <Button asChild variant="outline" size="sm"><Link to={user ? "/perfil" : "/conta"}>{user ? state.avatar : "Entrar"}</Link></Button>
-            <Link
-              to="/materias"
-              className="hidden rounded-xl bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground shadow-soft transition-transform hover:-translate-y-0.5 sm:block"
-            >
-              Começar a estudar
-            </Link>
+            <Button asChild variant="outline" size="sm">
+              <Link to={user ? "/perfil" : "/conta"}>{user ? state.avatar : "Entrar"}</Link>
+            </Button>
             <button
-              aria-label="Abrir menu"
+              aria-label={open ? "Fechar menu" : "Abrir menu"}
+              aria-expanded={open}
               onClick={() => setOpen((v) => !v)}
               className="rounded-lg border border-border p-2 text-foreground lg:hidden"
             >
@@ -130,87 +168,80 @@ export function SiteLayout({ children }: { children: ReactNode }) {
             </button>
           </div>
         </div>
-
-        {open && (
-          <nav className="border-t border-border bg-background px-4 pb-4 lg:hidden">
-            {[...nav, { to: "/perfil", label: "Perfil" } as const, { to: "/conta", label: "Minha conta" } as const].map((item) => (
-              <Link
-                key={item.to}
-                to={item.to}
-                onClick={() => setOpen(false)}
-                className="block rounded-lg px-3 py-3 text-sm font-medium text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
-                activeProps={{ className: "bg-secondary text-foreground" }}
-                activeOptions={{ exact: item.to === "/" }}
-              >
-                {item.label}
-              </Link>
-            ))}
-          </nav>
-        )}
       </header>
 
-      <main className="flex-1">{children}</main>
-      {accessLocked && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-background/95 px-4 backdrop-blur-sm">
-          <div className="w-full max-w-2xl rounded-3xl border border-border bg-card p-8 text-center shadow-lift sm:p-10">
-            <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-primary/10 text-3xl">🔒</div>
-            <h2 className="mt-5 text-2xl font-extrabold text-foreground sm:text-3xl">Seu período grátis terminou</h2>
-            <p className="mx-auto mt-3 max-w-xl text-muted-foreground">
-              Seus 4 dias gratuitos terminaram. Para continuar usando as matérias, quizzes, ferramentas e demais recursos do Sabe Mais, escolha um plano mensal.
-            </p>
-            <Link to="/planos" className="mt-7 inline-flex rounded-xl bg-primary px-6 py-3 font-semibold text-primary-foreground shadow-soft transition-transform hover:-translate-y-0.5">
-              Ver planos e continuar estudando
+      <div className="flex flex-1">
+        <aside className="sticky top-16 hidden h-[calc(100vh-4rem)] w-64 shrink-0 flex-col border-r border-border/70 bg-card/50 lg:flex">
+          <div className="flex-1 overflow-y-auto px-3 py-5">
+            {navigation()}
+          </div>
+          <div className="border-t border-border/70 p-3">
+            <Link to="/perfil" className="flex items-center gap-3 rounded-xl p-3 transition-colors hover:bg-secondary">
+              <span className="flex h-9 w-9 items-center justify-center rounded-full bg-primary/10 text-sm font-bold text-primary">
+                {state.avatar || "🎓"}
+              </span>
+              <span className="min-w-0 flex-1">
+                <span className="block truncate text-sm font-semibold text-foreground">{user?.email || "Área do estudante"}</span>
+                <span className="block text-xs text-muted-foreground">{current.name} · {state.points} pontos</span>
+              </span>
             </Link>
-            <p className="mt-4 text-xs text-muted-foreground">Você continuará podendo acessar esta tela e a página de planos.</p>
           </div>
-        </div>
-      )}
+        </aside>
 
-      <footer className="border-t border-border bg-secondary/40">
-        <div className="mx-auto grid w-full max-w-6xl gap-8 px-4 py-10 sm:grid-cols-3">
-          <div>
-            <p className="text-base font-bold text-foreground">Sabe Mais</p>
-            <p className="mt-1 text-sm text-muted-foreground">
-              Aprenda mais. Entenda melhor. Vá mais longe.
+        <div className="min-w-0 flex-1">
+          {open && (
+            <div className="fixed inset-0 top-16 z-30 bg-background lg:hidden">
+              <nav className="h-full overflow-y-auto px-4 py-5">{navigation(true)}</nav>
+            </div>
+          )}
+
+          <main className="min-h-[60vh]">{children}</main>
+
+          {accessLocked && (
+            <div className="fixed inset-0 z-[100] flex items-center justify-center bg-background/95 px-4 backdrop-blur-sm">
+              <div className="w-full max-w-2xl rounded-3xl border border-border bg-card p-8 text-center shadow-lift sm:p-10">
+                <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-primary/10 text-3xl">🔒</div>
+                <h2 className="mt-5 text-2xl font-extrabold text-foreground sm:text-3xl">Seu período grátis terminou</h2>
+                <p className="mx-auto mt-3 max-w-xl text-muted-foreground">
+                  Seus 4 dias gratuitos terminaram. Para continuar usando as matérias, quizzes, ferramentas e demais recursos do Sabe Mais, escolha um plano mensal.
+                </p>
+                <Link to="/planos" className="mt-7 inline-flex rounded-xl bg-primary px-6 py-3 font-semibold text-primary-foreground shadow-soft transition-transform hover:-translate-y-0.5">
+                  Ver planos e continuar estudando
+                </Link>
+                <p className="mt-4 text-xs text-muted-foreground">Você continuará podendo acessar esta tela e a página de planos.</p>
+              </div>
+            </div>
+          )}
+
+          <footer className="border-t border-border bg-secondary/40">
+            <div className="grid w-full gap-8 px-4 py-10 sm:grid-cols-3 sm:px-6">
+              <div>
+                <p className="text-base font-bold text-foreground">Sabe Mais</p>
+                <p className="mt-1 text-sm text-muted-foreground">Aprenda mais. Entenda melhor. Vá mais longe.</p>
+              </div>
+              <div className="text-sm">
+                <p className="font-semibold text-foreground">Navegar</p>
+                <ul className="mt-2 space-y-1 text-muted-foreground">
+                  {nav.slice(1, 5).map((item) => (
+                    <li key={item.to}><Link to={item.to} className="hover:text-foreground">{item.label}</Link></li>
+                  ))}
+                </ul>
+              </div>
+              <div className="text-sm">
+                <p className="font-semibold text-foreground">Estudante</p>
+                <ul className="mt-2 space-y-1 text-muted-foreground">
+                  <li><Link to="/progresso" className="hover:text-foreground">Meu progresso</Link></li>
+                  <li><Link to="/perfil" className="hover:text-foreground">Perfil e conquistas</Link></li>
+                  <li><Link to="/planos" className="hover:text-foreground">Sabe Mais Premium</Link></li>
+                </ul>
+              </div>
+            </div>
+            <p className="border-t border-border py-4 text-center text-xs text-muted-foreground">
+              © {new Date().getFullYear()} Sabe Mais · Plataforma brasileira de estudos
             </p>
-          </div>
-          <div className="text-sm">
-            <p className="font-semibold text-foreground">Navegar</p>
-            <ul className="mt-2 space-y-1 text-muted-foreground">
-              {nav.slice(1, 5).map((i) => (
-                <li key={i.to}>
-                  <Link to={i.to} className="hover:text-foreground">
-                    {i.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div className="text-sm">
-            <p className="font-semibold text-foreground">Estudante</p>
-            <ul className="mt-2 space-y-1 text-muted-foreground">
-              <li>
-                <Link to="/progresso" className="hover:text-foreground">
-                  Meu progresso
-                </Link>
-              </li>
-              <li>
-                <Link to="/perfil" className="hover:text-foreground">
-                  Perfil e conquistas
-                </Link>
-              </li>
-              <li>
-                <Link to="/planos" className="hover:text-foreground">
-                  Sabe Mais Premium
-                </Link>
-              </li>
-            </ul>
-          </div>
+          </footer>
         </div>
-        <p className="border-t border-border py-4 text-center text-xs text-muted-foreground">
-          © {new Date().getFullYear()} Sabe Mais · Plataforma brasileira de estudos
-        </p>
-      </footer>
+      </div>
     </div>
   );
 }
@@ -235,9 +266,7 @@ export function Card({
   className?: string;
 }) {
   return (
-    <div
-      className={`rounded-2xl border border-border bg-card p-6 shadow-soft transition-all duration-200 hover:-translate-y-1 hover:shadow-lift ${className}`}
-    >
+    <div className={`rounded-2xl border border-border bg-card p-6 shadow-soft transition-all duration-200 hover:-translate-y-1 hover:shadow-lift ${className}`}>
       {children}
     </div>
   );
