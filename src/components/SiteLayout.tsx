@@ -9,6 +9,7 @@ import {
 import { useAppState, levelOf, trialExpired } from "@/lib/store";
 import { useAuth } from "@/lib/auth";
 import { Button } from "@/components/ui/button";
+import { usePlanAccess } from "@/lib/plan-access";
 
 const navGroups = [
   {
@@ -96,7 +97,8 @@ export function SiteLayout({ children }: { children: ReactNode }) {
   const location = useLocation();
   const { user } = useAuth();
   const { current } = levelOf(state.points);
-  const accessLocked = trialExpired(state) && location.pathname !== "/planos";
+  const { plan: activePlan } = usePlanAccess();
+  const accessLocked = trialExpired(state) && !activePlan && location.pathname !== "/planos";
 
   const navigation = (mobile = false) => (
     <div className="space-y-5">
