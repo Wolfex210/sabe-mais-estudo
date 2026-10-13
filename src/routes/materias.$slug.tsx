@@ -6,7 +6,7 @@ import { getDeepStudy, getExamPrep, getSubject, getStudyHelpLines, subjects } fr
 import { usePlanAccess } from "@/lib/plan-access";
 import { curriculum, YEARS, YEAR_LABEL, type Year } from "@/lib/curriculum";
 import { getTopics } from "@/lib/lessons";
-import { actions } from "@/lib/store";
+import { actions, useAppState } from "@/lib/store";
 
 export const Route = createFileRoute("/materias/$slug")({
   loader: ({ params }) => {
@@ -36,6 +36,7 @@ export const Route = createFileRoute("/materias/$slug")({
 function SubjectPage() {
   const { slug } = Route.useParams();
   const subject = getSubject(slug);
+  const state = useAppState();
   const { limits, plan } = usePlanAccess();
   const subjectIndex = subjects.findIndex((item) => item.slug === slug);
   const availableYears = YEARS.filter((year) => (curriculum[slug]?.[year]?.length ?? 0) > 0);
@@ -218,6 +219,7 @@ function SubjectPage() {
   return (
     <SiteLayout>
       <PageHeader title={`${subject.emoji} ${subject.name}`} subtitle={subject.intro} />
+      <div className="mx-auto w-full max-w-6xl px-4 pt-6"><button type="button" aria-pressed={state.favorites.includes(subject.slug)} onClick={() => actions.toggleFavorite(subject.slug)} className="rounded-xl border border-primary/30 px-4 py-2.5 text-sm font-semibold text-primary hover:bg-primary/5">{state.favorites.includes(subject.slug) ? "★ Remover dos favoritos" : "☆ Salvar matéria nos favoritos"}</button></div>
       <div className="mx-auto grid w-full max-w-6xl gap-8 px-4 py-12 lg:grid-cols-3">
         <div className="space-y-8 lg:col-span-2">
           <section aria-labelledby="year-heading">
