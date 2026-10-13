@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { SiteLayout, PageHeader, Card } from "@/components/SiteLayout";
 import { useAppState } from "@/lib/store";
 import { subjects } from "@/lib/content";
@@ -12,6 +12,8 @@ export const Route = createFileRoute("/certificados")({
 function Certificados() {
   const s = useAppState();
   const [selected, setSelected] = useState(subjects[0]?.slug ?? "");
+  const [issuedDate, setIssuedDate] = useState("");
+  useEffect(() => { setIssuedDate(new Date().toLocaleDateString("pt-BR")); }, []);
   const completedBySubject = subjects.map(subject => {
     const ids = s.completedTopics.filter(id => id.startsWith(subject.slug + ":"));
     return { ...subject, completed: ids.length };
@@ -38,7 +40,7 @@ function Certificados() {
           <p className="mt-5 text-sm text-muted-foreground">Declaramos que</p>
           <p className="mt-1 text-2xl font-bold">{s.name || "Estudante"}</p>
           <p className="mt-4 leading-7">concluiu pelo menos cinco aulas registradas na trilha de <strong>{active.name}</strong> na plataforma Sabe Mais.</p>
-          <p className="mt-5 text-xs text-muted-foreground">Emitido em {new Date().toLocaleDateString("pt-BR")} · Progresso registrado na conta</p>
+          <p className="mt-5 text-xs text-muted-foreground">Emitido em {issuedDate || "Data de emissão no navegador"} · Progresso registrado na conta</p>
           <button type="button" onClick={() => window.print()} className="no-print mt-6 rounded-xl bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground">Imprimir ou salvar como PDF</button>
         </div> : <div className="mt-5 rounded-xl border border-border p-5"><p className="font-semibold">Ainda não disponível para esta matéria</p><p className="mt-2 text-sm leading-6 text-muted-foreground">Conclua mais aulas da matéria selecionada. Você precisa de pelo menos 5 aulas marcadas como concluídas para gerar o comprovante.</p></div>}
       </Card>
