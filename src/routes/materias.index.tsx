@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Search } from "lucide-react";
 import { SiteLayout, PageHeader, Card, AdSlot } from "@/components/SiteLayout";
 import { subjects } from "@/lib/content";
+import { subjectCoverImages } from "@/lib/subject-images";
 import { usePlanAccess } from "@/lib/plan-access";
 
 export const Route = createFileRoute("/materias/")({
@@ -90,9 +91,23 @@ function Materias() {
           {filteredSubjects.map((s) => {
             const locked = subjects.findIndex((item) => item.slug === s.slug) >= limits.subjects;
             const contents = <Card className={`h-full ${locked ? "opacity-80" : ""}`}>
-              <div className="flex items-start justify-between gap-2">
-                <span className={`flex h-12 w-12 items-center justify-center rounded-xl text-2xl ${s.color}`}>{s.emoji}</span>
-                {locked && <span className="inline-flex items-center gap-1 rounded-full bg-muted px-2 py-1 text-xs font-bold text-muted-foreground">🔒 Bloqueada</span>}
+              <div className="relative overflow-hidden rounded-xl">
+                <img
+                  src={subjectCoverImages[s.slug]}
+                  alt={`Imagem ilustrativa de ${s.name}`}
+                  loading="lazy"
+                  decoding="async"
+                  width={640}
+                  height={360}
+                  className="h-36 w-full object-cover"
+                  onError={(event) => {
+                    event.currentTarget.style.display = "none";
+                  }}
+                />
+                <div className="absolute left-3 top-3 flex items-center gap-2">
+                  <span className={`flex h-10 w-10 items-center justify-center rounded-xl text-2xl shadow-sm ${s.color}`}>{s.emoji}</span>
+                </div>
+                {locked && <span className="absolute right-3 top-3 inline-flex items-center gap-1 rounded-full bg-background/95 px-2 py-1 text-xs font-bold text-muted-foreground shadow-sm">🔒 Bloqueada</span>}
               </div>
               <h2 className="mt-4 text-lg font-semibold text-foreground">{s.name}</h2>
               <p className="mt-1 text-sm text-muted-foreground">{s.intro}</p>
