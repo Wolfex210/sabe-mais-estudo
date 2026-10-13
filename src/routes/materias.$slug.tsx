@@ -320,6 +320,81 @@ function SubjectPage() {
             </Card>
           </section>
 
+          <section aria-labelledby="deep-roadmap-heading">
+            <div>
+              <h2 id="deep-roadmap-heading" className="text-xl font-bold text-foreground">🧭 Roteiro aprofundado de {subject.name}</h2>
+              <p className="mt-2 text-sm leading-7 text-muted-foreground">
+                Um percurso complementar organizado para estudar com consistência: objetivos, conceitos, aplicação, revisão e preparação para avançar. Os temas do ano selecionado aparecem abaixo quando há currículo cadastrado.
+              </p>
+            </div>
+            <div className="mt-4 grid gap-4 lg:grid-cols-2">
+              <Card>
+                <h3 className="font-semibold text-foreground">1. Conceitos essenciais desta página</h3>
+                <p className="mt-2 text-sm leading-7 text-muted-foreground">
+                  Comece por “{subject.studyPages[studyPage]?.title ?? subject.name}”. Leia a explicação principal e transforme cada tópico em uma pergunta que você consiga responder com suas próprias palavras.
+                </p>
+                <div className="mt-3 space-y-3">
+                  {(subject.studyPages[studyPage]?.topics ?? []).map((topic, index) => (
+                    <div key={topic} className="rounded-lg bg-secondary p-3">
+                      <p className="text-sm font-semibold text-foreground">{index + 1}. {topic}</p>
+                      <p className="mt-1 text-sm leading-6 text-muted-foreground">
+                        Defina o conceito, identifique suas características principais e crie um exemplo próprio. Em seguida, explique como ele se conecta aos outros tópicos desta página.
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              </Card>
+              <Card>
+                <h3 className="font-semibold text-foreground">2. Sequência de estudo recomendada</h3>
+                <ol className="mt-3 space-y-3">
+                  <li className="rounded-lg border border-border p-3"><p className="text-sm font-semibold text-foreground">Compreender</p><p className="mt-1 text-sm leading-6 text-muted-foreground">Leia o resumo e destaque palavras-chave, ideias centrais, regras e relações de causa e consequência.</p></li>
+                  <li className="rounded-lg border border-border p-3"><p className="text-sm font-semibold text-foreground">Aplicar</p><p className="mt-1 text-sm leading-6 text-muted-foreground">Resolva um exercício sem olhar a resposta. Registre as etapas e justifique por que cada uma faz sentido.</p></li>
+                  <li className="rounded-lg border border-border p-3"><p className="text-sm font-semibold text-foreground">Verificar</p><p className="mt-1 text-sm leading-6 text-muted-foreground">Compare sua resposta com a solução, identifique a origem de possíveis erros e refaça a questão sem consultar a explicação.</p></li>
+                  <li className="rounded-lg border border-border p-3"><p className="text-sm font-semibold text-foreground">Consolidar</p><p className="mt-1 text-sm leading-6 text-muted-foreground">Revise depois de um intervalo e explique o assunto como se estivesse ensinando outra pessoa.</p></li>
+                </ol>
+              </Card>
+            </div>
+            <Card className="mt-4">
+              <h3 className="font-semibold text-foreground">3. Conteúdo do {YEAR_LABEL[activeYear]}</h3>
+              <p className="mt-2 text-sm leading-7 text-muted-foreground">
+                Use estes tópicos como uma trilha de estudo. A sequência curricular pode variar entre escolas; avance quando conseguir explicar o conceito e resolver atividades de forma independente.
+              </p>
+              {(curriculum[slug]?.[activeYear] ?? []).length > 0 ? (
+                <div className="mt-4 space-y-3">
+                  {(curriculum[slug]?.[activeYear] ?? []).map((entry, index) => {
+                    const [topic, explanation] = entry.split(" | ");
+                    return <div key={entry} className="rounded-xl border border-border p-4">
+                      <p className="text-xs font-bold uppercase tracking-wide text-primary">Etapa {index + 1}</p>
+                      <h4 className="mt-1 font-semibold text-foreground">{topic}</h4>
+                      <p className="mt-2 text-sm leading-7 text-muted-foreground">{explanation ?? "Estude o conceito, observe exemplos e pratique atividades relacionadas."}</p>
+                      <p className="mt-3 rounded-lg bg-secondary px-3 py-2 text-sm leading-6 text-foreground"><span className="font-semibold">Verificação:</span> escreva uma definição com suas palavras e resolva uma atividade sem consultar o material.</p>
+                    </div>;
+                  })}
+                </div>
+              ) : (
+                <p className="mt-3 rounded-lg bg-secondary p-3 text-sm leading-6 text-muted-foreground">Ainda não há uma sequência curricular específica cadastrada para este ano nesta matéria. Use as páginas de estudo, os resumos e os exercícios já disponíveis como percurso de aprendizagem.</p>
+              )}
+            </Card>
+            <Card className="mt-4">
+              <h3 className="font-semibold text-foreground">4. Checklist de domínio</h3>
+              <div className="mt-3 grid gap-2 sm:grid-cols-2">
+                {[
+                  "Consigo explicar os conceitos sem copiar o texto.",
+                  "Consigo dar um exemplo novo e pertinente.",
+                  "Consigo resolver uma atividade e justificar os passos.",
+                  "Sei identificar erros comuns e corrigi-los.",
+                  "Consigo relacionar o assunto a outro tema da matéria.",
+                  "Consigo revisar o conteúdo alguns dias depois."
+                ].map((item) => (
+                  <label key={item} className="flex items-start gap-3 rounded-lg bg-secondary p-3 text-sm leading-6 text-foreground">
+                    <input type="checkbox" className="mt-1 h-4 w-4 shrink-0 accent-primary" />
+                    <span>{item}</span>
+                  </label>
+                ))}
+              </div>
+            </Card>
+          </section>
+
           {deepStudy && (
             <section aria-labelledby="deep-study-heading">
               <div>
