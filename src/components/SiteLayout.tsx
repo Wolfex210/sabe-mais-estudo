@@ -13,6 +13,12 @@ import { usePlanAccess } from "@/lib/plan-access";
 
 const navGroups = [
   {
+    label: "PLANOS E ASSINATURA",
+    items: [
+      { to: "/planos", label: "Planos de compra", icon: CreditCard },
+    ],
+  },
+  {
     label: "PRINCIPAL",
     items: [
       { to: "/", label: "Início", icon: House },
@@ -43,7 +49,6 @@ const navGroups = [
   {
     label: "CONTA",
     items: [
-      { to: "/planos", label: "Planos", icon: CreditCard },
       { to: "/perfil", label: "Meu perfil", icon: UserRound },
     ],
   },
