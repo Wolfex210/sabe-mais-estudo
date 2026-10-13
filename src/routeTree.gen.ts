@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AlterarSenhaRouteImport } from './routes/alterar-senha'
 import { Route as AjudaRouteImport } from './routes/ajuda'
 import { Route as CadernoErrosRouteImport } from './routes/caderno-erros'
+import { Route as CertificadosRouteImport } from './routes/certificados'
 import { Route as CartoesRouteImport } from './routes/cartoes'
 import { Route as RedacaoRouteImport } from './routes/redacao'
 import { Route as ContaRouteImport } from './routes/conta'
@@ -55,6 +56,11 @@ const AlterarSenhaRoute = AlterarSenhaRouteImport.update({
 const CadernoErrosRoute = CadernoErrosRouteImport.update({
   id: '/caderno-erros',
   path: '/caderno-erros',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CertificadosRoute = CertificadosRouteImport.update({
+  id: '/certificados',
+  path: '/certificados',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CartoesRoute = CartoesRouteImport.update({
@@ -179,6 +185,7 @@ export interface FileRoutesByFullPath {
   '/alterar-senha': typeof AlterarSenhaRoute
   '/ajuda': typeof AjudaRoute
   '/caderno-erros': typeof CadernoErrosRoute
+  '/certificados': typeof CertificadosRoute
   '/cartoes': typeof CartoesRoute
   '/redacao': typeof RedacaoRoute
   '/conta': typeof ContaRoute
@@ -263,6 +270,7 @@ export interface FileRouteTypes {
     | '/alterar-senha'
     | '/ajuda'
     | '/caderno-erros'
+    | '/certificados'
     | '/cartoes'
     | '/redacao'
     | '/conta'
@@ -292,6 +300,7 @@ export interface FileRouteTypes {
     | '/alterar-senha'
     | '/ajuda'
     | '/caderno-erros'
+    | '/certificados'
     | '/cartoes'
     | '/redacao'
     | '/conta'
@@ -321,6 +330,7 @@ export interface FileRouteTypes {
     | '/alterar-senha'
     | '/ajuda'
     | '/caderno-erros'
+    | '/certificados'
     | '/cartoes'
     | '/redacao'
     | '/conta'
@@ -401,6 +411,13 @@ declare module '@tanstack/react-router' {
       path: '/caderno-erros'
       fullPath: '/caderno-erros'
       preLoaderRoute: typeof CadernoErrosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/certificados': {
+      id: '/certificados'
+      path: '/certificados'
+      fullPath: '/certificados'
+      preLoaderRoute: typeof CertificadosRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/cartoes': {
@@ -572,6 +589,7 @@ const rootRouteChildren: RootRouteChildren = {
   AlterarSenhaRoute: AlterarSenhaRoute,
   AjudaRoute: AjudaRoute,
   CadernoErrosRoute: CadernoErrosRoute,
+  CertificadosRoute: CertificadosRoute,
   CartoesRoute: CartoesRoute,
   RedacaoRoute: RedacaoRoute,
   ContaRoute: ContaRoute,
