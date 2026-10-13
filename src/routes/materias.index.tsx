@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Search } from "lucide-react";
 import { SiteLayout, PageHeader, Card, AdSlot } from "@/components/SiteLayout";
 import { subjects } from "@/lib/content";
+import { usePlanAccess } from "@/lib/plan-access";
 
 export const Route = createFileRoute("/materias/")({
   head: () => ({
@@ -26,8 +27,10 @@ const fundamentalSlugs = new Set(["portugues", "matematica", "ciencias", "biolog
 function Materias() {
   const [query, setQuery] = useState("");
   const [category, setCategory] = useState<"fundamentais" | "todas">("fundamentais");
+  const { limits, plan } = usePlanAccess();
+  const catalogSubjects = subjects.slice(0, limits.subjects);
   const normalize = (text: string) => text.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
-  const filteredSubjects = subjects.filter((subject) => {
+  const filteredSubjects = catalogSubjects.filter((subject) => {
     const matchesQuery = normalize(subject.name).includes(normalize(query.trim()));
     return matchesQuery && (category === "todas" || fundamentalSlugs.has(subject.slug));
   });
@@ -36,7 +39,7 @@ function Materias() {
     <SiteLayout>
       <PageHeader
         title="Matérias"
-        subtitle="Comece pelas matérias fundamentais, com trilhas reforçadas por ano escolar, ou explore o catálogo completo."
+        subtitle={plan === "basico" ? "Plano Básico: 25 matérias disponíveis. Faça upgrade para ampliar o catálogo." : plan === "medio" ? "Plano Médio: 60 matérias disponíveis. O Master libera o catálogo completo." : "Comece pelas matérias fundamentais ou explore o catálogo completo."}
       />
       <div className="mx-auto w-full max-w-6xl px-4 py-12">
         <div className="mb-6 flex flex-wrap gap-3" role="tablist" aria-label="Categorias de matérias">
@@ -81,6 +84,7 @@ function Materias() {
             />
           </div>
         </div>
+        <p className="mb-4 text-sm text-muted-foreground">Exibindo {filteredSubjects.length} de {catalogSubjects.length} matérias disponíveis neste plano.</p>
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {filteredSubjects.map((s) => (
             <Link key={s.slug} to="/materias/$slug" params={{ slug: s.slug }}>
@@ -95,6 +99,13 @@ function Materias() {
             </Link>
           ))}
         </div>
+        {!limits.isUnlimited && (
+          <div className="mt-8 rounded-2xl border border-primary/20 bg-primary/5 p-5 text-sm text-foreground">
+            <p className="font-semibold">Quer estudar mais matérias?</p>
+            <p className="mt-1 text-muted-foreground">O plano Médio libera até 60 matérias e o Master libera todas.</p>
+            <Link to="/planos" className="mt-3 inline-flex font-semibold text-primary hover:underline">Comparar planos →</Link>
+          </div>
+        )}
         {filteredSubjects.length === 0 && (
           <p role="status" className="py-8 text-sm text-muted-foreground">Nenhuma matéria encontrada para “{query.trim()}”.</p>
         )}
