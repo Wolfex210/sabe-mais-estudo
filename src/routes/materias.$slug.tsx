@@ -2,7 +2,8 @@ import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { useState } from "react";
 import { SiteLayout, PageHeader, Card, AdSlot } from "@/components/SiteLayout";
 import { Button } from "@/components/ui/button";
-import { getDeepStudy, getExamPrep, getSubject, getStudyHelpLines } from "@/lib/content";
+import { getDeepStudy, getExamPrep, getSubject, getStudyHelpLines, subjects } from "@/lib/content";
+import { usePlanAccess } from "@/lib/plan-access";
 import { curriculum, YEARS, YEAR_LABEL, type Year } from "@/lib/curriculum";
 import { getTopics } from "@/lib/lessons";
 import { actions } from "@/lib/store";
@@ -35,6 +36,8 @@ export const Route = createFileRoute("/materias/$slug")({
 function SubjectPage() {
   const { slug } = Route.useParams();
   const subject = getSubject(slug);
+  const { limits, plan } = usePlanAccess();
+  const subjectIndex = subjects.findIndex((item) => item.slug === slug);
   const availableYears = YEARS.filter((year) => (curriculum[slug]?.[year]?.length ?? 0) > 0);
   const [year, setYear] = useState<Year>(availableYears[0] ?? "1º EF");
   const activeYear = availableYears.includes(year) ? year : (availableYears[0] ?? "1º EF");
@@ -43,6 +46,18 @@ function SubjectPage() {
   const [chosen, setChosen] = useState<number | null>(null);
   const [score, setScore] = useState(0);
   const [studyPage, setStudyPage] = useState(0);
+
+  if (subjectIndex >= limits.subjects) {
+    return <SiteLayout>
+      <div className="mx-auto max-w-2xl px-4 py-20 text-center">
+        <h1 className="text-2xl font-bold text-foreground">Matéria indisponível neste plano</h1>
+        <p className="mt-3 text-muted-foreground">
+          {plan === "basico" ? "O Básico inclui 25 matérias. Faça upgrade para continuar." : "O Médio inclui 60 matérias. O Master libera todas."}
+        </p>
+        <Link to="/planos" className="mt-6 inline-flex rounded-xl bg-primary px-5 py-3 font-semibold text-primary-foreground">Comparar planos</Link>
+      </div>
+    </SiteLayout>;
+  }
   const studyImagesBySubject: Record<string, string[]> = {
     matematica: [
       "https://images.unsplash.com/photo-1509228468518-180dd4864904?auto=format&fit=crop&w=1200&q=80",
