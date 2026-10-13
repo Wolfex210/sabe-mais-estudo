@@ -41,9 +41,10 @@ function Dashboard() {
             <Link to="/simulados" className="mt-6 block rounded-xl bg-primary px-4 py-3 text-center text-sm font-semibold text-primary-foreground">Fazer um simulado</Link>
           </Card>
         </div>
-        <div className="mt-6 grid gap-6 lg:grid-cols-2">
+        <div className="mt-6 grid gap-6 lg:grid-cols-3">
           <Card><h2 className="font-bold">📚 Matérias estudadas</h2><p className="mt-3 text-sm text-muted-foreground">{studiedNames.length ? studiedNames.join(" · ") : "Você ainda não registrou matérias. Comece um quiz ou aula."}</p></Card>
           <Card><h2 className="font-bold">⏱️ Tempo de estudo</h2><p className="mt-3 text-3xl font-extrabold text-primary">{Math.floor(s.studySeconds/3600)}h {Math.floor((s.studySeconds%3600)/60)}min</p><p className="text-sm text-muted-foreground">{s.studySessions} sessões registradas.</p></Card>
+          <Card><h2 className="font-bold">⭐ Matérias favoritas</h2>{s.favorites.length ? <div className="mt-3 flex flex-wrap gap-2">{s.favorites.map(slug => { const sub = subjects.find(x => x.slug === slug); return sub ? <Link key={slug} to="/materias/$slug" params={{slug}} className="rounded-lg border border-border px-3 py-2 text-sm hover:bg-secondary">{sub.emoji} {sub.name}</Link> : null; })}</div> : <p className="mt-3 text-sm text-muted-foreground">Abra uma matéria e toque em “Salvar matéria nos favoritos” para encontrá-la aqui.</p>}</Card>
         </div>
       </div>
     </SiteLayout>
