@@ -11,7 +11,7 @@ export type SimulationResult = { id: string; title: string; total: number; corre
 export type AppState = {
   name: string; answered: number; correct: number; wrong: number; points: number; challenges: string[];
   studySeconds: number; days: string[]; achievements: string[]; tasks: Task[]; schedule: ScheduleItem[];
-  schoolYear: string; avatar: string; completedTopics: string[];
+  schoolYear: string; avatar: string; completedTopics: string[]; favorites: string[];
   quizHistory: { subject: string; topic?: string; level: string; correct: number; total: number; date: string }[];
   studySessions: number; trialStart: string | null; plan: "trial" | "basico" | "medio" | "master" | null;
   joinedAt: string | null; errors: ErrorItem[]; studyPlan: StudyPlan | null; simulationHistory: SimulationResult[];
@@ -21,7 +21,7 @@ const KEY = "sabe-mais:v1";
 const initial: AppState = {
   name: "Estudante", answered: 0, correct: 0, wrong: 0, points: 0, challenges: [],
   studySeconds: 0, days: [], achievements: [], tasks: [], schedule: [], schoolYear: "", avatar: "📚",
-  completedTopics: [], quizHistory: [], studySessions: 0, trialStart: null, plan: null, joinedAt: null,
+  completedTopics: [], favorites: [], quizHistory: [], studySessions: 0, trialStart: null, plan: null, joinedAt: null,
   errors: [], studyPlan: null, simulationHistory: [],
 };
 let state: AppState = initial;
@@ -130,6 +130,7 @@ export const actions = {
   setSchoolYear(schoolYear: string) { update(s => ({ ...s, schoolYear })); },
   setAvatar(avatar: string) { update(s => ({ ...s, avatar })); },
   completeTopic(id: string) { update(s => ({ ...s, completedTopics: s.completedTopics.includes(id) ? s.completedTopics : [...s.completedTopics, id] })); },
+  toggleFavorite(slug: string) { update(s => ({ ...s, favorites: s.favorites.includes(slug) ? s.favorites.filter(x => x !== slug) : [...s.favorites, slug] })); },
   recordQuiz(result: AppState["quizHistory"][number]) { update(s => ({ ...s, quizHistory: [...s.quizHistory, result] })); },
   recordSimulation(result: SimulationResult) { update(s => ({ ...s, simulationHistory: [...s.simulationHistory, result] })); },
   finishStudySession() { update(s => ({ ...s, studySessions: s.studySessions + 1 })); },
