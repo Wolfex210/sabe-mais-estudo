@@ -26,6 +26,7 @@ import { Route as ProgressoRouteImport } from './routes/progresso'
 import { Route as QuizRouteImport } from './routes/quiz'
 import { Route as RevisaoRouteImport } from './routes/revisao'
 import { Route as SimuladosRouteImport } from './routes/simulados'
+import { Route as TutorIaRouteImport } from './routes/tutor-ia'
 import { Route as CheckoutReturnRouteImport } from './routes/checkout/return'
 import { Route as FaculdadeIndexRouteImport } from './routes/faculdade.index'
 import { Route as FaculdadeSlugRouteImport } from './routes/faculdade.$slug'
@@ -119,6 +120,11 @@ const SimuladosRoute = SimuladosRouteImport.update({
   path: '/simulados',
   getParentRoute: () => rootRouteImport,
 } as any)
+const TutorIaRoute = TutorIaRouteImport.update({
+  id: '/tutor-ia',
+  path: '/tutor-ia',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const CheckoutReturnRoute = CheckoutReturnRouteImport.update({
   id: '/checkout/return',
   path: '/checkout/return',
@@ -174,6 +180,8 @@ export interface FileRoutesByFullPath {
   '/quiz': typeof QuizRoute
   '/revisao': typeof RevisaoRoute
   '/simulados': typeof SimuladosRoute
+  '/tutor-ia': typeof TutorIaRoute
+  '/tutor-ia': typeof TutorIaRoute
   '/checkout/return': typeof CheckoutReturnRoute
   '/faculdade/$slug': typeof FaculdadeSlugRoute
   '/materias/$slug': typeof MateriasSlugRoute
@@ -255,6 +263,7 @@ export interface FileRouteTypes {
     | '/quiz'
     | '/revisao'
     | '/simulados'
+    | '/tutor-ia'
     | '/checkout/return'
     | '/faculdade/$slug'
     | '/materias/$slug'
@@ -334,6 +343,7 @@ export interface RootRouteChildren {
   QuizRoute: typeof QuizRoute
   RevisaoRoute: typeof RevisaoRoute
   SimuladosRoute: typeof SimuladosRoute
+  TutorIaRoute: typeof TutorIaRoute
   CheckoutReturnRoute: typeof CheckoutReturnRoute
   FaculdadeSlugRoute: typeof FaculdadeSlugRoute
   MateriasSlugRoute: typeof MateriasSlugRoute
@@ -464,6 +474,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SimuladosRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/tutor-ia': {
+      id: '/tutor-ia'
+      path: '/tutor-ia'
+      fullPath: '/tutor-ia'
+      preLoaderRoute: typeof TutorIaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/checkout/return': {
       id: '/checkout/return'
       path: '/checkout/return'
@@ -534,6 +551,7 @@ const rootRouteChildren: RootRouteChildren = {
   QuizRoute: QuizRoute,
   RevisaoRoute: RevisaoRoute,
   SimuladosRoute: SimuladosRoute,
+  TutorIaRoute: TutorIaRoute,
   CheckoutReturnRoute: CheckoutReturnRoute,
   FaculdadeSlugRoute: FaculdadeSlugRoute,
   MateriasSlugRoute: MateriasSlugRoute,
