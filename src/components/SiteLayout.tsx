@@ -4,7 +4,7 @@ import { useEffect, useState, type ReactNode } from "react";
 import {
   Menu, X, GraduationCap, Download, House, BookOpen, GraduationCap as College,
   Wrench, Brain, Trophy, LayoutDashboard, CalendarDays, NotebookPen,
-  RotateCcw, ClipboardCheck, TrendingUp, CreditCard, Search, UserRound, Layers3, PenLine,
+  RotateCcw, ClipboardCheck, TrendingUp, CreditCard, Search, UserRound, Layers3, PenLine, CircleHelp,
 } from "lucide-react";
 import { useAppState, levelOf, trialExpired } from "@/lib/store";
 import { useAuth } from "@/lib/auth";
@@ -52,6 +52,7 @@ const navGroups = [
     label: "CONTA",
     items: [
       { to: "/perfil", label: "Meu perfil", icon: UserRound },
+      { to: "/ajuda", label: "Ajuda e suporte", icon: CircleHelp },
     ],
   },
 ] as const;
