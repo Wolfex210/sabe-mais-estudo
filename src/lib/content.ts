@@ -2090,10 +2090,10 @@ for (const item of expandedSubjectCatalog) {
   const groups = [item.topics.slice(0,3), item.topics.slice(3,6), item.topics.slice(6,9), item.topics.slice(9,12)];
   const pageTitles = ["Fundamentos e conceitos", "Linguagem e ferramentas", "Aplicações e contexto", "Revisão e projeto" ];
   const pageTexts = [
-    `Conheça os conceitos fundamentais de ${item.name}. Esta etapa apresenta ${groups[0].join(", ")} e explica como esses assuntos ajudam a construir a base da matéria.`,
-    `Explore métodos, vocabulário e ferramentas de ${item.name}, relacionando ${groups[1].join(", ")} a exemplos e situações de estudo.`,
-    `Veja como ${item.name} se conecta ao cotidiano e a outras áreas por meio de ${groups[2].join(", ")}. Observe contextos, evidências e aplicações.`,
-    `Revise ${groups[3].join(", ")} e organize o que aprendeu em uma atividade ou pequeno projeto. Use o quiz para verificar sua compreensão.`
+    `Conheça os conceitos fundamentais de ${item.name}. Esta etapa apresenta ${groups[0]?.join(", ") ?? ""} e explica como esses assuntos ajudam a construir a base da matéria.`,
+    `Explore métodos, vocabulário e ferramentas de ${item.name}, relacionando ${groups[1]?.join(", ") ?? ""} a exemplos e situações de estudo.`,
+    `Veja como ${item.name} se conecta ao cotidiano e a outras áreas por meio de ${groups[2]?.join(", ") ?? ""}. Observe contextos, evidências e aplicações.`,
+    `Revise ${groups[3]?.join(", ") ?? ""} e organize o que aprendeu em uma atividade ou pequeno projeto. Use o quiz para verificar sua compreensão.`
   ];
   subjects.push({
     slug: item.slug,
@@ -2374,7 +2374,7 @@ for (const track of fundamentalTracks) {
     a: `Uma boa resposta deve definir ${topic.toLowerCase()} com clareza, apresentar uma relação correta com ${track.name} e incluir um exemplo pertinente. Confira se a explicação está completa e se distingue esse conceito de ideias semelhantes.`,
   }));
   subject.questions = Array.from({ length: 10 }, (_, index) => {
-    const topic = track.topics[index];
+    const topic = track.topics[index] ?? track.name;
     const otherTopics = track.topics.filter((_, i) => i !== index);
     const options = [
       `A alternativa que define ou aplica corretamente ${topic.toLowerCase()} em ${track.name}.`,
@@ -2383,9 +2383,9 @@ for (const track of fundamentalTracks) {
       `Uma interpretação que confunde ${topic.toLowerCase()} com outro assunto.`,
     ];
     const answer = (index * 3) % 4;
-    const correct = options[0];
+    const correct = options[0]!;
     const shuffled = [...options];
-    const swap = shuffled[answer]; shuffled[answer] = correct; shuffled[0] = swap;
+    const swap = shuffled[answer]!; shuffled[answer] = correct; shuffled[0] = swap;
     return {
       q: `Na matéria ${track.name}, qual alternativa representa a compreensão mais adequada de “${topic}”?`,
       options: shuffled,

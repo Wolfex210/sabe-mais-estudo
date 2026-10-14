@@ -1433,7 +1433,7 @@ export const collegeLessons: Lesson[] = collegeCourses.flatMap(course => getColl
   if (!module) return [];
   const concepts = module.concepts;
   return [{
-    subject: discipline.id, year: discipline.period, title: discipline.lessonTitle,
+    subject: discipline.id, year: discipline.period as Lesson["year"], title: discipline.lessonTitle,
     explanation: concepts.map(c => `${c.term} — ${c.definition}.
 Na prática, esse conceito ajuda a ${c.case}. É importante observar que ${c.limit}.`).join("\n\n"),
     summary: `Bases de ${module.title.toLocaleLowerCase("pt-BR")} na trilha de ${course.name}: ${concepts.map(c => c.term.toLocaleLowerCase("pt-BR")).join(", ")}.`,

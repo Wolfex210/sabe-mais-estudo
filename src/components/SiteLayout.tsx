@@ -58,7 +58,7 @@ const navGroups = [
   },
 ] as const;
 
-const nav = navGroups.flatMap((group) => group.items);
+const nav: { to: string; label: string }[] = navGroups.flatMap((group) => group.items);
 
 export function AdSlot({ label = "Espaço reservado para publicidade" }: { label?: string }) {
   return (
