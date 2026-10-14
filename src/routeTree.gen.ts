@@ -10,12 +10,11 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as AlterarSenhaRouteImport } from './routes/alterar-senha'
 import { Route as AjudaRouteImport } from './routes/ajuda'
+import { Route as AlterarSenhaRouteImport } from './routes/alterar-senha'
 import { Route as CadernoErrosRouteImport } from './routes/caderno-erros'
-import { Route as CertificadosRouteImport } from './routes/certificados'
 import { Route as CartoesRouteImport } from './routes/cartoes'
-import { Route as RedacaoRouteImport } from './routes/redacao'
+import { Route as CertificadosRouteImport } from './routes/certificados'
 import { Route as ContaRouteImport } from './routes/conta'
 import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as DesafiosRouteImport } from './routes/desafios'
@@ -28,6 +27,7 @@ import { Route as PlanoEstudosRouteImport } from './routes/plano-estudos'
 import { Route as PlanosRouteImport } from './routes/planos'
 import { Route as ProgressoRouteImport } from './routes/progresso'
 import { Route as QuizRouteImport } from './routes/quiz'
+import { Route as RedacaoRouteImport } from './routes/redacao'
 import { Route as RevisaoRouteImport } from './routes/revisao'
 import { Route as SimuladosRouteImport } from './routes/simulados'
 import { Route as CheckoutReturnRouteImport } from './routes/checkout/return'
@@ -58,19 +58,14 @@ const CadernoErrosRoute = CadernoErrosRouteImport.update({
   path: '/caderno-erros',
   getParentRoute: () => rootRouteImport,
 } as any)
-const CertificadosRoute = CertificadosRouteImport.update({
-  id: '/certificados',
-  path: '/certificados',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const CartoesRoute = CartoesRouteImport.update({
   id: '/cartoes',
   path: '/cartoes',
   getParentRoute: () => rootRouteImport,
 } as any)
-const RedacaoRoute = RedacaoRouteImport.update({
-  id: '/redacao',
-  path: '/redacao',
+const CertificadosRoute = CertificadosRouteImport.update({
+  id: '/certificados',
+  path: '/certificados',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ContaRoute = ContaRouteImport.update({
@@ -133,6 +128,11 @@ const QuizRoute = QuizRouteImport.update({
   path: '/quiz',
   getParentRoute: () => rootRouteImport,
 } as any)
+const RedacaoRoute = RedacaoRouteImport.update({
+  id: '/redacao',
+  path: '/redacao',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const RevisaoRoute = RevisaoRouteImport.update({
   id: '/revisao',
   path: '/revisao',
@@ -182,12 +182,11 @@ const AulaSlugYearTopicRoute = AulaSlugYearTopicRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/alterar-senha': typeof AlterarSenhaRoute
   '/ajuda': typeof AjudaRoute
+  '/alterar-senha': typeof AlterarSenhaRoute
   '/caderno-erros': typeof CadernoErrosRoute
-  '/certificados': typeof CertificadosRoute
   '/cartoes': typeof CartoesRoute
-  '/redacao': typeof RedacaoRoute
+  '/certificados': typeof CertificadosRoute
   '/conta': typeof ContaRoute
   '/dashboard': typeof DashboardRoute
   '/desafios': typeof DesafiosRoute
@@ -200,6 +199,7 @@ export interface FileRoutesByFullPath {
   '/planos': typeof PlanosRoute
   '/progresso': typeof ProgressoRoute
   '/quiz': typeof QuizRoute
+  '/redacao': typeof RedacaoRoute
   '/revisao': typeof RevisaoRoute
   '/simulados': typeof SimuladosRoute
   '/checkout/return': typeof CheckoutReturnRoute
@@ -212,8 +212,11 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/ajuda': typeof AjudaRoute
   '/alterar-senha': typeof AlterarSenhaRoute
   '/caderno-erros': typeof CadernoErrosRoute
+  '/cartoes': typeof CartoesRoute
+  '/certificados': typeof CertificadosRoute
   '/conta': typeof ContaRoute
   '/dashboard': typeof DashboardRoute
   '/desafios': typeof DesafiosRoute
@@ -226,6 +229,7 @@ export interface FileRoutesByTo {
   '/planos': typeof PlanosRoute
   '/progresso': typeof ProgressoRoute
   '/quiz': typeof QuizRoute
+  '/redacao': typeof RedacaoRoute
   '/revisao': typeof RevisaoRoute
   '/simulados': typeof SimuladosRoute
   '/checkout/return': typeof CheckoutReturnRoute
@@ -239,8 +243,11 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/ajuda': typeof AjudaRoute
   '/alterar-senha': typeof AlterarSenhaRoute
   '/caderno-erros': typeof CadernoErrosRoute
+  '/cartoes': typeof CartoesRoute
+  '/certificados': typeof CertificadosRoute
   '/conta': typeof ContaRoute
   '/dashboard': typeof DashboardRoute
   '/desafios': typeof DesafiosRoute
@@ -253,6 +260,7 @@ export interface FileRoutesById {
   '/planos': typeof PlanosRoute
   '/progresso': typeof ProgressoRoute
   '/quiz': typeof QuizRoute
+  '/redacao': typeof RedacaoRoute
   '/revisao': typeof RevisaoRoute
   '/simulados': typeof SimuladosRoute
   '/checkout/return': typeof CheckoutReturnRoute
@@ -267,12 +275,11 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
-    | '/alterar-senha'
     | '/ajuda'
+    | '/alterar-senha'
     | '/caderno-erros'
-    | '/certificados'
     | '/cartoes'
-    | '/redacao'
+    | '/certificados'
     | '/conta'
     | '/dashboard'
     | '/desafios'
@@ -285,6 +292,7 @@ export interface FileRouteTypes {
     | '/planos'
     | '/progresso'
     | '/quiz'
+    | '/redacao'
     | '/revisao'
     | '/simulados'
     | '/checkout/return'
@@ -297,12 +305,11 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
-    | '/alterar-senha'
     | '/ajuda'
+    | '/alterar-senha'
     | '/caderno-erros'
-    | '/certificados'
     | '/cartoes'
-    | '/redacao'
+    | '/certificados'
     | '/conta'
     | '/dashboard'
     | '/desafios'
@@ -315,6 +322,7 @@ export interface FileRouteTypes {
     | '/planos'
     | '/progresso'
     | '/quiz'
+    | '/redacao'
     | '/revisao'
     | '/simulados'
     | '/checkout/return'
@@ -327,12 +335,11 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
-    | '/alterar-senha'
     | '/ajuda'
+    | '/alterar-senha'
     | '/caderno-erros'
-    | '/certificados'
     | '/cartoes'
-    | '/redacao'
+    | '/certificados'
     | '/conta'
     | '/dashboard'
     | '/desafios'
@@ -345,6 +352,7 @@ export interface FileRouteTypes {
     | '/planos'
     | '/progresso'
     | '/quiz'
+    | '/redacao'
     | '/revisao'
     | '/simulados'
     | '/checkout/return'
@@ -358,8 +366,11 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AjudaRoute: typeof AjudaRoute
   AlterarSenhaRoute: typeof AlterarSenhaRoute
   CadernoErrosRoute: typeof CadernoErrosRoute
+  CartoesRoute: typeof CartoesRoute
+  CertificadosRoute: typeof CertificadosRoute
   ContaRoute: typeof ContaRoute
   DashboardRoute: typeof DashboardRoute
   DesafiosRoute: typeof DesafiosRoute
@@ -372,6 +383,7 @@ export interface RootRouteChildren {
   PlanosRoute: typeof PlanosRoute
   ProgressoRoute: typeof ProgressoRoute
   QuizRoute: typeof QuizRoute
+  RedacaoRoute: typeof RedacaoRoute
   RevisaoRoute: typeof RevisaoRoute
   SimuladosRoute: typeof SimuladosRoute
   CheckoutReturnRoute: typeof CheckoutReturnRoute
@@ -392,18 +404,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/alterar-senha': {
-      id: '/alterar-senha'
-      path: '/alterar-senha'
-      fullPath: '/alterar-senha'
-      preLoaderRoute: typeof AlterarSenhaRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/ajuda': {
       id: '/ajuda'
       path: '/ajuda'
       fullPath: '/ajuda'
       preLoaderRoute: typeof AjudaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/alterar-senha': {
+      id: '/alterar-senha'
+      path: '/alterar-senha'
+      fullPath: '/alterar-senha'
+      preLoaderRoute: typeof AlterarSenhaRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/caderno-erros': {
@@ -413,13 +425,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CadernoErrosRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/certificados': {
-      id: '/certificados'
-      path: '/certificados'
-      fullPath: '/certificados'
-      preLoaderRoute: typeof CertificadosRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/cartoes': {
       id: '/cartoes'
       path: '/cartoes'
@@ -427,11 +432,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CartoesRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/redacao': {
-      id: '/redacao'
-      path: '/redacao'
-      fullPath: '/redacao'
-      preLoaderRoute: typeof RedacaoRouteImport
+    '/certificados': {
+      id: '/certificados'
+      path: '/certificados'
+      fullPath: '/certificados'
+      preLoaderRoute: typeof CertificadosRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/conta': {
@@ -518,6 +523,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof QuizRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/redacao': {
+      id: '/redacao'
+      path: '/redacao'
+      fullPath: '/redacao'
+      preLoaderRoute: typeof RedacaoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/revisao': {
       id: '/revisao'
       path: '/revisao'
@@ -586,12 +598,11 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  AlterarSenhaRoute: AlterarSenhaRoute,
   AjudaRoute: AjudaRoute,
+  AlterarSenhaRoute: AlterarSenhaRoute,
   CadernoErrosRoute: CadernoErrosRoute,
-  CertificadosRoute: CertificadosRoute,
   CartoesRoute: CartoesRoute,
-  RedacaoRoute: RedacaoRoute,
+  CertificadosRoute: CertificadosRoute,
   ContaRoute: ContaRoute,
   DashboardRoute: DashboardRoute,
   DesafiosRoute: DesafiosRoute,
@@ -604,6 +615,7 @@ const rootRouteChildren: RootRouteChildren = {
   PlanosRoute: PlanosRoute,
   ProgressoRoute: ProgressoRoute,
   QuizRoute: QuizRoute,
+  RedacaoRoute: RedacaoRoute,
   RevisaoRoute: RevisaoRoute,
   SimuladosRoute: SimuladosRoute,
   CheckoutReturnRoute: CheckoutReturnRoute,

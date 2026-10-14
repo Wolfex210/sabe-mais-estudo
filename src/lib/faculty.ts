@@ -355,7 +355,7 @@ function makeDiscipline(
 }
 
 export const facultyCourses: FacultyCourse[] = courseSeeds.map(([slug,name,area,focus],index)=>{
-  const t = trackDetails[area] ?? (area === "Educação" || area === "Humanidades" ? trackDetails["Ciências Humanas"] : trackDetails["Ciências Humanas"]);
+  const t = (trackDetails[area] ?? trackDetails["Ciências Humanas"])!;
   const phases = [
     {period:"1º semestre",theme:"Fundamentos e linguagem profissional",items:t.foundation},
     {period:"2º semestre",theme:"Bases científicas e técnicas",items:t.foundation.map((x,i)=>x+" aplicado")},
@@ -390,7 +390,7 @@ export const facultyCourses: FacultyCourse[] = courseSeeds.map(([slug,name,area,
       period:p.period,
       theme:p.theme,
       disciplines:p.items.map((item,di)=>makeDiscipline(
-        item, name, focus, p.period, t.practice[(si+di+index)%t.practice.length],
+        item, name, focus, p.period, t.practice[(si+di+index)%t.practice.length] ?? "",
         (courseVisuals[slug] ?? {topics:[focus,"fundamentos da área","métodos de pesquisa","ferramentas profissionais","estudo de caso","análise de dados","ética e responsabilidade","projeto aplicado","inovação","carreiras e aplicações"]}).topics,
         (si*3+di+index)%((courseVisuals[slug] ?? {topics:[focus]}).topics.length)
       ))

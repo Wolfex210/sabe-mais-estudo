@@ -42,6 +42,6 @@ export function usePlanAccess() {
   }, [user?.id]);
 
   const plan = subscriptionPlan ?? state.plan;
-  const limits = limitsForPlan(plan);
+  const limits = limitsForPlan(plan === "trial" ? null : plan);
   return { plan, limits, resolved };
 }
