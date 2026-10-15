@@ -19,6 +19,7 @@ import { Route as ContaRouteImport } from './routes/conta'
 import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as DesafiosRouteImport } from './routes/desafios'
 import { Route as FerramentasRouteImport } from './routes/ferramentas'
+import { Route as PagamentoRouteImport } from './routes/pagamento'
 import { Route as PagamentoCanceladoRouteImport } from './routes/pagamento-cancelado'
 import { Route as PagamentoSucessoRouteImport } from './routes/pagamento-sucesso'
 import { Route as PerfilRouteImport } from './routes/perfil'
@@ -86,6 +87,11 @@ const DesafiosRoute = DesafiosRouteImport.update({
 const FerramentasRoute = FerramentasRouteImport.update({
   id: '/ferramentas',
   path: '/ferramentas',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PagamentoRoute = PagamentoRouteImport.update({
+  id: '/pagamento',
+  path: '/pagamento',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PagamentoCanceladoRoute = PagamentoCanceladoRouteImport.update({
@@ -191,6 +197,7 @@ export interface FileRoutesByFullPath {
   '/dashboard': typeof DashboardRoute
   '/desafios': typeof DesafiosRoute
   '/ferramentas': typeof FerramentasRoute
+  '/pagamento': typeof PagamentoRoute
   '/pagamento-cancelado': typeof PagamentoCanceladoRoute
   '/pagamento-sucesso': typeof PagamentoSucessoRoute
   '/perfil': typeof PerfilRoute
@@ -221,6 +228,7 @@ export interface FileRoutesByTo {
   '/dashboard': typeof DashboardRoute
   '/desafios': typeof DesafiosRoute
   '/ferramentas': typeof FerramentasRoute
+  '/pagamento': typeof PagamentoRoute
   '/pagamento-cancelado': typeof PagamentoCanceladoRoute
   '/pagamento-sucesso': typeof PagamentoSucessoRoute
   '/perfil': typeof PerfilRoute
@@ -252,6 +260,7 @@ export interface FileRoutesById {
   '/dashboard': typeof DashboardRoute
   '/desafios': typeof DesafiosRoute
   '/ferramentas': typeof FerramentasRoute
+  '/pagamento': typeof PagamentoRoute
   '/pagamento-cancelado': typeof PagamentoCanceladoRoute
   '/pagamento-sucesso': typeof PagamentoSucessoRoute
   '/perfil': typeof PerfilRoute
@@ -284,6 +293,7 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/desafios'
     | '/ferramentas'
+    | '/pagamento'
     | '/pagamento-cancelado'
     | '/pagamento-sucesso'
     | '/perfil'
@@ -314,6 +324,7 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/desafios'
     | '/ferramentas'
+    | '/pagamento'
     | '/pagamento-cancelado'
     | '/pagamento-sucesso'
     | '/perfil'
@@ -344,6 +355,7 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/desafios'
     | '/ferramentas'
+    | '/pagamento'
     | '/pagamento-cancelado'
     | '/pagamento-sucesso'
     | '/perfil'
@@ -375,6 +387,7 @@ export interface RootRouteChildren {
   DashboardRoute: typeof DashboardRoute
   DesafiosRoute: typeof DesafiosRoute
   FerramentasRoute: typeof FerramentasRoute
+  PagamentoRoute: typeof PagamentoRoute
   PagamentoCanceladoRoute: typeof PagamentoCanceladoRoute
   PagamentoSucessoRoute: typeof PagamentoSucessoRoute
   PerfilRoute: typeof PerfilRoute
@@ -465,6 +478,13 @@ declare module '@tanstack/react-router' {
       path: '/ferramentas'
       fullPath: '/ferramentas'
       preLoaderRoute: typeof FerramentasRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/pagamento': {
+      id: '/pagamento'
+      path: '/pagamento'
+      fullPath: '/pagamento'
+      preLoaderRoute: typeof PagamentoRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/pagamento-cancelado': {
@@ -607,6 +627,7 @@ const rootRouteChildren: RootRouteChildren = {
   DashboardRoute: DashboardRoute,
   DesafiosRoute: DesafiosRoute,
   FerramentasRoute: FerramentasRoute,
+  PagamentoRoute: PagamentoRoute,
   PagamentoCanceladoRoute: PagamentoCanceladoRoute,
   PagamentoSucessoRoute: PagamentoSucessoRoute,
   PerfilRoute: PerfilRoute,
