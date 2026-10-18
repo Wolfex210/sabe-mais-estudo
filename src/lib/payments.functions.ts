@@ -66,7 +66,7 @@ export const createCheckoutSession = createServerFn({ method: 'POST' })
         const product = await stripe.products.retrieve(productId);
         const description = `${product.name} — acesso de 30 dias (Pix)`;
         const pixSession = await stripe.checkout.sessions.create({
-          line_items: [{ price_data: { currency: 'brl', unit_amount: expected.amount, product: productId }, quantity: 1 }],
+          line_items: [{ price_data: { currency: 'brl', unit_amount: price.unit_amount!, product: productId }, quantity: 1 }],
           mode: 'payment', ui_mode: 'embedded_page', payment_method_types: ['pix'],
           payment_method_options: { pix: { expires_after_seconds: 3600 } },
           return_url: `${origin}/checkout/return?session_id={CHECKOUT_SESSION_ID}`,

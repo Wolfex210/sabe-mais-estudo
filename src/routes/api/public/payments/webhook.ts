@@ -10,6 +10,16 @@ export const Route = createFileRoute('/api/public/payments/webhook')({
       let event;
       try { event = await verifyWebhook(request, environment); }
       catch { return new Response('Invalid signature', { status: 400 }); }
+      if (event.type === 'checkout.session.completed' || event.type === 'checkout.session.async_payment_succeeded') {
+        try {
+          const { recordPixPass } = await import('@/lib/pix-pass.server');
+          await recordPixPass(event.data.object, environment);
+          return Response.json({ received: true });
+        } catch (error) {
+          console.error('Pix update failed', error);
+          return new Response('Pix update failed', { status: 500 });
+        }
+      }
       if (!['customer.subscription.created','customer.subscription.updated','customer.subscription.deleted'].includes(event.type)) {
         return Response.json({ received: true });
       }
