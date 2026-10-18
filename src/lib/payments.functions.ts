@@ -5,6 +5,7 @@ import { createStripeClient, getStripeErrorMessage, type StripeEnv } from '@/lib
 import { STRIPE_PLANS } from '@/lib/stripe-plans';
 
 const PRICES = Object.values(STRIPE_PLANS);
+export const PIX_KIND = 'pix_30d';
 const validEnv = (value: unknown): value is StripeEnv => value === 'sandbox' || value === 'live';
 
 async function resolveOrCreateCustomer(
@@ -36,8 +37,9 @@ async function resolveOrCreateCustomer(
 
 export const createCheckoutSession = createServerFn({ method: 'POST' })
   .middleware([requireSupabaseAuth])
-  .inputValidator((data: { priceId: string; environment: StripeEnv }) => {
+  .inputValidator((data: { priceId: string; environment: StripeEnv; method?: 'card' | 'pix' }) => {
     if (!PRICES.some(price => price.lookupKey === data.priceId) || !validEnv(data.environment)) throw new Error('Plano inválido');
+    if (data.method !== undefined && data.method !== 'card' && data.method !== 'pix') throw new Error('Forma de pagamento inválida');
     return data;
   })
   .handler(async ({ data, context }): Promise<{ clientSecret: string } | { error: string }> => {
@@ -59,6 +61,22 @@ export const createCheckoutSession = createServerFn({ method: 'POST' })
       }
       const customerId = await resolveOrCreateCustomer(stripe, { userId: context.userId, ...(user.email ? { email: user.email } : {}) });
       const origin = new URL(getRequest().url).origin;
+      if (data.method === 'pix') {
+        const productId = typeof price.product === 'string' ? price.product : price.product.id;
+        const product = await stripe.products.retrieve(productId);
+        const description = `${product.name} — acesso de 30 dias (Pix)`;
+        const pixSession = await stripe.checkout.sessions.create({
+          line_items: [{ price_data: { currency: 'brl', unit_amount: price.unit_amount!, product: productId }, quantity: 1 }],
+          mode: 'payment', ui_mode: 'embedded_page', payment_method_types: ['pix'],
+          payment_method_options: { pix: { expires_after_seconds: 3600 } },
+          return_url: `${origin}/checkout/return?session_id={CHECKOUT_SESSION_ID}`,
+          customer: customerId,
+          metadata: { userId: context.userId, kind: PIX_KIND, lookupKey: data.priceId, productId },
+          payment_intent_data: { description, metadata: { userId: context.userId, kind: PIX_KIND } },
+        });
+        if (!pixSession.client_secret) return { error: 'Não foi possível iniciar o Pix. Tente novamente.' };
+        return { clientSecret: pixSession.client_secret };
+      }
       const session = await stripe.checkout.sessions.create({
         line_items: [{ price: price.id, quantity: 1 }], mode: 'subscription', ui_mode: 'embedded_page',
         adaptive_pricing: { enabled: false },
@@ -81,6 +99,10 @@ export const getCheckoutStatus = createServerFn({ method: 'POST' })
     try {
       const session = await createStripeClient(data.environment).checkout.sessions.retrieve(data.sessionId);
       if (session.metadata?.['userId'] !== context.userId) return { error: 'Este pagamento não pertence à sua conta.' };
+      if (session.metadata?.['kind'] === PIX_KIND && session.payment_status === 'paid') {
+        const { recordPixPass } = await import('@/lib/pix-pass.server');
+        await recordPixPass(session, data.environment);
+      }
       return { status: session.status ?? 'open', paymentStatus: session.payment_status };
     } catch (error) { return { error: getStripeErrorMessage(error) }; }
   });
@@ -104,7 +126,7 @@ export const getCurrentSubscriptionPlan = createServerFn({ method: 'GET' })
         for (const planId of Object.keys(STRIPE_PLANS) as (keyof typeof STRIPE_PLANS)[]) {
           const plan = STRIPE_PLANS[planId];
           const prices = await stripe.prices.list({ lookup_keys: [plan.lookupKey], active: true, limit: 10 });
-          if (prices.data.some((price) => price.id === row.price_id)) return { plan: planId };
+          if (row.price_id === plan.lookupKey || prices.data.some((price) => price.id === row.price_id)) return { plan: planId };
         }
       } catch (error) {
         console.error('Não foi possível identificar o plano ativo:', getStripeErrorMessage(error));
