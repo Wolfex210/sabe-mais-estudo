@@ -1,5 +1,5 @@
 # Conteúdo por ano
-- [ ] Integrar Mercado Pago e cobrar R$ 1,00 pelo cadastro; definir relação com os planos existentes e configurar credenciais seguras antes de ativar cobranças.
+- [ ] Integrar primeiro Mercado Pago exclusivamente para Pix, com credenciais seguras; depois implementar cobrança de R$ 1,00 pelo cadastro e definir relação com os planos existentes.
 - [ ] Implementar área Faculdade com 40 cursos, disciplinas, aulas, exercícios, quizzes e progresso compartilhado.
 - [ ] Verificar busca, navegação e conclusão de aulas e quizzes universitários.
 - [x] Organizar tópicos introdutórios do 1º EF ao 3º EM nas oito matérias, respeitando a introdução tardia de Física e Química.
