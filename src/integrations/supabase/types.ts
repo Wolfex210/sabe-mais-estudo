@@ -14,6 +14,48 @@ export type Database = {
   }
   public: {
     Tables: {
+      registration_payments: {
+        Row: {
+          amount_cents: number
+          created_at: string
+          currency: string
+          expires_at: string | null
+          id: string
+          paid_at: string | null
+          provider_payment_id: string | null
+          qr_code: string | null
+          qr_code_base64: string | null
+          status: string
+          user_id: string
+        }
+        Insert: {
+          amount_cents?: number
+          created_at?: string
+          currency?: string
+          expires_at?: string | null
+          id?: string
+          paid_at?: string | null
+          provider_payment_id?: string | null
+          qr_code?: string | null
+          qr_code_base64?: string | null
+          status?: string
+          user_id: string
+        }
+        Update: {
+          amount_cents?: number
+          created_at?: string
+          currency?: string
+          expires_at?: string | null
+          id?: string
+          paid_at?: string | null
+          provider_payment_id?: string | null
+          qr_code?: string | null
+          qr_code_base64?: string | null
+          status?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       student_profiles: {
         Row: {
           avatar: string | null

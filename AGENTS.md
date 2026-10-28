@@ -14,3 +14,4 @@
 - Use as lookup keys estáveis dos planos Stripe no checkout incorporado e resolva Price IDs no servidor; isso separa preços exibidos de identificadores de cobrança e mantém o Preview e a produção consistentes.
 - Keep the college catalog in a separate typed module with course-scoped discipline IDs and reuse the lesson, quiz and progress engines; this prevents collisions with school curricula and keeps account data independent of educational content.
 - Fetch individual lesson DTOs through a public read-only server function with TanStack Query; this preserves asynchronous route loading without exposing account data.
+- Registration payments use separate owner-readable, server-write-only orders and server-verified Mercado Pago Pix status; account creation precedes payment for secure ownership, while dashboard access requires confirmed payment.

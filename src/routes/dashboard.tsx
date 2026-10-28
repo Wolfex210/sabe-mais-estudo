@@ -3,10 +3,11 @@ import { Link } from "@tanstack/react-router";
 import { SiteLayout, PageHeader, Card } from "@/components/SiteLayout";
 import { useAppState, levelOf, streakOf } from "@/lib/store";
 import { subjects } from "@/lib/content";
+import { RegistrationAccess } from '@/components/RegistrationAccess';
 
 export const Route = createFileRoute("/dashboard")({
-  head: () => ({ meta: [{ title: "Dashboard — Sabe Mais" }, { name: "description", content: "Central do estudante com desempenho, plano, erros, revisões e simulados." }] }),
-  component: Dashboard,
+  head: () => ({ meta: [{ title: "Dashboard — Sabe Mais" }, { name: "description", content: "Central do estudante com desempenho, plano, erros, revisões e simulados." }, { property: 'og:title', content: 'Dashboard — Sabe Mais' }, { property: 'og:description', content: 'Seu painel pessoal de estudos no Sabe Mais.' }, { property: 'og:type', content: 'website' }, { name: 'twitter:card', content: 'summary' }] }),
+  component: () => <RegistrationAccess><Dashboard /></RegistrationAccess>,
 });
 
 function Dashboard() {
