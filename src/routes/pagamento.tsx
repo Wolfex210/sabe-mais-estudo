@@ -71,7 +71,7 @@ function Pagamento() {
         <CheckCircle className="mx-auto mb-4 h-12 w-12 text-primary" />
         <h2 className="text-2xl font-bold">Pagamento recebido</h2><p className="mt-2 text-muted-foreground">Seu cadastro foi liberado.</p>
         <Button asChild className="mt-6 w-full"><Link to="/dashboard">Acessar meu painel</Link></Button>
-      </> : <>
+      </div> : <>
         <div className="flex items-start justify-between gap-4 border-b border-border pb-6"><div><h2 className="text-xl font-bold">Taxa de cadastro</h2><p className="mt-1 text-sm text-muted-foreground">Sabe Mais · Mercado Pago</p></div><p className="whitespace-nowrap text-3xl font-extrabold text-primary">R$ 1,00</p></div>
         <div className="my-6 flex items-center gap-3"><QrCode className="h-6 w-6 text-primary" /><div><p className="font-semibold">Pix</p><p className="text-sm text-muted-foreground">Pagamento único, sem renovação automática</p></div></div>
         {!pix ? <Button onClick={() => void generate()} disabled={busy} className="w-full"><QrCode className="mr-2 h-4 w-4" />{busy ? 'Gerando Pix…' : 'Gerar Pix de R$ 1,00'}</Button> : <>
