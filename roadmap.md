@@ -1,5 +1,6 @@
 # Conteúdo por ano
-- [ ] Conectar cadastro → pagamento Pix de R$ 1,00 → dashboard somente após confirmação real; credencial Mercado Pago ainda não fornecida.
+- [x] Criar tela de cadastro → pagamento Pix de R$ 1,00 e bloquear dashboard de conta sem pagamento confirmado; verificado com conta autenticada.
+- [ ] Configurar credencial Mercado Pago e testar recebimento real, confirmação e liberação do dashboard; bloqueado pela credencial não fornecida.
 - [ ] Integrar primeiro Mercado Pago exclusivamente para Pix, com credenciais seguras; depois implementar cobrança de R$ 1,00 pelo cadastro e definir relação com os planos existentes.
 - [ ] Implementar área Faculdade com 40 cursos, disciplinas, aulas, exercícios, quizzes e progresso compartilhado.
 - [ ] Verificar busca, navegação e conclusão de aulas e quizzes universitários.
@@ -18,5 +19,5 @@
 - [ ] Ampliar as aulas e bancos de questões por ano e matéria; atualmente há uma aula completa de exemplo com 30 questões, além dos roteiros introdutórios já existentes.
 - [x] Corrigir o checkout de teste dos três planos para resolver Price IDs reais via catálogo Stripe, sem usar textos monetários como identificadores.
 - [ ] Ativar cobranças reais e histórico após o responsável vincular a conta Stripe de teste, concluir a ativação da conta real e instalar o aplicativo Lovable na Stripe; então verificar a prontidão e o checkout real.
-- [ ] Criar página de pagamento pós-cadastro (/pagamento) e liberar o dashboard somente após pagamento confirmado.
+- [x] Criar página de pagamento pós-cadastro (/pagamento) e condicionar dashboard à confirmação no servidor; recebimento real ainda não testado.
 - [ ] Habilitar Pix real nas assinaturas quando a Stripe liberar a conta e o método: consulta à conta real confirmou país BR, charges_enabled=false e pix.available=false nas configurações de pagamento; bloqueado pela aprovação/disponibilidade da Stripe. Não forçar Pix no checkout enquanto indisponível.
