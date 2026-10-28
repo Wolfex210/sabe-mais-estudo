@@ -1,4 +1,4 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useState, type FormEvent } from "react";
 import { SiteLayout, PageHeader } from "@/components/SiteLayout";
 import { Button } from "@/components/ui/button";
@@ -20,6 +20,7 @@ export const Route = createFileRoute("/conta")({
 
 function Conta() {
   const { user } = useAuth();
+  const navigate = useNavigate();
   const [mode, setMode] = useState<"entrar" | "cadastrar" | "recuperar">("entrar");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -39,31 +40,32 @@ function Conta() {
         const { error } = await supabase.auth.resetPasswordForEmail(email, { redirectTo: `${window.location.origin}/alterar-senha` });
         setMessage(error ? error.message : "Se o e-mail estiver cadastrado, enviaremos um link para redefinir a senha.");
       } else if (mode === "cadastrar") {
-        const { data, error } = await supabase.auth.signUp({ email, password, options: { data: { name, school_year: schoolYear, avatar } } });
+        const { data, error } = await supabase.auth.signUp({ email, password, options: { emailRedirectTo: `${window.location.origin}/pagamento`, data: { name, school_year: schoolYear, avatar } } });
         if (error) setMessage(error.message);
         else if (data.session && data.user) {
           await supabase.from("student_profiles").upsert({ user_id: data.user.id, name, school_year: schoolYear, avatar });
-          setMessage("Conta criada! Seu progresso já pode ser acompanhado.");
-        } else setMessage("Confira seu e-mail para confirmar sua conta antes de entrar.");
+          await navigate({ to: '/pagamento' });
+        } else setMessage("Dados cadastrados. Confirme seu e-mail para continuar ao pagamento de R$ 1,00 por Pix.");
       } else {
         const { error } = await supabase.auth.signInWithPassword({ email, password });
         setMessage(error ? "E-mail ou senha incorretos." : "Você entrou na sua conta.");
+        if (!error) await navigate({ to: '/pagamento' });
       }
     } finally { setBusy(false); }
   }
 
   async function google() {
     setMessage("");
-    const result = await lovable.auth.signInWithOAuth("google", { redirect_uri: window.location.origin });
+    const result = await lovable.auth.signInWithOAuth("google", { redirect_uri: `${window.location.origin}/pagamento` });
     if (result.error) setMessage("Não foi possível entrar com Google. Tente novamente.");
-    else if (!result.redirected) setMessage("Você entrou na sua conta.");
+    else if (!result.redirected) await navigate({ to: '/pagamento' });
   }
 
   return <SiteLayout><PageHeader title="Minha conta" subtitle="Seu espaço para estudar e acompanhar sua evolução." />
     <div className="mx-auto max-w-lg px-4 py-12">
       {user ? <div className="rounded-lg border border-border bg-card p-6">
         <p className="font-semibold text-foreground">Você está conectado</p><p className="mt-2 text-sm text-muted-foreground">{user.email}</p>
-        <div className="mt-5 flex gap-3"><Button asChild><Link to="/perfil">Ver perfil</Link></Button><Button variant="outline" onClick={() => void supabase.auth.signOut()}>Sair</Button></div>
+        <div className="mt-5 flex flex-wrap gap-3"><Button asChild><Link to="/pagamento">Continuar cadastro</Link></Button><Button variant="outline" asChild><Link to="/perfil">Ver perfil</Link></Button><Button variant="outline" onClick={() => void supabase.auth.signOut()}>Sair</Button></div>
       </div> : <div className="rounded-lg border border-border bg-card p-6 shadow-soft">
         <div className="mb-6 flex gap-4 border-b border-border pb-4 text-sm font-semibold">
           <Button variant={mode === "entrar" ? "default" : "ghost"} onClick={() => { setMode("entrar"); setMessage(""); }}>Entrar</Button>
