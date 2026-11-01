@@ -1,4 +1,7 @@
 # Conteúdo por ano
+- [ ] Auditar e reforçar segurança de contas, pagamentos, dados, conteúdo e implantação; documentar testes e limitações.
+- [ ] Confirmar limitação alternativa de tentativas e requisições; depende da decisão do responsável sobre infraestrutura não padronizada.
+- [ ] Verificar backups e restauração isolada; depende do inventário disponível somente ao responsável e de ambiente separado.
 - [x] Criar tela de cadastro → pagamento Pix de R$ 1,00 e bloquear dashboard de conta sem pagamento confirmado; verificado com conta autenticada.
 - [ ] Configurar credencial Mercado Pago e testar recebimento real, confirmação e liberação do dashboard; bloqueado pela credencial não fornecida.
 - [ ] Integrar primeiro Mercado Pago exclusivamente para Pix, com credenciais seguras; depois implementar cobrança de R$ 1,00 pelo cadastro e definir relação com os planos existentes.
