@@ -10,6 +10,8 @@ export const Route = createFileRoute('/api/public/payments/webhook')({
       let event;
       try { event = await verifyWebhook(request, environment); }
       catch { return new Response('Invalid signature', { status: 400 }); }
+      // Never let an event signed for one Stripe mode update the other environment.
+      if (event.livemode !== (environment === 'live')) return new Response('Environment mismatch', { status: 400 });
       if (event.type === 'checkout.session.completed' || event.type === 'checkout.session.async_payment_succeeded') {
         try {
           const { recordPixPass } = await import('@/lib/pix-pass.server');
