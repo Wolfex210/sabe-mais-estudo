@@ -36,8 +36,10 @@ export function isValidPixPassSession(session: PixSession, environment: StripeEn
 
 /** Registra um passe de 30 dias pago via Pix. Idempotente pelo id da sessão. */
 export async function recordPixPass(session: PixSession, environment: StripeEnv) {
+  // This webhook also receives ordinary card subscription Checkout Sessions.
+  // Ignore non-Pix sessions instead of treating them as invalid Pix purchases.
+  if (session.metadata?.['kind'] !== 'pix_30d' || session.payment_status !== 'paid') return;
   if (!isValidPixPassSession(session, environment)) {
-    if (session.payment_status !== 'paid') return;
     throw new Error('Checkout Pix inválido: pagamento, ambiente, moeda, valor ou plano não confere');
   }
 
