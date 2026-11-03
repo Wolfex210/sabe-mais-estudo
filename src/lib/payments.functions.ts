@@ -99,10 +99,7 @@ export const getCheckoutStatus = createServerFn({ method: 'POST' })
     try {
       const session = await createStripeClient(data.environment).checkout.sessions.retrieve(data.sessionId);
       if (session.metadata?.['userId'] !== context.userId) return { error: 'Este pagamento não pertence à sua conta.' };
-      if (session.metadata?.['kind'] === PIX_KIND && session.payment_status === 'paid') {
-        const { recordPixPass } = await import('@/lib/pix-pass.server');
-        await recordPixPass(session, data.environment);
-      }
+      // Somente leitura: o passe Pix é liberado exclusivamente pelo webhook assinado.
       return { status: session.status ?? 'open', paymentStatus: session.payment_status };
     } catch (error) { return { error: getStripeErrorMessage(error) }; }
   });

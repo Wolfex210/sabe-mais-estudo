@@ -8,6 +8,9 @@ type PixSession = {
   customer?: string | { id: string } | null;
   metadata?: Record<string, string> | null;
   created?: number;
+  mode?: string;
+  currency?: string | null;
+  amount_total?: number | null;
 };
 
 /** Registra um passe de 30 dias pago via Pix. Idempotente pelo id da sessão. */
@@ -16,6 +19,11 @@ export async function recordPixPass(session: PixSession, environment: StripeEnv)
   const userId = meta['userId'];
   if (session.payment_status !== 'paid' || meta['kind'] !== 'pix_30d') return;
   if (!userId || !/^[a-f0-9-]{36}$/i.test(userId)) throw new Error('Pix sem usuário válido');
+  const { STRIPE_PLANS } = await import('@/lib/stripe-plans');
+  const plan = Object.values(STRIPE_PLANS).find(p => p.lookupKey === meta['lookupKey']);
+  if (!plan || session.mode !== 'payment' || session.currency !== 'brl' || session.amount_total !== plan.amount) {
+    throw new Error('Pix com valor ou plano inválido');
+  }
   const customerId = typeof session.customer === 'string' ? session.customer : session.customer?.id;
   const { supabaseAdmin } = await import('@/integrations/supabase/client.server');
   const { data: existing } = await supabaseAdmin.from('subscriptions').select('id')
