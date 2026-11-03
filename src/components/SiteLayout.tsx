@@ -106,8 +106,8 @@ export function SiteLayout({ children }: { children: ReactNode }) {
   const location = useLocation();
   const { user } = useAuth();
   const { current } = levelOf(state.points);
-  const { plan: activePlan } = usePlanAccess();
-  const accessLocked = trialExpired(state) && !activePlan && location.pathname !== "/planos";
+  const { plan: activePlan, resolved: planResolved } = usePlanAccess();
+  const accessLocked = (user ? planResolved && !activePlan : trialExpired(state)) && location.pathname !== "/planos";
 
   const navigation = (mobile = false) => (
     <div className="space-y-5">

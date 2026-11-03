@@ -1,5 +1,5 @@
 # Conteúdo por ano
-- [ ] Auditar e reforçar segurança de contas, pagamentos, dados, conteúdo e implantação; documentar testes e limitações.
+- [x] Reforçar segurança: plano só pelo servidor, teste grátis pela data da conta, Pix Stripe só via webhook com valor validado, cache offline restrito, bibliotecas atualizadas.
 - [ ] Confirmar limitação alternativa de tentativas e requisições; depende da decisão do responsável sobre infraestrutura não padronizada.
 - [ ] Verificar backups e restauração isolada; depende do inventário disponível somente ao responsável e de ambiente separado.
 - [x] Criar tela de cadastro → pagamento Pix de R$ 1,00 e bloquear dashboard de conta sem pagamento confirmado; verificado com conta autenticada.

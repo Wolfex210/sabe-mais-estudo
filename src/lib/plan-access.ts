@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
 import { useAuth } from "@/lib/auth";
 import { getCurrentSubscriptionPlan } from "@/lib/payments.functions";
-import { useAppState } from "@/lib/store";
+import { useAppState, trialDaysLeft } from "@/lib/store";
+
+export const TRIAL_DAYS = 4;
 import type { PlanId } from "@/lib/stripe-plans";
 
 export type PlanLimits = { subjects: number; courses: number; isUnlimited: boolean };
@@ -41,7 +43,11 @@ export function usePlanAccess() {
     return () => { active = false; };
   }, [user?.id]);
 
-  const plan = subscriptionPlan ?? state.plan;
+  // O plano pago vem só do servidor; o teste grátis usa a data de criação da conta (não editável pelo navegador).
+  const trialActive = user
+    ? Date.now() - new Date(user.created_at).getTime() < TRIAL_DAYS * 86400000
+    : trialDaysLeft(state) > 0;
+  const plan: PlanId | "trial" | null = subscriptionPlan ?? (trialActive ? "trial" : null);
   const limits = limitsForPlan(plan === "trial" ? null : plan);
   return { plan, limits, resolved };
 }
