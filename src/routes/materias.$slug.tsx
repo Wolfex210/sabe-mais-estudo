@@ -3,6 +3,7 @@ import { useState } from "react";
 import { SiteLayout, PageHeader, Card, AdSlot } from "@/components/SiteLayout";
 import { Button } from "@/components/ui/button";
 import { getDeepStudy, getExamPrep, getSubject, getStudyHelpLines, subjects } from "@/lib/content";
+import { subjectCoverImages } from "@/lib/subject-images";
 import { usePlanAccess } from "@/lib/plan-access";
 import { curriculum, YEARS, YEAR_LABEL, type Year } from "@/lib/curriculum";
 import { getTopics } from "@/lib/lessons";
@@ -278,6 +279,15 @@ function SubjectPage() {
                     alt={`Imagem ilustrativa sobre ${page.title}`}
                     className="h-24 w-full object-cover transition-transform duration-300 group-hover:scale-105"
                     loading="lazy"
+                    onError={(event) => {
+                      const image = event.currentTarget;
+                      if (image.dataset.fallback !== "used") {
+                        image.dataset.fallback = "used";
+                        image.src = subjectCoverImages[slug] ?? subjectCoverImages["ciencias"]!;
+                      } else {
+                        image.style.display = "none";
+                      }
+                    }}
                   />
                   <div className="p-3">
                     <span className="text-xs font-semibold text-primary">Página {i + 1}</span>
@@ -292,6 +302,15 @@ function SubjectPage() {
                 src={studyImages[studyPage % studyImages.length]}
                 alt={`Imagem ilustrativa sobre ${subject.studyPages[studyPage]?.title ?? subject.name}`}
                 className="h-52 w-full object-cover sm:h-64"
+                onError={(event) => {
+                  const image = event.currentTarget;
+                  if (image.dataset.fallback !== "used") {
+                    image.dataset.fallback = "used";
+                    image.src = subjectCoverImages[slug] ?? subjectCoverImages["ciencias"]!;
+                  } else {
+                    image.style.display = "none";
+                  }
+                }}
               />
               <div className="p-5 sm:p-6">
                 <div className="h-1.5 overflow-hidden rounded-full bg-primary/15">
@@ -432,6 +451,15 @@ function SubjectPage() {
                       alt={deepStudy.imageAlt}
                       className="h-full min-h-[300px] w-full object-cover"
                       loading="lazy"
+                      onError={(event) => {
+                        const image = event.currentTarget;
+                        if (image.dataset.fallback !== "used") {
+                          image.dataset.fallback = "used";
+                          image.src = subjectCoverImages[slug] ?? subjectCoverImages["ciencias"]!;
+                        } else {
+                          image.style.display = "none";
+                        }
+                      }}
                     />
                   </div>
                 </div>

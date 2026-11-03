@@ -51,15 +51,21 @@ function Faculdade() {
       <div className="mt-4 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
         {filtered.map(course => {
           const locked = facultyCourses.findIndex((item) => item.slug === course.slug) >= limits.courses;
-          const contents = <Card className={`h-full ${locked ? "opacity-80" : ""}`}>
+          const contents = <Card className={`h-full overflow-hidden p-0 ${locked ? "opacity-80" : ""}`}>
+            <div className="relative">
+              <img src={course.coverImage} alt={course.coverAlt} loading="lazy" decoding="async" className="h-40 w-full object-cover" onError={(event) => { event.currentTarget.src = "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=1200&q=80"; }} />
+              <span className="absolute left-3 top-3 rounded-lg bg-background/95 px-3 py-1 text-xs font-bold text-primary shadow-sm">{course.area}</span>
+              {locked && <span className="absolute right-3 top-3 rounded-full bg-background/95 px-2 py-1 text-xs font-bold text-muted-foreground shadow-sm">🔒 Bloqueado</span>}
+            </div>
+            <div className="p-5">
             <div className="flex items-start justify-between gap-3">
-              <span className="rounded-lg bg-primary/10 px-3 py-1 text-xs font-bold text-primary">{course.area}</span>
-              {locked ? <span className="rounded-full bg-muted px-2 py-1 text-xs font-bold text-muted-foreground">🔒 Bloqueado</span> : <Clock3 className="h-4 w-4 text-muted-foreground"/>}
+              {!locked && <Clock3 className="h-4 w-4 text-muted-foreground"/>}
             </div>
             <h2 className="mt-4 text-xl font-bold text-foreground">{course.name}</h2>
             <p className="mt-2 text-sm leading-6 text-muted-foreground">{course.description}</p>
             <div className="mt-5 flex items-center justify-between text-xs text-muted-foreground">
               <span>{course.duration}</span><span className={`font-semibold ${locked ? "text-muted-foreground" : "text-primary"}`}>{locked ? "Fazer upgrade →" : "Começar →"}</span>
+            </div>
             </div>
           </Card>;
           return locked

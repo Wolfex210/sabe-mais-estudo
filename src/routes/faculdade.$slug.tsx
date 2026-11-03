@@ -52,9 +52,12 @@ function FaculdadeCurso(){
             <h1 className="mt-1 text-3xl font-extrabold tracking-tight text-foreground sm:text-4xl">{course.name}</h1>
             <p className="mt-3 max-w-3xl text-muted-foreground">{course.description}</p>
         <div className="mt-6 overflow-hidden rounded-2xl border border-border bg-background">
-          <div className="flex min-h-44 items-center gap-5 bg-gradient-to-br from-primary/15 via-secondary to-background p-6">
-            <div className="flex h-28 w-28 shrink-0 items-center justify-center rounded-3xl bg-primary/10 text-7xl" role="img" aria-label={course.coverAlt}>{course.coverEmoji}</div>
-            <div><p className="text-xs font-bold uppercase tracking-wider text-primary">Imagem do curso</p><p className="mt-2 text-sm leading-6 text-muted-foreground">{course.coverAlt}. Ilustração temática criada para identificar visualmente esta trilha.</p></div>
+          <div className="grid gap-0 md:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">
+            <img src={course.coverImage} alt={course.coverAlt} loading="eager" decoding="async" className="h-56 w-full object-cover md:h-full md:min-h-56" onError={(event) => { event.currentTarget.src = "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=1200&q=80"; }} />
+            <div className="flex min-h-44 items-center gap-5 bg-gradient-to-br from-primary/15 via-secondary to-background p-6">
+              <div className="flex h-20 w-20 shrink-0 items-center justify-center rounded-2xl bg-primary/10 text-5xl" role="img" aria-label={course.coverAlt}>{course.coverEmoji}</div>
+              <div><p className="text-xs font-bold uppercase tracking-wider text-primary">Conheça a área</p><p className="mt-2 text-sm leading-6 text-muted-foreground">{course.coverAlt}. Imagem temática desta trilha educacional.</p></div>
+            </div>
           </div>
         </div>
           </div>

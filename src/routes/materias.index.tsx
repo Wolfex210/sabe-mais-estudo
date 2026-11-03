@@ -101,7 +101,13 @@ function Materias() {
                   height={360}
                   className="h-36 w-full object-cover"
                   onError={(event) => {
-                    event.currentTarget.style.display = "none";
+                    const image = event.currentTarget;
+                    if (image.dataset.fallback !== "used") {
+                      image.dataset.fallback = "used";
+                      image.src = subjectCoverImages["ciencias"]!;
+                    } else {
+                      image.style.display = "none";
+                    }
                   }}
                 />
                 <div className="absolute left-3 top-3 flex items-center gap-2">

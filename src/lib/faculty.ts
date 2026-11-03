@@ -22,6 +22,7 @@ export type FacultyCourse = {
   competencies: string[];
   coverEmoji: string;
   coverAlt: string;
+  coverImage: string;
   examples: string[];
   semesters: FacultySemester[];
 };
@@ -354,6 +355,27 @@ function makeDiscipline(
   };
 }
 
+const facultyAreaCoverImages: Record<string, string> = {
+  "Engenharias": "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=1200&q=80",
+  "Tecnologia": "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&q=80",
+  "Arquitetura e Design": "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1200&q=80",
+  "Gestão e Negócios": "https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1200&q=80",
+  "Ciências Humanas": "https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?auto=format&fit=crop&w=1200&q=80",
+  "Saúde": "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1200&q=80",
+  "Saúde e Humanas": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=1200&q=80",
+  "Saúde Animal": "https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?auto=format&fit=crop&w=1200&q=80",
+  "Ciências Agrárias": "https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1200&q=80",
+  "Produção e Alimentação": "https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=1200&q=80",
+  "Comunicação e Negócios": "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1200&q=80",
+  "Comunicação": "https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&w=1200&q=80",
+  "Informação": "https://images.unsplash.com/photo-1507842217343-583bb7270b66?auto=format&fit=crop&w=1200&q=80",
+  "Turismo e Hospitalidade": "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80",
+  "Ciências Exatas": "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?auto=format&fit=crop&w=1200&q=80",
+  "Educação": "https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=1200&q=80",
+  "Humanidades": "https://images.unsplash.com/photo-1461360228754-6e81c478b882?auto=format&fit=crop&w=1200&q=80",
+};
+const DEFAULT_FACULTY_COVER = "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=1200&q=80";
+
 export const facultyCourses: FacultyCourse[] = courseSeeds.map(([slug,name,area,focus],index)=>{
   const t = (trackDetails[area] ?? trackDetails["Ciências Humanas"])!;
   const phases = [
@@ -384,7 +406,8 @@ export const facultyCourses: FacultyCourse[] = courseSeeds.map(([slug,name,area,
       "Comunicar resultados com clareza e responsabilidade"
     ],
     coverEmoji: (courseVisuals[slug] ?? {emoji:"🎓",alt:`Ilustração temática de ${name}`,topics:[focus,"fundamentos da área","métodos de pesquisa","ferramentas profissionais","estudo de caso","análise de dados","ética e responsabilidade","projeto aplicado","inovação","carreiras e aplicações"]}).emoji,
-    coverAlt: (courseVisuals[slug] ?? {emoji:"🎓",alt:`Ilustração temática de ${name}`,topics:[focus,"fundamentos da área","métodos de pesquisa","ferramentas profissionais","estudo de caso","análise de dados","ética e responsabilidade","projeto aplicado","inovação","carreiras e aplicações"]}).alt,
+    coverAlt: (courseVisuals[slug] ?? {emoji:"🎓",alt:`Imagem temática de ${name}`,topics:[focus,"fundamentos da área","métodos de pesquisa","ferramentas profissionais","estudo de caso","análise de dados","ética e responsabilidade","projeto aplicado","inovação","carreiras e aplicações"]}).alt,
+    coverImage: facultyAreaCoverImages[area] ?? DEFAULT_FACULTY_COVER,
     examples: ((courseVisuals[slug] ?? {emoji:"🎓",alt:`Ilustração temática de ${name}`,topics:[focus,"fundamentos da área","métodos de pesquisa","ferramentas profissionais","estudo de caso","análise de dados","ética e responsabilidade","projeto aplicado","inovação","carreiras e aplicações"]}).topics).map((topic,i)=>`Exemplo ${i+1}: ${topic} aplicado em uma situação de estudo ou projeto de ${name.toLowerCase()}.`),
     semesters:phases.map((p,si)=>({
       period:p.period,
