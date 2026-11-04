@@ -62,7 +62,7 @@ function SubjectPage() {
   const studyImagesBySubject: Record<string, string[]> = {
     matematica: [
       "https://images.unsplash.com/photo-1509228468518-180dd4864904?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1596495578060-6e0763fa1178?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1453733190371-0a9bedd82893?auto=format&fit=crop&w=1200&q=80",
       "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?auto=format&fit=crop&w=1200&q=80",
       "https://images.unsplash.com/photo-1635372722656-389f87a941b7?auto=format&fit=crop&w=1200&q=80",
     ],
@@ -111,7 +111,7 @@ function SubjectPage() {
     astronomia: [
       "https://images.unsplash.com/photo-1444703686981-a3abbc4d4fe3?auto=format&fit=crop&w=1200&q=80",
       "https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1534791547706-3c0e7e3f9f7b?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1419242902214-272b3f66ee7a?auto=format&fit=crop&w=1200&q=80",
       "https://images.unsplash.com/photo-1465101162946-4377e57745c3?auto=format&fit=crop&w=1200&q=80",
     ],
     sociologia: [
@@ -141,7 +141,7 @@ function SubjectPage() {
     "ensino-religioso": [
       "https://images.unsplash.com/photo-1504052434569-70ad5836ab65?auto=format&fit=crop&w=1200&q=80",
       "https://images.unsplash.com/photo-1473177104440-ffee2f376098?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1548625361-7a4a4f0b8f5c?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?auto=format&fit=crop&w=1200&q=80",
       "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=1200&q=80",
     ],
     redacao: [
@@ -182,7 +182,7 @@ function SubjectPage() {
     ],
     algebra: [
       "https://images.unsplash.com/photo-1509228468518-180dd4864904?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1596495578060-6e0763fa1178?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1453733190371-0a9bedd82893?auto=format&fit=crop&w=1200&q=80",
       "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?auto=format&fit=crop&w=1200&q=80",
       "https://images.unsplash.com/photo-1635372722656-389f87a941b7?auto=format&fit=crop&w=1200&q=80",
     ],
