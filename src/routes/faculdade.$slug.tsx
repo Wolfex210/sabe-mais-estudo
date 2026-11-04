@@ -4,6 +4,7 @@ import { ArrowLeft, CheckCircle2, ChevronDown, GraduationCap, LockKeyhole } from
 import { SiteLayout, Card } from "@/components/SiteLayout";
 import { getFacultyCourse, facultyCourses } from "@/lib/faculty";
 import { usePlanAccess } from "@/lib/plan-access";
+import { getCoursePhoto } from "@/lib/course-photos";
 
 export const Route = createFileRoute("/faculdade/$slug")({
   loader: ({params}) => {
@@ -52,10 +53,7 @@ function FaculdadeCurso(){
             <h1 className="mt-1 text-3xl font-extrabold tracking-tight text-foreground sm:text-4xl">{course.name}</h1>
             <p className="mt-3 max-w-3xl text-muted-foreground">{course.description}</p>
         <div className="mt-6 overflow-hidden rounded-2xl border border-border bg-background">
-          <div className="flex min-h-44 items-center gap-5 bg-gradient-to-br from-primary/15 via-secondary to-background p-6">
-            <div className="flex h-28 w-28 shrink-0 items-center justify-center rounded-3xl bg-primary/10 text-7xl" role="img" aria-label={course.coverAlt}>{course.coverEmoji}</div>
-            <div><p className="text-xs font-bold uppercase tracking-wider text-primary">Imagem do curso</p><p className="mt-2 text-sm leading-6 text-muted-foreground">{course.coverAlt}. Ilustração temática criada para identificar visualmente esta trilha.</p></div>
-          </div>
+          <img src={getCoursePhoto(course.slug)} alt={course.coverAlt} className="h-56 w-full object-cover sm:h-72" />
         </div>
           </div>
         </div>
