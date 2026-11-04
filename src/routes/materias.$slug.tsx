@@ -3,7 +3,7 @@ import { useState } from "react";
 import { SiteLayout, PageHeader, Card, AdSlot } from "@/components/SiteLayout";
 import { Button } from "@/components/ui/button";
 import { getDeepStudy, getExamPrep, getSubject, getStudyHelpLines, subjects } from "@/lib/content";
-import { subjectCoverImages } from "@/lib/subject-images";
+import { DEFAULT_SUBJECT_COVER, getSubjectCoverImage } from "@/lib/subject-images";
 import { usePlanAccess } from "@/lib/plan-access";
 import { curriculum, YEARS, YEAR_LABEL, type Year } from "@/lib/curriculum";
 import { getTopics } from "@/lib/lessons";
@@ -283,7 +283,7 @@ function SubjectPage() {
                       const image = event.currentTarget;
                       if (image.dataset.fallback !== "used") {
                         image.dataset.fallback = "used";
-                        image.src = subjectCoverImages[slug] ?? subjectCoverImages["ciencias"]!;
+                        image.src = getSubjectCoverImage(slug, subject.name) ?? DEFAULT_SUBJECT_COVER!;
                       } else {
                         image.style.display = "none";
                       }
@@ -306,7 +306,7 @@ function SubjectPage() {
                   const image = event.currentTarget;
                   if (image.dataset.fallback !== "used") {
                     image.dataset.fallback = "used";
-                    image.src = subjectCoverImages[slug] ?? subjectCoverImages["ciencias"]!;
+                    image.src = getSubjectCoverImage(slug, subject.name) ?? DEFAULT_SUBJECT_COVER!;
                   } else {
                     image.style.display = "none";
                   }
@@ -455,7 +455,7 @@ function SubjectPage() {
                         const image = event.currentTarget;
                         if (image.dataset.fallback !== "used") {
                           image.dataset.fallback = "used";
-                          image.src = subjectCoverImages[slug] ?? subjectCoverImages["ciencias"]!;
+                          image.src = getSubjectCoverImage(slug, subject.name) ?? DEFAULT_SUBJECT_COVER!;
                         } else {
                           image.style.display = "none";
                         }
