@@ -41,5 +41,5 @@ export const coursePhotos: Record<string, string> = {
   "agronomia": "https://images.unsplash.com/photo-1500937386664-56d1dfef3854?auto=format&fit=crop&w=1200&q=80",
   "jornalismo": "https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&w=1200&q=80",
 };
-export const DEFAULT_COURSE_PHOTO = "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=1200&q=80";
+export const DEFAULT_COURSE_PHOTO = "https://images.unsplash.com/photo-1541339907198-e08756dedf3f?auto=format&fit=crop&w=1200&q=80";
 export const getCoursePhoto = (slug: string) => coursePhotos[slug] ?? DEFAULT_COURSE_PHOTO;
