@@ -23,3 +23,28 @@ export const subjectCoverImages: Record<string, string> = {
   "algebra": "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?auto=format&fit=crop&w=1200&q=80",
   "geometria": "https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=1200&q=80",
 };
+
+
+/** Capas adicionais para matérias complementares e idiomas exibidos no catálogo. */
+export const extraSubjectCoverImages: Record<string, string> = {
+  musica: "https://images.unsplash.com/photo-1516280440614-37939bbacd81?auto=format&fit=crop&w=1200&q=80",
+  teatro: "https://images.unsplash.com/photo-1507676184212-d03ab07a01bf?auto=format&fit=crop&w=1200&q=80",
+  danca: "https://images.unsplash.com/photo-1504609813442-a8924e83f76e?auto=format&fit=crop&w=1200&q=80",
+  espanhol: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=1200&q=80",
+  frances: "https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=1200&q=80",
+  alemao: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=1200&q=80",
+  mandarim: "https://images.unsplash.com/photo-1508124071415-573a8e9a6f18?auto=format&fit=crop&w=1200&q=80",
+  libras: "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=1200&q=80",
+};
+
+const defaultSubjectCover = "https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=1200&q=80";
+const normalizeSubjectKey = (value: string) => value.normalize("NFD").replace(/[\\u0300-\\u036f]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+
+/** Sempre retorna uma capa: específica por slug/nome ou uma capa educacional reserva. */
+export function getSubjectCoverImage(slug: string, name?: string): string {
+  const slugKey = normalizeSubjectKey(slug);
+  const nameKey = normalizeSubjectKey(name ?? "");
+  return subjectCoverImages[slugKey] ?? extraSubjectCoverImages[slugKey] ?? subjectCoverImages[nameKey] ?? extraSubjectCoverImages[nameKey] ?? defaultSubjectCover;
+}
+
+export const DEFAULT_SUBJECT_COVER = defaultSubjectCover;
