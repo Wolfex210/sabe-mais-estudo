@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Search } from "lucide-react";
 import { SiteLayout, PageHeader, Card, AdSlot } from "@/components/SiteLayout";
 import { subjects } from "@/lib/content";
-import { subjectCoverImages } from "@/lib/subject-images";
+import { DEFAULT_SUBJECT_COVER, getSubjectCoverImage } from "@/lib/subject-images";
 import { usePlanAccess } from "@/lib/plan-access";
 
 export const Route = createFileRoute("/materias/")({
@@ -93,7 +93,7 @@ function Materias() {
             const contents = <Card className={`h-full ${locked ? "opacity-80" : ""}`}>
               <div className="relative overflow-hidden rounded-xl">
                 <img
-                  src={subjectCoverImages[s.slug]}
+                  src={getSubjectCoverImage(s.slug, s.name)}
                   alt={`Imagem ilustrativa de ${s.name}`}
                   loading="lazy"
                   decoding="async"
@@ -104,7 +104,7 @@ function Materias() {
                     const image = event.currentTarget;
                     if (image.dataset.fallback !== "used") {
                       image.dataset.fallback = "used";
-                      image.src = subjectCoverImages["ciencias"]!;
+                      image.src = DEFAULT_SUBJECT_COVER;
                     } else {
                       image.style.display = "none";
                     }
