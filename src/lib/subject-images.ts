@@ -38,7 +38,7 @@ export const extraSubjectCoverImages: Record<string, string> = {
 };
 
 const defaultSubjectCover = "https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=1200&q=80";
-const normalizeSubjectKey = (value: string) => value.normalize("NFD").replace(/[\\u0300-\\u036f]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+const normalizeSubjectKey = (value: string) => value.normalize("NFD").replace(/\p{Diacritic}/gu, "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
 
 /** Sempre retorna uma capa: específica por slug/nome ou uma capa educacional reserva. */
 export function getSubjectCoverImage(slug: string, name?: string): string {
