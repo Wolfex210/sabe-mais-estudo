@@ -53,7 +53,7 @@ function FaculdadeCurso(){
             <h1 className="mt-1 text-3xl font-extrabold tracking-tight text-foreground sm:text-4xl">{course.name}</h1>
             <p className="mt-3 max-w-3xl text-muted-foreground">{course.description}</p>
         <div className="mt-6 overflow-hidden rounded-2xl border border-border bg-background">
-          <img src={getCoursePhoto(course.slug)} alt={course.coverAlt} className="h-56 w-full object-cover sm:h-72" />
+          <img src={getCoursePhoto(course.slug, course.name)} alt={course.coverAlt} className="h-56 w-full object-cover sm:h-72" />
         </div>
           </div>
         </div>

@@ -42,4 +42,39 @@ export const coursePhotos: Record<string, string> = {
   "jornalismo": "https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&w=1200&q=80",
 };
 export const DEFAULT_COURSE_PHOTO = "https://images.unsplash.com/photo-1541339907198-e08756dedf3f?auto=format&fit=crop&w=1200&q=80";
-export const getCoursePhoto = (slug: string) => coursePhotos[slug] ?? DEFAULT_COURSE_PHOTO;
+
+const u = (id: string) => `https://images.unsplash.com/photo-${id}?auto=format&fit=crop&w=1200&q=80`;
+
+// Fotos por palavra-chave do nome, para cursos sem foto própria (ordem importa).
+const keywordPhotos: [RegExp, string][] = [
+  [/m[uú]sic/, u("1511379938547-c1f69419868d")],
+  [/teatro|dan[cç]a|c[eê]nicas|cinema|r[aá]dio/, u("1503095396549-807759245b35")],
+  [/design|moda|interiores|ilustra|anima|artes visuais|fotografia/, u("1561070791-2526d30994b5")],
+  [/computa|dados|nuvem|redes|software|jogos|seguran[cç]a da informa|embarcados|bioinform|digital|cognitiva/, u("1517694712202-14dd9538aa97")],
+  [/alimentos|panifica|culin|hotelaria|eventos|turismo|enologia/, u("1556910103-1c02745aae4d")],
+  [/agro|florest|zootec|equinas|aquicult|silvic|pesca/, u("1500937386664-56d1dfef3854")],
+  [/ambient|sanit[aá]ria|marinha|oceano|meteoro|geolog|energia/, u("1473341304170-971dccb5ac1e")],
+  [/urban|regional|transportes|ferrovi|cartogr|edif[ií]cios/, u("1487958449943-2429e8be8625")],
+  [/engenharia|minas|metal|materiais/, u("1581091226825-a6a2a5aee158")],
+  [/qu[ií]mica|biotec|biol[oó]g/, u("1532187863486-abf9dbad1b69")],
+  [/astronomia|f[ií]sica$/, u("1419242902214-272b3f66ee7a")],
+  [/matem[aá]tica|estat[ií]stica|atuariais/, u("1453733190371-0a9bedd82893")],
+  [/esporte|desport|f[ií]sica adaptada|lazer|treinamento/, u("1517836357463-d25dfeac3438")],
+  [/est[eé]tica|podologia|terapia|fono/, u("1576091160550-2173dba999ef")],
+  [/sa[uú]de|obstet|geront|optom|radiolog|neuro|medicina/, u("1576091160399-112ba8d25d1d")],
+  [/criminol|forenses|riscos|seguran[cç]a do trabalho|compliance/, u("1589829545856-d10d557cf95f")],
+  [/internacion|asi[aá]ticos|africanos|exterior/, u("1526778548025-fa2f459cd5c1")],
+  [/comunica|rela[cç][oõ]es p[uú]blicas|publicidade/, u("1504711434969-e33886168f5c")],
+  [/econom|finan|bancos/, u("1611974789855-9c2a0a7236a3")],
+  [/gest[aã]o|neg[oó]cios|empreend|inova|projetos|secretariado|processos|recursos humanos/, u("1454165804606-c3d57bc86b40")],
+  [/letras|lingu[ií]st|tradu|liter[aá]r|bibliotec|museolog/, u("1481627834876-b7833e8f5570")],
+  [/arqueolog|patrim[oô]nio|restauro/, u("1461360228754-6e81c478b882")],
+  [/educa[cç][aã]o/, u("1503676260728-1c00da094a0b")],
+  [/filosofia|sociologia|antropolog|teologia|religi|pol[ií]tica|servi[cç]o social|g[eê]nero|fam[ií]lia/, u("1495446815901-a7297e633e8d")],
+];
+
+export function getCoursePhoto(slug: string, name = ""): string {
+  if (coursePhotos[slug]) return coursePhotos[slug];
+  const n = name.toLowerCase();
+  return keywordPhotos.find(([re]) => re.test(n))?.[1] ?? DEFAULT_COURSE_PHOTO;
+}
