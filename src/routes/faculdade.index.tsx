@@ -4,6 +4,7 @@ import { useMemo, useState } from "react";
 import { SiteLayout, PageHeader, Card } from "@/components/SiteLayout";
 import { facultyCourses } from "@/lib/faculty";
 import { usePlanAccess } from "@/lib/plan-access";
+import { getCoursePhoto } from "@/lib/course-photos";
 
 export const Route = createFileRoute("/faculdade/")({
   head: () => ({ meta: [
@@ -52,6 +53,7 @@ function Faculdade() {
         {filtered.map(course => {
           const locked = facultyCourses.findIndex((item) => item.slug === course.slug) >= limits.courses;
           const contents = <Card className={`h-full ${locked ? "opacity-80" : ""}`}>
+            <img src={getCoursePhoto(course.slug, course.name)} alt={`Foto do curso de ${course.name}`} loading="lazy" className="-mx-6 -mt-6 mb-5 h-40 w-[calc(100%+3rem)] max-w-none rounded-t-2xl object-cover" />
             <div className="flex items-start justify-between gap-3">
               <span className="rounded-lg bg-primary/10 px-3 py-1 text-xs font-bold text-primary">{course.area}</span>
               {locked ? <span className="rounded-full bg-muted px-2 py-1 text-xs font-bold text-muted-foreground">🔒 Bloqueado</span> : <Clock3 className="h-4 w-4 text-muted-foreground"/>}
