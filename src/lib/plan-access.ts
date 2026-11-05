@@ -8,7 +8,9 @@ import type { PlanId } from "@/lib/stripe-plans";
 
 export type PlanLimits = { subjects: number; courses: number; isUnlimited: boolean };
 
-export function limitsForPlan(plan: PlanId | null): PlanLimits {
+export function limitsForPlan(plan: PlanId | "trial" | null): PlanLimits {
+  // Sem assinatura e com o teste grátis encerrado, nenhuma matéria ou curso fica liberado.
+  if (plan === null) return { subjects: 0, courses: 0, isUnlimited: false };
   if (plan === "basico") return { subjects: 25, courses: 25, isUnlimited: false };
   if (plan === "medio") return { subjects: 60, courses: 70, isUnlimited: false };
   return { subjects: Number.POSITIVE_INFINITY, courses: Number.POSITIVE_INFINITY, isUnlimited: true };
@@ -48,6 +50,6 @@ export function usePlanAccess() {
     ? Date.now() - new Date(user.created_at).getTime() < TRIAL_DAYS * 86400000
     : trialDaysLeft(state) > 0;
   const plan: PlanId | "trial" | null = subscriptionPlan ?? (trialActive ? "trial" : null);
-  const limits = limitsForPlan(plan === "trial" ? null : plan);
+  const limits = limitsForPlan(plan);
   return { plan, limits, resolved };
 }

@@ -53,7 +53,7 @@ function SubjectPage() {
       <div className="mx-auto max-w-2xl px-4 py-20 text-center">
         <h1 className="text-2xl font-bold text-foreground">Matéria indisponível neste plano</h1>
         <p className="mt-3 text-muted-foreground">
-          {plan === "basico" ? "O Básico inclui 25 matérias. Faça upgrade para continuar." : "O Médio inclui 60 matérias. O Master libera todas."}
+          {plan === null ? "Seu teste grátis terminou. Assine um plano para voltar a estudar." : plan === "basico" ? "O Básico inclui 25 matérias. Faça upgrade para continuar." : "O Médio inclui 60 matérias. O Master libera todas."}
         </p>
         <Link to="/planos" className="mt-6 inline-flex rounded-xl bg-primary px-5 py-3 font-semibold text-primary-foreground">Comparar planos</Link>
       </div>
