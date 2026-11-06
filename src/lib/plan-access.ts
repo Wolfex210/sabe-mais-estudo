@@ -3,20 +3,12 @@ import { useAuth } from "@/lib/auth";
 import { getCurrentSubscriptionPlan } from "@/lib/payments.functions";
 import { useAppState, trialDaysLeft } from "@/lib/store";
 
-export const TRIAL_DAYS = 4;
 import type { PlanId } from "@/lib/stripe-plans";
 
-export type PlanLimits = { subjects: number; courses: number; isUnlimited: boolean };
+export type PlanLimits = { suexport { TRIAL_DAYS, limitsForPlan, isTrialActive, type PlanLimits } from "@/lib/plan-rules";
+import { limitsForPlan, isTrialActive } from "@/lib/plan-rules";
 
-export function limitsForPlan(plan: PlanId | "trial" | null): PlanLimits {
-  // Sem assinatura e com o teste grátis encerrado, nenhuma matéria ou curso fica liberado.
-  if (plan === null) return { subjects: 0, courses: 0, isUnlimited: false };
-  if (plan === "basico") return { subjects: 25, courses: 25, isUnlimited: false };
-  if (plan === "medio") return { subjects: 60, courses: 70, isUnlimited: false };
-  return { subjects: Number.POSITIVE_INFINITY, courses: Number.POSITIVE_INFINITY, isUnlimited: true };
-}
-
-/** Resolve o plano pago no banco de assinaturas; durante o teste grátis, libera o catálogo inteiro. */
+anco de assinaturas; durante o teste grátis, libera o catálogo inteiro. */
 export function usePlanAccess() {
   const { user } = useAuth();
   const state = useAppState();
@@ -47,7 +39,7 @@ export function usePlanAccess() {
 
   // O plano pago vem só do servidor; o teste grátis usa a data de criação da conta (não editável pelo navegador).
   const trialActive = user
-    ? Date.now() - new Date(user.created_at).getTime() < TRIAL_DAYS * 86400000
+    ? isTrialActive(user.created_at)
     : trialDaysLeft(state) > 0;
   const plan: PlanId | "trial" | null = subscriptionPlan ?? (trialActive ? "trial" : null);
   const limits = limitsForPlan(plan);

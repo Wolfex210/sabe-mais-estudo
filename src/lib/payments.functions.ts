@@ -107,29 +107,8 @@ export const getCheckoutStatus = createServerFn({ method: 'POST' })
 export const getCurrentSubscriptionPlan = createServerFn({ method: 'GET' })
   .middleware([requireSupabaseAuth])
   .handler(async ({ context }): Promise<{ plan: import('@/lib/stripe-plans').PlanId | null }> => {
-    const { data: rows, error } = await context.supabase.from('subscriptions')
-      .select('price_id,status,current_period_end,environment')
-      .eq('user_id', context.userId)
-      .in('status', ['active', 'trialing', 'past_due', 'canceled'])
-      .order('created_at', { ascending: false });
-    if (error || !rows?.length) return { plan: null };
-
-    for (const row of rows) {
-      const validStatus = row.status === 'active' || row.status === 'trialing' ||
-        (row.status === 'canceled' && row.current_period_end && new Date(row.current_period_end).getTime() > Date.now());
-      if (!validStatus) continue;
-      try {
-        const stripe = createStripeClient(row.environment as StripeEnv);
-        for (const planId of Object.keys(STRIPE_PLANS) as (keyof typeof STRIPE_PLANS)[]) {
-          const plan = STRIPE_PLANS[planId];
-          const prices = await stripe.prices.list({ lookup_keys: [plan.lookupKey], active: true, limit: 10 });
-          if (row.price_id === plan.lookupKey || prices.data.some((price) => price.id === row.price_id)) return { plan: planId };
-        }
-      } catch (error) {
-        console.error('Não foi possível identificar o plano ativo:', getStripeErrorMessage(error));
-      }
-    }
-    return { plan: null };
+    const { resolveSubscriptionPlan } = await import('@/lib/subscription-plan.server');
+    return { plan: await resolveSubscriptionPlan(context.supabase, context.userId) };
   });
 
 export const createPortalSession = createServerFn({ method: 'POST' })
