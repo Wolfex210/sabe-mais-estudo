@@ -2,13 +2,11 @@ import { useEffect, useState } from "react";
 import { useAuth } from "@/lib/auth";
 import { getCurrentSubscriptionPlan } from "@/lib/payments.functions";
 import { useAppState, trialDaysLeft } from "@/lib/store";
-
 import type { PlanId } from "@/lib/stripe-plans";
-
-export type PlanLimits = { suexport { TRIAL_DAYS, limitsForPlan, isTrialActive, type PlanLimits } from "@/lib/plan-rules";
 import { limitsForPlan, isTrialActive } from "@/lib/plan-rules";
+export { TRIAL_DAYS, limitsForPlan, isTrialActive, type PlanLimits } from "@/lib/plan-rules";
 
-anco de assinaturas; durante o teste grátis, libera o catálogo inteiro. */
+/** Resolve o plano pago no banco de assinaturas; durante o teste grátis, libera o catálogo inteiro. */
 export function usePlanAccess() {
   const { user } = useAuth();
   const state = useAppState();
