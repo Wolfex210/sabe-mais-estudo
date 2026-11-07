@@ -1,16 +1,17 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { SiteLayout, PageHeader } from "@/components/SiteLayout";
 import { Button } from "@/components/ui/button";
-import { lessons } from "@/lib/lessons";
-import { YEAR_LABEL, YEARS, type Year } from "@/lib/curriculum";
-import { subjects } from "@/lib/content";
+import type { Lesson } from "@/lib/lessons";
+import { YEAR_LABEL, type Year } from "@/lib/years";
+import { subjects } from "@/lib/catalog";
+import { getLessonStudy } from "@/lib/study.functions";
+import { StudyState, useStudy } from "@/components/StudyGate";
 import { actions, useAppState } from "@/lib/store";
 
 export const Route = createFileRoute("/aula/$slug/$year/$topic")({
   loader: ({ params }) => {
-    const lesson = lessons.find(l => l.subject === params.slug && l.year === params.year && l.title === params.topic);
-    if (!lesson) throw notFound();
-    return lesson;
+    if (!subjects.some((s) => s.slug === params.slug)) throw notFound();
+    return { title: params.topic, summary: undefined as string | undefined };
   },
   head: ({ loaderData }) => ({ meta: [
     { title: loaderData ? `${loaderData.title} — Sabe Mais` : "Aula não encontrada — Sabe Mais" },
@@ -23,7 +24,12 @@ export const Route = createFileRoute("/aula/$slug/$year/$topic")({
 });
 
 function Aula() {
-  const lesson = Route.useLoaderData();
+  const params = Route.useParams();
+  const study = useStudy(["lesson", params.slug, params.year, params.topic], getLessonStudy, { slug: params.slug, year: params.year, topic: params.topic });
+  return <StudyState state={study}>{(lesson) => <LessonView lesson={lesson} />}</StudyState>;
+}
+
+function LessonView({ lesson }: { lesson: Lesson }) {
   const s = useAppState();
   const id = `${lesson.subject}:${lesson.year}:${lesson.title}`;
   const label = subjects.find(subject => subject.slug === lesson.subject)?.name ?? lesson.subject;
