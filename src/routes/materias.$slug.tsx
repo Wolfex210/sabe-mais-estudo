@@ -2,15 +2,15 @@ import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { useState } from "react";
 import { SiteLayout, PageHeader, Card, AdSlot } from "@/components/SiteLayout";
 import { Button } from "@/components/ui/button";
-import { getDeepStudy, getExamPrep, getSubject, getStudyHelpLines, subjects } from "@/lib/content";
-import { usePlanAccess } from "@/lib/plan-access";
-import { curriculum, YEARS, YEAR_LABEL, type Year } from "@/lib/curriculum";
-import { getTopics } from "@/lib/lessons";
+import { getSubjectInfo } from "@/lib/catalog";
+import { YEARS, YEAR_LABEL, type Year } from "@/lib/years";
+import { getSubjectStudy, type SubjectStudy } from "@/lib/study.functions";
+import { StudyState, useStudy } from "@/components/StudyGate";
 import { actions, useAppState } from "@/lib/store";
 
 export const Route = createFileRoute("/materias/$slug")({
   loader: ({ params }) => {
-    const subject = getSubject(params.slug);
+    const subject = getSubjectInfo(params.slug);
     if (!subject) throw notFound();
     return { name: subject.name, intro: subject.intro };
   },
@@ -35,11 +35,14 @@ export const Route = createFileRoute("/materias/$slug")({
 
 function SubjectPage() {
   const { slug } = Route.useParams();
-  const subject = getSubject(slug);
+  const study = useStudy(["subject", slug], getSubjectStudy, { slug });
+  return <StudyState state={study}>{(data) => <SubjectStudyView key={slug} slug={slug} data={data} />}</StudyState>;
+}
+
+function SubjectStudyView({ slug, data }: { slug: string; data: SubjectStudy }) {
+  const subject = data.subject;
   const state = useAppState();
-  const { limits, plan } = usePlanAccess();
-  const subjectIndex = subjects.findIndex((item) => item.slug === slug);
-  const availableYears = YEARS.filter((year) => (curriculum[slug]?.[year]?.length ?? 0) > 0);
+  const availableYears = YEARS.filter((year) => (data.curriculum[year]?.length ?? 0) > 0);
   const [year, setYear] = useState<Year>(availableYears[0] ?? "1º EF");
   const activeYear = availableYears.includes(year) ? year : (availableYears[0] ?? "1º EF");
   const [open, setOpen] = useState<number | null>(null);
@@ -48,17 +51,6 @@ function SubjectPage() {
   const [score, setScore] = useState(0);
   const [studyPage, setStudyPage] = useState(0);
 
-  if (subjectIndex >= limits.subjects) {
-    return <SiteLayout>
-      <div className="mx-auto max-w-2xl px-4 py-20 text-center">
-        <h1 className="text-2xl font-bold text-foreground">Matéria indisponível neste plano</h1>
-        <p className="mt-3 text-muted-foreground">
-          {plan === null ? "Seu teste grátis terminou. Assine um plano para voltar a estudar." : plan === "basico" ? "O Básico inclui 25 matérias. Faça upgrade para continuar." : "O Médio inclui 60 matérias. O Master libera todas."}
-        </p>
-        <Link to="/planos" className="mt-6 inline-flex rounded-xl bg-primary px-5 py-3 font-semibold text-primary-foreground">Comparar planos</Link>
-      </div>
-    </SiteLayout>;
-  }
   const studyImagesBySubject: Record<string, string[]> = {
     matematica: [
       "https://images.unsplash.com/photo-1509228468518-180dd4864904?auto=format&fit=crop&w=1200&q=80",
@@ -201,11 +193,11 @@ function SubjectPage() {
   ];
 
   if (!subject || !studyImages?.length) return null;
-  const topics = getTopics(slug, activeYear);
+  const topics = data.topics[activeYear] ?? [];
   const q = subject.questions[qIndex];
-  const helpLines = getStudyHelpLines(slug);
-  const examPrep = getExamPrep(slug);
-  const deepStudy = getDeepStudy(slug);
+  const helpLines = data.help;
+  const examPrep = data.exam;
+  const deepStudy = data.deep;
   const finished = qIndex >= subject.questions.length || !q;
 
   function pick(i: number) {
@@ -245,7 +237,7 @@ function SubjectPage() {
                     <li key={`${activeYear}-${index}`} className="rounded-lg border border-border bg-card px-4 py-4 shadow-soft">
                       <h4 className="font-semibold text-foreground">{topic.title}</h4>
                       <p className="mt-1 text-sm leading-relaxed text-muted-foreground">{topic.text}</p>
-                      {topic.lesson && <Link to="/aula/$slug/$year/$topic" params={{ slug, year: activeYear, topic: topic.title }} className="mt-3 inline-block text-sm font-semibold text-primary hover:underline">Abrir aula e atividades →</Link>}
+                      {topic.hasLesson && <Link to="/aula/$slug/$year/$topic" params={{ slug, year: activeYear, topic: topic.title }} className="mt-3 inline-block text-sm font-semibold text-primary hover:underline">Abrir aula e atividades →</Link>}
                     </li>
                   );
                 })}
@@ -361,9 +353,9 @@ function SubjectPage() {
               <p className="mt-2 text-sm leading-7 text-muted-foreground">
                 Use estes tópicos como uma trilha de estudo. A sequência curricular pode variar entre escolas; avance quando conseguir explicar o conceito e resolver atividades de forma independente.
               </p>
-              {(curriculum[slug]?.[activeYear] ?? []).length > 0 ? (
+              {(data.curriculum[activeYear] ?? []).length > 0 ? (
                 <div className="mt-4 space-y-3">
-                  {(curriculum[slug]?.[activeYear] ?? []).map((entry, index) => {
+                  {(data.curriculum[activeYear] ?? []).map((entry, index) => {
                     const [topic, explanation] = entry.split(" | ");
                     return <div key={entry} className="rounded-xl border border-border p-4">
                       <p className="text-xs font-bold uppercase tracking-wide text-primary">Etapa {index + 1}</p>

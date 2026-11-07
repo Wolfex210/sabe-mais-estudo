@@ -11,7 +11,7 @@ import {
   GraduationCap,
 } from "lucide-react";
 import { SiteLayout, Card, AdSlot } from "@/components/SiteLayout";
-import { subjects } from "@/lib/content";
+import { subjects } from "@/lib/catalog";
 import heroImg from "@/assets/hero-estudos.png";
 
 export const Route = createFileRoute("/")({

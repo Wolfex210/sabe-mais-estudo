@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { SiteLayout, PageHeader, Card, AdSlot } from "@/components/SiteLayout";
-import { challenges, dailyChallenge, type Challenge } from "@/lib/content";
+import { challenges, dailyChallenge, type Challenge } from "@/lib/challenges";
 import { useAppState, actions, levelOf, LEVELS } from "@/lib/store";
 import { useAuth } from "@/lib/auth";
 import { usePlanAccess } from "@/lib/plan-access";

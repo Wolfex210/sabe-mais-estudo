@@ -4,10 +4,10 @@ import { SiteLayout, PageHeader, Card, AdSlot } from "@/components/SiteLayout";
 import { useAppState, actions, levelOf, ACHIEVEMENTS, streakOf } from "@/lib/store";
 import { useAuth } from "@/lib/auth";
 import { supabase } from "@/integrations/supabase/client";
-import { YEARS, YEAR_LABEL, type Year } from "@/lib/curriculum";
+import { YEARS, YEAR_LABEL, type Year } from "@/lib/years";
 import { Link } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
-import { subjects } from "@/lib/content";
+import { subjects } from "@/lib/catalog";
 
 export const Route = createFileRoute("/perfil")({
   head: () => ({

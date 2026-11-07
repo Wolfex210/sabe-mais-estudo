@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Link } from "@tanstack/react-router";
 import { SiteLayout, PageHeader, Card } from "@/components/SiteLayout";
 import { useAppState, levelOf, streakOf } from "@/lib/store";
-import { subjects } from "@/lib/content";
+import { subjects } from "@/lib/catalog";
 import { RegistrationAccess } from '@/components/RegistrationAccess';
 
 export const Route = createFileRoute("/dashboard")({

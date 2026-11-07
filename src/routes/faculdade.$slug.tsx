@@ -2,13 +2,15 @@ import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { useState } from "react";
 import { ArrowLeft, CheckCircle2, ChevronDown, GraduationCap, LockKeyhole } from "lucide-react";
 import { SiteLayout, Card } from "@/components/SiteLayout";
-import { getFacultyCourse, facultyCourses } from "@/lib/faculty";
-import { usePlanAccess } from "@/lib/plan-access";
+import { getFacultyCourseInfo } from "@/lib/catalog";
+import type { FacultyCourse } from "@/lib/faculty";
+import { getFacultyCourseStudy } from "@/lib/study.functions";
+import { StudyState, useStudy } from "@/components/StudyGate";
 import { getCoursePhoto } from "@/lib/course-photos";
 
 export const Route = createFileRoute("/faculdade/$slug")({
   loader: ({params}) => {
-    const course=getFacultyCourse(params.slug);
+    const course=getFacultyCourseInfo(params.slug);
     if(!course) throw notFound();
     return course;
   },
@@ -20,9 +22,12 @@ export const Route = createFileRoute("/faculdade/$slug")({
 });
 
 function FaculdadeCurso(){
-  const course=Route.useLoaderData();
-  const { limits, plan } = usePlanAccess();
-  const courseIndex = facultyCourses.findIndex((item) => item.slug === course.slug);
+  const info=Route.useLoaderData();
+  const study=useStudy(["course", info.slug], getFacultyCourseStudy, { slug: info.slug });
+  return <StudyState state={study} kind="curso">{(course)=><CourseView key={course.slug} course={course}/>}</StudyState>;
+}
+
+function CourseView({course}:{course:FacultyCourse}){
   const [open,setOpen]=useState<string|null>(null);
   const [completed,setCompleted]=useState<string[]>([]);
   const toggle=(id:string)=>setOpen(v=>v===id?null:id);
@@ -30,8 +35,7 @@ function FaculdadeCurso(){
   const total=course.semesters.reduce((n,s)=>n+s.disciplines.length,0);
   const progress=total?Math.round(completed.length/total*100):0;
 
-  if (courseIndex >= limits.courses) {
-    return <SiteLayout>
+  return <SiteLayout>
       <div className="mx-auto max-w-2xl px-4 py-20 text-center">
         <h1 className="text-2xl font-bold text-foreground">Curso indisponível neste plano</h1>
         <p className="mt-3 text-muted-foreground">

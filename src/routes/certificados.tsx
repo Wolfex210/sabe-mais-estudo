@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { SiteLayout, PageHeader, Card } from "@/components/SiteLayout";
 import { useAppState } from "@/lib/store";
-import { subjects } from "@/lib/content";
+import { subjects } from "@/lib/catalog";
 
 export const Route = createFileRoute("/certificados")({
   head: () => ({ meta: [{ title: "Certificados de estudo — Sabe Mais" }, { name: "description", content: "Consulte seus marcos de estudo e imprima um comprovante de conclusão de trilha." }] }),

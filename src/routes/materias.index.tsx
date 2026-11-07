@@ -2,7 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { Search } from "lucide-react";
 import { SiteLayout, PageHeader, Card, AdSlot } from "@/components/SiteLayout";
-import { subjects } from "@/lib/content";
+import { subjects } from "@/lib/catalog";
 import { subjectCoverImages } from "@/lib/subject-images";
 import { usePlanAccess } from "@/lib/plan-access";
 
