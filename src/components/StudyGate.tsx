@@ -3,11 +3,12 @@ import { useQuery } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
 import type { ReactNode } from "react";
 import { useAuth } from "@/lib/auth";
+import { SiteLayout } from "@/components/SiteLayout";
 import type { StudyPlan, StudyResult } from "@/lib/study.functions";
 
 /** Busca conteúdo protegido no servidor; só quem está logado e tem plano/teste ativo recebe o conteúdo. */
 export function useStudy<A, T>(key: unknown[], fn: (opts: { data: A }) => Promise<StudyResult<T>>, args: A) {
-  const { user, loading } = useAuth() as { user: { id: string } | null; loading?: boolean };
+  const { user, loading } = useAuth();
   const call = useServerFn(fn as never) as (opts: { data: A }) => Promise<StudyResult<T>>;
   const query = useQuery({ queryKey: ["study", user?.id, ...key], queryFn: () => call({ data: args }), enabled: !!user, staleTime: 5 * 60_000 });
   return { user, authLoading: !!loading, ...query };
@@ -36,13 +37,15 @@ export function LoadingMessage() {
   return <p className="mx-auto max-w-2xl px-4 py-20 text-center text-muted-foreground" role="status">Carregando conteúdo…</p>;
 }
 
-/** Mostra login, carregamento, bloqueio ou o conteúdo liberado. */
-export function StudyState<T>({ state, kind, children }: { state: ReturnType<typeof useStudy<unknown, T>>; kind?: "matéria" | "curso" | "conteúdo"; children: (data: T) => ReactNode }) {
-  if (state.authLoading) return <LoadingMessage />;
-  if (!state.user) return <SignInMessage />;
-  if (state.isError) return <p className="mx-auto max-w-2xl px-4 py-20 text-center text-muted-foreground">Não foi possível carregar o conteúdo. Tente novamente.</p>;
-  if (!state.data) return <LoadingMessage />;
-  if (state.data.status === "not_found") return <p className="mx-auto max-w-2xl px-4 py-20 text-center text-muted-foreground">Conteúdo não encontrado.</p>;
-  if (state.data.status === "locked") return <LockedMessage plan={state.data.plan} {...(kind ? { kind } : {})} />;
-  return <>{children(state.data.data)}</>;
+/** Mostra login, carregamento, bloqueio ou o conteúdo liberado (o conteúdo traz o próprio layout). */
+export function StudyState<T>({ state, kind, children }: { state: { user: unknown; authLoading: boolean; isError: boolean; data: StudyResult<T> | undefined }; kind?: "matéria" | "curso" | "conteúdo"; children: (data: T) => ReactNode }) {
+  let fallback: ReactNode;
+  if (state.authLoading) fallback = <LoadingMessage />;
+  else if (!state.user) fallback = <SignInMessage />;
+  else if (state.isError) fallback = <p className="mx-auto max-w-2xl px-4 py-20 text-center text-muted-foreground">Não foi possível carregar o conteúdo. Tente novamente.</p>;
+  else if (!state.data) fallback = <LoadingMessage />;
+  else if (state.data.status === "not_found") fallback = <p className="mx-auto max-w-2xl px-4 py-20 text-center text-muted-foreground">Conteúdo não encontrado.</p>;
+  else if (state.data.status === "locked") fallback = <LockedMessage plan={state.data.plan} {...(kind ? { kind } : {})} />;
+  else return <>{children(state.data.data)}</>;
+  return <SiteLayout>{fallback}</SiteLayout>;
 }
