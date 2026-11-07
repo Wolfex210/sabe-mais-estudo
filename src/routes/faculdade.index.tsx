@@ -2,7 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { Search, GraduationCap, Clock3, ArrowRight } from "lucide-react";
 import { useMemo, useState } from "react";
 import { SiteLayout, PageHeader, Card } from "@/components/SiteLayout";
-import { facultyCourses } from "@/lib/faculty";
+import { facultyCatalog as facultyCourses } from "@/lib/catalog";
 import { usePlanAccess } from "@/lib/plan-access";
 import { getCoursePhoto } from "@/lib/course-photos";
 

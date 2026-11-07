@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { supabase } from "@/integrations/supabase/client";
 import { lovable } from "@/integrations/lovable/index";
 import { useAuth } from "@/lib/auth";
-import { YEARS, YEAR_LABEL } from "@/lib/curriculum";
+import { YEARS, YEAR_LABEL } from "@/lib/years";
 
 export const Route = createFileRoute("/conta")({
   head: () => ({ meta: [

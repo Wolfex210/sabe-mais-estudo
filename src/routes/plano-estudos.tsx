@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 import { SiteLayout, PageHeader, Card } from "@/components/SiteLayout";
 import { actions, useAppState } from "@/lib/store";
-import { subjects } from "@/lib/content";
+import { subjects } from "@/lib/catalog";
 
 export const Route = createFileRoute("/plano-estudos")({
   head: () => ({ meta: [{ title: "Plano de estudos — Sabe Mais" }, { name: "description", content: "Monte uma rotina semanal adaptada ao seu tempo, objetivos e desempenho nos quizzes." }] }),
