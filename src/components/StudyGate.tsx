@@ -49,3 +49,15 @@ export function StudyState<T>({ state, kind, children }: { state: { user: unknow
   else return <>{children(state.data.data)}</>;
   return <SiteLayout>{fallback}</SiteLayout>;
 }
+
+/** Aviso curto para páginas com seletor de matéria (quiz, cartões, simulados). */
+export function inlineStudyNotice(state: { user: unknown; authLoading: boolean; isError: boolean; data: StudyResult<unknown> | undefined }): ReactNode | null {
+  const box = (text: ReactNode) => <div className="rounded-xl border border-border bg-card p-5 text-center text-sm text-muted-foreground">{text}</div>;
+  if (state.authLoading) return box("Carregando…");
+  if (!state.user) return box(<>Entre na sua conta para estudar. <Link to="/conta" className="font-semibold text-primary">Entrar ou criar conta</Link></>);
+  if (state.isError) return box("Não foi possível carregar o conteúdo. Tente novamente.");
+  if (!state.data) return box("Carregando…");
+  if (state.data.status === "not_found") return box("Conteúdo não encontrado.");
+  if (state.data.status === "locked") return box(<>{state.data.plan === null ? "Seu teste grátis terminou. Assine um plano para voltar a estudar." : "Esta matéria não faz parte do seu plano."} <Link to="/planos" className="font-semibold text-primary">Comparar planos</Link></>);
+  return null;
+}

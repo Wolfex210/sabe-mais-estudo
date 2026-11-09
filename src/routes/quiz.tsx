@@ -1,9 +1,11 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 import { SiteLayout, PageHeader, Card, AdSlot } from "@/components/SiteLayout";
-import { subjects, type Question } from "@/lib/content";
+import type { Question } from "@/lib/content";
+import { subjects } from "@/lib/catalog";
+import { getQuizBank } from "@/lib/study.functions";
+import { inlineStudyNotice, useStudy } from "@/components/StudyGate";
 import { actions } from "@/lib/store";
-import { lessons } from "@/lib/lessons";
 
 export const Route = createFileRoute("/quiz")({
   validateSearch: (search: Record<string, unknown>) => ({
@@ -45,14 +47,17 @@ function QuizPage() {
   const [score, setScore] = useState(0);
   const [answers, setAnswers] = useState<{ question: string; selected: string; expected: string; correct: boolean; explanation?: string }[]>([]);
 
-  const topicLessons = lessons.filter(l => l.subject === slug && Object.values(l.quizzes ?? {}).some(list => list?.length === 10));
+  const bank = useStudy(["quiz", slug], getQuizBank, { slug });
+  const notice = inlineStudyNotice(bank);
+  const bankData = bank.data?.status === "ok" ? bank.data.data : null;
+  const topicLessons = bankData?.topicLessons ?? [];
 
   const questions = useMemo(
     () => {
       const lesson = topicLessons.find(l => l.title === topic && (!search.year || search.year === l.year));
-      return lesson?.quizzes?.[level]?.length === 10 ? lesson.quizzes[level] : (subjects.find(s => s.slug === slug)?.questions ?? []).filter(q => q.level === level);
+      return lesson?.quizzes?.[level]?.length === 10 ? lesson.quizzes[level] : (bankData?.questions ?? []).filter(q => q.level === level);
     },
-    [slug, level, topic],
+    [slug, level, topic, bankData],
   );
 
   function restart() {
@@ -127,6 +132,7 @@ function QuizPage() {
               ))}
             </div>
 
+            {notice && <div className="mt-6">{notice}</div>}
             <button
               disabled={questions.length === 0}
               onClick={() => setStarted(true)}
