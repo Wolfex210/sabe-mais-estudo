@@ -2,7 +2,9 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { SiteLayout, PageHeader, Card } from "@/components/SiteLayout";
 import { actions, useAppState } from "@/lib/store";
-import { subjects, type Question } from "@/lib/content";
+import type { Question } from "@/lib/content";
+import { getSimuladoBank } from "@/lib/study.functions";
+import { inlineStudyNotice, useStudy } from "@/components/StudyGate";
 
 export const Route = createFileRoute("/simulados")({ head: () => ({ meta: [{ title: "Simulados — Sabe Mais" }, { name: "description", content: "Treine com simulados cronometrados, explicações e relatório por matéria." }] }), component: Simulados });
 
@@ -18,7 +20,10 @@ function Simulados() {
   const [answers, setAnswers] = useState<AnswerRecord[]>([]);
   const [remaining, setRemaining] = useState(size * 90);
   const recorded = useRef(false);
-  const pool = useMemo<SimQ[]>(() => subjects.flatMap(sub => sub.questions.map(q => ({ ...q, subject: sub.slug, subjectName: sub.name }))).sort(() => Math.random() - 0.5), [started]);
+  const bank = useStudy(["simulado"], getSimuladoBank, undefined);
+  const notice = inlineStudyNotice(bank);
+  const bankList = bank.data?.status === "ok" ? bank.data.data : null;
+  const pool = useMemo<SimQ[]>(() => [...(bankList ?? [])].sort(() => Math.random() - 0.5), [started, bankList]);
   const questions = pool.slice(0, size);
   const finished = started && (index >= questions.length || remaining <= 0);
   const mm = String(Math.floor(remaining / 60)).padStart(2, "0");
