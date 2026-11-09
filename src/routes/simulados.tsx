@@ -85,6 +85,7 @@ function Simulados() {
         <h2 className="text-xl font-bold">📝 Prepare seu simulado</h2>
         <p className="mt-2 text-sm leading-6 text-muted-foreground">As questões são selecionadas entre as matérias cadastradas. O tempo sugerido é de 90 segundos por questão; ao terminar, você recebe um relatório do que respondeu.</p>
         <div className="mt-5 flex flex-wrap gap-2">{[10,20,30].map(n => <button type="button" key={n} onClick={() => setSize(n)} className={"rounded-xl border px-5 py-3 font-semibold " + (size === n ? "border-primary bg-primary text-primary-foreground" : "border-border")}>{n} questões</button>)}</div>
+        {notice && <div className="mt-5">{notice}</div>}
         <p className="mt-3 text-xs text-muted-foreground">Duração sugerida: {Math.floor(size * 1.5)} minutos. Você pode encerrar antes.</p>
         <button type="button" onClick={start} disabled={pool.length === 0} className="mt-6 w-full rounded-xl bg-primary px-5 py-3 font-semibold text-primary-foreground disabled:opacity-50">Começar simulado</button>
       </Card>}
