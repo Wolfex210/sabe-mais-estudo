@@ -1,9 +1,11 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 import { SiteLayout, PageHeader } from "@/components/SiteLayout";
-import { subjects } from "@/lib/content";
-import { curriculum, YEARS, YEAR_LABEL, parseTopic } from "@/lib/curriculum";
-import { lessons } from "@/lib/lessons";
+import { subjects } from "@/lib/catalog";
+import { getSearchIndex, type SearchEntry } from "@/lib/study.functions";
+import { useAuth } from "@/lib/auth";
+import { useQuery } from "@tanstack/react-query";
+import { useServerFn } from "@tanstack/react-start";
 import { Search, Sparkles, BookOpen, ArrowRight, X } from "lucide-react";
 
 export const Route = createFileRoute("/pesquisa")({
@@ -11,19 +13,8 @@ export const Route = createFileRoute("/pesquisa")({
   component: Pesquisa,
 });
 
-type SearchEntry = { title: string; detail: string; slug: string; year: string; kind: "Matéria" | "Assunto" | "Resumo" | "Exercício" | "Quiz" | "Aula"; searchable: string };
-
-const entries: SearchEntry[] = subjects.flatMap((s) => [
-  { title: s.name, detail: "Matéria", slug: s.slug, year: "", kind: "Matéria" as const, searchable: `${s.name} ${s.intro}` },
-  ...YEARS.flatMap((y) => (curriculum[s.slug]?.[y] ?? []).map((item) => {
-    const title = parseTopic(item).title;
-    return { title, detail: `${s.name} · ${YEAR_LABEL[y]}`, slug: s.slug, year: y, kind: "Assunto" as const, searchable: `${title} ${s.name} ${YEAR_LABEL[y]}` };
-  })),
-  ...s.summaries.map((item) => ({ title: item.title, detail: `${s.name} · Resumo`, slug: s.slug, year: "", kind: "Resumo" as const, searchable: `${item.title} ${s.name} ${item.text}` })),
-  ...s.exercises.map((item) => ({ title: item.q, detail: `${s.name} · Exercício`, slug: s.slug, year: "", kind: "Exercício" as const, searchable: `${item.q} ${s.name} ${item.a}` })),
-  ...s.questions.map((item) => ({ title: item.q, detail: `${s.name} · Quiz`, slug: s.slug, year: "", kind: "Quiz" as const, searchable: `${item.q} ${s.name} ${item.options.join(" ")} ${item.explanation ?? ""}` })),
-  ...lessons.filter((l) => l.subject === s.slug).map((l) => ({ title: l.title, detail: `${s.name} · Aula`, slug: s.slug, year: l.year, kind: "Aula" as const, searchable: `${l.title} ${s.name} ${l.year}` })),
-]);
+// Matérias são públicas; assuntos, aulas, resumos e questões vêm do servidor conforme o plano.
+const subjectEntries: SearchEntry[] = subjects.map((s) => ({ title: s.name, detail: "Matéria", slug: s.slug, year: "", kind: "Matéria" as const, searchable: `${s.name} ${s.intro}` }));
 
 const suggestions = ["frações", "interpretação de texto", "Revolução Industrial", "porcentagem", "ecologia", "ENEM"];
 
@@ -86,6 +77,10 @@ function Pesquisa() {
   const [query, setQuery] = useState("");
   const [selectedKind, setSelectedKind] = useState("Todos");
   const normalized = normalize(query);
+  const { user } = useAuth();
+  const fetchIndex = useServerFn(getSearchIndex);
+  const { data: studyEntries } = useQuery({ queryKey: ["study", user?.id, "search"], queryFn: () => fetchIndex(), enabled: !!user, staleTime: 5 * 60_000 });
+  const entries = useMemo(() => [...subjectEntries, ...(studyEntries ?? [])], [studyEntries]);
   const results = useMemo(() => {
     if (!normalized) return [];
     return entries
@@ -93,7 +88,7 @@ function Pesquisa() {
       .filter((entry) => entry.score > 0 && (selectedKind === "Todos" || entry.kind === selectedKind))
       .sort((a, b) => b.score - a.score || a.title.localeCompare(b.title, "pt-BR"))
       .slice(0, 60);
-  }, [normalized, query, selectedKind]);
+  }, [normalized, query, selectedKind, entries]);
 
   function clearSearch() {
     setQuery("");

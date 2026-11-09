@@ -1,7 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useMemo, useState } from "react";
 import { SiteLayout, PageHeader, Card } from "@/components/SiteLayout";
-import { subjects } from "@/lib/content";
+import { subjects } from "@/lib/catalog";
+import { getQuizBank } from "@/lib/study.functions";
+import { inlineStudyNotice, useStudy } from "@/components/StudyGate";
 
 export const Route = createFileRoute("/cartoes")({
   head: () => ({ meta: [{ title: "Flashcards — Sabe Mais" }, { name: "description", content: "Revise conceitos com cartões de pergunta e resposta." }] }),
@@ -20,15 +22,17 @@ function Cartoes() {
   const [flipped, setFlipped] = useState(false);
   const [reviews, setReviews] = useState<ReviewMap>({});
   useEffect(() => { setReviews(loadReviews()); }, []);
+  const bank = useStudy(["quiz", subjectSlug], getQuizBank, { slug: subjectSlug });
+  const notice = inlineStudyNotice(bank);
+  const bankQuestions = bank.data?.status === "ok" ? bank.data.data.questions : [];
   const deck = useMemo(() => {
-    const subject = subjects.find(s => s.slug === subjectSlug);
-    return (subject?.questions ?? []).map((q, i) => ({
+    return bankQuestions.map((q, i) => ({
       id: subjectSlug + ":" + i,
       question: q.q,
       answer: q.options[q.answer] ?? "Consulte a explicação da questão.",
       explanation: q.explanation ?? "Explique com suas próprias palavras por que esta resposta está correta e relacione-a ao conceito estudado.",
     }));
-  }, [subjectSlug]);
+  }, [subjectSlug, bankQuestions]);
   const current = deck[index];
   const known = deck.filter(c => reviews[c.id] === "known").length;
   const pending = deck.filter(c => reviews[c.id] !== "known").length;
@@ -55,7 +59,7 @@ function Cartoes() {
           <div className="rounded-xl bg-secondary p-3"><p className="text-xs text-muted-foreground">Para revisar</p><p className="text-2xl font-bold">{pending}</p></div>
         </div>
       </Card>
-      {current ? <Card>
+      {notice ? notice : current ? <Card>
         <div className="flex items-center justify-between text-xs text-muted-foreground"><span>Cartão {index + 1} de {deck.length}</span><span>{reviews[current.id] === "known" ? "✓ Dominado" : reviews[current.id] === "review" ? "↻ Revisar" : "Novo"}</span></div>
         <button type="button" onClick={() => setFlipped(v => !v)} aria-label={flipped ? "Mostrar pergunta" : "Mostrar resposta"} className="mt-4 flex min-h-64 w-full flex-col items-center justify-center rounded-2xl border border-primary/25 bg-primary/5 p-7 text-center transition hover:bg-primary/10">
           <span className="text-xs font-bold uppercase tracking-widest text-primary">{flipped ? "Resposta" : "Pergunta"}</span>

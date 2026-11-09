@@ -36,17 +36,6 @@ function CourseView({course}:{course:FacultyCourse}){
   const progress=total?Math.round(completed.length/total*100):0;
 
   return <SiteLayout>
-      <div className="mx-auto max-w-2xl px-4 py-20 text-center">
-        <h1 className="text-2xl font-bold text-foreground">Curso indisponível neste plano</h1>
-        <p className="mt-3 text-muted-foreground">
-          {plan === null ? "Seu teste grátis terminou. Assine um plano para voltar a estudar." : plan === "basico" ? "O Básico inclui 25 cursos. Faça upgrade para continuar." : "O Médio inclui 70 cursos. O Master libera todos."}
-        </p>
-        <Link to="/planos" className="mt-6 inline-flex rounded-xl bg-primary px-5 py-3 font-semibold text-primary-foreground">Comparar planos</Link>
-      </div>
-    </SiteLayout>;
-  }
-
-  return <SiteLayout>
     <div className="border-b border-border bg-gradient-hero">
       <div className="mx-auto w-full max-w-6xl px-4 py-10">
         <Link to="/faculdade" className="inline-flex items-center gap-2 text-sm font-semibold text-muted-foreground hover:text-foreground"><ArrowLeft className="h-4 w-4"/> Voltar para Faculdade</Link>

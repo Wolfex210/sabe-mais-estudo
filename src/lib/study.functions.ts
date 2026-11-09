@@ -1,6 +1,6 @@
 import { createServerFn } from "@tanstack/react-start";
 import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
-import type { Question, Subject, DeepStudySection } from "@/lib/content";
+import type { Question, Subject, DeepStudySection, ExamPrepSection } from "@/lib/content";
 import type { Lesson } from "@/lib/lessons";
 import type { FacultyCourse } from "@/lib/faculty";
 import type { Year } from "@/lib/years";
@@ -24,7 +24,7 @@ export type SubjectTopic = { title: string; text: string; hasLesson: boolean };
 export type SubjectStudy = {
   subject: Subject;
   deep: DeepStudySection | null;
-  exam: { title: string; text: string }[];
+  exam: ExamPrepSection[];
   help: string[];
   curriculum: Partial<Record<Year, string[]>>;
   topics: Partial<Record<Year, SubjectTopic[]>>;
@@ -44,7 +44,7 @@ export const getSubjectStudy = createServerFn({ method: "POST" })
     const topics: SubjectStudy["topics"] = {};
     for (const year of YEARS) topics[year] = getTopics(data.slug, year).map((t) => ({ title: t.title, text: t.text, hasLesson: !!t.lesson }));
     return { status: "ok", data: {
-      subject, deep: content.getDeepStudy(data.slug), exam: content.getExamPrep(data.slug) as { title: string; text: string }[],
+      subject, deep: content.getDeepStudy(data.slug), exam: content.getExamPrep(data.slug),
       help: content.getStudyHelpLines(data.slug), curriculum: curriculum[data.slug] ?? {}, topics,
     } };
   });
