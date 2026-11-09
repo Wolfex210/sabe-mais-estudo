@@ -9,7 +9,7 @@ import type { StudyPlan, StudyResult } from "@/lib/study.functions";
 /** Busca conteúdo protegido no servidor; só quem está logado e tem plano/teste ativo recebe o conteúdo. */
 export function useStudy<A, T>(key: unknown[], fn: (opts: { data: A }) => Promise<StudyResult<T>>, args: A) {
   const { user, loading } = useAuth();
-  const call = useServerFn(fn as never) as (opts: { data: A }) => Promise<StudyResult<T>>;
+  const call = useServerFn(fn as never) as unknown as (opts: { data: A }) => Promise<StudyResult<T>>;
   const query = useQuery({ queryKey: ["study", user?.id, ...key], queryFn: () => call({ data: args }), enabled: !!user, staleTime: 5 * 60_000 });
   return { user, authLoading: !!loading, ...query };
 }
