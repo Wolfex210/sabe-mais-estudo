@@ -23,4 +23,5 @@
 - [x] Corrigir o checkout de teste dos três planos para resolver Price IDs reais via catálogo Stripe, sem usar textos monetários como identificadores.
 - [ ] Ativar cobranças reais e histórico após o responsável vincular a conta Stripe de teste, concluir a ativação da conta real e instalar o aplicativo Lovable na Stripe; então verificar a prontidão e o checkout real.
 - [x] Criar página de pagamento pós-cadastro (/pagamento) e condicionar dashboard à confirmação no servidor; recebimento real ainda não testado.
-- [ ] Habilitar Pix real nas assinaturas quando a Stripe liberar a conta e o método: consulta à conta real confirmou país BR, charges_enabled=false e pix.available=false nas configurações de pagamento; bloqueado pela aprovação/disponibilidade da Stripe. Não forçar Pix no checkout enquanto indisponível.
+- [ ] Habilitar Pix real nas assinaturas quando a Stripe liberar a conta e o método: consulta à conta real confirmou país BR, charges_enabled=false e pix.available=false nas configurações de pagamento; bloqueado pela aprovação/disponibilidade da Stripe. Não forçar Pix no checkout enquanto indisponível.- [x] Exigir senha atual na troca de senha para quem está logado.
+- [x] Entregar aulas, quizzes e cursos somente pelo servidor após conferir login e plano.
