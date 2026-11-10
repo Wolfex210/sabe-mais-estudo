@@ -36,6 +36,7 @@ import { Route as FaculdadeIndexRouteImport } from './routes/faculdade.index'
 import { Route as FaculdadeSlugRouteImport } from './routes/faculdade.$slug'
 import { Route as MateriasIndexRouteImport } from './routes/materias.index'
 import { Route as MateriasSlugRouteImport } from './routes/materias.$slug'
+import { Route as ApiPublicMercadopagoWebhookRouteImport } from './routes/api/public/mercadopago-webhook'
 import { Route as ApiPublicPaymentsWebhookRouteImport } from './routes/api/public/payments/webhook'
 import { Route as AulaSlugYearTopicRouteImport } from './routes/aula.$slug.$year.$topic'
 
@@ -174,6 +175,12 @@ const MateriasSlugRoute = MateriasSlugRouteImport.update({
   path: '/materias/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiPublicMercadopagoWebhookRoute =
+  ApiPublicMercadopagoWebhookRouteImport.update({
+    id: '/api/public/mercadopago-webhook',
+    path: '/api/public/mercadopago-webhook',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const ApiPublicPaymentsWebhookRoute =
   ApiPublicPaymentsWebhookRouteImport.update({
     id: '/api/public/payments/webhook',
@@ -214,6 +221,7 @@ export interface FileRoutesByFullPath {
   '/materias/$slug': typeof MateriasSlugRoute
   '/faculdade/': typeof FaculdadeIndexRoute
   '/materias/': typeof MateriasIndexRoute
+  '/api/public/mercadopago-webhook': typeof ApiPublicMercadopagoWebhookRoute
   '/api/public/payments/webhook': typeof ApiPublicPaymentsWebhookRoute
   '/aula/$slug/$year/$topic': typeof AulaSlugYearTopicRoute
 }
@@ -245,6 +253,7 @@ export interface FileRoutesByTo {
   '/materias/$slug': typeof MateriasSlugRoute
   '/faculdade': typeof FaculdadeIndexRoute
   '/materias': typeof MateriasIndexRoute
+  '/api/public/mercadopago-webhook': typeof ApiPublicMercadopagoWebhookRoute
   '/api/public/payments/webhook': typeof ApiPublicPaymentsWebhookRoute
   '/aula/$slug/$year/$topic': typeof AulaSlugYearTopicRoute
 }
@@ -277,6 +286,7 @@ export interface FileRoutesById {
   '/materias/$slug': typeof MateriasSlugRoute
   '/faculdade/': typeof FaculdadeIndexRoute
   '/materias/': typeof MateriasIndexRoute
+  '/api/public/mercadopago-webhook': typeof ApiPublicMercadopagoWebhookRoute
   '/api/public/payments/webhook': typeof ApiPublicPaymentsWebhookRoute
   '/aula/$slug/$year/$topic': typeof AulaSlugYearTopicRoute
 }
@@ -310,6 +320,7 @@ export interface FileRouteTypes {
     | '/materias/$slug'
     | '/faculdade/'
     | '/materias/'
+    | '/api/public/mercadopago-webhook'
     | '/api/public/payments/webhook'
     | '/aula/$slug/$year/$topic'
   fileRoutesByTo: FileRoutesByTo
@@ -341,6 +352,7 @@ export interface FileRouteTypes {
     | '/materias/$slug'
     | '/faculdade'
     | '/materias'
+    | '/api/public/mercadopago-webhook'
     | '/api/public/payments/webhook'
     | '/aula/$slug/$year/$topic'
   id:
@@ -372,6 +384,7 @@ export interface FileRouteTypes {
     | '/materias/$slug'
     | '/faculdade/'
     | '/materias/'
+    | '/api/public/mercadopago-webhook'
     | '/api/public/payments/webhook'
     | '/aula/$slug/$year/$topic'
   fileRoutesById: FileRoutesById
@@ -404,6 +417,7 @@ export interface RootRouteChildren {
   MateriasSlugRoute: typeof MateriasSlugRoute
   FaculdadeIndexRoute: typeof FaculdadeIndexRoute
   MateriasIndexRoute: typeof MateriasIndexRoute
+  ApiPublicMercadopagoWebhookRoute: typeof ApiPublicMercadopagoWebhookRoute
   ApiPublicPaymentsWebhookRoute: typeof ApiPublicPaymentsWebhookRoute
   AulaSlugYearTopicRoute: typeof AulaSlugYearTopicRoute
 }
@@ -599,6 +613,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MateriasSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/mercadopago-webhook': {
+      id: '/api/public/mercadopago-webhook'
+      path: '/api/public/mercadopago-webhook'
+      fullPath: '/api/public/mercadopago-webhook'
+      preLoaderRoute: typeof ApiPublicMercadopagoWebhookRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/public/payments/webhook': {
       id: '/api/public/payments/webhook'
       path: '/api/public/payments/webhook'
@@ -644,6 +665,7 @@ const rootRouteChildren: RootRouteChildren = {
   MateriasSlugRoute: MateriasSlugRoute,
   FaculdadeIndexRoute: FaculdadeIndexRoute,
   MateriasIndexRoute: MateriasIndexRoute,
+  ApiPublicMercadopagoWebhookRoute: ApiPublicMercadopagoWebhookRoute,
   ApiPublicPaymentsWebhookRoute: ApiPublicPaymentsWebhookRoute,
   AulaSlugYearTopicRoute: AulaSlugYearTopicRoute,
 }
