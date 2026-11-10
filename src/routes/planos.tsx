@@ -129,7 +129,7 @@ function Planos() {
                 disabled={loading || !paymentsAvailable()}
                 className="mt-6 w-full"
               >
-                {loading ? "Carregando..." : user ? "Assinar com Stripe" : "Entrar para assinar"}
+                {loading ? "Carregando..." : user ? "Assinar com Pix" : "Entrar para assinar"}
               </Button>
             </Card>
           ))}
@@ -153,9 +153,6 @@ function Planos() {
           </p>
         )}
 
-        <p className="mt-8 text-center text-xs text-muted-foreground">
-          A conta Stripe que receberá os pagamentos e as configurações de cobrança devem ser administradas por um responsável elegível. Nunca coloque a chave secreta do Stripe no código, no GitHub ou no navegador.
-        </p>
       </div>
     </SiteLayout>
   );

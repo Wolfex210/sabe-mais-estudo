@@ -61,18 +61,10 @@ function PixFrame({ priceId }: { priceId: string }) {
 }
 
 export function StripeEmbeddedCheckout({ priceId }: { priceId: string }) {
-  const [method, setMethod] = useState<Method>('card');
+  // Somente Pix (Mercado Pago): cartão de crédito foi removido a pedido do dono.
   return <div className="mt-8" id="checkout">
-    <h2 className="mb-4 text-xl font-bold text-foreground">Finalizar pagamento</h2>
-    <div role="radiogroup" aria-label="Forma de pagamento" className="mb-6 grid gap-3 sm:grid-cols-2">
-      {METHODS.map((m) => (
-        <button key={m.id} type="button" role="radio" aria-checked={method === m.id} onClick={() => setMethod(m.id)}
-          className={`rounded-2xl border p-4 text-left transition hover:shadow-soft ${method === m.id ? 'border-primary bg-primary/5 ring-2 ring-primary/30' : 'border-border bg-card'}`}>
-          <span className="block font-semibold text-foreground">{m.title}</span>
-          <span className="block text-sm text-muted-foreground">{m.detail}</span>
-        </button>
-      ))}
-    </div>
-    {method === 'pix' ? <PixFrame key={priceId} priceId={priceId} /> : <CheckoutFrame key={priceId} priceId={priceId} method={method} />}
+    <h2 className="mb-1 text-xl font-bold text-foreground">Finalizar pagamento por Pix</h2>
+    <p className="mb-6 text-sm text-muted-foreground">Acesso de 30 dias, sem renovação automática.</p>
+    <PixFrame key={priceId} priceId={priceId} />
   </div>;
 }
