@@ -162,6 +162,486 @@
         "tipo": "Análise de erro",
         "dificuldade": "Intermediária",
         "enunciado": "Um aluno afirma que um triângulo com lados 4 cm, 5 cm e 6 cm é retângulo porque 4 + 5 > 6. A conclusão procede?"
+      },
+      {
+        "n": 7,
+        "tipo": "Equação do primeiro grau",
+        "dificuldade": "Intermediária",
+        "enunciado": "Resolva e confira: 3x + 6 = 12."
+      },
+      {
+        "n": 8,
+        "tipo": "Teorema de Pitágoras",
+        "dificuldade": "Intermediária",
+        "enunciado": "Um triângulo retângulo tem catetos 3 cm e 4 cm. Determine a hipotenusa."
+      },
+      {
+        "n": 9,
+        "tipo": "Estatística",
+        "dificuldade": "Intermediária",
+        "enunciado": "Calcule a média aritmética de 4, 6 e 11."
+      },
+      {
+        "n": 10,
+        "tipo": "Desconto percentual",
+        "dificuldade": "Intermediária",
+        "enunciado": "Um produto custa R$ 140,00. Calcule o preço após desconto de 25%."
+      },
+      {
+        "n": 11,
+        "tipo": "Equação do primeiro grau",
+        "dificuldade": "Intermediária",
+        "enunciado": "Resolva e confira: 7x + 10 = 52."
+      },
+      {
+        "n": 12,
+        "tipo": "Teorema de Pitágoras",
+        "dificuldade": "Intermediária",
+        "enunciado": "Um triângulo retângulo tem catetos 6 cm e 8 cm. Determine a hipotenusa."
+      },
+      {
+        "n": 13,
+        "tipo": "Estatística",
+        "dificuldade": "Intermediária",
+        "enunciado": "Calcule a média aritmética de 8, 10 e 15."
+      },
+      {
+        "n": 14,
+        "tipo": "Desconto percentual",
+        "dificuldade": "Intermediária",
+        "enunciado": "Um produto custa R$ 180,00. Calcule o preço após desconto de 10%."
+      },
+      {
+        "n": 15,
+        "tipo": "Equação do primeiro grau",
+        "dificuldade": "Intermediária",
+        "enunciado": "Resolva e confira: 11x + 14 = 124."
+      },
+      {
+        "n": 16,
+        "tipo": "Teorema de Pitágoras",
+        "dificuldade": "Intermediária",
+        "enunciado": "Um triângulo retângulo tem catetos 9 cm e 12 cm. Determine a hipotenusa."
+      },
+      {
+        "n": 17,
+        "tipo": "Estatística",
+        "dificuldade": "Intermediária",
+        "enunciado": "Calcule a média aritmética de 12, 14 e 19."
+      },
+      {
+        "n": 18,
+        "tipo": "Desconto percentual",
+        "dificuldade": "Intermediária",
+        "enunciado": "Um produto custa R$ 220,00. Calcule o preço após desconto de 30%."
+      },
+      {
+        "n": 19,
+        "tipo": "Equação do primeiro grau",
+        "dificuldade": "Intermediária",
+        "enunciado": "Resolva e confira: 15x + 18 = 63."
+      },
+      {
+        "n": 20,
+        "tipo": "Teorema de Pitágoras",
+        "dificuldade": "Intermediária",
+        "enunciado": "Um triângulo retângulo tem catetos 12 cm e 16 cm. Determine a hipotenusa."
+      },
+      {
+        "n": 21,
+        "tipo": "Estatística",
+        "dificuldade": "Intermediária",
+        "enunciado": "Calcule a média aritmética de 16, 18 e 23."
+      },
+      {
+        "n": 22,
+        "tipo": "Desconto percentual",
+        "dificuldade": "Intermediária",
+        "enunciado": "Um produto custa R$ 260,00. Calcule o preço após desconto de 15%."
+      },
+      {
+        "n": 23,
+        "tipo": "Equação do primeiro grau",
+        "dificuldade": "Intermediária",
+        "enunciado": "Resolva e confira: 19x + 22 = 155."
+      },
+      {
+        "n": 24,
+        "tipo": "Teorema de Pitágoras",
+        "dificuldade": "Intermediária",
+        "enunciado": "Um triângulo retângulo tem catetos 15 cm e 20 cm. Determine a hipotenusa."
+      },
+      {
+        "n": 25,
+        "tipo": "Estatística",
+        "dificuldade": "Intermediária",
+        "enunciado": "Calcule a média aritmética de 20, 22 e 27."
+      },
+      {
+        "n": 26,
+        "tipo": "Desconto percentual",
+        "dificuldade": "Intermediária",
+        "enunciado": "Um produto custa R$ 300,00. Calcule o preço após desconto de 35%."
+      },
+      {
+        "n": 27,
+        "tipo": "Equação do primeiro grau",
+        "dificuldade": "Intermediária",
+        "enunciado": "Resolva e confira: 23x + 26 = 279."
+      },
+      {
+        "n": 28,
+        "tipo": "Teorema de Pitágoras",
+        "dificuldade": "Intermediária",
+        "enunciado": "Um triângulo retângulo tem catetos 18 cm e 24 cm. Determine a hipotenusa."
+      },
+      {
+        "n": 29,
+        "tipo": "Estatística",
+        "dificuldade": "Intermediária",
+        "enunciado": "Calcule a média aritmética de 24, 26 e 31."
+      },
+      {
+        "n": 30,
+        "tipo": "Desconto percentual",
+        "dificuldade": "Intermediária",
+        "enunciado": "Um produto custa R$ 340,00. Calcule o preço após desconto de 20%."
+      },
+      {
+        "n": 31,
+        "tipo": "Equação do primeiro grau",
+        "dificuldade": "Intermediária",
+        "enunciado": "Resolva e confira: 27x + 30 = 138."
+      },
+      {
+        "n": 32,
+        "tipo": "Teorema de Pitágoras",
+        "dificuldade": "Intermediária",
+        "enunciado": "Um triângulo retângulo tem catetos 21 cm e 28 cm. Determine a hipotenusa."
+      },
+      {
+        "n": 33,
+        "tipo": "Estatística",
+        "dificuldade": "Intermediária",
+        "enunciado": "Calcule a média aritmética de 28, 30 e 35."
+      },
+      {
+        "n": 34,
+        "tipo": "Desconto percentual",
+        "dificuldade": "Intermediária",
+        "enunciado": "Um produto custa R$ 380,00. Calcule o preço após desconto de 5%."
+      },
+      {
+        "n": 35,
+        "tipo": "Equação do primeiro grau",
+        "dificuldade": "Intermediária",
+        "enunciado": "Resolva e confira: 31x + 34 = 282."
+      },
+      {
+        "n": 36,
+        "tipo": "Teorema de Pitágoras",
+        "dificuldade": "Intermediária",
+        "enunciado": "Um triângulo retângulo tem catetos 24 cm e 32 cm. Determine a hipotenusa."
+      },
+      {
+        "n": 37,
+        "tipo": "Estatística",
+        "dificuldade": "Intermediária",
+        "enunciado": "Calcule a média aritmética de 32, 34 e 39."
+      },
+      {
+        "n": 38,
+        "tipo": "Desconto percentual",
+        "dificuldade": "Intermediária",
+        "enunciado": "Um produto custa R$ 420,00. Calcule o preço após desconto de 25%."
+      },
+      {
+        "n": 39,
+        "tipo": "Equação do primeiro grau",
+        "dificuldade": "Intermediária",
+        "enunciado": "Resolva e confira: 35x + 38 = 73."
+      },
+      {
+        "n": 40,
+        "tipo": "Teorema de Pitágoras",
+        "dificuldade": "Intermediária",
+        "enunciado": "Um triângulo retângulo tem catetos 27 cm e 36 cm. Determine a hipotenusa."
+      },
+      {
+        "n": 41,
+        "tipo": "Estatística",
+        "dificuldade": "Intermediária",
+        "enunciado": "Calcule a média aritmética de 36, 38 e 43."
+      },
+      {
+        "n": 42,
+        "tipo": "Desconto percentual",
+        "dificuldade": "Intermediária",
+        "enunciado": "Um produto custa R$ 460,00. Calcule o preço após desconto de 10%."
+      },
+      {
+        "n": 43,
+        "tipo": "Equação do primeiro grau",
+        "dificuldade": "Intermediária",
+        "enunciado": "Resolva e confira: 39x + 42 = 237."
+      },
+      {
+        "n": 44,
+        "tipo": "Teorema de Pitágoras",
+        "dificuldade": "Intermediária",
+        "enunciado": "Um triângulo retângulo tem catetos 30 cm e 40 cm. Determine a hipotenusa."
+      },
+      {
+        "n": 45,
+        "tipo": "Estatística",
+        "dificuldade": "Intermediária",
+        "enunciado": "Calcule a média aritmética de 40, 42 e 47."
+      },
+      {
+        "n": 46,
+        "tipo": "Desconto percentual",
+        "dificuldade": "Intermediária",
+        "enunciado": "Um produto custa R$ 500,00. Calcule o preço após desconto de 30%."
+      },
+      {
+        "n": 47,
+        "tipo": "Equação do primeiro grau",
+        "dificuldade": "Intermediária",
+        "enunciado": "Resolva e confira: 43x + 46 = 433."
+      },
+      {
+        "n": 48,
+        "tipo": "Teorema de Pitágoras",
+        "dificuldade": "Intermediária",
+        "enunciado": "Um triângulo retângulo tem catetos 33 cm e 44 cm. Determine a hipotenusa."
+      },
+      {
+        "n": 49,
+        "tipo": "Estatística",
+        "dificuldade": "Intermediária",
+        "enunciado": "Calcule a média aritmética de 44, 46 e 51."
+      },
+      {
+        "n": 50,
+        "tipo": "Desconto percentual",
+        "dificuldade": "Intermediária",
+        "enunciado": "Um produto custa R$ 540,00. Calcule o preço após desconto de 15%."
+      },
+      {
+        "n": 51,
+        "tipo": "Equação do primeiro grau",
+        "dificuldade": "Intermediária",
+        "enunciado": "Resolva e confira: 47x + 50 = 144."
+      },
+      {
+        "n": 52,
+        "tipo": "Teorema de Pitágoras",
+        "dificuldade": "Intermediária",
+        "enunciado": "Um triângulo retângulo tem catetos 36 cm e 48 cm. Determine a hipotenusa."
+      },
+      {
+        "n": 53,
+        "tipo": "Estatística",
+        "dificuldade": "Intermediária",
+        "enunciado": "Calcule a média aritmética de 48, 50 e 55."
+      },
+      {
+        "n": 54,
+        "tipo": "Desconto percentual",
+        "dificuldade": "Intermediária",
+        "enunciado": "Um produto custa R$ 580,00. Calcule o preço após desconto de 35%."
+      },
+      {
+        "n": 55,
+        "tipo": "Equação do primeiro grau",
+        "dificuldade": "Intermediária",
+        "enunciado": "Resolva e confira: 51x + 54 = 360."
+      },
+      {
+        "n": 56,
+        "tipo": "Teorema de Pitágoras",
+        "dificuldade": "Intermediária",
+        "enunciado": "Um triângulo retângulo tem catetos 39 cm e 52 cm. Determine a hipotenusa."
+      },
+      {
+        "n": 57,
+        "tipo": "Estatística",
+        "dificuldade": "Intermediária",
+        "enunciado": "Calcule a média aritmética de 52, 54 e 59."
+      },
+      {
+        "n": 58,
+        "tipo": "Desconto percentual",
+        "dificuldade": "Intermediária",
+        "enunciado": "Um produto custa R$ 620,00. Calcule o preço após desconto de 20%."
+      },
+      {
+        "n": 59,
+        "tipo": "Equação do primeiro grau",
+        "dificuldade": "Intermediária",
+        "enunciado": "Resolva e confira: 55x + 58 = 608."
+      },
+      {
+        "n": 60,
+        "tipo": "Teorema de Pitágoras",
+        "dificuldade": "Intermediária",
+        "enunciado": "Um triângulo retângulo tem catetos 42 cm e 56 cm. Determine a hipotenusa."
+      },
+      {
+        "n": 61,
+        "tipo": "Estatística",
+        "dificuldade": "Intermediária",
+        "enunciado": "Calcule a média aritmética de 56, 58 e 63."
+      },
+      {
+        "n": 62,
+        "tipo": "Desconto percentual",
+        "dificuldade": "Intermediária",
+        "enunciado": "Um produto custa R$ 660,00. Calcule o preço após desconto de 5%."
+      },
+      {
+        "n": 63,
+        "tipo": "Equação do primeiro grau",
+        "dificuldade": "Intermediária",
+        "enunciado": "Resolva e confira: 59x + 62 = 239."
+      },
+      {
+        "n": 64,
+        "tipo": "Teorema de Pitágoras",
+        "dificuldade": "Intermediária",
+        "enunciado": "Um triângulo retângulo tem catetos 45 cm e 60 cm. Determine a hipotenusa."
+      },
+      {
+        "n": 65,
+        "tipo": "Estatística",
+        "dificuldade": "Intermediária",
+        "enunciado": "Calcule a média aritmética de 60, 62 e 67."
+      },
+      {
+        "n": 66,
+        "tipo": "Desconto percentual",
+        "dificuldade": "Intermediária",
+        "enunciado": "Um produto custa R$ 700,00. Calcule o preço após desconto de 25%."
+      },
+      {
+        "n": 67,
+        "tipo": "Equação do primeiro grau",
+        "dificuldade": "Intermediária",
+        "enunciado": "Resolva e confira: 63x + 66 = 507."
+      },
+      {
+        "n": 68,
+        "tipo": "Teorema de Pitágoras",
+        "dificuldade": "Intermediária",
+        "enunciado": "Um triângulo retângulo tem catetos 48 cm e 64 cm. Determine a hipotenusa."
+      },
+      {
+        "n": 69,
+        "tipo": "Estatística",
+        "dificuldade": "Intermediária",
+        "enunciado": "Calcule a média aritmética de 64, 66 e 71."
+      },
+      {
+        "n": 70,
+        "tipo": "Desconto percentual",
+        "dificuldade": "Intermediária",
+        "enunciado": "Um produto custa R$ 740,00. Calcule o preço após desconto de 10%."
+      },
+      {
+        "n": 71,
+        "tipo": "Equação do primeiro grau",
+        "dificuldade": "Intermediária",
+        "enunciado": "Resolva e confira: 67x + 70 = 807."
+      },
+      {
+        "n": 72,
+        "tipo": "Teorema de Pitágoras",
+        "dificuldade": "Intermediária",
+        "enunciado": "Um triângulo retângulo tem catetos 51 cm e 68 cm. Determine a hipotenusa."
+      },
+      {
+        "n": 73,
+        "tipo": "Estatística",
+        "dificuldade": "Intermediária",
+        "enunciado": "Calcule a média aritmética de 68, 70 e 75."
+      },
+      {
+        "n": 74,
+        "tipo": "Desconto percentual",
+        "dificuldade": "Intermediária",
+        "enunciado": "Um produto custa R$ 780,00. Calcule o preço após desconto de 30%."
+      },
+      {
+        "n": 75,
+        "tipo": "Equação do primeiro grau",
+        "dificuldade": "Intermediária",
+        "enunciado": "Resolva e confira: 71x + 74 = 358."
+      },
+      {
+        "n": 76,
+        "tipo": "Teorema de Pitágoras",
+        "dificuldade": "Intermediária",
+        "enunciado": "Um triângulo retângulo tem catetos 54 cm e 72 cm. Determine a hipotenusa."
+      },
+      {
+        "n": 77,
+        "tipo": "Estatística",
+        "dificuldade": "Intermediária",
+        "enunciado": "Calcule a média aritmética de 72, 74 e 79."
+      },
+      {
+        "n": 78,
+        "tipo": "Desconto percentual",
+        "dificuldade": "Intermediária",
+        "enunciado": "Um produto custa R$ 820,00. Calcule o preço após desconto de 15%."
+      },
+      {
+        "n": 79,
+        "tipo": "Equação do primeiro grau",
+        "dificuldade": "Intermediária",
+        "enunciado": "Resolva e confira: 75x + 78 = 678."
+      },
+      {
+        "n": 80,
+        "tipo": "Teorema de Pitágoras",
+        "dificuldade": "Intermediária",
+        "enunciado": "Um triângulo retângulo tem catetos 57 cm e 76 cm. Determine a hipotenusa."
+      },
+      {
+        "n": 81,
+        "tipo": "Estatística",
+        "dificuldade": "Intermediária",
+        "enunciado": "Calcule a média aritmética de 76, 78 e 83."
+      },
+      {
+        "n": 82,
+        "tipo": "Desconto percentual",
+        "dificuldade": "Intermediária",
+        "enunciado": "Um produto custa R$ 860,00. Calcule o preço após desconto de 35%."
+      },
+      {
+        "n": 83,
+        "tipo": "Equação do primeiro grau",
+        "dificuldade": "Intermediária",
+        "enunciado": "Resolva e confira: 79x + 82 = 161."
+      },
+      {
+        "n": 84,
+        "tipo": "Teorema de Pitágoras",
+        "dificuldade": "Intermediária",
+        "enunciado": "Um triângulo retângulo tem catetos 60 cm e 80 cm. Determine a hipotenusa."
+      },
+      {
+        "n": 85,
+        "tipo": "Estatística",
+        "dificuldade": "Intermediária",
+        "enunciado": "Calcule a média aritmética de 80, 82 e 87."
+      },
+      {
+        "n": 86,
+        "tipo": "Desconto percentual",
+        "dificuldade": "Intermediária",
+        "enunciado": "Um produto custa R$ 900,00. Calcule o preço após desconto de 20%."
       }
     ],
     "gabarito": [
@@ -188,6 +668,326 @@
       {
         "n": 6,
         "resposta": "Não. A desigualdade citada ajuda a verificar a existência do triângulo, não um ângulo reto. Como 4² + 5² = 41 e 6² = 36, ele não é retângulo."
+      },
+      {
+        "n": 7,
+        "resposta": "Subtraindo 6: 3x = 6. Dividindo por 3: x = 2. Conferência: 3 × 2 + 6 = 12."
+      },
+      {
+        "n": 8,
+        "resposta": "h² = (3)² + (4)² = 25. Logo h = 5 cm."
+      },
+      {
+        "n": 9,
+        "resposta": "Média = (4 + 6 + 11)/3 = 7.00 (arredondada a duas casas)."
+      },
+      {
+        "n": 10,
+        "resposta": "Desconto: 140 × 25/100 = R$ 35.00. Preço final: R$ 105.00."
+      },
+      {
+        "n": 11,
+        "resposta": "Subtraindo 10: 7x = 42. Dividindo por 7: x = 6. Conferência: 7 × 6 + 10 = 52."
+      },
+      {
+        "n": 12,
+        "resposta": "h² = (6)² + (8)² = 100. Logo h = 10 cm."
+      },
+      {
+        "n": 13,
+        "resposta": "Média = (8 + 10 + 15)/3 = 11.00 (arredondada a duas casas)."
+      },
+      {
+        "n": 14,
+        "resposta": "Desconto: 180 × 10/100 = R$ 18.00. Preço final: R$ 162.00."
+      },
+      {
+        "n": 15,
+        "resposta": "Subtraindo 14: 11x = 110. Dividindo por 11: x = 10. Conferência: 11 × 10 + 14 = 124."
+      },
+      {
+        "n": 16,
+        "resposta": "h² = (9)² + (12)² = 225. Logo h = 15 cm."
+      },
+      {
+        "n": 17,
+        "resposta": "Média = (12 + 14 + 19)/3 = 15.00 (arredondada a duas casas)."
+      },
+      {
+        "n": 18,
+        "resposta": "Desconto: 220 × 30/100 = R$ 66.00. Preço final: R$ 154.00."
+      },
+      {
+        "n": 19,
+        "resposta": "Subtraindo 18: 15x = 45. Dividindo por 15: x = 3. Conferência: 15 × 3 + 18 = 63."
+      },
+      {
+        "n": 20,
+        "resposta": "h² = (12)² + (16)² = 400. Logo h = 20 cm."
+      },
+      {
+        "n": 21,
+        "resposta": "Média = (16 + 18 + 23)/3 = 19.00 (arredondada a duas casas)."
+      },
+      {
+        "n": 22,
+        "resposta": "Desconto: 260 × 15/100 = R$ 39.00. Preço final: R$ 221.00."
+      },
+      {
+        "n": 23,
+        "resposta": "Subtraindo 22: 19x = 133. Dividindo por 19: x = 7. Conferência: 19 × 7 + 22 = 155."
+      },
+      {
+        "n": 24,
+        "resposta": "h² = (15)² + (20)² = 625. Logo h = 25 cm."
+      },
+      {
+        "n": 25,
+        "resposta": "Média = (20 + 22 + 27)/3 = 23.00 (arredondada a duas casas)."
+      },
+      {
+        "n": 26,
+        "resposta": "Desconto: 300 × 35/100 = R$ 105.00. Preço final: R$ 195.00."
+      },
+      {
+        "n": 27,
+        "resposta": "Subtraindo 26: 23x = 253. Dividindo por 23: x = 11. Conferência: 23 × 11 + 26 = 279."
+      },
+      {
+        "n": 28,
+        "resposta": "h² = (18)² + (24)² = 900. Logo h = 30 cm."
+      },
+      {
+        "n": 29,
+        "resposta": "Média = (24 + 26 + 31)/3 = 27.00 (arredondada a duas casas)."
+      },
+      {
+        "n": 30,
+        "resposta": "Desconto: 340 × 20/100 = R$ 68.00. Preço final: R$ 272.00."
+      },
+      {
+        "n": 31,
+        "resposta": "Subtraindo 30: 27x = 108. Dividindo por 27: x = 4. Conferência: 27 × 4 + 30 = 138."
+      },
+      {
+        "n": 32,
+        "resposta": "h² = (21)² + (28)² = 1225. Logo h = 35 cm."
+      },
+      {
+        "n": 33,
+        "resposta": "Média = (28 + 30 + 35)/3 = 31.00 (arredondada a duas casas)."
+      },
+      {
+        "n": 34,
+        "resposta": "Desconto: 380 × 5/100 = R$ 19.00. Preço final: R$ 361.00."
+      },
+      {
+        "n": 35,
+        "resposta": "Subtraindo 34: 31x = 248. Dividindo por 31: x = 8. Conferência: 31 × 8 + 34 = 282."
+      },
+      {
+        "n": 36,
+        "resposta": "h² = (24)² + (32)² = 1600. Logo h = 40 cm."
+      },
+      {
+        "n": 37,
+        "resposta": "Média = (32 + 34 + 39)/3 = 35.00 (arredondada a duas casas)."
+      },
+      {
+        "n": 38,
+        "resposta": "Desconto: 420 × 25/100 = R$ 105.00. Preço final: R$ 315.00."
+      },
+      {
+        "n": 39,
+        "resposta": "Subtraindo 38: 35x = 35. Dividindo por 35: x = 1. Conferência: 35 × 1 + 38 = 73."
+      },
+      {
+        "n": 40,
+        "resposta": "h² = (27)² + (36)² = 2025. Logo h = 45 cm."
+      },
+      {
+        "n": 41,
+        "resposta": "Média = (36 + 38 + 43)/3 = 39.00 (arredondada a duas casas)."
+      },
+      {
+        "n": 42,
+        "resposta": "Desconto: 460 × 10/100 = R$ 46.00. Preço final: R$ 414.00."
+      },
+      {
+        "n": 43,
+        "resposta": "Subtraindo 42: 39x = 195. Dividindo por 39: x = 5. Conferência: 39 × 5 + 42 = 237."
+      },
+      {
+        "n": 44,
+        "resposta": "h² = (30)² + (40)² = 2500. Logo h = 50 cm."
+      },
+      {
+        "n": 45,
+        "resposta": "Média = (40 + 42 + 47)/3 = 43.00 (arredondada a duas casas)."
+      },
+      {
+        "n": 46,
+        "resposta": "Desconto: 500 × 30/100 = R$ 150.00. Preço final: R$ 350.00."
+      },
+      {
+        "n": 47,
+        "resposta": "Subtraindo 46: 43x = 387. Dividindo por 43: x = 9. Conferência: 43 × 9 + 46 = 433."
+      },
+      {
+        "n": 48,
+        "resposta": "h² = (33)² + (44)² = 3025. Logo h = 55 cm."
+      },
+      {
+        "n": 49,
+        "resposta": "Média = (44 + 46 + 51)/3 = 47.00 (arredondada a duas casas)."
+      },
+      {
+        "n": 50,
+        "resposta": "Desconto: 540 × 15/100 = R$ 81.00. Preço final: R$ 459.00."
+      },
+      {
+        "n": 51,
+        "resposta": "Subtraindo 50: 47x = 94. Dividindo por 47: x = 2. Conferência: 47 × 2 + 50 = 144."
+      },
+      {
+        "n": 52,
+        "resposta": "h² = (36)² + (48)² = 3600. Logo h = 60 cm."
+      },
+      {
+        "n": 53,
+        "resposta": "Média = (48 + 50 + 55)/3 = 51.00 (arredondada a duas casas)."
+      },
+      {
+        "n": 54,
+        "resposta": "Desconto: 580 × 35/100 = R$ 203.00. Preço final: R$ 377.00."
+      },
+      {
+        "n": 55,
+        "resposta": "Subtraindo 54: 51x = 306. Dividindo por 51: x = 6. Conferência: 51 × 6 + 54 = 360."
+      },
+      {
+        "n": 56,
+        "resposta": "h² = (39)² + (52)² = 4225. Logo h = 65 cm."
+      },
+      {
+        "n": 57,
+        "resposta": "Média = (52 + 54 + 59)/3 = 55.00 (arredondada a duas casas)."
+      },
+      {
+        "n": 58,
+        "resposta": "Desconto: 620 × 20/100 = R$ 124.00. Preço final: R$ 496.00."
+      },
+      {
+        "n": 59,
+        "resposta": "Subtraindo 58: 55x = 550. Dividindo por 55: x = 10. Conferência: 55 × 10 + 58 = 608."
+      },
+      {
+        "n": 60,
+        "resposta": "h² = (42)² + (56)² = 4900. Logo h = 70 cm."
+      },
+      {
+        "n": 61,
+        "resposta": "Média = (56 + 58 + 63)/3 = 59.00 (arredondada a duas casas)."
+      },
+      {
+        "n": 62,
+        "resposta": "Desconto: 660 × 5/100 = R$ 33.00. Preço final: R$ 627.00."
+      },
+      {
+        "n": 63,
+        "resposta": "Subtraindo 62: 59x = 177. Dividindo por 59: x = 3. Conferência: 59 × 3 + 62 = 239."
+      },
+      {
+        "n": 64,
+        "resposta": "h² = (45)² + (60)² = 5625. Logo h = 75 cm."
+      },
+      {
+        "n": 65,
+        "resposta": "Média = (60 + 62 + 67)/3 = 63.00 (arredondada a duas casas)."
+      },
+      {
+        "n": 66,
+        "resposta": "Desconto: 700 × 25/100 = R$ 175.00. Preço final: R$ 525.00."
+      },
+      {
+        "n": 67,
+        "resposta": "Subtraindo 66: 63x = 441. Dividindo por 63: x = 7. Conferência: 63 × 7 + 66 = 507."
+      },
+      {
+        "n": 68,
+        "resposta": "h² = (48)² + (64)² = 6400. Logo h = 80 cm."
+      },
+      {
+        "n": 69,
+        "resposta": "Média = (64 + 66 + 71)/3 = 67.00 (arredondada a duas casas)."
+      },
+      {
+        "n": 70,
+        "resposta": "Desconto: 740 × 10/100 = R$ 74.00. Preço final: R$ 666.00."
+      },
+      {
+        "n": 71,
+        "resposta": "Subtraindo 70: 67x = 737. Dividindo por 67: x = 11. Conferência: 67 × 11 + 70 = 807."
+      },
+      {
+        "n": 72,
+        "resposta": "h² = (51)² + (68)² = 7225. Logo h = 85 cm."
+      },
+      {
+        "n": 73,
+        "resposta": "Média = (68 + 70 + 75)/3 = 71.00 (arredondada a duas casas)."
+      },
+      {
+        "n": 74,
+        "resposta": "Desconto: 780 × 30/100 = R$ 234.00. Preço final: R$ 546.00."
+      },
+      {
+        "n": 75,
+        "resposta": "Subtraindo 74: 71x = 284. Dividindo por 71: x = 4. Conferência: 71 × 4 + 74 = 358."
+      },
+      {
+        "n": 76,
+        "resposta": "h² = (54)² + (72)² = 8100. Logo h = 90 cm."
+      },
+      {
+        "n": 77,
+        "resposta": "Média = (72 + 74 + 79)/3 = 75.00 (arredondada a duas casas)."
+      },
+      {
+        "n": 78,
+        "resposta": "Desconto: 820 × 15/100 = R$ 123.00. Preço final: R$ 697.00."
+      },
+      {
+        "n": 79,
+        "resposta": "Subtraindo 78: 75x = 600. Dividindo por 75: x = 8. Conferência: 75 × 8 + 78 = 678."
+      },
+      {
+        "n": 80,
+        "resposta": "h² = (57)² + (76)² = 9025. Logo h = 95 cm."
+      },
+      {
+        "n": 81,
+        "resposta": "Média = (76 + 78 + 83)/3 = 79.00 (arredondada a duas casas)."
+      },
+      {
+        "n": 82,
+        "resposta": "Desconto: 860 × 35/100 = R$ 301.00. Preço final: R$ 559.00."
+      },
+      {
+        "n": 83,
+        "resposta": "Subtraindo 82: 79x = 79. Dividindo por 79: x = 1. Conferência: 79 × 1 + 82 = 161."
+      },
+      {
+        "n": 84,
+        "resposta": "h² = (60)² + (80)² = 10000. Logo h = 100 cm."
+      },
+      {
+        "n": 85,
+        "resposta": "Média = (80 + 82 + 87)/3 = 83.00 (arredondada a duas casas)."
+      },
+      {
+        "n": 86,
+        "resposta": "Desconto: 900 × 20/100 = R$ 180.00. Preço final: R$ 720.00."
       }
     ]
   },
