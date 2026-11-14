@@ -1,7 +1,7 @@
 # Conteúdo por ano
-- [ ] Corrigir pesquisa: relevância real, total sem corte e abertura direta do conteúdo encontrado.
-- [ ] Ampliar matérias fundamentais com explicações, exercícios variados e planilhas de estudo extensas.
-- [ ] Adicionar troca entre 10 idiomas no perfil para assinantes, com preferência salva e menus traduzidos.
+- [x] Corrigir pesquisa: relevância real, total sem corte e abertura direta do conteúdo encontrado; resumo específico verificado em conta conectada.
+- [x] Adicionar primeira ampliação das nove matérias fundamentais: 27 explicações, 134 exercícios comentados e planilhas CSV; Matemática com 86 exercícios e download verificado. Não representa currículo completo de todos os anos.
+- [x] Adicionar troca entre 10 idiomas no perfil para assinantes, com preferência salva e navegação traduzida; inglês e persistência verificados. Aulas e demais textos permanecem em português.
 - [x] Manter Pomodoro ativo ao trocar de página ou aba, com som de natureza e aviso ao concluir; contagem entre páginas, conclusão e apresentação móvel verificadas.
 - [x] Reforçar segurança: plano só pelo servidor, teste grátis pela data da conta, Pix Stripe só via webhook com valor validado, cache offline restrito, bibliotecas atualizadas.
 - [ ] Confirmar limitação alternativa de tentativas e requisições; depende da decisão do responsável sobre infraestrutura não padronizada.
