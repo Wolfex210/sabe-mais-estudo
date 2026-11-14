@@ -9,7 +9,7 @@ import { StudyState, useStudy } from "@/components/StudyGate";
 import { actions, useAppState } from "@/lib/store";
 
 export const Route = createFileRoute("/materias/$slug")({
-  validateSearch: (search: Record<string, unknown>) => ({ year: typeof search.year === "string" ? search.year : undefined, result: typeof search.result === "string" ? search.result : undefined }),
+  validateSearch: (search: Record<string, unknown>): { year?: string; result?: string } => ({ ...(typeof search["year"] === "string" ? { year: search["year"] } : {}), ...(typeof search["result"] === "string" ? { result: search["result"] } : {}) }),
   loader: ({ params }) => {
     const subject = getSubjectInfo(params.slug);
     if (!subject) throw notFound();

@@ -80,7 +80,7 @@ function Pesquisa() {
           {results.length ? <div className="grid gap-3 sm:grid-cols-2">
             {results.slice(0, visibleCount).map((entry, index) => {
               const isLesson = entry.kind === "Aula";
-              return <Link key={`${entry.slug}-${entry.kind}-${entry.title}-${index}`} to={isLesson ? "/aula/$slug/$year/$topic" : "/materias/$slug"} params={isLesson ? { slug: entry.slug, year: entry.year, topic: entry.title } : { slug: entry.slug }} search={isLesson || entry.kind === "Matéria" ? {} : { year: entry.year, result: entry.id }} hash={isLesson || entry.kind === "Matéria" ? undefined : entry.id} className="group flex min-w-0 items-start gap-3 rounded-xl border border-border bg-card p-4 transition-colors hover:border-primary/50 hover:bg-primary/[0.03]">
+              return <Link key={`${entry.slug}-${entry.kind}-${entry.title}-${index}`} to={isLesson ? "/aula/$slug/$year/$topic" : "/materias/$slug"} params={isLesson ? { slug: entry.slug, year: entry.year, topic: entry.title } : { slug: entry.slug }} search={isLesson || entry.kind === "Matéria" ? {} : { year: entry.year, result: entry.id }} hash={isLesson || entry.kind === "Matéria" ? "" : entry.id} className="group flex min-w-0 items-start gap-3 rounded-xl border border-border bg-card p-4 transition-colors hover:border-primary/50 hover:bg-primary/[0.03]">
                 <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary"><BookOpen className="h-5 w-5" /></span>
                 <span className="min-w-0 flex-1">
                   <span className="block font-semibold text-foreground">{entry.title}</span>
