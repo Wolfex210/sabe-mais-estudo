@@ -22,6 +22,7 @@ export function advancePomodoro(state: PomodoroState, now: number) {
     next = { ...next, remainingMs, focusMs: next.focusMs + (next.mode === "foco" ? consumed : 0) };
     if (remainingMs > 0) break;
     const boundary = next.deadline;
+    if (boundary === null) break;
     if (next.mode === "foco") {
       studySeconds += Math.floor(next.focusMs / 1000);
       sessions++;
