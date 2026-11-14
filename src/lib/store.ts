@@ -9,7 +9,7 @@ export type StudyPlan = { dailyMinutes: number; subjects: string[]; goal: string
 export type SimulationResult = { id: string; title: string; total: number; correct: number; date: string; subjects: string[] };
 
 export type AppState = {
-  name: string; answered: number; correct: number; wrong: number; points: number; challenges: string[];
+  language: string; name: string; answered: number; correct: number; wrong: number; points: number; challenges: string[];
   studySeconds: number; days: string[]; achievements: string[]; tasks: Task[]; schedule: ScheduleItem[];
   schoolYear: string; avatar: string; completedTopics: string[]; favorites: string[];
   quizHistory: { subject: string; topic?: string; level: string; correct: number; total: number; date: string }[];
@@ -19,7 +19,7 @@ export type AppState = {
 
 const KEY = "sabe-mais:v1";
 const initial: AppState = {
-  name: "Estudante", answered: 0, correct: 0, wrong: 0, points: 0, challenges: [],
+  language: "pt", name: "Estudante", answered: 0, correct: 0, wrong: 0, points: 0, challenges: [],
   studySeconds: 0, days: [], achievements: [], tasks: [], schedule: [], schoolYear: "", avatar: "📚",
   completedTopics: [], favorites: [], quizHistory: [], studySessions: 0, trialStart: null, plan: null, joinedAt: null,
   errors: [], studyPlan: null, simulationHistory: [],
@@ -126,6 +126,7 @@ export const actions = {
   resolveError(id: string) { update(s => ({ ...s, errors: s.errors.map(e => e.id === id ? { ...e, resolved: true } : e) })); },
   completeChallenge(id: string) { update(s => s.challenges.includes(id) ? s : { ...s, challenges: [...s.challenges, id], points: s.points + 10 }); },
   addStudySeconds(sec: number) { update(s => ({ ...s, studySeconds: s.studySeconds + sec })); },
+  setLanguage(language: string) { update(s => ({ ...s, language })); },
   setName(name: string) { update(s => ({ ...s, name })); },
   setSchoolYear(schoolYear: string) { update(s => ({ ...s, schoolYear })); },
   setAvatar(avatar: string) { update(s => ({ ...s, avatar })); },

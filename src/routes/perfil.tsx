@@ -102,7 +102,7 @@ function Perfil() {
                 const next = e.target.value;
                 if (!isLanguageCode(next)) return;
                 setSavingLanguage(true); setLanguageError("");
-                try { const result = await save({data:{code:next}}); if (result.ok) setCode(next); else setLanguageError(result.error); }
+                try { const result = await save({data:{code:next}}); if (result.ok) { actions.setLanguage(next); setCode(next); } else setLanguageError(result.error); }
                 catch { setLanguageError("Não foi possível salvar o idioma. Tente novamente."); }
                 finally { setSavingLanguage(false); }
               }} className="w-full rounded-lg border border-border bg-background p-3 text-foreground">
