@@ -1,4 +1,7 @@
 # Conteúdo por ano
+- [ ] Corrigir pesquisa: relevância real, total sem corte e abertura direta do conteúdo encontrado.
+- [ ] Ampliar matérias fundamentais com explicações, exercícios variados e planilhas de estudo extensas.
+- [ ] Adicionar troca entre 10 idiomas no perfil para assinantes, com preferência salva e menus traduzidos.
 - [x] Manter Pomodoro ativo ao trocar de página ou aba, com som de natureza e aviso ao concluir; contagem entre páginas, conclusão e apresentação móvel verificadas.
 - [x] Reforçar segurança: plano só pelo servidor, teste grátis pela data da conta, Pix Stripe só via webhook com valor validado, cache offline restrito, bibliotecas atualizadas.
 - [ ] Confirmar limitação alternativa de tentativas e requisições; depende da decisão do responsável sobre infraestrutura não padronizada.
