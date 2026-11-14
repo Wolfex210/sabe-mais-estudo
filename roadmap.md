@@ -1,5 +1,5 @@
 # Conteúdo por ano
-- [ ] Manter Pomodoro ativo ao trocar de página ou aba, com som de natureza e aviso ao concluir; verificar contagem e conclusão.
+- [x] Manter Pomodoro ativo ao trocar de página ou aba, com som de natureza e aviso ao concluir; contagem entre páginas, conclusão e apresentação móvel verificadas.
 - [x] Reforçar segurança: plano só pelo servidor, teste grátis pela data da conta, Pix Stripe só via webhook com valor validado, cache offline restrito, bibliotecas atualizadas.
 - [ ] Confirmar limitação alternativa de tentativas e requisições; depende da decisão do responsável sobre infraestrutura não padronizada.
 - [ ] Verificar backups e restauração isolada; depende do inventário disponível somente ao responsável e de ambiente separado.
