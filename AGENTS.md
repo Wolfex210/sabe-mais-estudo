@@ -16,3 +16,6 @@
 - Study content (subjects, lessons, quizzes, college courses) is served only by authenticated server functions that check the plan server-side; client code imports just the public catalog, so paid content never ships in the browser bundle.
 - Registration payments use separate owner-readable, server-write-only orders and server-verified Mercado Pago Pix status; account creation precedes payment for secure ownership, while dashboard access requires confirmed payment.
 - Keep the Pomodoro controller in the root provider and calculate time from absolute deadlines, so route changes and background timer throttling do not reset or slow sessions.
+- Search entries carry stable section IDs and optional school-year parameters so search opens the exact authorized content; totals are computed before display pagination.
+- Keep reinforcement datasets server-loaded through the existing study authorization and export worksheets from authorized responses, so downloadable content does not bypass plan checks.
+- Store language preferences with account-scoped study progress and verify a paid subscription before saving through the language server function; navigation translations are static to avoid per-view AI charges.

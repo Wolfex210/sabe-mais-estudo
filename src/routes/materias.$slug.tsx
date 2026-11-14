@@ -7,6 +7,7 @@ import { YEARS, YEAR_LABEL, type Year } from "@/lib/years";
 import { getSubjectStudy, type SubjectStudy } from "@/lib/study.functions";
 import { StudyState, useStudy } from "@/components/StudyGate";
 import { actions, useAppState } from "@/lib/store";
+import { ReinforcementView } from "@/components/ReinforcementView";
 
 export const Route = createFileRoute("/materias/$slug")({
   validateSearch: (search: Record<string, unknown>): { year?: string; result?: string } => ({ ...(typeof search["year"] === "string" ? { year: search["year"] } : {}), ...(typeof search["result"] === "string" ? { result: search["result"] } : {}) }),
@@ -224,6 +225,7 @@ function SubjectStudyView({ slug, data }: { slug: string; data: SubjectStudy }) 
       <div className="mx-auto w-full max-w-6xl px-4 pt-6"><button type="button" aria-pressed={state.favorites.includes(subject.slug)} onClick={() => actions.toggleFavorite(subject.slug)} className="rounded-xl border border-primary/30 px-4 py-2.5 text-sm font-semibold text-primary hover:bg-primary/5">{state.favorites.includes(subject.slug) ? "★ Remover dos favoritos" : "☆ Salvar matéria nos favoritos"}</button></div>
       <div className="mx-auto grid w-full max-w-6xl gap-8 px-4 py-12 lg:grid-cols-3">
         <div className="space-y-8 lg:col-span-2">
+          {data.reinforcement && <ReinforcementView sheet={data.reinforcement} rows={data.worksheet} />}
           <section aria-labelledby="year-heading">
             <h2 id="year-heading" className="text-xl font-bold text-foreground">Estude por ano escolar</h2>
             <p className="mt-2 text-sm text-muted-foreground">
