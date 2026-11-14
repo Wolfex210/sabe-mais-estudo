@@ -106,10 +106,13 @@ export const getSearchIndex = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
   .handler(async ({ context }): Promise<SearchEntry[]> => {
     const { subjects } = await import("@/lib/content");
+    const { getReinforcement } = await import("@/lib/reinforcement");
     const { curriculum, YEARS, YEAR_LABEL, parseTopic } = await import("@/lib/curriculum");
     const { lessons } = await import("@/lib/lessons");
     const { mod, access: a } = await access(context);
     return subjects.filter((s) => mod.canOpenSubject(a, s.slug)).flatMap((s): SearchEntry[] => [
+      ...(getReinforcement(s.slug)?.topicos ?? []).map((topic, index) => ({ id: `reinforcement-topic-${index}`, title: topic.titulo, detail: `${s.name} · Reforço`, slug: s.slug, year: "", kind: "Resumo" as const, searchable: `${topic.titulo} ${s.name} ${topic.explicacao}` })),
+      ...(getReinforcement(s.slug)?.exercicios ?? []).map(ex => ({ id: `reinforcement-exercise-${ex.n}`, title: ex.enunciado, detail: `${s.name} · ${ex.tipo}`, slug: s.slug, year: "", kind: "Exercício" as const, searchable: `${ex.enunciado} ${s.name}` })),
       ...YEARS.flatMap((y) => (curriculum[s.slug]?.[y] ?? []).map((item, index) => {
         const title = parseTopic(item).title;
         return { id: `topic-${index}`, title, detail: `${s.name} · ${YEAR_LABEL[y]}`, slug: s.slug, year: y, kind: "Assunto" as const, searchable: `${title} ${s.name} ${YEAR_LABEL[y]}` };
