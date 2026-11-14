@@ -48,6 +48,7 @@ function SubjectStudyView({ slug, data }: { slug: string; data: SubjectStudy }) 
   const availableYears = YEARS.filter((year) => (data.curriculum[year]?.length ?? 0) > 0);
   const [year, setYear] = useState<Year>(availableYears.find(y => y === search.year) ?? availableYears[0] ?? "1º EF");
   const activeYear = availableYears.includes(year) ? year : (availableYears[0] ?? "1º EF");
+  const [view, setView] = useState<"ano" | "reforco">("ano");
   const [open, setOpen] = useState<number | null>(null);
   const [qIndex, setQIndex] = useState(0);
   const [chosen, setChosen] = useState<number | null>(null);
@@ -56,6 +57,8 @@ function SubjectStudyView({ slug, data }: { slug: string; data: SubjectStudy }) 
   useEffect(() => {
     const targetYear = availableYears.find(y => y === search.year);
     if (targetYear) setYear(targetYear);
+    if (search.result?.startsWith("reinforcement-")) setView("reforco");
+    else if (targetYear) setView("ano");
     if (search.result?.startsWith("exercise-")) setOpen(Number(search.result.slice(9)));
     if (search.result?.startsWith("quiz-")) { setQIndex(Number(search.result.slice(5))); setChosen(null); }
     const id = window.setTimeout(() => document.getElementById(search.result ?? "")?.scrollIntoView({ block: "center" }), 100);
