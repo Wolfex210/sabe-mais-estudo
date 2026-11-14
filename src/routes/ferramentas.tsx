@@ -1,8 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import { SiteLayout, PageHeader, Card, AdSlot } from "@/components/SiteLayout";
 import { useAppState, actions, type Task, type ScheduleItem } from "@/lib/store";
 import { Button } from "@/components/ui/button";
+import { usePomodoro } from "@/components/PomodoroProvider";
 
 export const Route = createFileRoute("/ferramentas")({
   head: () => ({
@@ -43,47 +44,10 @@ function Ferramentas() {
 
 /* ---------------- Pomodoro ---------------- */
 function Pomodoro() {
-  const [config, setConfig] = useState({ study: 25, short: 5, long: 15, cycles: 4 });
-  const [preset, setPreset] = useState("25/5");
-  const [mode, setMode] = useState<"foco" | "pausa curta" | "pausa longa">("foco");
-  const [cycle, setCycle] = useState(1);
-  const [left, setLeft] = useState(25 * 60);
-  const [running, setRunning] = useState(false);
-  const elapsed = useRef(0);
-
-  function reset() { setRunning(false); setMode("foco"); setCycle(1); setLeft(config.study * 60); elapsed.current = 0; }
-  function setDuration(key: keyof typeof config, value: number) {
-    const safe = Math.min(key === "cycles" ? 12 : 180, Math.max(1, value || 1));
-    setConfig(c => ({ ...c, [key]: safe })); setPreset("Personalizado");
-    if (!running && mode === "foco" && key === "study") setLeft(safe * 60);
-  }
-  function choosePreset(study: number, short: number, name: string) {
-    setRunning(false); setPreset(name); setConfig(c => ({ ...c, study, short })); setMode("foco"); setCycle(1); setLeft(study * 60); elapsed.current = 0;
-  }
-  function endSession() {
-    setRunning(false);
-    if (elapsed.current) { actions.addStudySeconds(elapsed.current); actions.finishStudySession(); }
-    elapsed.current = 0; setCycle(1); setMode("foco"); setLeft(config.study * 60);
-  }
-
-  useEffect(() => {
-    if (!running) return;
-    const id = setInterval(() => {
-      setLeft((v) => {
-        if (mode === "foco") elapsed.current += 1;
-        if (v <= 1) {
-          if (mode === "foco") { actions.addStudySeconds(elapsed.current); actions.finishStudySession(); elapsed.current = 0; }
-          if (mode !== "foco" && cycle >= config.cycles) { setRunning(false); setCycle(1); setMode("foco"); return config.study * 60; }
-          const next = mode === "foco" ? (cycle >= config.cycles ? "pausa longa" : "pausa curta") : "foco";
-          if (mode !== "foco") setCycle(c => c + 1);
-          setMode(next);
-          return (next === "foco" ? config.study : next === "pausa longa" ? config.long : config.short) * 60;
-        }
-        return v - 1;
-      });
-    }, 1000);
-    return () => clearInterval(id);
-  }, [running, mode, cycle, config]);
+  const { state, toggle, reset, endSession, setDuration, choosePreset } = usePomodoro();
+  const { config, preset, mode, cycle } = state;
+  const left = Math.ceil(state.remainingMs / 1000);
+  const running = state.deadline !== null;
 
   const mm = String(Math.floor(left / 60)).padStart(2, "0");
   const ss = String(left % 60).padStart(2, "0");
@@ -102,7 +66,7 @@ function Pomodoro() {
       </p>
       <div className="mt-6 flex justify-center gap-3">
         <Button
-          onClick={() => setRunning((r) => !r)}
+          onClick={toggle}
         >
           {running ? "Pausar" : "Iniciar"}
         </Button>

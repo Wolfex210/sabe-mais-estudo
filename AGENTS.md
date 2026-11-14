@@ -15,3 +15,4 @@
 - Keep the college catalog in a separate typed module with course-scoped discipline IDs and reuse the lesson, quiz and progress engines; this prevents collisions with school curricula and keeps account data independent of educational content.
 - Study content (subjects, lessons, quizzes, college courses) is served only by authenticated server functions that check the plan server-side; client code imports just the public catalog, so paid content never ships in the browser bundle.
 - Registration payments use separate owner-readable, server-write-only orders and server-verified Mercado Pago Pix status; account creation precedes payment for secure ownership, while dashboard access requires confirmed payment.
+- Keep the Pomodoro controller in the root provider and calculate time from absolute deadlines, so route changes and background timer throttling do not reset or slow sessions.
