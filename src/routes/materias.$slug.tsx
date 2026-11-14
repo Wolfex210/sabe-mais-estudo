@@ -48,6 +48,7 @@ function SubjectStudyView({ slug, data }: { slug: string; data: SubjectStudy }) 
   const availableYears = YEARS.filter((year) => (data.curriculum[year]?.length ?? 0) > 0);
   const [year, setYear] = useState<Year>(availableYears.find(y => y === search.year) ?? availableYears[0] ?? "1º EF");
   const activeYear = availableYears.includes(year) ? year : (availableYears[0] ?? "1º EF");
+  const [view, setView] = useState<"ano" | "reforco">("ano");
   const [open, setOpen] = useState<number | null>(null);
   const [qIndex, setQIndex] = useState(0);
   const [chosen, setChosen] = useState<number | null>(null);
@@ -56,6 +57,8 @@ function SubjectStudyView({ slug, data }: { slug: string; data: SubjectStudy }) 
   useEffect(() => {
     const targetYear = availableYears.find(y => y === search.year);
     if (targetYear) setYear(targetYear);
+    if (search.result?.startsWith("reinforcement-")) setView("reforco");
+    else if (targetYear) setView("ano");
     if (search.result?.startsWith("exercise-")) setOpen(Number(search.result.slice(9)));
     if (search.result?.startsWith("quiz-")) { setQIndex(Number(search.result.slice(5))); setChosen(null); }
     const id = window.setTimeout(() => document.getElementById(search.result ?? "")?.scrollIntoView({ block: "center" }), 100);
@@ -225,22 +228,40 @@ function SubjectStudyView({ slug, data }: { slug: string; data: SubjectStudy }) 
       <div className="mx-auto w-full max-w-6xl px-4 pt-6"><button type="button" aria-pressed={state.favorites.includes(subject.slug)} onClick={() => actions.toggleFavorite(subject.slug)} className="rounded-xl border border-primary/30 px-4 py-2.5 text-sm font-semibold text-primary hover:bg-primary/5">{state.favorites.includes(subject.slug) ? "★ Remover dos favoritos" : "☆ Salvar matéria nos favoritos"}</button></div>
       <div className="mx-auto grid w-full max-w-6xl gap-8 px-4 py-12 lg:grid-cols-3">
         <div className="space-y-8 lg:col-span-2">
-          {data.reinforcement && <ReinforcementView sheet={data.reinforcement} rows={data.worksheet} />}
           <section aria-labelledby="year-heading">
             <h2 id="year-heading" className="text-xl font-bold text-foreground">Estude por ano escolar</h2>
             <p className="mt-2 text-sm text-muted-foreground">
               Selecione seu ano para ver um roteiro introdutório dos principais assuntos. A ordem pode variar conforme a escola.
               {(slug === "fisica" || slug === "quimica") && " Antes do 9º ano, estes temas aparecem principalmente em Ciências."}
             </p>
-            <label htmlFor="school-year" className="mt-5 block text-sm font-semibold text-foreground">Ano escolar</label>
-            <select
-              id="school-year"
-              value={activeYear}
-              onChange={(event) => setYear(event.target.value as Year)}
-              className="mt-2 w-full rounded-lg border border-border bg-background px-4 py-3 text-sm text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring sm:max-w-sm"
-            >
-              {availableYears.map((item) => <option key={item} value={item}>{YEAR_LABEL[item]}</option>)}
-            </select>
+            <div className="mt-5 flex flex-wrap gap-2" role="group" aria-label="Escolha o ano escolar ou o caderno de reforço">
+              {availableYears.map((item) => (
+                <button
+                  key={item}
+                  type="button"
+                  aria-pressed={view === "ano" && activeYear === item}
+                  onClick={() => { setYear(item); setView("ano"); }}
+                  className={`rounded-full border px-4 py-2 text-sm font-semibold transition-colors ${view === "ano" && activeYear === item ? "border-primary bg-primary text-primary-foreground" : "border-border bg-card text-foreground hover:border-primary/50 hover:bg-primary/5"}`}
+                >
+                  {YEAR_LABEL[item]}
+                </button>
+              ))}
+              {data.reinforcement && (
+                <button
+                  type="button"
+                  aria-pressed={view === "reforco"}
+                  onClick={() => setView("reforco")}
+                  className={`rounded-full border px-4 py-2 text-sm font-semibold transition-colors ${view === "reforco" ? "border-primary bg-primary text-primary-foreground" : "border-border bg-card text-foreground hover:border-primary/50 hover:bg-primary/5"}`}
+                >
+                  📖 Caderno de reforço
+                </button>
+              )}
+            </div>
+            {view === "reforco" && data.reinforcement ? (
+              <div className="mt-6" aria-live="polite">
+                <ReinforcementView sheet={data.reinforcement} rows={data.worksheet} />
+              </div>
+            ) : (
             <div className="mt-5 space-y-3" aria-live="polite">
               <h3 className="text-base font-semibold text-foreground">{YEAR_LABEL[activeYear]}</h3>
               <ol className="space-y-3">
@@ -255,6 +276,7 @@ function SubjectStudyView({ slug, data }: { slug: string; data: SubjectStudy }) 
                 })}
               </ol>
             </div>
+            )}
           </section>
 
           <section aria-labelledby="study-pages-heading">
