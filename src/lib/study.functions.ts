@@ -94,7 +94,7 @@ export const getSimuladoBank = createServerFn({ method: "POST" })
     return { status: "ok", data: allowed.flatMap((s) => s.questions.map((q) => ({ ...q, subject: s.slug, subjectName: s.name }))) };
   });
 
-export type SearchEntry = { title: string; detail: string; slug: string; year: string; kind: "Matéria" | "Assunto" | "Resumo" | "Exercício" | "Quiz" | "Aula"; searchable: string };
+export type SearchEntry = { id: string; title: string; detail: string; slug: string; year: string; kind: "Matéria" | "Assunto" | "Resumo" | "Exercício" | "Quiz" | "Aula"; searchable: string };
 
 export const getSearchIndex = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
@@ -104,14 +104,14 @@ export const getSearchIndex = createServerFn({ method: "POST" })
     const { lessons } = await import("@/lib/lessons");
     const { mod, access: a } = await access(context);
     return subjects.filter((s) => mod.canOpenSubject(a, s.slug)).flatMap((s): SearchEntry[] => [
-      ...YEARS.flatMap((y) => (curriculum[s.slug]?.[y] ?? []).map((item) => {
+      ...YEARS.flatMap((y) => (curriculum[s.slug]?.[y] ?? []).map((item, index) => {
         const title = parseTopic(item).title;
-        return { title, detail: `${s.name} · ${YEAR_LABEL[y]}`, slug: s.slug, year: y, kind: "Assunto" as const, searchable: `${title} ${s.name} ${YEAR_LABEL[y]}` };
+        return { id: `topic-${index}`, title, detail: `${s.name} · ${YEAR_LABEL[y]}`, slug: s.slug, year: y, kind: "Assunto" as const, searchable: `${title} ${s.name} ${YEAR_LABEL[y]}` };
       })),
-      ...s.summaries.map((item) => ({ title: item.title, detail: `${s.name} · Resumo`, slug: s.slug, year: "", kind: "Resumo" as const, searchable: `${item.title} ${s.name} ${item.text}` })),
-      ...s.exercises.map((item) => ({ title: item.q, detail: `${s.name} · Exercício`, slug: s.slug, year: "", kind: "Exercício" as const, searchable: `${item.q} ${s.name} ${item.a}` })),
-      ...s.questions.map((item) => ({ title: item.q, detail: `${s.name} · Quiz`, slug: s.slug, year: "", kind: "Quiz" as const, searchable: `${item.q} ${s.name} ${item.options.join(" ")} ${item.explanation ?? ""}` })),
-      ...lessons.filter((l) => l.subject === s.slug).map((l) => ({ title: l.title, detail: `${s.name} · Aula`, slug: s.slug, year: l.year, kind: "Aula" as const, searchable: `${l.title} ${s.name} ${l.year}` })),
+      ...s.summaries.map((item, index) => ({ id: `summary-${index}`, title: item.title, detail: `${s.name} · Resumo`, slug: s.slug, year: "", kind: "Resumo" as const, searchable: `${item.title} ${s.name} ${item.text}` })),
+      ...s.exercises.map((item, index) => ({ id: `exercise-${index}`, title: item.q, detail: `${s.name} · Exercício`, slug: s.slug, year: "", kind: "Exercício" as const, searchable: `${item.q} ${s.name} ${item.a}` })),
+      ...s.questions.map((item, index) => ({ id: `quiz-${index}`, title: item.q, detail: `${s.name} · Quiz`, slug: s.slug, year: "", kind: "Quiz" as const, searchable: `${item.q} ${s.name} ${item.options.join(" ")} ${item.explanation ?? ""}` })),
+      ...lessons.filter((l) => l.subject === s.slug).map((l) => ({ id: l.title, title: l.title, detail: `${s.name} · Aula`, slug: s.slug, year: l.year, kind: "Aula" as const, searchable: `${l.title} ${s.name} ${l.year}` })),
     ]);
   });
 

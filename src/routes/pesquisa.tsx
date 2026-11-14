@@ -6,6 +6,8 @@ import { getSearchIndex, type SearchEntry } from "@/lib/study.functions";
 import { useAuth } from "@/lib/auth";
 import { useQuery } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
+import { findSearchResults, normalizeSearch } from "@/lib/search";
+import { Button } from "@/components/ui/button";
 import { Search, Sparkles, BookOpen, ArrowRight, X } from "lucide-react";
 
 export const Route = createFileRoute("/pesquisa")({
@@ -14,81 +16,24 @@ export const Route = createFileRoute("/pesquisa")({
 });
 
 // Matérias são públicas; assuntos, aulas, resumos e questões vêm do servidor conforme o plano.
-const subjectEntries: SearchEntry[] = subjects.map((s) => ({ title: s.name, detail: "Matéria", slug: s.slug, year: "", kind: "Matéria" as const, searchable: `${s.name} ${s.intro}` }));
+const subjectEntries: SearchEntry[] = subjects.map((s) => ({ id: s.slug, title: s.name, detail: "Matéria", slug: s.slug, year: "", kind: "Matéria" as const, searchable: `${s.name} ${s.intro}` }));
 
 const suggestions = ["frações", "interpretação de texto", "Revolução Industrial", "porcentagem", "ecologia", "ENEM"];
-
-const synonymGroups: string[][] = [
-  ["matemática", "matematica", "conta", "cálculo", "calculo", "números", "numeros"],
-  ["português", "portugues", "gramática", "gramatica", "redação", "redacao", "interpretação", "interpretacao", "texto"],
-  ["história", "historia", "passado", "guerra", "revolução", "revolucao"],
-  ["geografia", "mapa", "países", "paises", "clima", "relevo"],
-  ["ciências", "ciencias", "biologia", "corpo humano", "natureza", "ecologia"],
-  ["exercício", "exercicio", "prática", "pratica", "questão", "questao", "atividade"],
-  ["quiz", "teste", "perguntas", "simulado", "prova", "enem", "vestibular"],
-  ["aula", "lição", "licao", "aprender", "estudar", "conteúdo", "conteudo"],
-];
-
-function normalize(value: string) {
-  return value.toLocaleLowerCase("pt-BR").normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9\s]/g, " ").replace(/\s+/g, " ").trim();
-}
-
-function expandTerms(value: string) {
-  const base = normalize(value).split(" ").filter((word) => word.length > 1);
-  const expanded = new Set(base);
-  for (const group of synonymGroups) {
-    const normalizedGroup = group.map(normalize);
-    if (normalizedGroup.some((term) => term === normalize(value) || base.some((word) => term.split(" ").includes(word)))) {
-      for (const term of normalizedGroup) term.split(" ").forEach((word) => { if (word.length > 1) expanded.add(word); });
-    }
-  }
-  return [...expanded];
-}
-
-function scoreEntry(entry: SearchEntry, query: string) {
-  const title = normalize(entry.title);
-  const detail = normalize(entry.detail);
-  const searchable = normalize(entry.searchable);
-  const q = normalize(query);
-  const terms = normalize(query).split(" ").filter((word) => word.length > 1);
-  const expanded = expandTerms(query);
-  let score = 0;
-  if (title === q) score += 120;
-  if (title.startsWith(q)) score += 70;
-  if (title.includes(q)) score += 45;
-  if (detail.includes(q)) score += 24;
-  for (const term of terms) {
-    if (title.split(" ").includes(term)) score += 18;
-    else if (title.includes(term)) score += 10;
-    if (detail.includes(term)) score += 7;
-    if (searchable.includes(term)) score += 3;
-  }
-  for (const term of expanded) {
-    if (terms.includes(term)) continue;
-    if (title.includes(term)) score += 6;
-    else if (detail.includes(term)) score += 4;
-    else if (searchable.includes(term)) score += 1;
-  }
-  if (entry.kind === "Matéria") score += 2;
-  return score;
-}
 
 function Pesquisa() {
   const [query, setQuery] = useState("");
   const [selectedKind, setSelectedKind] = useState("Todos");
-  const normalized = normalize(query);
+  const normalized = normalizeSearch(query);
   const { user } = useAuth();
   const fetchIndex = useServerFn(getSearchIndex);
-  const { data: studyEntries } = useQuery({ queryKey: ["study", user?.id, "search"], queryFn: () => fetchIndex(), enabled: !!user, staleTime: 5 * 60_000 });
+  const { data: studyEntries, isLoading, isError } = useQuery({ queryKey: ["study", user?.id, "search-v2"], queryFn: () => fetchIndex(), enabled: !!user, staleTime: 5 * 60_000 });
   const entries = useMemo(() => [...subjectEntries, ...(studyEntries ?? [])], [studyEntries]);
   const results = useMemo(() => {
     if (!normalized) return [];
-    return entries
-      .map((entry) => ({ ...entry, score: scoreEntry(entry, query) }))
-      .filter((entry) => entry.score > 0 && (selectedKind === "Todos" || entry.kind === selectedKind))
-      .sort((a, b) => b.score - a.score || a.title.localeCompare(b.title, "pt-BR"))
-      .slice(0, 60);
+    return findSearchResults(entries, query, selectedKind);
   }, [normalized, query, selectedKind, entries]);
+
+  const [visibleCount, setVisibleCount] = useState(30);
 
   function clearSearch() {
     setQuery("");
@@ -125,14 +70,17 @@ function Pesquisa() {
         </div>
 
         {normalized && <section className="mt-6" aria-live="polite">
+          {isLoading && <p className="mb-3 text-sm text-muted-foreground">Buscando conteúdos…</p>}
+          {isError && <p role="alert" className="mb-3 text-sm text-destructive">Não foi possível consultar as aulas. Tente novamente.</p>}
+          {!user && <p className="mb-3 text-sm text-muted-foreground">Entre na sua conta para pesquisar também aulas e atividades.</p>}
           <div className="mb-3 flex items-center justify-between gap-3">
             <h2 className="font-semibold text-foreground">{results.length ? `${results.length} resultados relevantes` : "Nenhum resultado exato encontrado"}</h2>
             <span className="text-xs text-muted-foreground">Busca inteligente</span>
           </div>
           {results.length ? <div className="grid gap-3 sm:grid-cols-2">
-            {results.map((entry, index) => {
+            {results.slice(0, visibleCount).map((entry, index) => {
               const isLesson = entry.kind === "Aula";
-              return <Link key={`${entry.slug}-${entry.kind}-${entry.title}-${index}`} to={isLesson ? "/aula/$slug/$year/$topic" : "/materias/$slug"} params={isLesson ? { slug: entry.slug, year: entry.year, topic: entry.title } : { slug: entry.slug }} className="group flex min-w-0 items-start gap-3 rounded-xl border border-border bg-card p-4 transition-colors hover:border-primary/50 hover:bg-primary/[0.03]">
+              return <Link key={`${entry.slug}-${entry.kind}-${entry.title}-${index}`} to={isLesson ? "/aula/$slug/$year/$topic" : "/materias/$slug"} params={isLesson ? { slug: entry.slug, year: entry.year, topic: entry.title } : { slug: entry.slug }} search={isLesson || entry.kind === "Matéria" ? {} : { year: entry.year, result: entry.id }} hash={isLesson || entry.kind === "Matéria" ? undefined : entry.id} className="group flex min-w-0 items-start gap-3 rounded-xl border border-border bg-card p-4 transition-colors hover:border-primary/50 hover:bg-primary/[0.03]">
                 <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary"><BookOpen className="h-5 w-5" /></span>
                 <span className="min-w-0 flex-1">
                   <span className="block font-semibold text-foreground">{entry.title}</span>
@@ -146,6 +94,7 @@ function Pesquisa() {
             <p className="mt-2 text-sm text-muted-foreground">Use palavras mais curtas, o nome da matéria ou uma destas sugestões.</p>
             <div className="mt-4 flex flex-wrap justify-center gap-2">{suggestions.slice(0, 4).map((item) => <button key={item} type="button" onClick={() => setQuery(item)} className="rounded-full border border-border px-3 py-2 text-sm hover:border-primary/50">{item}</button>)}</div>
           </div>}
+          {results.length > visibleCount && <Button variant="outline" className="mt-5" onClick={() => setVisibleCount(count => count + 30)}>Mostrar mais resultados</Button>}
         </section>}
       </div>
     </SiteLayout>
