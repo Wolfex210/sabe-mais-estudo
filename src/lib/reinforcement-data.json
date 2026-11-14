@@ -1,0 +1,1666 @@
+[
+  {
+    "id": "portugues",
+    "nome": "Língua Portuguesa",
+    "etapa_sugerida": "8º e 9º anos do Ensino Fundamental",
+    "dificuldade": "Básica a intermediária",
+    "topicos": [
+      {
+        "titulo": "Inferência e evidências na leitura",
+        "explicacao": "Compreender um texto envolve localizar informações explícitas e construir inferências. A informação explícita aparece diretamente nas palavras; a inferência resulta da combinação entre pistas textuais e conhecimentos pertinentes do leitor. Inferir não significa adivinhar: uma conclusão precisa ser sustentada pelo texto e não pode contradizê-lo. Em uma narrativa, ações, objetos e escolhas de palavras podem revelar sentimentos que o narrador não nomeia. Em uma reportagem, dados e relações entre acontecimentos permitem compreender consequências que não estão formuladas em uma única frase. Também é necessário distinguir o que o texto afirma daquilo que uma personagem acredita ou que uma fonte declara. Para justificar uma interpretação, primeiro apresente a conclusão; depois, indique a passagem que a sustenta; por fim, explique a relação entre ambas. Quando faltam evidências, a resposta adequada pode ser reconhecer que determinada informação não é dedutível. Essa postura evita transformar impressões pessoais em supostos sentidos obrigatórios do texto e favorece uma leitura crítica.",
+        "exemplo_resolvido": {
+          "enunciado": "Leia: “Ao ouvir seu nome, Júlia apertou o papel do discurso e respirou fundo antes de subir ao palco.” O que se pode inferir?",
+          "resolucao": "É razoável inferir que Júlia estava tensa ou se preparando emocionalmente. Apertar o papel e respirar fundo são pistas. Não se pode afirmar que ela esqueceu o discurso, pois isso não foi informado nem suficientemente sugerido."
+        }
+      },
+      {
+        "titulo": "Coesão e relações de sentido",
+        "explicacao": "A coesão reúne recursos linguísticos que conectam partes de um texto. Pronomes, sinônimos, repetições planejadas e expressões equivalentes podem retomar informações e evitar ambiguidades. Entretanto, substituir palavras mecanicamente não garante clareza: o leitor precisa identificar o referente de cada expressão. Os conectivos também orientam a interpretação, estabelecendo relações como causa, consequência, oposição, condição e conclusão. Em “Choveu, mas houve treino”, o conectivo indica uma oposição à expectativa de cancelamento. Em “Como choveu, o treino foi cancelado”, a oração inicial apresenta a causa. Coesão não é sinônimo de coerência. Um texto pode apresentar muitos conectivos e, ainda assim, reunir ideias contraditórias ou incompatíveis com a situação comunicativa. Na revisão, vale perguntar quem cada pronome retoma, qual relação existe entre as frases e se a ordem das informações facilita a compreensão. A escolha do conectivo deve acompanhar o raciocínio, não apenas produzir aparência de formalidade. Pontuação e organização em parágrafos também colaboram para explicitar essas relações.",
+        "exemplo_resolvido": {
+          "enunciado": "Reescreva para eliminar a ambiguidade: “Marina contou a Paula que seu trabalho havia sido selecionado.” Considere que o trabalho era de Paula.",
+          "resolucao": "“Marina contou a Paula que o trabalho dela, Paula, havia sido selecionado.” Uma solução mais fluente é: “Marina informou a Paula: ‘Seu trabalho foi selecionado’.” Na fala direta, o contexto identifica Paula como destinatária e proprietária do trabalho."
+        }
+      },
+      {
+        "titulo": "Argumentação e avaliação de evidências",
+        "explicacao": "Um texto argumentativo procura defender uma posição sobre uma questão discutível. A tese corresponde à posição central; os argumentos apresentam razões para aceitá-la. Exemplos, pesquisas, dados e explicações podem sustentar argumentos, desde que sejam pertinentes e verificáveis. Uma experiência individual pode ilustrar um problema, mas não comprova, sozinha, que ele ocorre com toda a população. Também é importante diferenciar fato verificável, opinião e interpretação de um fato. Ao utilizar números, observe a fonte, o período, o tamanho do grupo estudado e a comparação realizada. Uma boa argumentação reconhece objeções relevantes e responde a elas sem distorcer a posição contrária. Atacar a pessoa que discorda não demonstra que sua ideia esteja errada. Na escrita escolar, planeje uma tese delimitada, desenvolva razões em sequência e conclua retomando o raciocínio. Evite promessas absolutas, como afirmar que uma medida resolverá todos os problemas. A força do argumento depende mais da qualidade das justificativas do que do tom de certeza empregado.",
+        "exemplo_resolvido": {
+          "enunciado": "Avalie: “A biblioteca deve abrir no intervalo porque muitos estudantes não conseguem frequentá-la depois das aulas.”",
+          "resolucao": "Tese: abrir a biblioteca no intervalo. Argumento: ampliar o acesso de quem não pode permanecer na escola. Para fortalecer o argumento, uma pesquisa com os estudantes poderia verificar horários disponíveis e demanda. A proposta também precisaria considerar pessoal e funcionamento."
+        }
+      }
+    ],
+    "exercicios": [
+      {
+        "n": 1,
+        "tipo": "Inferência",
+        "dificuldade": "Básica",
+        "enunciado": "“Rafael olhou o relógio pela quarta vez e caminhou até o portão.” Indique uma inferência plausível e uma informação que não pode ser afirmada."
+      },
+      {
+        "n": 2,
+        "tipo": "Múltipla escolha",
+        "dificuldade": "Básica",
+        "enunciado": "Em “Estudou bastante; portanto, chegou mais confiante”, “portanto” indica: A) oposição; B) conclusão; C) condição; D) comparação."
+      },
+      {
+        "n": 3,
+        "tipo": "Reescrita",
+        "dificuldade": "Intermediária",
+        "enunciado": "Una as frases com um conectivo de concessão, preservando os fatos: “A equipe estava cansada. A equipe concluiu a atividade.”"
+      },
+      {
+        "n": 4,
+        "tipo": "Análise argumentativa",
+        "dificuldade": "Intermediária",
+        "enunciado": "Identifique tese e argumento: “A escola deve instalar bebedouros adicionais, pois as filas atuais reduzem o tempo disponível para o lanche.”"
+      },
+      {
+        "n": 5,
+        "tipo": "Avaliação de evidência",
+        "dificuldade": "Intermediária",
+        "enunciado": "“Meu primo aprendeu inglês com jogos; logo, jogos garantem fluência a qualquer pessoa.” Explique o problema do raciocínio."
+      },
+      {
+        "n": 6,
+        "tipo": "Produção curta",
+        "dificuldade": "Intermediária",
+        "enunciado": "Escreva duas frases defendendo a divulgação antecipada do calendário de avaliações. Inclua uma razão e uma ressalva."
+      }
+    ],
+    "gabarito": [
+      {
+        "n": 1,
+        "resposta": "Inferência plausível: Rafael espera alguém ou está preocupado com o horário. Não é possível afirmar quem ele espera, nem que esteja atrasado. A resposta deve distinguir hipótese sustentada de detalhe inventado."
+      },
+      {
+        "n": 2,
+        "resposta": "B. O conectivo introduz uma conclusão apresentada como decorrente do estudo."
+      },
+      {
+        "n": 3,
+        "resposta": "“Embora estivesse cansada, a equipe concluiu a atividade.” Aceita-se outra construção concessiva equivalente."
+      },
+      {
+        "n": 4,
+        "resposta": "Tese: instalar bebedouros adicionais. Argumento: as filas existentes diminuem o tempo do lanche."
+      },
+      {
+        "n": 5,
+        "resposta": "Há generalização indevida: uma experiência individual não demonstra garantia universal de fluência. Faltam critérios de fluência e evidências sobre outros aprendizes."
+      },
+      {
+        "n": 6,
+        "resposta": "Resposta-modelo: “A escola deve divulgar antecipadamente o calendário para que os estudantes organizem seus estudos. Contudo, alterações justificadas podem ser necessárias e devem ser comunicadas.” Exigir posição, razão pertinente e ressalva coerente."
+      }
+    ]
+  },
+  {
+    "id": "matematica",
+    "nome": "Matemática",
+    "etapa_sugerida": "8º e 9º anos do Ensino Fundamental",
+    "dificuldade": "Básica a intermediária",
+    "topicos": [
+      {
+        "titulo": "Porcentagens e variações sucessivas",
+        "explicacao": "Porcentagem é uma razão cujo denominador de referência é cem. Dizer que uma quantidade corresponde a 18% de outra significa multiplicar a quantidade de referência por 18/100. O ponto decisivo é identificar essa referência: 20% dos estudantes de uma turma não representa necessariamente o mesmo número de pessoas que 20% dos estudantes da escola. Aumentos e descontos podem ser calculados por fatores multiplicativos. Um aumento de 12% corresponde à multiplicação por 1,12; um desconto de 12%, à multiplicação por 0,88. Em alterações sucessivas, os fatores devem ser multiplicados, pois a base muda após cada operação. Por isso, aumentar um preço em 20% e depois reduzi-lo em 20% não restaura o valor inicial. Também se deve distinguir porcentagem de pontos percentuais: passar de 30% para 40% representa aumento de dez pontos percentuais, mas crescimento relativo de aproximadamente 33,3%. Estimar o resultado antes do cálculo ajuda a detectar erros de escala e interpretações equivocadas.",
+        "exemplo_resolvido": {
+          "enunciado": "Um tênis de R$ 200,00 recebe aumento de 10% e depois desconto de 10%. Qual é o preço final?",
+          "resolucao": "Após o aumento: 200 × 1,10 = 220. Após o desconto: 220 × 0,90 = 198. Preço final: R$ 198,00, redução de 1% em relação ao preço inicial."
+        }
+      },
+      {
+        "titulo": "Equações e modelagem de problemas",
+        "explicacao": "Uma equação expressa uma igualdade que contém uma ou mais incógnitas. Resolver uma equação significa encontrar os valores que tornam essa igualdade verdadeira, respeitando as condições do problema. Nas equações do primeiro grau com uma incógnita, a incógnita aparece com expoente um e, após simplificação, seu coeficiente é diferente de zero. O princípio de equivalência permite somar ou subtrair a mesma quantidade nos dois membros, bem como multiplicá-los ou dividi-los por um mesmo número não nulo. A expressão informal “passar para o outro lado trocando o sinal” resume algumas operações, mas pode esconder seu fundamento. Em problemas, antes de calcular, defina o significado da incógnita e traduza as relações descritas. Depois, resolva e confira o resultado na situação original. Uma solução algébrica pode ser inadequada ao contexto, como uma quantidade negativa de ingressos. Unidades, restrições e interpretação final fazem parte da resposta, não são apenas detalhes acrescentados ao cálculo. A substituição permite verificar a solução.",
+        "exemplo_resolvido": {
+          "enunciado": "Um serviço cobra R$ 18,00 fixos e R$ 7,00 por hora. A conta foi de R$ 60,00. Quantas horas foram cobradas?",
+          "resolucao": "Se h é o número de horas, 18 + 7h = 60. Subtraindo 18: 7h = 42. Dividindo por 7: h = 6. Verificação: 18 + 7 × 6 = 60. Foram cobradas 6 horas."
+        }
+      },
+      {
+        "titulo": "Teorema de Pitágoras e medidas",
+        "explicacao": "O teorema de Pitágoras relaciona os comprimentos dos lados de um triângulo retângulo, isto é, um triângulo com um ângulo de 90 graus. O lado oposto ao ângulo reto é a hipotenusa e também é o maior lado. Os outros dois lados são os catetos. Se os catetos medem a e b e a hipotenusa mede c, então a² + b² = c². A relação envolve quadrados dos comprimentos, não a soma direta dos lados. Ela pode ser interpretada pelas áreas dos quadrados construídos sobre esses segmentos. Para determinar um cateto, subtrai-se do quadrado da hipotenusa o quadrado do outro cateto e calcula-se a raiz quadrada. Antes de aplicar a fórmula, é necessário confirmar que existe um ângulo reto. Em situações geométricas, desenhar uma figura e marcar as medidas reduz confusões. Ao finalizar, verifique se a hipotenusa permanece maior que cada cateto e apresente a unidade de comprimento adequada ao problema.",
+        "exemplo_resolvido": {
+          "enunciado": "Uma escada de 5 m apoia-se em uma parede vertical. Sua base está a 3 m da parede, em piso horizontal. Qual altura ela alcança?",
+          "resolucao": "A escada é a hipotenusa. Logo, h² + 3² = 5²; h² = 25 − 9 = 16; h = 4 m. Usa-se a raiz positiva porque h representa comprimento."
+        }
+      }
+    ],
+    "exercicios": [
+      {
+        "n": 1,
+        "tipo": "Cálculo percentual",
+        "dificuldade": "Básica",
+        "enunciado": "Em uma turma de 40 estudantes, 15% faltaram. Quantos compareceram?"
+      },
+      {
+        "n": 2,
+        "tipo": "Variação sucessiva",
+        "dificuldade": "Intermediária",
+        "enunciado": "Um produto de R$ 150,00 recebe descontos sucessivos de 20% e 10%. Determine o preço final e o desconto percentual equivalente."
+      },
+      {
+        "n": 3,
+        "tipo": "Equação",
+        "dificuldade": "Básica",
+        "enunciado": "Resolva e verifique: 3(x − 2) = 2x + 5."
+      },
+      {
+        "n": 4,
+        "tipo": "Modelagem",
+        "dificuldade": "Intermediária",
+        "enunciado": "Uma corrida custa R$ 8,00 fixos mais R$ 3,00 por quilômetro. Sem outras cobranças, qual distância corresponde a R$ 35,00?"
+      },
+      {
+        "n": 5,
+        "tipo": "Geometria aplicada",
+        "dificuldade": "Intermediária",
+        "enunciado": "Um retângulo tem lados de 6 cm e 8 cm. Calcule a diagonal e o perímetro."
+      },
+      {
+        "n": 6,
+        "tipo": "Análise de erro",
+        "dificuldade": "Intermediária",
+        "enunciado": "Um aluno afirma que um triângulo com lados 4 cm, 5 cm e 6 cm é retângulo porque 4 + 5 > 6. A conclusão procede?"
+      },
+      {
+        "n": 7,
+        "tipo": "Equação do primeiro grau",
+        "dificuldade": "Intermediária",
+        "enunciado": "Resolva e confira: 3x + 6 = 12."
+      },
+      {
+        "n": 8,
+        "tipo": "Teorema de Pitágoras",
+        "dificuldade": "Intermediária",
+        "enunciado": "Um triângulo retângulo tem catetos 3 cm e 4 cm. Determine a hipotenusa."
+      },
+      {
+        "n": 9,
+        "tipo": "Estatística",
+        "dificuldade": "Intermediária",
+        "enunciado": "Calcule a média aritmética de 4, 6 e 11."
+      },
+      {
+        "n": 10,
+        "tipo": "Desconto percentual",
+        "dificuldade": "Intermediária",
+        "enunciado": "Um produto custa R$ 140,00. Calcule o preço após desconto de 25%."
+      },
+      {
+        "n": 11,
+        "tipo": "Equação do primeiro grau",
+        "dificuldade": "Intermediária",
+        "enunciado": "Resolva e confira: 7x + 10 = 52."
+      },
+      {
+        "n": 12,
+        "tipo": "Teorema de Pitágoras",
+        "dificuldade": "Intermediária",
+        "enunciado": "Um triângulo retângulo tem catetos 6 cm e 8 cm. Determine a hipotenusa."
+      },
+      {
+        "n": 13,
+        "tipo": "Estatística",
+        "dificuldade": "Intermediária",
+        "enunciado": "Calcule a média aritmética de 8, 10 e 15."
+      },
+      {
+        "n": 14,
+        "tipo": "Desconto percentual",
+        "dificuldade": "Intermediária",
+        "enunciado": "Um produto custa R$ 180,00. Calcule o preço após desconto de 10%."
+      },
+      {
+        "n": 15,
+        "tipo": "Equação do primeiro grau",
+        "dificuldade": "Intermediária",
+        "enunciado": "Resolva e confira: 11x + 14 = 124."
+      },
+      {
+        "n": 16,
+        "tipo": "Teorema de Pitágoras",
+        "dificuldade": "Intermediária",
+        "enunciado": "Um triângulo retângulo tem catetos 9 cm e 12 cm. Determine a hipotenusa."
+      },
+      {
+        "n": 17,
+        "tipo": "Estatística",
+        "dificuldade": "Intermediária",
+        "enunciado": "Calcule a média aritmética de 12, 14 e 19."
+      },
+      {
+        "n": 18,
+        "tipo": "Desconto percentual",
+        "dificuldade": "Intermediária",
+        "enunciado": "Um produto custa R$ 220,00. Calcule o preço após desconto de 30%."
+      },
+      {
+        "n": 19,
+        "tipo": "Equação do primeiro grau",
+        "dificuldade": "Intermediária",
+        "enunciado": "Resolva e confira: 15x + 18 = 63."
+      },
+      {
+        "n": 20,
+        "tipo": "Teorema de Pitágoras",
+        "dificuldade": "Intermediária",
+        "enunciado": "Um triângulo retângulo tem catetos 12 cm e 16 cm. Determine a hipotenusa."
+      },
+      {
+        "n": 21,
+        "tipo": "Estatística",
+        "dificuldade": "Intermediária",
+        "enunciado": "Calcule a média aritmética de 16, 18 e 23."
+      },
+      {
+        "n": 22,
+        "tipo": "Desconto percentual",
+        "dificuldade": "Intermediária",
+        "enunciado": "Um produto custa R$ 260,00. Calcule o preço após desconto de 15%."
+      },
+      {
+        "n": 23,
+        "tipo": "Equação do primeiro grau",
+        "dificuldade": "Intermediária",
+        "enunciado": "Resolva e confira: 19x + 22 = 155."
+      },
+      {
+        "n": 24,
+        "tipo": "Teorema de Pitágoras",
+        "dificuldade": "Intermediária",
+        "enunciado": "Um triângulo retângulo tem catetos 15 cm e 20 cm. Determine a hipotenusa."
+      },
+      {
+        "n": 25,
+        "tipo": "Estatística",
+        "dificuldade": "Intermediária",
+        "enunciado": "Calcule a média aritmética de 20, 22 e 27."
+      },
+      {
+        "n": 26,
+        "tipo": "Desconto percentual",
+        "dificuldade": "Intermediária",
+        "enunciado": "Um produto custa R$ 300,00. Calcule o preço após desconto de 35%."
+      },
+      {
+        "n": 27,
+        "tipo": "Equação do primeiro grau",
+        "dificuldade": "Intermediária",
+        "enunciado": "Resolva e confira: 23x + 26 = 279."
+      },
+      {
+        "n": 28,
+        "tipo": "Teorema de Pitágoras",
+        "dificuldade": "Intermediária",
+        "enunciado": "Um triângulo retângulo tem catetos 18 cm e 24 cm. Determine a hipotenusa."
+      },
+      {
+        "n": 29,
+        "tipo": "Estatística",
+        "dificuldade": "Intermediária",
+        "enunciado": "Calcule a média aritmética de 24, 26 e 31."
+      },
+      {
+        "n": 30,
+        "tipo": "Desconto percentual",
+        "dificuldade": "Intermediária",
+        "enunciado": "Um produto custa R$ 340,00. Calcule o preço após desconto de 20%."
+      },
+      {
+        "n": 31,
+        "tipo": "Equação do primeiro grau",
+        "dificuldade": "Intermediária",
+        "enunciado": "Resolva e confira: 27x + 30 = 138."
+      },
+      {
+        "n": 32,
+        "tipo": "Teorema de Pitágoras",
+        "dificuldade": "Intermediária",
+        "enunciado": "Um triângulo retângulo tem catetos 21 cm e 28 cm. Determine a hipotenusa."
+      },
+      {
+        "n": 33,
+        "tipo": "Estatística",
+        "dificuldade": "Intermediária",
+        "enunciado": "Calcule a média aritmética de 28, 30 e 35."
+      },
+      {
+        "n": 34,
+        "tipo": "Desconto percentual",
+        "dificuldade": "Intermediária",
+        "enunciado": "Um produto custa R$ 380,00. Calcule o preço após desconto de 5%."
+      },
+      {
+        "n": 35,
+        "tipo": "Equação do primeiro grau",
+        "dificuldade": "Intermediária",
+        "enunciado": "Resolva e confira: 31x + 34 = 282."
+      },
+      {
+        "n": 36,
+        "tipo": "Teorema de Pitágoras",
+        "dificuldade": "Intermediária",
+        "enunciado": "Um triângulo retângulo tem catetos 24 cm e 32 cm. Determine a hipotenusa."
+      },
+      {
+        "n": 37,
+        "tipo": "Estatística",
+        "dificuldade": "Intermediária",
+        "enunciado": "Calcule a média aritmética de 32, 34 e 39."
+      },
+      {
+        "n": 38,
+        "tipo": "Desconto percentual",
+        "dificuldade": "Intermediária",
+        "enunciado": "Um produto custa R$ 420,00. Calcule o preço após desconto de 25%."
+      },
+      {
+        "n": 39,
+        "tipo": "Equação do primeiro grau",
+        "dificuldade": "Intermediária",
+        "enunciado": "Resolva e confira: 35x + 38 = 73."
+      },
+      {
+        "n": 40,
+        "tipo": "Teorema de Pitágoras",
+        "dificuldade": "Intermediária",
+        "enunciado": "Um triângulo retângulo tem catetos 27 cm e 36 cm. Determine a hipotenusa."
+      },
+      {
+        "n": 41,
+        "tipo": "Estatística",
+        "dificuldade": "Intermediária",
+        "enunciado": "Calcule a média aritmética de 36, 38 e 43."
+      },
+      {
+        "n": 42,
+        "tipo": "Desconto percentual",
+        "dificuldade": "Intermediária",
+        "enunciado": "Um produto custa R$ 460,00. Calcule o preço após desconto de 10%."
+      },
+      {
+        "n": 43,
+        "tipo": "Equação do primeiro grau",
+        "dificuldade": "Intermediária",
+        "enunciado": "Resolva e confira: 39x + 42 = 237."
+      },
+      {
+        "n": 44,
+        "tipo": "Teorema de Pitágoras",
+        "dificuldade": "Intermediária",
+        "enunciado": "Um triângulo retângulo tem catetos 30 cm e 40 cm. Determine a hipotenusa."
+      },
+      {
+        "n": 45,
+        "tipo": "Estatística",
+        "dificuldade": "Intermediária",
+        "enunciado": "Calcule a média aritmética de 40, 42 e 47."
+      },
+      {
+        "n": 46,
+        "tipo": "Desconto percentual",
+        "dificuldade": "Intermediária",
+        "enunciado": "Um produto custa R$ 500,00. Calcule o preço após desconto de 30%."
+      },
+      {
+        "n": 47,
+        "tipo": "Equação do primeiro grau",
+        "dificuldade": "Intermediária",
+        "enunciado": "Resolva e confira: 43x + 46 = 433."
+      },
+      {
+        "n": 48,
+        "tipo": "Teorema de Pitágoras",
+        "dificuldade": "Intermediária",
+        "enunciado": "Um triângulo retângulo tem catetos 33 cm e 44 cm. Determine a hipotenusa."
+      },
+      {
+        "n": 49,
+        "tipo": "Estatística",
+        "dificuldade": "Intermediária",
+        "enunciado": "Calcule a média aritmética de 44, 46 e 51."
+      },
+      {
+        "n": 50,
+        "tipo": "Desconto percentual",
+        "dificuldade": "Intermediária",
+        "enunciado": "Um produto custa R$ 540,00. Calcule o preço após desconto de 15%."
+      },
+      {
+        "n": 51,
+        "tipo": "Equação do primeiro grau",
+        "dificuldade": "Intermediária",
+        "enunciado": "Resolva e confira: 47x + 50 = 144."
+      },
+      {
+        "n": 52,
+        "tipo": "Teorema de Pitágoras",
+        "dificuldade": "Intermediária",
+        "enunciado": "Um triângulo retângulo tem catetos 36 cm e 48 cm. Determine a hipotenusa."
+      },
+      {
+        "n": 53,
+        "tipo": "Estatística",
+        "dificuldade": "Intermediária",
+        "enunciado": "Calcule a média aritmética de 48, 50 e 55."
+      },
+      {
+        "n": 54,
+        "tipo": "Desconto percentual",
+        "dificuldade": "Intermediária",
+        "enunciado": "Um produto custa R$ 580,00. Calcule o preço após desconto de 35%."
+      },
+      {
+        "n": 55,
+        "tipo": "Equação do primeiro grau",
+        "dificuldade": "Intermediária",
+        "enunciado": "Resolva e confira: 51x + 54 = 360."
+      },
+      {
+        "n": 56,
+        "tipo": "Teorema de Pitágoras",
+        "dificuldade": "Intermediária",
+        "enunciado": "Um triângulo retângulo tem catetos 39 cm e 52 cm. Determine a hipotenusa."
+      },
+      {
+        "n": 57,
+        "tipo": "Estatística",
+        "dificuldade": "Intermediária",
+        "enunciado": "Calcule a média aritmética de 52, 54 e 59."
+      },
+      {
+        "n": 58,
+        "tipo": "Desconto percentual",
+        "dificuldade": "Intermediária",
+        "enunciado": "Um produto custa R$ 620,00. Calcule o preço após desconto de 20%."
+      },
+      {
+        "n": 59,
+        "tipo": "Equação do primeiro grau",
+        "dificuldade": "Intermediária",
+        "enunciado": "Resolva e confira: 55x + 58 = 608."
+      },
+      {
+        "n": 60,
+        "tipo": "Teorema de Pitágoras",
+        "dificuldade": "Intermediária",
+        "enunciado": "Um triângulo retângulo tem catetos 42 cm e 56 cm. Determine a hipotenusa."
+      },
+      {
+        "n": 61,
+        "tipo": "Estatística",
+        "dificuldade": "Intermediária",
+        "enunciado": "Calcule a média aritmética de 56, 58 e 63."
+      },
+      {
+        "n": 62,
+        "tipo": "Desconto percentual",
+        "dificuldade": "Intermediária",
+        "enunciado": "Um produto custa R$ 660,00. Calcule o preço após desconto de 5%."
+      },
+      {
+        "n": 63,
+        "tipo": "Equação do primeiro grau",
+        "dificuldade": "Intermediária",
+        "enunciado": "Resolva e confira: 59x + 62 = 239."
+      },
+      {
+        "n": 64,
+        "tipo": "Teorema de Pitágoras",
+        "dificuldade": "Intermediária",
+        "enunciado": "Um triângulo retângulo tem catetos 45 cm e 60 cm. Determine a hipotenusa."
+      },
+      {
+        "n": 65,
+        "tipo": "Estatística",
+        "dificuldade": "Intermediária",
+        "enunciado": "Calcule a média aritmética de 60, 62 e 67."
+      },
+      {
+        "n": 66,
+        "tipo": "Desconto percentual",
+        "dificuldade": "Intermediária",
+        "enunciado": "Um produto custa R$ 700,00. Calcule o preço após desconto de 25%."
+      },
+      {
+        "n": 67,
+        "tipo": "Equação do primeiro grau",
+        "dificuldade": "Intermediária",
+        "enunciado": "Resolva e confira: 63x + 66 = 507."
+      },
+      {
+        "n": 68,
+        "tipo": "Teorema de Pitágoras",
+        "dificuldade": "Intermediária",
+        "enunciado": "Um triângulo retângulo tem catetos 48 cm e 64 cm. Determine a hipotenusa."
+      },
+      {
+        "n": 69,
+        "tipo": "Estatística",
+        "dificuldade": "Intermediária",
+        "enunciado": "Calcule a média aritmética de 64, 66 e 71."
+      },
+      {
+        "n": 70,
+        "tipo": "Desconto percentual",
+        "dificuldade": "Intermediária",
+        "enunciado": "Um produto custa R$ 740,00. Calcule o preço após desconto de 10%."
+      },
+      {
+        "n": 71,
+        "tipo": "Equação do primeiro grau",
+        "dificuldade": "Intermediária",
+        "enunciado": "Resolva e confira: 67x + 70 = 807."
+      },
+      {
+        "n": 72,
+        "tipo": "Teorema de Pitágoras",
+        "dificuldade": "Intermediária",
+        "enunciado": "Um triângulo retângulo tem catetos 51 cm e 68 cm. Determine a hipotenusa."
+      },
+      {
+        "n": 73,
+        "tipo": "Estatística",
+        "dificuldade": "Intermediária",
+        "enunciado": "Calcule a média aritmética de 68, 70 e 75."
+      },
+      {
+        "n": 74,
+        "tipo": "Desconto percentual",
+        "dificuldade": "Intermediária",
+        "enunciado": "Um produto custa R$ 780,00. Calcule o preço após desconto de 30%."
+      },
+      {
+        "n": 75,
+        "tipo": "Equação do primeiro grau",
+        "dificuldade": "Intermediária",
+        "enunciado": "Resolva e confira: 71x + 74 = 358."
+      },
+      {
+        "n": 76,
+        "tipo": "Teorema de Pitágoras",
+        "dificuldade": "Intermediária",
+        "enunciado": "Um triângulo retângulo tem catetos 54 cm e 72 cm. Determine a hipotenusa."
+      },
+      {
+        "n": 77,
+        "tipo": "Estatística",
+        "dificuldade": "Intermediária",
+        "enunciado": "Calcule a média aritmética de 72, 74 e 79."
+      },
+      {
+        "n": 78,
+        "tipo": "Desconto percentual",
+        "dificuldade": "Intermediária",
+        "enunciado": "Um produto custa R$ 820,00. Calcule o preço após desconto de 15%."
+      },
+      {
+        "n": 79,
+        "tipo": "Equação do primeiro grau",
+        "dificuldade": "Intermediária",
+        "enunciado": "Resolva e confira: 75x + 78 = 678."
+      },
+      {
+        "n": 80,
+        "tipo": "Teorema de Pitágoras",
+        "dificuldade": "Intermediária",
+        "enunciado": "Um triângulo retângulo tem catetos 57 cm e 76 cm. Determine a hipotenusa."
+      },
+      {
+        "n": 81,
+        "tipo": "Estatística",
+        "dificuldade": "Intermediária",
+        "enunciado": "Calcule a média aritmética de 76, 78 e 83."
+      },
+      {
+        "n": 82,
+        "tipo": "Desconto percentual",
+        "dificuldade": "Intermediária",
+        "enunciado": "Um produto custa R$ 860,00. Calcule o preço após desconto de 35%."
+      },
+      {
+        "n": 83,
+        "tipo": "Equação do primeiro grau",
+        "dificuldade": "Intermediária",
+        "enunciado": "Resolva e confira: 79x + 82 = 161."
+      },
+      {
+        "n": 84,
+        "tipo": "Teorema de Pitágoras",
+        "dificuldade": "Intermediária",
+        "enunciado": "Um triângulo retângulo tem catetos 60 cm e 80 cm. Determine a hipotenusa."
+      },
+      {
+        "n": 85,
+        "tipo": "Estatística",
+        "dificuldade": "Intermediária",
+        "enunciado": "Calcule a média aritmética de 80, 82 e 87."
+      },
+      {
+        "n": 86,
+        "tipo": "Desconto percentual",
+        "dificuldade": "Intermediária",
+        "enunciado": "Um produto custa R$ 900,00. Calcule o preço após desconto de 20%."
+      }
+    ],
+    "gabarito": [
+      {
+        "n": 1,
+        "resposta": "Faltaram 0,15 × 40 = 6; compareceram 34 estudantes."
+      },
+      {
+        "n": 2,
+        "resposta": "150 × 0,80 × 0,90 = R$ 108,00. O fator total é 0,72; desconto equivalente de 28%."
+      },
+      {
+        "n": 3,
+        "resposta": "3x − 6 = 2x + 5; x = 11. Verificação: 3 × 9 = 22 + 5 = 27."
+      },
+      {
+        "n": 4,
+        "resposta": "8 + 3d = 35; 3d = 27; d = 9 km."
+      },
+      {
+        "n": 5,
+        "resposta": "Diagonal: √(6² + 8²) = 10 cm. Perímetro: 2(6 + 8) = 28 cm."
+      },
+      {
+        "n": 6,
+        "resposta": "Não. A desigualdade citada ajuda a verificar a existência do triângulo, não um ângulo reto. Como 4² + 5² = 41 e 6² = 36, ele não é retângulo."
+      },
+      {
+        "n": 7,
+        "resposta": "Subtraindo 6: 3x = 6. Dividindo por 3: x = 2. Conferência: 3 × 2 + 6 = 12."
+      },
+      {
+        "n": 8,
+        "resposta": "h² = (3)² + (4)² = 25. Logo h = 5 cm."
+      },
+      {
+        "n": 9,
+        "resposta": "Média = (4 + 6 + 11)/3 = 7.00 (arredondada a duas casas)."
+      },
+      {
+        "n": 10,
+        "resposta": "Desconto: 140 × 25/100 = R$ 35.00. Preço final: R$ 105.00."
+      },
+      {
+        "n": 11,
+        "resposta": "Subtraindo 10: 7x = 42. Dividindo por 7: x = 6. Conferência: 7 × 6 + 10 = 52."
+      },
+      {
+        "n": 12,
+        "resposta": "h² = (6)² + (8)² = 100. Logo h = 10 cm."
+      },
+      {
+        "n": 13,
+        "resposta": "Média = (8 + 10 + 15)/3 = 11.00 (arredondada a duas casas)."
+      },
+      {
+        "n": 14,
+        "resposta": "Desconto: 180 × 10/100 = R$ 18.00. Preço final: R$ 162.00."
+      },
+      {
+        "n": 15,
+        "resposta": "Subtraindo 14: 11x = 110. Dividindo por 11: x = 10. Conferência: 11 × 10 + 14 = 124."
+      },
+      {
+        "n": 16,
+        "resposta": "h² = (9)² + (12)² = 225. Logo h = 15 cm."
+      },
+      {
+        "n": 17,
+        "resposta": "Média = (12 + 14 + 19)/3 = 15.00 (arredondada a duas casas)."
+      },
+      {
+        "n": 18,
+        "resposta": "Desconto: 220 × 30/100 = R$ 66.00. Preço final: R$ 154.00."
+      },
+      {
+        "n": 19,
+        "resposta": "Subtraindo 18: 15x = 45. Dividindo por 15: x = 3. Conferência: 15 × 3 + 18 = 63."
+      },
+      {
+        "n": 20,
+        "resposta": "h² = (12)² + (16)² = 400. Logo h = 20 cm."
+      },
+      {
+        "n": 21,
+        "resposta": "Média = (16 + 18 + 23)/3 = 19.00 (arredondada a duas casas)."
+      },
+      {
+        "n": 22,
+        "resposta": "Desconto: 260 × 15/100 = R$ 39.00. Preço final: R$ 221.00."
+      },
+      {
+        "n": 23,
+        "resposta": "Subtraindo 22: 19x = 133. Dividindo por 19: x = 7. Conferência: 19 × 7 + 22 = 155."
+      },
+      {
+        "n": 24,
+        "resposta": "h² = (15)² + (20)² = 625. Logo h = 25 cm."
+      },
+      {
+        "n": 25,
+        "resposta": "Média = (20 + 22 + 27)/3 = 23.00 (arredondada a duas casas)."
+      },
+      {
+        "n": 26,
+        "resposta": "Desconto: 300 × 35/100 = R$ 105.00. Preço final: R$ 195.00."
+      },
+      {
+        "n": 27,
+        "resposta": "Subtraindo 26: 23x = 253. Dividindo por 23: x = 11. Conferência: 23 × 11 + 26 = 279."
+      },
+      {
+        "n": 28,
+        "resposta": "h² = (18)² + (24)² = 900. Logo h = 30 cm."
+      },
+      {
+        "n": 29,
+        "resposta": "Média = (24 + 26 + 31)/3 = 27.00 (arredondada a duas casas)."
+      },
+      {
+        "n": 30,
+        "resposta": "Desconto: 340 × 20/100 = R$ 68.00. Preço final: R$ 272.00."
+      },
+      {
+        "n": 31,
+        "resposta": "Subtraindo 30: 27x = 108. Dividindo por 27: x = 4. Conferência: 27 × 4 + 30 = 138."
+      },
+      {
+        "n": 32,
+        "resposta": "h² = (21)² + (28)² = 1225. Logo h = 35 cm."
+      },
+      {
+        "n": 33,
+        "resposta": "Média = (28 + 30 + 35)/3 = 31.00 (arredondada a duas casas)."
+      },
+      {
+        "n": 34,
+        "resposta": "Desconto: 380 × 5/100 = R$ 19.00. Preço final: R$ 361.00."
+      },
+      {
+        "n": 35,
+        "resposta": "Subtraindo 34: 31x = 248. Dividindo por 31: x = 8. Conferência: 31 × 8 + 34 = 282."
+      },
+      {
+        "n": 36,
+        "resposta": "h² = (24)² + (32)² = 1600. Logo h = 40 cm."
+      },
+      {
+        "n": 37,
+        "resposta": "Média = (32 + 34 + 39)/3 = 35.00 (arredondada a duas casas)."
+      },
+      {
+        "n": 38,
+        "resposta": "Desconto: 420 × 25/100 = R$ 105.00. Preço final: R$ 315.00."
+      },
+      {
+        "n": 39,
+        "resposta": "Subtraindo 38: 35x = 35. Dividindo por 35: x = 1. Conferência: 35 × 1 + 38 = 73."
+      },
+      {
+        "n": 40,
+        "resposta": "h² = (27)² + (36)² = 2025. Logo h = 45 cm."
+      },
+      {
+        "n": 41,
+        "resposta": "Média = (36 + 38 + 43)/3 = 39.00 (arredondada a duas casas)."
+      },
+      {
+        "n": 42,
+        "resposta": "Desconto: 460 × 10/100 = R$ 46.00. Preço final: R$ 414.00."
+      },
+      {
+        "n": 43,
+        "resposta": "Subtraindo 42: 39x = 195. Dividindo por 39: x = 5. Conferência: 39 × 5 + 42 = 237."
+      },
+      {
+        "n": 44,
+        "resposta": "h² = (30)² + (40)² = 2500. Logo h = 50 cm."
+      },
+      {
+        "n": 45,
+        "resposta": "Média = (40 + 42 + 47)/3 = 43.00 (arredondada a duas casas)."
+      },
+      {
+        "n": 46,
+        "resposta": "Desconto: 500 × 30/100 = R$ 150.00. Preço final: R$ 350.00."
+      },
+      {
+        "n": 47,
+        "resposta": "Subtraindo 46: 43x = 387. Dividindo por 43: x = 9. Conferência: 43 × 9 + 46 = 433."
+      },
+      {
+        "n": 48,
+        "resposta": "h² = (33)² + (44)² = 3025. Logo h = 55 cm."
+      },
+      {
+        "n": 49,
+        "resposta": "Média = (44 + 46 + 51)/3 = 47.00 (arredondada a duas casas)."
+      },
+      {
+        "n": 50,
+        "resposta": "Desconto: 540 × 15/100 = R$ 81.00. Preço final: R$ 459.00."
+      },
+      {
+        "n": 51,
+        "resposta": "Subtraindo 50: 47x = 94. Dividindo por 47: x = 2. Conferência: 47 × 2 + 50 = 144."
+      },
+      {
+        "n": 52,
+        "resposta": "h² = (36)² + (48)² = 3600. Logo h = 60 cm."
+      },
+      {
+        "n": 53,
+        "resposta": "Média = (48 + 50 + 55)/3 = 51.00 (arredondada a duas casas)."
+      },
+      {
+        "n": 54,
+        "resposta": "Desconto: 580 × 35/100 = R$ 203.00. Preço final: R$ 377.00."
+      },
+      {
+        "n": 55,
+        "resposta": "Subtraindo 54: 51x = 306. Dividindo por 51: x = 6. Conferência: 51 × 6 + 54 = 360."
+      },
+      {
+        "n": 56,
+        "resposta": "h² = (39)² + (52)² = 4225. Logo h = 65 cm."
+      },
+      {
+        "n": 57,
+        "resposta": "Média = (52 + 54 + 59)/3 = 55.00 (arredondada a duas casas)."
+      },
+      {
+        "n": 58,
+        "resposta": "Desconto: 620 × 20/100 = R$ 124.00. Preço final: R$ 496.00."
+      },
+      {
+        "n": 59,
+        "resposta": "Subtraindo 58: 55x = 550. Dividindo por 55: x = 10. Conferência: 55 × 10 + 58 = 608."
+      },
+      {
+        "n": 60,
+        "resposta": "h² = (42)² + (56)² = 4900. Logo h = 70 cm."
+      },
+      {
+        "n": 61,
+        "resposta": "Média = (56 + 58 + 63)/3 = 59.00 (arredondada a duas casas)."
+      },
+      {
+        "n": 62,
+        "resposta": "Desconto: 660 × 5/100 = R$ 33.00. Preço final: R$ 627.00."
+      },
+      {
+        "n": 63,
+        "resposta": "Subtraindo 62: 59x = 177. Dividindo por 59: x = 3. Conferência: 59 × 3 + 62 = 239."
+      },
+      {
+        "n": 64,
+        "resposta": "h² = (45)² + (60)² = 5625. Logo h = 75 cm."
+      },
+      {
+        "n": 65,
+        "resposta": "Média = (60 + 62 + 67)/3 = 63.00 (arredondada a duas casas)."
+      },
+      {
+        "n": 66,
+        "resposta": "Desconto: 700 × 25/100 = R$ 175.00. Preço final: R$ 525.00."
+      },
+      {
+        "n": 67,
+        "resposta": "Subtraindo 66: 63x = 441. Dividindo por 63: x = 7. Conferência: 63 × 7 + 66 = 507."
+      },
+      {
+        "n": 68,
+        "resposta": "h² = (48)² + (64)² = 6400. Logo h = 80 cm."
+      },
+      {
+        "n": 69,
+        "resposta": "Média = (64 + 66 + 71)/3 = 67.00 (arredondada a duas casas)."
+      },
+      {
+        "n": 70,
+        "resposta": "Desconto: 740 × 10/100 = R$ 74.00. Preço final: R$ 666.00."
+      },
+      {
+        "n": 71,
+        "resposta": "Subtraindo 70: 67x = 737. Dividindo por 67: x = 11. Conferência: 67 × 11 + 70 = 807."
+      },
+      {
+        "n": 72,
+        "resposta": "h² = (51)² + (68)² = 7225. Logo h = 85 cm."
+      },
+      {
+        "n": 73,
+        "resposta": "Média = (68 + 70 + 75)/3 = 71.00 (arredondada a duas casas)."
+      },
+      {
+        "n": 74,
+        "resposta": "Desconto: 780 × 30/100 = R$ 234.00. Preço final: R$ 546.00."
+      },
+      {
+        "n": 75,
+        "resposta": "Subtraindo 74: 71x = 284. Dividindo por 71: x = 4. Conferência: 71 × 4 + 74 = 358."
+      },
+      {
+        "n": 76,
+        "resposta": "h² = (54)² + (72)² = 8100. Logo h = 90 cm."
+      },
+      {
+        "n": 77,
+        "resposta": "Média = (72 + 74 + 79)/3 = 75.00 (arredondada a duas casas)."
+      },
+      {
+        "n": 78,
+        "resposta": "Desconto: 820 × 15/100 = R$ 123.00. Preço final: R$ 697.00."
+      },
+      {
+        "n": 79,
+        "resposta": "Subtraindo 78: 75x = 600. Dividindo por 75: x = 8. Conferência: 75 × 8 + 78 = 678."
+      },
+      {
+        "n": 80,
+        "resposta": "h² = (57)² + (76)² = 9025. Logo h = 95 cm."
+      },
+      {
+        "n": 81,
+        "resposta": "Média = (76 + 78 + 83)/3 = 79.00 (arredondada a duas casas)."
+      },
+      {
+        "n": 82,
+        "resposta": "Desconto: 860 × 35/100 = R$ 301.00. Preço final: R$ 559.00."
+      },
+      {
+        "n": 83,
+        "resposta": "Subtraindo 82: 79x = 79. Dividindo por 79: x = 1. Conferência: 79 × 1 + 82 = 161."
+      },
+      {
+        "n": 84,
+        "resposta": "h² = (60)² + (80)² = 10000. Logo h = 100 cm."
+      },
+      {
+        "n": 85,
+        "resposta": "Média = (80 + 82 + 87)/3 = 83.00 (arredondada a duas casas)."
+      },
+      {
+        "n": 86,
+        "resposta": "Desconto: 900 × 20/100 = R$ 180.00. Preço final: R$ 720.00."
+      }
+    ]
+  },
+  {
+    "id": "ciencias",
+    "nome": "Ciências",
+    "etapa_sugerida": "6º ao 8º ano do Ensino Fundamental",
+    "dificuldade": "Básica a intermediária",
+    "topicos": [
+      {
+        "titulo": "Investigação científica e controle de variáveis",
+        "explicacao": "Investigar cientificamente é construir e avaliar explicações com base em evidências. Uma investigação pode começar com uma pergunta sobre um fenômeno observado e uma hipótese que proponha uma resposta testável. Em experimentos controlados, modifica-se deliberadamente uma variável e observa-se seu possível efeito sobre outra, mantendo condições relevantes semelhantes. A variável modificada é chamada independente; a resposta medida é a dependente. Um grupo de comparação ajuda a interpretar o resultado, mas não elimina automaticamente todos os problemas do estudo. Repetições e amostras adequadas reduzem a influência de variações ocasionais. Registrar procedimentos, unidades e resultados permite que outras pessoas examinem o trabalho. Se os dados não sustentam a hipótese, ela pode ser revista: isso faz parte da investigação. Nem toda pesquisa exige um experimento; astronomia e ecologia também utilizam observações sistemáticas. Além disso, associação entre dois acontecimentos não demonstra, sozinha, que um causou o outro. É preciso considerar explicações alternativas, qualidade das medições e limites das conclusões.",
+        "exemplo_resolvido": {
+          "enunciado": "Como investigar se a quantidade de luz afeta o crescimento de mudas da mesma espécie?",
+          "resolucao": "Distribua várias mudas semelhantes em grupos com diferentes tempos de iluminação. Mantenha semelhantes solo, água, recipiente e temperatura; meça o crescimento no mesmo intervalo. Variável independente: iluminação. Dependente: crescimento medido. As diferenças observadas devem ser analisadas considerando a variação entre as mudas."
+        }
+      },
+      {
+        "titulo": "Cadeias alimentares, energia e matéria",
+        "explicacao": "Uma cadeia alimentar representa relações de alimentação entre organismos. Produtores, como plantas e algas, fabricam matéria orgânica utilizando fontes de energia, geralmente a luz solar. Consumidores obtêm matéria e energia ao se alimentar de outros seres vivos. Decompositores, especialmente muitos fungos e bactérias, transformam matéria orgânica de restos e resíduos, participando da disponibilização de nutrientes no ambiente. As setas de uma cadeia apontam do organismo consumido para quem o consome, indicando a transferência de matéria e energia. Na natureza, as relações formam teias, pois uma espécie pode ter vários alimentos e predadores. A energia disponível tende a diminuir entre níveis tróficos porque parte é utilizada no metabolismo e dissipada como calor. Por isso, energia flui pelo ecossistema, enquanto elementos químicos circulam em ciclos. Não é correto afirmar que decompositores reciclam energia. Alterações em uma população podem afetar outras direta ou indiretamente, mas a intensidade desses efeitos depende das relações existentes e das condições ambientais.",
+        "exemplo_resolvido": {
+          "enunciado": "Na sequência capim → gafanhoto → sapo → cobra, identifique os níveis tróficos.",
+          "resolucao": "Capim: produtor. Gafanhoto: consumidor primário. Sapo: consumidor secundário. Cobra: consumidor terciário nessa cadeia. As setas indicam transferência do alimento para o consumidor. Restos de todos esses organismos podem ser utilizados por decompositores."
+        }
+      },
+      {
+        "titulo": "Ciclo da água e transformações urbanas",
+        "explicacao": "A água circula entre atmosfera, superfície e subsolo por processos interligados. Na evaporação, a água líquida passa para o estado gasoso; na transpiração, plantas liberam vapor de água. O resfriamento do ar pode favorecer a condensação, formando gotículas ou cristais que compõem nuvens. Quando partículas crescem e as condições permitem, ocorre precipitação. Parte da água infiltra no solo, podendo contribuir para a recarga de aquíferos; outra parte escoa pela superfície. A energia solar e a gravidade são fundamentais nesse conjunto de processos. O ciclo não garante disponibilidade imediata de água potável em qualquer lugar. Distribuição das chuvas, qualidade da água, infraestrutura e consumo influenciam o abastecimento. Nas cidades, a impermeabilização do solo costuma reduzir a infiltração e aumentar o escoamento superficial, favorecendo alagamentos. Vegetação, áreas permeáveis e planejamento da drenagem ajudam a reduzir esses impactos. Entretanto, medidas isoladas não substituem políticas de saneamento, proteção de mananciais e ocupação adequada do território.",
+        "exemplo_resolvido": {
+          "enunciado": "Por que substituir um terreno vegetado por um estacionamento asfaltado pode aumentar alagamentos próximos?",
+          "resolucao": "O asfalto reduz a infiltração e tende a acelerar o escoamento da chuva. Mais água pode chegar rapidamente à drenagem, superando sua capacidade. O efeito depende também da intensidade da chuva, do relevo e da infraestrutura local."
+        }
+      }
+    ],
+    "exercicios": [
+      {
+        "n": 1,
+        "tipo": "Planejamento experimental",
+        "dificuldade": "Intermediária",
+        "enunciado": "Uma turma compara a dissolução de 5 g de açúcar em 100 mL de água a 20 °C e a 50 °C. Indique a variável independente, a dependente e dois controles necessários."
+      },
+      {
+        "n": 2,
+        "tipo": "Interpretação de evidência",
+        "dificuldade": "Intermediária",
+        "enunciado": "Uma única planta que recebeu adubo cresceu mais que outra sem adubo. Isso basta para concluir que o adubo sempre aumenta o crescimento? Justifique."
+      },
+      {
+        "n": 3,
+        "tipo": "Construção de cadeia",
+        "dificuldade": "Básica",
+        "enunciado": "Organize com setas: coruja, milho e rato. Identifique o consumidor primário."
+      },
+      {
+        "n": 4,
+        "tipo": "Correção conceitual",
+        "dificuldade": "Básica",
+        "enunciado": "Corrija: “Os decompositores devolvem ao Sol a energia usada pelas plantas.”"
+      },
+      {
+        "n": 5,
+        "tipo": "Aplicação",
+        "dificuldade": "Básica",
+        "enunciado": "Gotículas aparecem na parte externa de um copo com água gelada. De onde vem essa água e qual transformação ocorreu?"
+      },
+      {
+        "n": 6,
+        "tipo": "Proposta fundamentada",
+        "dificuldade": "Intermediária",
+        "enunciado": "Indique duas medidas urbanas que podem reduzir o escoamento superficial e explique o mecanismo de uma delas."
+      }
+    ],
+    "gabarito": [
+      {
+        "n": 1,
+        "resposta": "Independente: temperatura da água. Dependente: tempo para dissolver completamente o açúcar. Controles possíveis: tipo e granulometria do açúcar, agitação e formato do recipiente, além das massas e volumes já fixados."
+      },
+      {
+        "n": 2,
+        "resposta": "Não. Há apenas uma planta em cada condição, podendo existir diferenças individuais e outros fatores. São necessárias repetições e condições comparáveis; a conclusão também não deve ser universal."
+      },
+      {
+        "n": 3,
+        "resposta": "Milho → rato → coruja. O rato é consumidor primário."
+      },
+      {
+        "n": 4,
+        "resposta": "Decompositores participam da ciclagem da matéria. A energia flui e parte dela é dissipada como calor; não é devolvida ao Sol nem reciclada no ecossistema."
+      },
+      {
+        "n": 5,
+        "resposta": "Vem do vapor de água presente no ar, que se condensa ao encontrar a superfície fria. Não atravessou o vidro."
+      },
+      {
+        "n": 6,
+        "resposta": "Exemplos: ampliar áreas vegetadas, jardins de chuva e pavimentos permeáveis adequados. Áreas permeáveis favorecem a infiltração e podem reduzir ou retardar a água que chega à drenagem."
+      }
+    ]
+  },
+  {
+    "id": "biologia",
+    "nome": "Biologia",
+    "etapa_sugerida": "1ª e 2ª séries do Ensino Médio",
+    "dificuldade": "Intermediária",
+    "topicos": [
+      {
+        "titulo": "Membrana plasmática e transportes",
+        "explicacao": "A membrana plasmática delimita a célula e participa do controle das trocas com o ambiente. Sua estrutura inclui uma bicamada de lipídios e diferentes proteínas, compondo uma organização dinâmica. A permeabilidade seletiva significa que substâncias não atravessam a membrana com a mesma facilidade. Na difusão simples, certas moléculas atravessam a bicamada seguindo seu gradiente de concentração. Na difusão facilitada, proteínas auxiliam o transporte, também sem gasto direto de ATP nesse processo. Na osmose, ocorre movimento líquido de água através de uma membrana seletivamente permeável, relacionado às diferenças de concentração de solutos e de pressão. Em situações escolares simplificadas, a água tende a se deslocar para o compartimento com maior concentração de solutos que não atravessam a membrana. Já o transporte ativo pode deslocar substâncias contra seu gradiente eletroquímico, utilizando energia direta ou indiretamente. Os efeitos de uma solução sobre a célula dependem de sua tonicidade e das características celulares, incluindo a presença de parede celular.",
+        "exemplo_resolvido": {
+          "enunciado": "Uma hemácia é colocada em solução hipertônica em relação ao seu interior. O que tende a ocorrer?",
+          "resolucao": "A água tende a sair da hemácia por osmose. Como ela não possui parede celular, seu volume diminui e a célula fica crenada. A explicação considera solutos efetivamente responsáveis pela tonicidade."
+        }
+      },
+      {
+        "titulo": "Genética mendeliana e probabilidade",
+        "explicacao": "Genes são segmentos de DNA relacionados à produção de moléculas funcionais, e alelos são versões de um mesmo gene. Em organismos diploides, muitos genes estão representados por dois alelos, um herdado de cada progenitor. O genótipo descreve a constituição genética considerada; o fenótipo corresponde às características observáveis, resultantes de interações entre constituição genética e ambiente. Em um modelo de dominância completa, o heterozigoto apresenta o fenótipo associado ao alelo dominante. Isso não significa que esse alelo seja melhor, mais forte ou necessariamente mais frequente na população. Pela segregação mendeliana, os dois alelos de um par se separam durante a formação dos gametas. Quadros de cruzamento ajudam a organizar probabilidades de combinações na fecundação. Essas probabilidades não determinam uma sequência obrigatória de nascimentos: cada evento deve ser analisado conforme as condições do modelo. Além disso, muitas características humanas não seguem herança monogênica simples; altura e cor da pele, por exemplo, envolvem múltiplos genes e influências ambientais.",
+        "exemplo_resolvido": {
+          "enunciado": "Em uma espécie hipotética, A determina sementes amarelas e domina completamente a. Qual o resultado esperado de Aa × Aa?",
+          "resolucao": "Cada progenitor produz gametas A e a em proporções iguais. Combinações: AA, Aa, Aa e aa. Probabilidades genotípicas: 25%, 50% e 25%. Fenótipos esperados: 75% amarelas e 25% recessivas, nas condições do modelo."
+        }
+      },
+      {
+        "titulo": "Seleção natural e resistência bacteriana",
+        "explicacao": "A evolução biológica envolve mudanças em características hereditárias de populações ao longo das gerações. A seleção natural ocorre quando diferenças hereditárias influenciam o sucesso de sobrevivência e reprodução em determinado ambiente. A variação não surge porque os organismos percebem uma necessidade. Mutações não são direcionadas para produzir uma adaptação desejada, embora seus efeitos possam ser favoráveis, desfavoráveis ou neutros conforme o contexto. Em uma população bacteriana, algumas variantes podem apresentar resistência a um antibiótico antes da exposição. O tratamento cria uma pressão seletiva: bactérias sensíveis são mais afetadas, enquanto resistentes podem sobreviver e deixar descendentes. Genes de resistência também podem se disseminar por transferência horizontal entre bactérias. Portanto, não é o corpo da pessoa que se torna resistente ao medicamento nesse processo. O uso inadequado de antibióticos favorece a seleção e a disseminação da resistência. Esses medicamentos não tratam infecções virais, e seu uso deve seguir avaliação e orientação profissional, sem automedicação ou compartilhamento de sobras.",
+        "exemplo_resolvido": {
+          "enunciado": "Após exposição a um antibiótico, a proporção de bactérias resistentes aumentou. Isso prova que o medicamento criou mutações úteis?",
+          "resolucao": "Não. O resultado é compatível com seleção de variantes resistentes já existentes. O antibiótico pode reduzir as sensíveis e aumentar a participação relativa das resistentes, que se reproduzem. O dado, isoladamente, não demonstra a origem das variantes."
+        }
+      }
+    ],
+    "exercicios": [
+      {
+        "n": 1,
+        "tipo": "Previsão",
+        "dificuldade": "Básica",
+        "enunciado": "Uma hemácia é colocada em meio fortemente hipotônico. Qual é a tendência do movimento líquido da água e qual risco existe?"
+      },
+      {
+        "n": 2,
+        "tipo": "Classificação",
+        "dificuldade": "Intermediária",
+        "enunciado": "Um íon atravessa a membrana contra seu gradiente eletroquímico por uma bomba que hidrolisa ATP. Classifique o transporte e justifique."
+      },
+      {
+        "n": 3,
+        "tipo": "Cruzamento",
+        "dificuldade": "Intermediária",
+        "enunciado": "Com dominância completa, determine as proporções genotípicas e fenotípicas de Aa × aa."
+      },
+      {
+        "n": 4,
+        "tipo": "Probabilidade",
+        "dificuldade": "Intermediária",
+        "enunciado": "No cruzamento Aa × Aa, qual a probabilidade de dois descendentes independentes apresentarem genótipo aa?"
+      },
+      {
+        "n": 5,
+        "tipo": "Análise conceitual",
+        "dificuldade": "Intermediária",
+        "enunciado": "Explique o erro: “As bactérias decidiram se adaptar ao antibiótico e, por isso, produziram a resistência necessária.”"
+      },
+      {
+        "n": 6,
+        "tipo": "Interpretação quantitativa",
+        "dificuldade": "Intermediária",
+        "enunciado": "Antes de um tratamento havia 990 bactérias sensíveis e 10 resistentes. Depois, restaram 9 sensíveis e 9 resistentes. A quantidade de resistentes aumentou? E sua proporção?"
+      }
+    ],
+    "gabarito": [
+      {
+        "n": 1,
+        "resposta": "A água tende a entrar na hemácia. Ela aumenta de volume e pode sofrer hemólise."
+      },
+      {
+        "n": 2,
+        "resposta": "Transporte ativo primário: a bomba utiliza diretamente a energia da hidrólise de ATP para transportar o íon contra o gradiente eletroquímico."
+      },
+      {
+        "n": 3,
+        "resposta": "50% Aa e 50% aa. Fenótipos: 50% dominante e 50% recessivo."
+      },
+      {
+        "n": 4,
+        "resposta": "1/4 × 1/4 = 1/16, ou 6,25%."
+      },
+      {
+        "n": 5,
+        "resposta": "A explicação atribui intenção e direção à evolução. Variações hereditárias podem existir antes da exposição; o antibiótico seleciona diferencialmente as bactérias, sem que elas planejem a adaptação."
+      },
+      {
+        "n": 6,
+        "resposta": "O número absoluto caiu de 10 para 9. A proporção aumentou de 10/1.000 = 1% para 9/18 = 50%. Aumento de frequência não exige aumento absoluto."
+      }
+    ]
+  },
+  {
+    "id": "historia",
+    "nome": "História",
+    "etapa_sugerida": "8º e 9º anos do Ensino Fundamental",
+    "dificuldade": "Intermediária",
+    "topicos": [
+      {
+        "titulo": "Independência do Brasil como processo",
+        "explicacao": "A Independência do Brasil deve ser compreendida como um processo político e social, não apenas como um acontecimento em 7 de setembro de 1822. A transferência da corte portuguesa para o Rio de Janeiro, em 1808, alterou a administração e a posição do território americano no Império português. Em 1820, a Revolução Liberal do Porto desencadeou disputas sobre a organização do império e os poderes das Cortes. No Brasil, grupos com interesses diferentes negociaram e confrontaram projetos de autonomia e de separação. A atuação de Pedro foi importante, mas não substituiu a participação de elites provinciais, militares, setores populares e outros agentes. Houve conflitos armados em diferentes províncias; na Bahia, a luta prosseguiu até 1823. A separação política não aboliu a escravidão nem distribuiu igualmente direitos e poder. O novo Estado adotou a monarquia e preservou importantes hierarquias sociais. Assim, analisar a Independência exige observar rupturas com Portugal e continuidades internas, sem tratar a população como um grupo homogêneo.",
+        "exemplo_resolvido": {
+          "enunciado": "Por que a frase “Em 7 de setembro todos os brasileiros conquistaram liberdade e igualdade” é historicamente inadequada?",
+          "resolucao": "Ela reduz um processo conflituoso a uma data e confunde independência política com igualdade social. A escravidão permaneceu, os direitos eram limitados e havia projetos e interesses distintos. Além disso, os confrontos continuaram em algumas regiões."
+        }
+      },
+      {
+        "titulo": "Abolição, resistências e pós-abolição",
+        "explicacao": "A abolição da escravidão no Brasil, formalizada pela Lei Áurea em 13 de maio de 1888, resultou de um processo marcado por conflitos e mobilizações. Pessoas escravizadas resistiram por fugas, formação de quilombos, negociações, ações judiciais, preservação de vínculos e outras estratégias. Redes abolicionistas, associações, jornalistas, advogados e setores populares também atuaram, com projetos nem sempre idênticos. Leis anteriores, como a de 1850 contra o tráfico transatlântico, a do Ventre Livre de 1871 e a dos Sexagenários de 1885, tiveram limites e não encerraram imediatamente a exploração escravista. A assinatura da lei foi decisiva juridicamente, mas não pode apagar o protagonismo negro. A liberdade legal tampouco veio acompanhada de uma ampla política nacional de acesso à terra, reparação e inclusão social. No pós-abolição, a população negra construiu associações, trajetórias de trabalho e formas de participação, enfrentando racismo e desigualdades. É importante reconhecer essa agência sem minimizar as barreiras estruturais que continuaram presentes na sociedade brasileira.",
+        "exemplo_resolvido": {
+          "enunciado": "Como diferenciar abolição jurídica de igualdade efetiva?",
+          "resolucao": "A abolição jurídica encerrou legalmente a escravidão. Igualdade efetiva exigiria condições reais de acesso a direitos, recursos e oportunidades, além do enfrentamento do racismo. Portanto, 1888 foi uma ruptura fundamental, mas não eliminou as desigualdades herdadas."
+        }
+      },
+      {
+        "titulo": "Ditadura militar e redemocratização",
+        "explicacao": "O golpe de 1964 depôs o presidente João Goulart e iniciou uma ditadura que durou até 1985. Embora dirigida por militares, ela contou com apoio de setores civis, enquanto outros grupos civis se opuseram ao regime. O período apresentou mudanças institucionais e diferentes graus de repressão, sem deixar de restringir a democracia. O Ato Institucional número 5, de dezembro de 1968, ampliou os poderes de exceção, permitiu o fechamento do Congresso e suspendeu garantias em determinadas situações. Censura, perseguições, prisões arbitrárias, tortura e desaparecimentos integraram a repressão estatal. O crescimento econômico de parte do período não beneficiou igualmente a população e coexistiu com concentração de renda. A redemocratização foi gradual e disputada, envolvendo movimentos sociais, organizações políticas, mobilização sindical e negociações. A campanha Diretas Já defendeu eleições presidenciais diretas, mas a escolha de 1985 ainda foi indireta. A Constituição de 1988 ampliou direitos, e a eleição presidencial direta ocorreu em 1989, sem apagar automaticamente as heranças autoritárias.",
+        "exemplo_resolvido": {
+          "enunciado": "A campanha Diretas Já conseguiu realizar uma eleição presidencial direta em 1985?",
+          "resolucao": "Não. A emenda que permitiria a eleição direta não obteve os votos necessários na Câmara em 1984. Em 1985, Tancredo Neves foi escolhido indiretamente pelo Colégio Eleitoral. A campanha, contudo, teve grande importância na mobilização democrática."
+        }
+      }
+    ],
+    "exercicios": [
+      {
+        "n": 1,
+        "tipo": "Cronologia",
+        "dificuldade": "Básica",
+        "enunciado": "Ordene: Lei Áurea; chegada da corte portuguesa; Constituição de 1988; proclamação da Independência."
+      },
+      {
+        "n": 2,
+        "tipo": "Ruptura e continuidade",
+        "dificuldade": "Intermediária",
+        "enunciado": "Indique uma ruptura política e uma continuidade social relacionadas à Independência."
+      },
+      {
+        "n": 3,
+        "tipo": "Crítica de narrativa",
+        "dificuldade": "Intermediária",
+        "enunciado": "Um monumento apresenta a abolição apenas como um presente concedido pela monarquia. Qual dimensão histórica essa representação omite?"
+      },
+      {
+        "n": 4,
+        "tipo": "Comparação",
+        "dificuldade": "Intermediária",
+        "enunciado": "Explique por que a Lei do Ventre Livre, de 1871, não equivaleu à abolição geral da escravidão."
+      },
+      {
+        "n": 5,
+        "tipo": "Correção cronológica",
+        "dificuldade": "Básica",
+        "enunciado": "Corrija: “O AI-5 iniciou a ditadura em 1964 e a Constituição de 1988 elegeu diretamente o presidente.”"
+      },
+      {
+        "n": 6,
+        "tipo": "Análise de fonte",
+        "dificuldade": "Intermediária",
+        "enunciado": "Um anúncio oficial de 1972 celebra o crescimento econômico. Esse documento basta para concluir que não havia repressão ou desigualdade? Explique como utilizá-lo criticamente."
+      }
+    ],
+    "gabarito": [
+      {
+        "n": 1,
+        "resposta": "Chegada da corte, 1808; Independência, 1822; Lei Áurea, 1888; Constituição, 1988."
+      },
+      {
+        "n": 2,
+        "resposta": "Ruptura: separação política de Portugal e formação de um Estado independente. Continuidade: manutenção da escravidão, por exemplo."
+      },
+      {
+        "n": 3,
+        "resposta": "Omite as resistências e iniciativas de pessoas escravizadas e libertas, o movimento abolicionista e os conflitos que pressionaram pelo fim da escravidão."
+      },
+      {
+        "n": 4,
+        "resposta": "A lei declarou livres os filhos de mulheres escravizadas nascidos a partir de sua promulgação, sob condições que restringiam sua autonomia. Não libertou todas as pessoas escravizadas nem encerrou imediatamente o sistema."
+      },
+      {
+        "n": 5,
+        "resposta": "A ditadura começou com o golpe de 1964; o AI-5 foi editado em 1968. A Constituição foi promulgada em 1988; a eleição presidencial direta ocorreu em 1989."
+      },
+      {
+        "n": 6,
+        "resposta": "Não. É uma fonte com finalidade propagandística. Deve-se analisar autoria, público e contexto, confrontando-a com dados de renda e documentos sobre censura e repressão. Crescimento econômico não demonstra ausência de violações."
+      }
+    ]
+  },
+  {
+    "id": "geografia",
+    "nome": "Geografia",
+    "etapa_sugerida": "7º ao 9º ano do Ensino Fundamental",
+    "dificuldade": "Básica a intermediária",
+    "topicos": [
+      {
+        "titulo": "Escala cartográfica e leitura de mapas",
+        "explicacao": "Mapas são representações seletivas do espaço geográfico. Para interpretá-los, é preciso considerar título, legenda, orientação, fonte, data e escala. A escala informa a relação entre uma distância no mapa e a distância correspondente no terreno, usando a mesma unidade. Em uma escala de 1:100.000, um centímetro representa cem mil centímetros, equivalentes a um quilômetro. Quanto menor o denominador de uma escala numérica, maior é a escala e maior tende a ser o detalhamento de uma mesma área. Assim, 1:10.000 é uma escala maior que 1:1.000.000. A escala gráfica mantém sua utilidade quando o mapa é ampliado ou reduzido proporcionalmente junto com a barra; a numérica impressa deixa de corresponder ao novo tamanho. Também é necessário distinguir distância em linha reta de percurso real por ruas ou estradas. Finalmente, todo mapa utiliza escolhas e projeções, que produzem distorções: nenhuma representação plana da superfície terrestre preserva simultaneamente todas as propriedades geométricas do planeta.",
+        "exemplo_resolvido": {
+          "enunciado": "Duas localidades estão separadas por 4 cm em um mapa de escala 1:250.000. Qual a distância em linha reta?",
+          "resolucao": "4 × 250.000 = 1.000.000 cm. Como 100.000 cm = 1 km, a distância é 10 km. Esse resultado não informa necessariamente a extensão do trajeto por estrada."
+        }
+      },
+      {
+        "titulo": "Tempo atmosférico, clima e mudanças climáticas",
+        "explicacao": "Tempo atmosférico é o estado da atmosfera em determinado lugar e momento, descrito por condições como temperatura, chuva, umidade e vento. Clima corresponde aos padrões estatísticos dessas condições e de sua variabilidade ao longo de períodos extensos, geralmente analisados com séries de décadas. Um dia frio não contradiz, por si só, uma tendência de aquecimento global, assim como um dia quente não a comprova isoladamente. Latitude, altitude, relevo, circulação atmosférica e proximidade do mar influenciam os climas. O efeito estufa natural mantém a Terra mais aquecida do que seria sem certos gases atmosféricos. O problema atual está na intensificação desse efeito, principalmente pelo aumento de gases decorrente de atividades humanas. Queima de combustíveis fósseis e mudanças no uso da terra contribuem para esse processo. Seus impactos variam regionalmente e envolvem riscos à água, à saúde, à produção e aos ecossistemas. Mitigação busca reduzir causas; adaptação procura diminuir danos e vulnerabilidades diante dos impactos presentes ou esperados.",
+        "exemplo_resolvido": {
+          "enunciado": "Classifique: substituir combustíveis fósseis por fontes de baixa emissão; criar abrigos e alertas para ondas de calor.",
+          "resolucao": "A primeira ação é principalmente mitigação, pois busca reduzir emissões. A segunda é adaptação, pois procura diminuir danos de eventos de calor. Algumas políticas podem combinar as duas funções."
+        }
+      },
+      {
+        "titulo": "Urbanização e desigualdade socioespacial",
+        "explicacao": "Urbanização é o aumento da participação da população urbana no total populacional, acompanhado de transformações nas atividades, nas paisagens e nas relações sociais. Não é sinônimo apenas de crescimento físico de uma cidade: a população urbana pode crescer sem que sua proporção aumente, caso a população rural cresça no mesmo ritmo. No Brasil, industrialização, mudanças no campo, migrações e expansão dos serviços contribuíram para uma urbanização intensa no século XX. Esse processo ocorreu de maneira desigual e produziu diferenças no acesso à moradia, ao transporte e ao saneamento. A segregação socioespacial relaciona-se à distribuição desigual de grupos e oportunidades no território. Ela não decorre apenas de escolhas individuais, pois envolve renda, mercado imobiliário, políticas públicas e discriminações. Morar longe de empregos e equipamentos pode aumentar custos e tempos de deslocamento. Para analisar uma cidade, é importante cruzar dados populacionais com infraestrutura e condições ambientais. Planejamento participativo, habitação adequada e transporte coletivo integrado podem contribuir para enfrentar essas desigualdades.",
+        "exemplo_resolvido": {
+          "enunciado": "Uma cidade amplia moradias populares em uma área distante, sem transporte regular nem escola próxima. O problema habitacional foi integralmente resolvido?",
+          "resolucao": "Não. A oferta da unidade residencial é importante, mas moradia adequada também envolve acesso a serviços, infraestrutura e oportunidades. A localização pode aprofundar segregação e aumentar o custo cotidiano das famílias."
+        }
+      }
+    ],
+    "exercicios": [
+      {
+        "n": 1,
+        "tipo": "Cálculo cartográfico",
+        "dificuldade": "Básica",
+        "enunciado": "Em um mapa de escala 1:50.000, um segmento mede 6 cm. Qual distância representa, em quilômetros?"
+      },
+      {
+        "n": 2,
+        "tipo": "Comparação",
+        "dificuldade": "Básica",
+        "enunciado": "Qual escala tende a ser mais adequada para mostrar ruas de um bairro: 1:5.000 ou 1:5.000.000? Justifique."
+      },
+      {
+        "n": 3,
+        "tipo": "Classificação",
+        "dificuldade": "Básica",
+        "enunciado": "Classifique como tempo ou clima: A) “Hoje houve neblina pela manhã”; B) “A região apresenta verões geralmente chuvosos”."
+      },
+      {
+        "n": 4,
+        "tipo": "Análise crítica",
+        "dificuldade": "Intermediária",
+        "enunciado": "Uma cidade registrou uma semana muito fria. Por que esse dado não basta para refutar o aquecimento global?"
+      },
+      {
+        "n": 5,
+        "tipo": "Indicador demográfico",
+        "dificuldade": "Intermediária",
+        "enunciado": "Um município tinha 60 mil habitantes urbanos em um total de 100 mil. Depois passou a ter 78 mil urbanos em um total de 120 mil. Calcule as taxas de urbanização e a diferença em pontos percentuais."
+      },
+      {
+        "n": 6,
+        "tipo": "Planejamento urbano",
+        "dificuldade": "Intermediária",
+        "enunciado": "Proponha duas intervenções articuladas para um bairro com longos deslocamentos e ausência de serviços públicos próximos."
+      }
+    ],
+    "gabarito": [
+      {
+        "n": 1,
+        "resposta": "6 × 50.000 = 300.000 cm = 3 km."
+      },
+      {
+        "n": 2,
+        "resposta": "1:5.000. É a maior escala entre as duas e permite representar uma área menor com mais detalhes."
+      },
+      {
+        "n": 3,
+        "resposta": "A: tempo atmosférico. B: clima, pois descreve um padrão recorrente."
+      },
+      {
+        "n": 4,
+        "resposta": "É um registro local e curto. A avaliação da tendência global exige séries longas, cobertura espacial ampla e análise da variabilidade."
+      },
+      {
+        "n": 5,
+        "resposta": "Inicial: 60/100 = 60%. Final: 78/120 = 65%. Aumento de 5 pontos percentuais."
+      },
+      {
+        "n": 6,
+        "resposta": "Resposta-modelo: melhorar o transporte coletivo integrado e instalar equipamentos de educação e saúde conforme diagnóstico da demanda. Exigir duas ações pertinentes e explicação de como ampliam o acesso."
+      }
+    ]
+  },
+  {
+    "id": "ingles",
+    "nome": "Língua Inglesa",
+    "etapa_sugerida": "7º ao 9º ano do Ensino Fundamental",
+    "dificuldade": "Básica a intermediária",
+    "topicos": [
+      {
+        "titulo": "Simple present e hábitos",
+        "explicacao": "O simple present é usado para apresentar hábitos, situações relativamente estáveis e generalizações, entre outros sentidos. Com I, you, we e they, o verbo principal geralmente aparece na forma básica: “They study here”. Com he, she e it, acrescenta-se normalmente s ou es: “She studies here”. Algumas grafias mudam, como study para studies, e há formas particulares, como have para has. Nas negativas e perguntas com a maioria dos verbos, utilizam-se do ou does. Quando does aparece, o verbo principal volta à forma básica: “Does she study here?” e “She does not study here”. O verbo be segue outro funcionamento: “She is tired”, “Is she tired?” e “She is not tired”. Advérbios como always, usually e never ajudam a indicar frequência, mas seu uso deve corresponder ao sentido pretendido. Antes de montar a frase, identifique o sujeito e verifique se o verbo é be ou outro verbo. Isso evita combinar auxiliares e flexões de maneira inadequada.",
+        "exemplo_resolvido": {
+          "enunciado": "Transforme “Lucas plays volleyball on Fridays” em negativa e interrogativa.",
+          "resolucao": "Negativa: “Lucas does not play volleyball on Fridays.” Interrogativa: “Does Lucas play volleyball on Fridays?” O auxiliar does marca a terceira pessoa; por isso, play não recebe s."
+        }
+      },
+      {
+        "titulo": "Simple past e acontecimentos concluídos",
+        "explicacao": "O simple past é frequentemente empregado para narrar acontecimentos concluídos em um período passado, indicado pelo contexto ou por expressões como yesterday e last week. Na afirmativa, verbos regulares recebem normalmente ed, com ajustes de grafia: visit vira visited e study vira studied. Verbos irregulares apresentam formas próprias, como go e went, que precisam ser aprendidas em contexto. Nas negativas e perguntas com a maioria dos verbos, usa-se did, e o verbo principal retorna à forma básica: “They did not go” e “Did they go?”. Não se escreve “did went”. O verbo be utiliza was e were, sem did nessas construções: “She was late” e “Were they late?”. Para compreender uma narrativa, além dos verbos, observe marcadores temporais e a ordem dos acontecimentos. Ao escrever, mantenha coerência entre o tempo verbal e a referência temporal. O objetivo não é trocar todas as palavras por formas passadas, mas indicar claramente quando os eventos ocorreram.",
+        "exemplo_resolvido": {
+          "enunciado": "Traduza: “Nós não visitamos o museu ontem. Fomos ao parque.”",
+          "resolucao": "“We did not visit the museum yesterday. We went to the park.” Visit permanece na forma básica após did not. Go assume a forma irregular went na segunda frase afirmativa."
+        }
+      },
+      {
+        "titulo": "Estratégias de leitura e falsos cognatos",
+        "explicacao": "Ler em inglês não exige traduzir cada palavra isoladamente. Primeiro, observe título, gênero, imagens e organização para formular uma expectativa sobre o texto. Depois, faça uma leitura geral para identificar o assunto, estratégia conhecida como skimming. Quando o objetivo é localizar uma informação específica, como horário ou preço, procure diretamente esse dado, realizando scanning. Palavras conhecidas e cognatos podem ajudar, mas semelhança gráfica não garante equivalência de sentido. Actually costuma significar “na verdade”, e não “atualmente”; library significa “biblioteca”, e não “livraria”. O contexto deve orientar a interpretação. Também é útil reconhecer conectivos: but indica contraste, because apresenta causa e so pode introduzir consequência. Pronomes ajudam a acompanhar quem pratica as ações, desde que seus referentes sejam identificados. Quando uma palavra desconhecida não impede a compreensão central, avance e retome depois. Se for decisiva, examine a frase e consulte um dicionário adequado. Uma boa leitura combina compreensão global, busca seletiva e verificação de hipóteses.",
+        "exemplo_resolvido": {
+          "enunciado": "Leia: “The library opens at nine, but the reading club starts at ten.” A que horas começa o clube e qual palavra marca contraste?",
+          "resolucao": "O clube começa às dez: “starts at ten”. But marca contraste entre os horários apresentados. Library significa biblioteca; o texto não informa o horário de uma livraria."
+        }
+      }
+    ],
+    "exercicios": [
+      {
+        "n": 1,
+        "tipo": "Completar",
+        "dificuldade": "Básica",
+        "enunciado": "Complete no simple present: “My sister ___ (study) at night. My parents ___ (work) in the morning.”"
+      },
+      {
+        "n": 2,
+        "tipo": "Transformação",
+        "dificuldade": "Básica",
+        "enunciado": "Escreva a pergunta correspondente a “They live near the school”, perguntando se a informação é verdadeira."
+      },
+      {
+        "n": 3,
+        "tipo": "Correção",
+        "dificuldade": "Intermediária",
+        "enunciado": "Corrija: “Did Ana went to school yesterday?”"
+      },
+      {
+        "n": 4,
+        "tipo": "Produção orientada",
+        "dificuldade": "Intermediária",
+        "enunciado": "Escreva em inglês: “Eu estava cansado, mas terminei a tarefa ontem.” Use simple past."
+      },
+      {
+        "n": 5,
+        "tipo": "Leitura funcional",
+        "dificuldade": "Básica",
+        "enunciado": "Leia: “Museum: Tuesday to Sunday, 10 a.m.–6 p.m. Closed on Mondays.” O museu abre na segunda-feira? Qual é o horário de fechamento nos dias de funcionamento?"
+      },
+      {
+        "n": 6,
+        "tipo": "Sentido contextual",
+        "dificuldade": "Intermediária",
+        "enunciado": "Traduza: “Actually, the book is in the library.” Explique por que traduzir actually como “atualmente” produz erro."
+      }
+    ],
+    "gabarito": [
+      {
+        "n": 1,
+        "resposta": "studies; work."
+      },
+      {
+        "n": 2,
+        "resposta": "“Do they live near the school?”"
+      },
+      {
+        "n": 3,
+        "resposta": "“Did Ana go to school yesterday?” Após did, usa-se go."
+      },
+      {
+        "n": 4,
+        "resposta": "“I was tired, but I finished the task yesterday.” Aceita-se homework se “tarefa” for entendida como dever de casa."
+      },
+      {
+        "n": 5,
+        "resposta": "Não. Fecha às 18h nos dias de funcionamento."
+      },
+      {
+        "n": 6,
+        "resposta": "“Na verdade, o livro está na biblioteca.” Actually introduz uma informação ou correção com sentido de “na verdade”; “atualmente” seria, conforme o contexto, currently ou nowadays."
+      }
+    ]
+  },
+  {
+    "id": "fisica",
+    "nome": "Física",
+    "etapa_sugerida": "1ª e 2ª séries do Ensino Médio",
+    "dificuldade": "Intermediária",
+    "topicos": [
+      {
+        "titulo": "Movimento e velocidade média",
+        "explicacao": "Descrever um movimento exige escolher um referencial e acompanhar a posição do corpo ao longo do tempo. Um objeto pode estar em repouso em relação a um passageiro e em movimento em relação à estrada. O deslocamento corresponde à diferença entre posição final e inicial, enquanto a distância percorrida mede o comprimento total do trajeto. Essas grandezas podem ter valores diferentes, especialmente quando há mudança de sentido. Em uma descrição unidimensional, a velocidade média é a razão entre deslocamento e intervalo de tempo. Já a rapidez média, frequentemente chamada velocidade escalar média no ensino escolar, relaciona distância total e tempo total. No movimento retilíneo uniforme, a velocidade é constante e a posição obedece à expressão s = s₀ + vt. As unidades precisam ser compatíveis: metros e segundos produzem metros por segundo. Para converter quilômetros por hora em metros por segundo, divide-se por 3,6. Interpretar o sinal da velocidade requer observar o sentido positivo definido para o eixo.",
+        "exemplo_resolvido": {
+          "enunciado": "Uma pessoa anda 300 m para leste e depois 100 m para oeste em 200 s. Determine rapidez média e velocidade média, tomando leste como positivo.",
+          "resolucao": "Distância: 400 m; rapidez média = 400/200 = 2 m/s. Deslocamento: +200 m; velocidade média = 200/200 = +1 m/s, para leste."
+        }
+      },
+      {
+        "titulo": "Força resultante e leis de Newton",
+        "explicacao": "As leis de Newton relacionam forças e mudanças no movimento, em referenciais aproximadamente inerciais. A primeira lei afirma que um corpo mantém repouso ou movimento retilíneo uniforme quando a força resultante sobre ele é nula. Portanto, movimento não exige necessariamente uma força resultante no sentido da velocidade. A segunda lei estabelece, para massa constante, que a força resultante é igual ao produto da massa pela aceleração. Forças são grandezas vetoriais: direção e sentido precisam ser considerados na soma. Peso é a força gravitacional exercida sobre o corpo e não deve ser confundido com massa. A terceira lei descreve pares de forças de interação com mesma intensidade, mesma direção e sentidos opostos, aplicadas em corpos diferentes. Por atuarem em corpos distintos, essas forças não se anulam na análise de um único corpo. Para resolver problemas, delimite o corpo estudado, desenhe as forças externas e só então escreva as equações. Evite incluir como força uma suposta “tendência de continuar andando”.",
+        "exemplo_resolvido": {
+          "enunciado": "Um bloco de 4 kg recebe força horizontal de 18 N para a direita e atrito de 6 N para a esquerda. Qual sua aceleração horizontal?",
+          "resolucao": "Tomando a direita como positiva, Fresultante = 18 − 6 = 12 N. Pela segunda lei, a = 12/4 = 3 m/s² para a direita."
+        }
+      },
+      {
+        "titulo": "Energia mecânica e transformações",
+        "explicacao": "Energia é uma grandeza útil para analisar transformações e estabelecer balanços em sistemas físicos. A energia cinética de um corpo depende de sua massa e do quadrado da rapidez: Ec = mv²/2. Próximo à superfície terrestre, a variação da energia potencial gravitacional pode ser calculada por mgh, adotando uma referência de altura e considerando g aproximadamente constante. A energia mecânica é a soma das energias cinética e potencial consideradas no modelo. Quando apenas forças conservativas realizam trabalho, ela se conserva. Havendo atrito, parte da energia mecânica pode transformar-se em energia interna dos corpos e do ambiente; isso não significa que a energia total desapareceu. Também é importante diferenciar energia de potência: potência indica a taxa de transferência ou transformação de energia ao longo do tempo. Um equipamento mais potente não necessariamente consome mais energia em qualquer situação, pois o consumo depende também do tempo de funcionamento. Em problemas, explicite o sistema, as simplificações e a referência escolhida.",
+        "exemplo_resolvido": {
+          "enunciado": "Um corpo de 2 kg é abandonado do repouso a 5 m do solo. Despreze o ar e use g = 10 m/s². Qual a rapidez imediatamente antes de tocar o chão?",
+          "resolucao": "Energia inicial: mgh = 2 × 10 × 5 = 100 J. No final, mv²/2 = 100; como m = 2, v² = 100 e v = 10 m/s."
+        }
+      }
+    ],
+    "exercicios": [
+      {
+        "n": 1,
+        "tipo": "Conversão",
+        "dificuldade": "Básica",
+        "enunciado": "Converta 72 km/h em m/s."
+      },
+      {
+        "n": 2,
+        "tipo": "Interpretação de percurso",
+        "dificuldade": "Intermediária",
+        "enunciado": "Um corredor completa uma volta de 400 m e retorna ao ponto inicial em 80 s. Calcule a rapidez média e o módulo da velocidade média."
+      },
+      {
+        "n": 3,
+        "tipo": "Dinâmica",
+        "dificuldade": "Intermediária",
+        "enunciado": "Um carrinho de 5 kg acelera a 2 m/s² para a direita. Uma força de 14 N atua para a direita e outra força horizontal atua para a esquerda. Determine a segunda força."
+      },
+      {
+        "n": 4,
+        "tipo": "Análise conceitual",
+        "dificuldade": "Intermediária",
+        "enunciado": "Um livro está parado sobre uma mesa horizontal. Peso e normal constituem um par de ação e reação? Justifique."
+      },
+      {
+        "n": 5,
+        "tipo": "Energia cinética",
+        "dificuldade": "Básica",
+        "enunciado": "Um corpo de 3 kg tem rapidez de 4 m/s. Calcule sua energia cinética. Qual será a energia se a rapidez dobrar?"
+      },
+      {
+        "n": 6,
+        "tipo": "Potência e consumo",
+        "dificuldade": "Intermediária",
+        "enunciado": "Um aparelho de potência constante de 1.200 W funciona durante 30 minutos. Calcule a energia consumida em kWh e em joules."
+      }
+    ],
+    "gabarito": [
+      {
+        "n": 1,
+        "resposta": "72/3,6 = 20 m/s."
+      },
+      {
+        "n": 2,
+        "resposta": "Rapidez média: 400/80 = 5 m/s. Velocidade média: zero, pois o deslocamento é nulo."
+      },
+      {
+        "n": 3,
+        "resposta": "Resultante: 5 × 2 = 10 N para a direita. Então 14 − F = 10; F = 4 N para a esquerda."
+      },
+      {
+        "n": 4,
+        "resposta": "Não. Ambas atuam no livro. A reação ao peso é a força gravitacional do livro sobre a Terra; a reação à normal é a força do livro sobre a mesa."
+      },
+      {
+        "n": 5,
+        "resposta": "Ec = 3 × 4²/2 = 24 J. Com 8 m/s, Ec = 96 J, quatro vezes maior."
+      },
+      {
+        "n": 6,
+        "resposta": "1,2 kW × 0,5 h = 0,6 kWh. Em joules: 1.200 × 1.800 = 2.160.000 J."
+      }
+    ]
+  },
+  {
+    "id": "quimica",
+    "nome": "Química",
+    "etapa_sugerida": "1ª série do Ensino Médio",
+    "dificuldade": "Básica a intermediária",
+    "topicos": [
+      {
+        "titulo": "Estrutura atômica, íons e isótopos",
+        "explicacao": "Átomos apresentam um núcleo, que contém prótons e, na maioria dos casos, nêutrons, e uma região eletrônica descrita por modelos quânticos. O número de prótons define o número atômico e identifica o elemento químico. Assim, todos os átomos de carbono possuem seis prótons, independentemente de sua carga elétrica ou do número de nêutrons. O número de massa corresponde à soma de prótons e nêutrons de um núcleo específico. Ele não deve ser confundido com a massa atômica média apresentada normalmente na tabela periódica. Isótopos são átomos do mesmo elemento com diferentes números de nêutrons. Em um átomo eletricamente neutro, o número de elétrons é igual ao de prótons. Quando perde elétrons, forma um cátion; quando ganha, forma um ânion. Nessas transformações químicas usuais, o núcleo não muda. Portanto, formar um íon não transforma um elemento em outro. Representações de elétrons em órbitas circulares podem auxiliar historicamente, mas não descrevem literalmente a estrutura eletrônica aceita atualmente.",
+        "exemplo_resolvido": {
+          "enunciado": "Um íon possui número atômico 12, número de massa 24 e carga 2+. Determine prótons, nêutrons e elétrons.",
+          "resolucao": "Prótons: 12. Nêutrons: 24 − 12 = 12. Carga 2+ indica perda de dois elétrons em relação ao átomo neutro; elétrons: 12 − 2 = 10."
+        }
+      },
+      {
+        "titulo": "Substâncias, misturas e separação",
+        "explicacao": "Uma substância química possui composição definida e propriedades características em condições especificadas. Substâncias simples são constituídas por um único elemento químico, como o oxigênio molecular; substâncias compostas envolvem mais de um elemento, como a água. Misturas contêm duas ou mais substâncias e podem apresentar composição variável. Uma mistura homogênea possui uma única fase na escala de observação adotada; uma heterogênea apresenta mais de uma. Fase não é sinônimo de componente: água com sal completamente dissolvido tem dois componentes e uma fase, enquanto água líquida e gelo podem constituir duas fases de uma única substância. A escolha de um método de separação depende das propriedades dos materiais. Filtração separa partículas sólidas não dissolvidas de um fluido; não retira, por si só, o sal dissolvido na água. Destilação utiliza diferenças de volatilidade, com vaporização e posterior condensação. Decantação pode aproveitar diferenças de densidade entre fases. Antes de escolher o procedimento, identifique os componentes, as fases e aquilo que se deseja recuperar.",
+        "exemplo_resolvido": {
+          "enunciado": "Como separar uma mistura de areia, água e sal dissolvido, recuperando areia, água e sal?",
+          "resolucao": "Primeiro, filtre para reter a areia. Depois, destile a solução: a água é vaporizada e condensada em outro recipiente, enquanto o sal permanece no recipiente de aquecimento. Na prática, a recuperação exige condições e procedimentos adequados."
+        }
+      },
+      {
+        "titulo": "Reações químicas e conservação da massa",
+        "explicacao": "Uma reação química transforma reagentes em produtos por rearranjos de átomos e mudanças nas ligações ou interações químicas. Em reações químicas usuais, os átomos dos elementos são conservados, embora passem a integrar outras espécies. Uma equação balanceada representa essa conservação por meio de coeficientes que igualam a quantidade de átomos de cada elemento nos dois lados. Não se alteram os índices das fórmulas para balancear uma equação, pois isso mudaria a identidade das substâncias. Em um sistema fechado, a massa total dos reagentes é igual à massa total dos produtos, considerando todos os materiais envolvidos. Em sistemas abertos, a saída de gases pode produzir aparente diminuição de massa, e a incorporação de gases do ar pode produzir aumento. Mudança de cor, formação de gás e liberação de energia podem indicar reação, mas precisam ser interpretadas no contexto; ebulição também produz bolhas sem gerar uma nova substância. A análise deve combinar observações, condições experimentais e modelos explicativos.",
+        "exemplo_resolvido": {
+          "enunciado": "Balanceie a formação de água a partir de H₂ e O₂ e interprete uma relação de massas.",
+          "resolucao": "Equação: 2 H₂ + O₂ → 2 H₂O. Há quatro átomos de H e dois de O em cada lado. Na proporção estequiométrica, 4 g de H₂ reagem com 32 g de O₂ e produzem 36 g de água."
+        }
+      }
+    ],
+    "exercicios": [
+      {
+        "n": 1,
+        "tipo": "Estrutura atômica",
+        "dificuldade": "Básica",
+        "enunciado": "Uma espécie possui 17 prótons, 18 nêutrons e 18 elétrons. Determine número atômico, número de massa e carga."
+      },
+      {
+        "n": 2,
+        "tipo": "Comparação",
+        "dificuldade": "Básica",
+        "enunciado": "Átomos X e Y possuem, respectivamente, 6 prótons e 6 nêutrons; 6 prótons e 8 nêutrons. São do mesmo elemento? São isótopos? Justifique."
+      },
+      {
+        "n": 3,
+        "tipo": "Classificação",
+        "dificuldade": "Intermediária",
+        "enunciado": "Classifique o sistema formado somente por água líquida pura e gelo puro quanto ao número de componentes e de fases."
+      },
+      {
+        "n": 4,
+        "tipo": "Seleção de procedimento",
+        "dificuldade": "Intermediária",
+        "enunciado": "Um filtro de papel comum separa completamente água e açúcar dissolvido? Qual procedimento permite recuperar a água dessa solução?"
+      },
+      {
+        "n": 5,
+        "tipo": "Balanceamento",
+        "dificuldade": "Intermediária",
+        "enunciado": "Balanceie com os menores coeficientes inteiros: Fe + O₂ → Fe₂O₃."
+      },
+      {
+        "n": 6,
+        "tipo": "Conservação da massa",
+        "dificuldade": "Intermediária",
+        "enunciado": "Em um recipiente fechado, 12 g de carbono reagem completamente com 32 g de oxigênio, formando apenas dióxido de carbono. Qual massa de produto é obtida? Por que uma reação em recipiente aberto pode aparentar perda de massa?"
+      }
+    ],
+    "gabarito": [
+      {
+        "n": 1,
+        "resposta": "Número atômico 17; número de massa 35; carga 1−, pois há um elétron a mais que prótons."
+      },
+      {
+        "n": 2,
+        "resposta": "Sim para as duas perguntas. Ambos são carbono, pois têm seis prótons; são isótopos porque diferem no número de nêutrons. Números de massa: 12 e 14."
+      },
+      {
+        "n": 3,
+        "resposta": "Um componente, H₂O, e duas fases, sólida e líquida. É um sistema heterogêneo, embora não seja uma mistura de substâncias."
+      },
+      {
+        "n": 4,
+        "resposta": "Não. O açúcar dissolvido atravessa o filtro com a água. A destilação simples permite vaporizar a água e recuperá-la por condensação, deixando o açúcar no recipiente, sob condições adequadas."
+      },
+      {
+        "n": 5,
+        "resposta": "4 Fe + 3 O₂ → 2 Fe₂O₃."
+      },
+      {
+        "n": 6,
+        "resposta": "44 g de CO₂, pela conservação da massa. Em sistema aberto, produtos gasosos podem sair do recipiente; a massa não desaparece, mas deixa de integrar o sistema que está sendo pesado."
+      }
+    ]
+  }
+]

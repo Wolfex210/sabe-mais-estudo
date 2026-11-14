@@ -1,5 +1,5 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { SiteLayout, PageHeader, Card, AdSlot } from "@/components/SiteLayout";
 import { Button } from "@/components/ui/button";
 import { getSubjectInfo } from "@/lib/catalog";
@@ -7,8 +7,10 @@ import { YEARS, YEAR_LABEL, type Year } from "@/lib/years";
 import { getSubjectStudy, type SubjectStudy } from "@/lib/study.functions";
 import { StudyState, useStudy } from "@/components/StudyGate";
 import { actions, useAppState } from "@/lib/store";
+import { ReinforcementView } from "@/components/ReinforcementView";
 
 export const Route = createFileRoute("/materias/$slug")({
+  validateSearch: (search: Record<string, unknown>): { year?: string; result?: string } => ({ ...(typeof search["year"] === "string" ? { year: search["year"] } : {}), ...(typeof search["result"] === "string" ? { result: search["result"] } : {}) }),
   loader: ({ params }) => {
     const subject = getSubjectInfo(params.slug);
     if (!subject) throw notFound();
@@ -41,15 +43,24 @@ function SubjectPage() {
 
 function SubjectStudyView({ slug, data }: { slug: string; data: SubjectStudy }) {
   const subject = data.subject;
+  const search = Route.useSearch();
   const state = useAppState();
   const availableYears = YEARS.filter((year) => (data.curriculum[year]?.length ?? 0) > 0);
-  const [year, setYear] = useState<Year>(availableYears[0] ?? "1º EF");
+  const [year, setYear] = useState<Year>(availableYears.find(y => y === search.year) ?? availableYears[0] ?? "1º EF");
   const activeYear = availableYears.includes(year) ? year : (availableYears[0] ?? "1º EF");
   const [open, setOpen] = useState<number | null>(null);
   const [qIndex, setQIndex] = useState(0);
   const [chosen, setChosen] = useState<number | null>(null);
   const [score, setScore] = useState(0);
   const [studyPage, setStudyPage] = useState(0);
+  useEffect(() => {
+    const targetYear = availableYears.find(y => y === search.year);
+    if (targetYear) setYear(targetYear);
+    if (search.result?.startsWith("exercise-")) setOpen(Number(search.result.slice(9)));
+    if (search.result?.startsWith("quiz-")) { setQIndex(Number(search.result.slice(5))); setChosen(null); }
+    const id = window.setTimeout(() => document.getElementById(search.result ?? "")?.scrollIntoView({ block: "center" }), 100);
+    return () => clearTimeout(id);
+  }, [search.result, search.year]);
 
   const studyImagesBySubject: Record<string, string[]> = {
     matematica: [
@@ -214,6 +225,7 @@ function SubjectStudyView({ slug, data }: { slug: string; data: SubjectStudy }) 
       <div className="mx-auto w-full max-w-6xl px-4 pt-6"><button type="button" aria-pressed={state.favorites.includes(subject.slug)} onClick={() => actions.toggleFavorite(subject.slug)} className="rounded-xl border border-primary/30 px-4 py-2.5 text-sm font-semibold text-primary hover:bg-primary/5">{state.favorites.includes(subject.slug) ? "★ Remover dos favoritos" : "☆ Salvar matéria nos favoritos"}</button></div>
       <div className="mx-auto grid w-full max-w-6xl gap-8 px-4 py-12 lg:grid-cols-3">
         <div className="space-y-8 lg:col-span-2">
+          {data.reinforcement && <ReinforcementView sheet={data.reinforcement} rows={data.worksheet} />}
           <section aria-labelledby="year-heading">
             <h2 id="year-heading" className="text-xl font-bold text-foreground">Estude por ano escolar</h2>
             <p className="mt-2 text-sm text-muted-foreground">
@@ -234,7 +246,7 @@ function SubjectStudyView({ slug, data }: { slug: string; data: SubjectStudy }) 
               <ol className="space-y-3">
                 {topics.map((topic, index) => {
                   return (
-                    <li key={`${activeYear}-${index}`} className="rounded-lg border border-border bg-card px-4 py-4 shadow-soft">
+                    <li id={`topic-${index}`} key={`${activeYear}-${index}`} className="rounded-lg border border-border bg-card px-4 py-4 shadow-soft">
                       <h4 className="font-semibold text-foreground">{topic.title}</h4>
                       <p className="mt-1 text-sm leading-relaxed text-muted-foreground">{topic.text}</p>
                       {topic.hasLesson && <Link to="/aula/$slug/$year/$topic" params={{ slug, year: activeYear, topic: topic.title }} className="mt-3 inline-block text-sm font-semibold text-primary hover:underline">Abrir aula e atividades →</Link>}
@@ -474,11 +486,11 @@ function SubjectStudyView({ slug, data }: { slug: string; data: SubjectStudy }) 
             <h2 className="text-xl font-bold text-foreground">Resumos e explicações complementares</h2>
             <p className="mt-2 text-sm text-muted-foreground">Materiais gerais da disciplina, não específicos do ano selecionado.</p>
             <div className="mt-4 space-y-4">
-              {subject.summaries.map((s) => (
-                <Card key={s.title}>
+              {subject.summaries.map((s, index) => (
+                <div id={`summary-${index}`} key={s.title}><Card>
                   <h3 className="font-semibold text-foreground">{s.title}</h3>
                   <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{s.text}</p>
-                </Card>
+                </Card></div>
               ))}
             </div>
           </section>
@@ -513,7 +525,7 @@ function SubjectStudyView({ slug, data }: { slug: string; data: SubjectStudy }) 
             <h2 className="text-xl font-bold text-foreground">Exercícios</h2>
             <div className="mt-4 space-y-3">
               {subject.exercises.map((ex, i) => (
-                <Card key={ex.q} className="p-4">
+                <div id={`exercise-${i}`} key={ex.q}><Card className="p-4">
                   <p className="text-sm font-medium text-foreground">{ex.q}</p>
                   <Button variant="link"
                     onClick={() => setOpen(open === i ? null : i)}
@@ -526,13 +538,13 @@ function SubjectStudyView({ slug, data }: { slug: string; data: SubjectStudy }) 
                       {ex.a}
                     </p>
                   )}
-                </Card>
+                </Card></div>
               ))}
             </div>
           </section>
 
           <section>
-            <h2 className="text-xl font-bold text-foreground">Quiz de {subject.name}</h2>
+            <h2 id={`quiz-${qIndex}`} className="text-xl font-bold text-foreground">Quiz de {subject.name}</h2>
             <Card className="mt-4">
               {finished ? (
                 <div className="text-center">

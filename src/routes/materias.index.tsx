@@ -23,7 +23,7 @@ export const Route = createFileRoute("/materias/")({
   component: Materias,
 });
 
-const fundamentalSlugs = new Set(["portugues", "matematica", "ciencias", "biologia", "historia", "geografia", "ingles"]);
+const fundamentalSlugs = new Set(["portugues", "matematica", "ciencias", "biologia", "historia", "geografia", "ingles", "fisica", "quimica"]);
 
 function Materias() {
   const [query, setQuery] = useState("");
@@ -68,7 +68,7 @@ function Materias() {
           <div className="mb-8 rounded-xl border border-border bg-card p-5">
             <h2 className="text-lg font-bold text-foreground">Trilha Fundamentais</h2>
             <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
-              Português, Matemática, Ciências, Biologia, História, Geografia e Inglês com oito unidades aprofundadas, exemplos, exercícios, quiz e conteúdo organizado para os 12 anos escolares.
+              Português, Matemática, Ciências, Biologia, História, Geografia, Inglês, Física e Química com cadernos de reforço, explicações, exemplos resolvidos, exercícios variados e planilhas para baixar.
             </p>
           </div>
         )}

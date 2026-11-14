@@ -5,6 +5,7 @@ import type { Lesson } from "@/lib/lessons";
 import type { FacultyCourse } from "@/lib/faculty";
 import type { Year } from "@/lib/years";
 import type { PlanId } from "@/lib/stripe-plans";
+import type { Reinforcement } from "@/lib/reinforcement";
 
 /**
  * Conteúdo de estudo protegido: só sai do servidor depois de conferir login e plano.
@@ -22,6 +23,8 @@ async function access(context: { supabase: Parameters<typeof import("@/lib/study
 
 export type SubjectTopic = { title: string; text: string; hasLesson: boolean };
 export type SubjectStudy = {
+  reinforcement: Reinforcement | null;
+  worksheet: string[][];
   subject: Subject;
   deep: DeepStudySection | null;
   exam: ExamPrepSection[];
@@ -41,9 +44,12 @@ export const getSubjectStudy = createServerFn({ method: "POST" })
     if (!mod.canOpenSubject(a, data.slug)) return { status: "locked", plan: a.plan };
     const { curriculum, YEARS } = await import("@/lib/curriculum");
     const { getTopics } = await import("@/lib/lessons");
+    const { getReinforcement, worksheetRows } = await import("@/lib/reinforcement");
+    const reinforcement = getReinforcement(data.slug);
     const topics: SubjectStudy["topics"] = {};
     for (const year of YEARS) topics[year] = getTopics(data.slug, year).map((t) => ({ title: t.title, text: t.text, hasLesson: !!t.lesson }));
     return { status: "ok", data: {
+      reinforcement, worksheet: reinforcement ? worksheetRows(reinforcement) : [],
       subject, deep: content.getDeepStudy(data.slug), exam: content.getExamPrep(data.slug),
       help: content.getStudyHelpLines(data.slug), curriculum: curriculum[data.slug] ?? {}, topics,
     } };
@@ -94,24 +100,27 @@ export const getSimuladoBank = createServerFn({ method: "POST" })
     return { status: "ok", data: allowed.flatMap((s) => s.questions.map((q) => ({ ...q, subject: s.slug, subjectName: s.name }))) };
   });
 
-export type SearchEntry = { title: string; detail: string; slug: string; year: string; kind: "Matéria" | "Assunto" | "Resumo" | "Exercício" | "Quiz" | "Aula"; searchable: string };
+export type SearchEntry = { id: string; title: string; detail: string; slug: string; year: string; kind: "Matéria" | "Assunto" | "Resumo" | "Exercício" | "Quiz" | "Aula"; searchable: string };
 
 export const getSearchIndex = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
   .handler(async ({ context }): Promise<SearchEntry[]> => {
     const { subjects } = await import("@/lib/content");
+    const { getReinforcement } = await import("@/lib/reinforcement");
     const { curriculum, YEARS, YEAR_LABEL, parseTopic } = await import("@/lib/curriculum");
     const { lessons } = await import("@/lib/lessons");
     const { mod, access: a } = await access(context);
     return subjects.filter((s) => mod.canOpenSubject(a, s.slug)).flatMap((s): SearchEntry[] => [
-      ...YEARS.flatMap((y) => (curriculum[s.slug]?.[y] ?? []).map((item) => {
+      ...(getReinforcement(s.slug)?.topicos ?? []).map((topic, index) => ({ id: `reinforcement-topic-${index}`, title: topic.titulo, detail: `${s.name} · Reforço`, slug: s.slug, year: "", kind: "Resumo" as const, searchable: `${topic.titulo} ${s.name} ${topic.explicacao}` })),
+      ...(getReinforcement(s.slug)?.exercicios ?? []).map(ex => ({ id: `reinforcement-exercise-${ex.n}`, title: ex.enunciado, detail: `${s.name} · ${ex.tipo}`, slug: s.slug, year: "", kind: "Exercício" as const, searchable: `${ex.enunciado} ${s.name}` })),
+      ...YEARS.flatMap((y) => (curriculum[s.slug]?.[y] ?? []).map((item, index) => {
         const title = parseTopic(item).title;
-        return { title, detail: `${s.name} · ${YEAR_LABEL[y]}`, slug: s.slug, year: y, kind: "Assunto" as const, searchable: `${title} ${s.name} ${YEAR_LABEL[y]}` };
+        return { id: `topic-${index}`, title, detail: `${s.name} · ${YEAR_LABEL[y]}`, slug: s.slug, year: y, kind: "Assunto" as const, searchable: `${title} ${s.name} ${YEAR_LABEL[y]}` };
       })),
-      ...s.summaries.map((item) => ({ title: item.title, detail: `${s.name} · Resumo`, slug: s.slug, year: "", kind: "Resumo" as const, searchable: `${item.title} ${s.name} ${item.text}` })),
-      ...s.exercises.map((item) => ({ title: item.q, detail: `${s.name} · Exercício`, slug: s.slug, year: "", kind: "Exercício" as const, searchable: `${item.q} ${s.name} ${item.a}` })),
-      ...s.questions.map((item) => ({ title: item.q, detail: `${s.name} · Quiz`, slug: s.slug, year: "", kind: "Quiz" as const, searchable: `${item.q} ${s.name} ${item.options.join(" ")} ${item.explanation ?? ""}` })),
-      ...lessons.filter((l) => l.subject === s.slug).map((l) => ({ title: l.title, detail: `${s.name} · Aula`, slug: s.slug, year: l.year, kind: "Aula" as const, searchable: `${l.title} ${s.name} ${l.year}` })),
+      ...s.summaries.map((item, index) => ({ id: `summary-${index}`, title: item.title, detail: `${s.name} · Resumo`, slug: s.slug, year: "", kind: "Resumo" as const, searchable: `${item.title} ${s.name} ${item.text}` })),
+      ...s.exercises.map((item, index) => ({ id: `exercise-${index}`, title: item.q, detail: `${s.name} · Exercício`, slug: s.slug, year: "", kind: "Exercício" as const, searchable: `${item.q} ${s.name} ${item.a}` })),
+      ...s.questions.map((item, index) => ({ id: `quiz-${index}`, title: item.q, detail: `${s.name} · Quiz`, slug: s.slug, year: "", kind: "Quiz" as const, searchable: `${item.q} ${s.name} ${item.options.join(" ")} ${item.explanation ?? ""}` })),
+      ...lessons.filter((l) => l.subject === s.slug).map((l) => ({ id: l.title, title: l.title, detail: `${s.name} · Aula`, slug: s.slug, year: l.year, kind: "Aula" as const, searchable: `${l.title} ${s.name} ${l.year}` })),
     ]);
   });
 
