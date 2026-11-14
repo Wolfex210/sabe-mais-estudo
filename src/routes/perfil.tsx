@@ -7,6 +7,12 @@ import { supabase } from "@/integrations/supabase/client";
 import { YEARS, YEAR_LABEL, type Year } from "@/lib/years";
 import { Link } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
+import { languages, isLanguageCode, canChangeLanguage } from "@/lib/languages";
+import { saveLanguage } from "@/lib/language.functions";
+import { useLanguage } from "@/components/LanguageProvider";
+import { usePlanAccess } from "@/lib/plan-access";
+import { useServerFn } from "@tanstack/react-start";
+import { Languages } from "lucide-react";
 import { subjects } from "@/lib/catalog";
 
 export const Route = createFileRoute("/perfil")({
@@ -28,6 +34,12 @@ export const Route = createFileRoute("/perfil")({
 
 function Perfil() {
   const s = useAppState();
+  const { code, setCode, t } = useLanguage();
+  const { plan, resolved } = usePlanAccess();
+  const save = useServerFn(saveLanguage);
+  const [languageOpen, setLanguageOpen] = useState(false);
+  const [savingLanguage, setSavingLanguage] = useState(false);
+  const [languageError, setLanguageError] = useState("");
   const { current, next, progress } = levelOf(s.points);
   const [name, setName] = useState(s.name);
   const { user } = useAuth();
@@ -37,7 +49,7 @@ function Perfil() {
 
   return (
     <SiteLayout>
-      <PageHeader title="Perfil" subtitle="Seu espaço no Sabe Mais." />
+      <PageHeader title={t("Perfil")} subtitle="Seu espaço no Sabe Mais." />
       <div className="mx-auto grid w-full max-w-5xl gap-6 px-4 py-12 lg:grid-cols-3">
         <Card className="lg:col-span-2">
           <div className="flex items-center gap-4">
@@ -83,11 +95,29 @@ function Perfil() {
             <label className="text-sm font-semibold">Ano escolar<select value={s.schoolYear} onChange={e => actions.setSchoolYear(e.target.value)} className="mt-1 w-full rounded-lg border border-border bg-background p-2"><option value="">Selecionar ano</option>{YEARS.map(y => <option key={y} value={y}>{YEAR_LABEL[y]}</option>)}</select></label>
             <label className="text-sm font-semibold">Avatar<select value={s.avatar} onChange={e => actions.setAvatar(e.target.value)} className="mt-1 w-full rounded-lg border border-border bg-background p-2">{["📚", "🎓", "⭐", "🧠", "🚀"].map(a => <option key={a} value={a}>{a}</option>)}</select></label>
           </div>
-          <div className="mt-5 flex flex-wrap gap-3">{user ? <><Button variant="outline" asChild><Link to="/alterar-senha">Alterar senha</Link></Button><Button variant="outline" onClick={() => void supabase.auth.signOut()}>Sair</Button></> : <Button asChild><Link to="/conta">Criar conta ou entrar</Link></Button>}</div>
+          <div className="mt-5 border-t border-border pt-5">
+            <Button variant="outline" aria-expanded={languageOpen} onClick={() => setLanguageOpen(!languageOpen)}><Languages className="mr-2 h-4 w-4" />{t("Idioma")}</Button>
+            {languageOpen && <div className="mt-3 max-w-sm">
+              <select aria-label="Idioma" disabled={savingLanguage || !resolved || !canChangeLanguage(plan)} value={code} onChange={async e => {
+                const next = e.target.value;
+                if (!isLanguageCode(next)) return;
+                setSavingLanguage(true); setLanguageError("");
+                try { const result = await save({data:{code:next}}); if (result.ok) setCode(next); else setLanguageError(result.error); }
+                catch { setLanguageError("Não foi possível salvar o idioma. Tente novamente."); }
+                finally { setSavingLanguage(false); }
+              }} className="w-full rounded-lg border border-border bg-background p-3 text-foreground">
+                {languages.map(language => <option key={language.code} value={language.code}>{language.label}</option>)}
+              </select>
+              {!canChangeLanguage(plan) && <p className="mt-2 text-sm text-muted-foreground">Disponível para assinantes dos planos Básico, Médio e Master.</p>}
+              {savingLanguage && <p role="status" className="mt-2 text-sm text-muted-foreground">Salvando idioma…</p>}
+              {languageError && <p role="alert" className="mt-2 text-sm text-destructive">{languageError}</p>}
+            </div>}
+          </div>
+          <div className="mt-5 flex flex-wrap gap-3">{user ? <><Button variant="outline" asChild><Link to="/alterar-senha">{t("Alterar senha")}</Link></Button><Button variant="outline" onClick={() => void supabase.auth.signOut()}>{t("Sair")}</Button></> : <Button asChild><Link to="/conta">Criar conta ou entrar</Link></Button>}</div>
         </Card>
 
         <Card>
-          <h2 className="font-semibold text-foreground">Resumo</h2>
+          <h2 className="font-semibold text-foreground">{t("Resumo")}</h2>
           <ul className="mt-3 space-y-2 text-sm text-muted-foreground">
             <li>Questões respondidas: <strong className="text-foreground">{s.answered}</strong></li>
             <li>Acertos: <strong className="text-foreground">{s.correct}</strong></li>
@@ -123,7 +153,7 @@ function Perfil() {
         <div className="lg:col-span-3"><h2 className="text-xl font-bold text-foreground">Histórico de compras</h2><p className="mt-3 text-sm text-muted-foreground">Nenhuma compra realizada. Os pagamentos ainda não estão disponíveis.</p></div>
 
         <div className="lg:col-span-3">
-          <h2 className="text-xl font-bold text-foreground">Conquistas</h2>
+          <h2 className="text-xl font-bold text-foreground">{t("Conquistas")}</h2>
           <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {ACHIEVEMENTS.map((a) => {
               const got = s.achievements.includes(a.id);

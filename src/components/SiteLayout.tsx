@@ -11,6 +11,8 @@ import { useAuth } from "@/lib/auth";
 import { Button } from "@/components/ui/button";
 import { usePlanAccess } from "@/lib/plan-access";
 
+import { useLanguage } from "@/components/LanguageProvider";
+
 const navGroups = [
   {
     label: "PLANOS E ASSINATURA",
@@ -74,6 +76,7 @@ type BeforeInstallPromptEvent = Event & {
 };
 
 export function SiteLayout({ children }: { children: ReactNode }) {
+  const { t } = useLanguage();
   const [open, setOpen] = useState(false);
   const [installPrompt, setInstallPrompt] = useState<BeforeInstallPromptEvent | null>(null);
 
@@ -112,9 +115,9 @@ export function SiteLayout({ children }: { children: ReactNode }) {
   const navigation = (mobile = false) => (
     <div className="space-y-5">
       {navGroups.map((group) => (
-        <section key={group.label}>
+        <section key={t(group.label)}>
           <p className="px-3 pb-2 text-[10px] font-extrabold tracking-[0.16em] text-muted-foreground/75">
-            {group.label}
+            {t(group.label)}
           </p>
           <div className="space-y-1">
             {group.items.map((item) => {
@@ -129,7 +132,7 @@ export function SiteLayout({ children }: { children: ReactNode }) {
                   className="group flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground [&.active]:bg-primary/10 [&.active]:text-primary"
                 >
                   <Icon className="h-[18px] w-[18px] shrink-0" />
-                  <span>{item.label}</span>
+                  <span>{t(item.label)}</span>
                 </Link>
               );
             })}
@@ -164,10 +167,10 @@ export function SiteLayout({ children }: { children: ReactNode }) {
               title="Instalar o Sabe Mais como aplicativo"
             >
               <Download className="h-4 w-4" />
-              <span className="hidden sm:inline">Baixar app</span>
+              <span className="hidden sm:inline">{t("Baixar app")}</span>
             </button>
             <Button asChild variant="outline" size="sm">
-              <Link to={user ? "/perfil" : "/conta"}>{user ? state.avatar : "Entrar"}</Link>
+              <Link to={user ? "/perfil" : "/conta"}>{user ? state.avatar : t("Entrar")}</Link>
             </Button>
             <button
               aria-label={open ? "Fechar menu" : "Abrir menu"}
@@ -234,7 +237,7 @@ export function SiteLayout({ children }: { children: ReactNode }) {
                 <p className="font-semibold text-foreground">Navegar</p>
                 <ul className="mt-2 space-y-1 text-muted-foreground">
                   {nav.slice(1, 5).map((item) => (
-                    <li key={item.to}><Link to={item.to} className="hover:text-foreground">{item.label}</Link></li>
+                    <li key={item.to}><Link to={item.to} className="hover:text-foreground">{t(item.label)}</Link></li>
                   ))}
                 </ul>
               </div>

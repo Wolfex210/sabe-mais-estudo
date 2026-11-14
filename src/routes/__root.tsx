@@ -13,6 +13,7 @@ import { useEffect, type ReactNode } from "react";
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { AuthProvider } from "@/lib/auth";
+import { LanguageProvider } from "@/components/LanguageProvider";
 import { PomodoroProvider } from "@/components/PomodoroProvider";
 
 function NotFoundComponent() {
@@ -131,7 +132,7 @@ function RootComponent() {
   return (
     <QueryClientProvider client={queryClient}>
       {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-      <AuthProvider><PomodoroProvider><Outlet /></PomodoroProvider></AuthProvider>
+      <AuthProvider><LanguageProvider><PomodoroProvider><Outlet /></PomodoroProvider></LanguageProvider></AuthProvider>
     </QueryClientProvider>
   );
 }
